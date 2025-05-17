@@ -41,16 +41,18 @@ def login(request):
     """
     serializer = LoginSerializer(data=request.data)
     if serializer.is_valid():
-        user_id = serializer.validated_data['id']
-        password = serializer.validated_data['contrasena']
+        codigo = serializer.validated_data['codigo']
+        password = serializer.validated_data['password']
         
-        user = authenticate(request, username=user_id, password=password)
+        user = authenticate(request, username=codigo, password=password)
         
         if user:
             refresh = RefreshToken.for_user(user)
             return Response({
+                'mensaje': 'Inicio de sesión exitoso. ¡Bienvenido!',
                 'usuario': {
                     'id': user.id,
+                    'codigo': user.codigo,
                     'nombre': user.nombre,
                     'apellido': user.apellido,
                 },
@@ -58,6 +60,6 @@ def login(request):
                     'refresh': str(refresh),
                     'access': str(refresh.access_token),
                 }
-            })
+            }, status=status.HTTP_200_OK)
         return Response({'error': 'Credenciales inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

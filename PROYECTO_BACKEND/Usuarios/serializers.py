@@ -2,21 +2,25 @@ from rest_framework import serializers
 from .models import Usuario
 
 class UsuarioSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, required=True)
+    
     class Meta:
         model = Usuario
-        fields = ['id', 'nombre', 'apellido', 'telefono', 'contrasena']
-        extra_kwargs = {'contrasena': {'write_only': True}}
+        fields = ['id', 'codigo', 'nombre', 'apellido', 'telefono', 'password']
+        extra_kwargs = {
+            'id': {'read_only': True},
+            'codigo': {'required': False}
+        }
     
     def create(self, validated_data):
+        # Extrae la contraseña para pasarla como parámetro separado
+        password = validated_data.pop('password')
         usuario = Usuario.objects.create_user(
-            id=validated_data.get('id'),
-            nombre=validated_data['nombre'],
-            apellido=validated_data['apellido'],
-            telefono=validated_data.get('telefono'),
-            password=validated_data['contrasena']
+            **validated_data,
+            password=password
         )
         return usuario
 
 class LoginSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    contrasena = serializers.CharField(write_only=True)
+    codigo = serializers.CharField()
+    password = serializers.CharField(write_only=True)
