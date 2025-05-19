@@ -6,32 +6,31 @@ from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from ..models import Usuario
 from ..serializers import UsuarioSerializer, LoginSerializer
+from Permisos.models import Rol
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register(request):
     """
-    Registra un nuevo usuario.
+    Registrar un nuevo usuario.
+    Opcionalmente puede asignar un rol.
     """
-    serializer = UsuarioSerializer(data=request.data)
-    if serializer.is_valid():
-        usuario = serializer.save()
+    try:
+        # Obtener datos del usuario a registrar
+        serializer = UsuarioSerializer(data=request.data)
         
-        # Generar tokens JWT para el nuevo usuario
-        refresh = RefreshToken.for_user(usuario)
+        if serializer.is_valid():
+            usuario = serializer.save()
+            
+            # Devolver respuesta exitosa
+            return Response({
+                'mensaje': f'Usuario {usuario.nombre} {usuario.apellido} registrado correctamente',
+                'usuario': UsuarioSerializer(usuario).data
+            }, status=status.HTTP_201_CREATED)
         
-        return Response({
-            'usuario': {
-                'id': usuario.id,
-                'nombre': usuario.nombre,
-                'apellido': usuario.apellido,
-            },
-            'tokens': {
-                'refresh': str(refresh),
-                'access': str(refresh.access_token),
-            }
-        }, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['POST'])
 @permission_classes([AllowAny])

@@ -1,5 +1,6 @@
-from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.db import models
+from Permisos.models import Rol
 import random
 import string
 
@@ -43,12 +44,21 @@ class UsuarioManager(BaseUserManager):
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
     id = models.AutoField(primary_key=True)
-    codigo = models.CharField(max_length=10, unique=True, verbose_name='Código de acceso')
+    codigo = models.CharField(max_length=20, unique=True, verbose_name='Código de acceso')
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
-    telefono = models.IntegerField(null=True, blank=True)
+    telefono = models.CharField(max_length=15, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    
+    # Cambiar la relación a ForeignKey (un usuario, un rol)
+    rol = models.ForeignKey(
+        Rol, 
+        on_delete=models.SET_NULL,  # Si se borra un rol, los usuarios no serán eliminados
+        null=True,  # Permitir usuarios sin rol
+        blank=True,
+        related_name='usuarios_rol'  # Nombre diferenciado para la relación inversa
+    )
 
     objects = UsuarioManager()
     

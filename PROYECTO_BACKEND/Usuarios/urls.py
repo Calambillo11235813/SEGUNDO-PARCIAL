@@ -13,4 +13,5 @@ urlpatterns = [
     path('usuarios/<int:id>/', usuario_controllers.get_usuario, name='get_usuario'),
     path('usuarios/<int:id>/update/', usuario_controllers.update_usuario, name='update_usuario'),
     path('usuarios/<int:id>/delete/', usuario_controllers.delete_usuario, name='delete_usuario'),
+    path('usuarios/<int:usuario_id>/cambiar-rol/', usuario_controllers.update_rol_usuario, name='update_rol_usuario'),
 ]
