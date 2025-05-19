@@ -1,3 +1,9 @@
 import { Routes } from '@angular/router';
+import { LoginComponent } from './auth/components/login/login.component';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  // Agregar más rutas aquí
+  { path: '**', redirectTo: '/login' } // Ruta comodín para redirigir cualquier ruta no encontrada
+];

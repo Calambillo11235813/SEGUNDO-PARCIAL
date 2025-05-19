@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'Cursos',
     'Permisos',
     'rest_framework',  # Añadido para APIs REST
+    'corsheaders',  # Añadido para manejar CORS
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # Añadido para manejar CORS
 ]
 
 ROOT_URLCONF = 'Backend.urls'
@@ -155,3 +157,14 @@ SIMPLE_JWT = {
     'USER_ID_FIELD': 'id',
     'USER_ID_CLAIM': 'user_id',
 }
+
+# Configuración de CORS
+CORS_ALLOW_ALL_ORIGINS = True  # Para desarrollo - en producción es mejor especificar orígenes
+
+# Opcional: configura orígenes específicos para producción
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:4200",  # Tu cliente Angular
+# ]
+
+# Permitir credenciales (cookies, encabezados de autorización)
+CORS_ALLOW_CREDENTIALS = True
