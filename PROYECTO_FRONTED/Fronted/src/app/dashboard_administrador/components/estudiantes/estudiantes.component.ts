@@ -4,21 +4,21 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { UsuariosService } from '../../../services/usuarios.service';
 
 @Component({
-  selector: 'app-profesores',
+  selector: 'app-estudiantes',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: `
-    <div class="profesores-container">
-      <h2>Gestión de Profesores</h2>
+    <div class="estudiantes-container">
+      <h2>Gestión de Estudiantes</h2>
       
       <div class="row">
         <div class="col-md-4">
           <div class="card">
             <div class="card-header">
-              <h3>Nuevo Profesor</h3>
+              <h3>Nuevo Estudiante</h3>
             </div>
             <div class="card-body">
-              <form [formGroup]="profesorForm" (ngSubmit)="crearProfesor()">
+              <form [formGroup]="estudianteForm" (ngSubmit)="crearEstudiante()">
                 <div class="form-group">
                   <label for="codigo">Código</label>
                   <input type="text" id="codigo" formControlName="codigo" class="form-control">
@@ -52,9 +52,9 @@ import { UsuariosService } from '../../../services/usuarios.service';
                   {{ error }}
                 </div>
                 
-                <button type="submit" class="btn btn-primary" [disabled]="profesorForm.invalid || loading">
+                <button type="submit" class="btn btn-primary" [disabled]="estudianteForm.invalid || loading">
                   <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                  Registrar Profesor
+                  Registrar Estudiante
                 </button>
               </form>
             </div>
@@ -64,7 +64,7 @@ import { UsuariosService } from '../../../services/usuarios.service';
         <div class="col-md-8">
           <div class="card">
             <div class="card-header">
-              <h3>Lista de Profesores</h3>
+              <h3>Lista de Estudiantes</h3>
             </div>
             <div class="card-body">
               <table class="table">
@@ -77,14 +77,14 @@ import { UsuariosService } from '../../../services/usuarios.service';
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let profesor of profesores">
-                    <td>{{ profesor.codigo }}</td>
-                    <td>{{ profesor.nombre }}</td>
-                    <td>{{ profesor.apellido }}</td>
-                    <td>{{ profesor.telefono || 'N/A' }}</td>
+                  <tr *ngFor="let estudiante of estudiantes">
+                    <td>{{ estudiante.codigo }}</td>
+                    <td>{{ estudiante.nombre }}</td>
+                    <td>{{ estudiante.apellido }}</td>
+                    <td>{{ estudiante.telefono || 'N/A' }}</td>
                   </tr>
-                  <tr *ngIf="profesores.length === 0">
-                    <td colspan="4" class="text-center">No hay profesores registrados</td>
+                  <tr *ngIf="estudiantes.length === 0">
+                    <td colspan="4" class="text-center">No hay estudiantes registrados</td>
                   </tr>
                 </tbody>
               </table>
@@ -95,7 +95,7 @@ import { UsuariosService } from '../../../services/usuarios.service';
     </div>
   `,
   styles: [`
-    .profesores-container {
+    .estudiantes-container {
       padding: 1rem;
     }
     .row {
@@ -180,9 +180,9 @@ import { UsuariosService } from '../../../services/usuarios.service';
     }
   `]
 })
-export class ProfesoresComponent implements OnInit {
-  profesorForm: FormGroup;
-  profesores: any[] = [];
+export class EstudiantesComponent implements OnInit {
+  estudianteForm: FormGroup;
+  estudiantes: any[] = [];
   loading = false;
   mensaje = '';
   error = '';
@@ -191,7 +191,7 @@ export class ProfesoresComponent implements OnInit {
     private fb: FormBuilder,
     private usuariosService: UsuariosService
   ) {
-    this.profesorForm = this.fb.group({
+    this.estudianteForm = this.fb.group({
       nombre: ['', [Validators.required]],
       apellido: ['', [Validators.required]],
       codigo: ['', [Validators.required]],
@@ -201,25 +201,25 @@ export class ProfesoresComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.cargarProfesores();
+    this.cargarEstudiantes();
   }
   
-  cargarProfesores(): void {
+  cargarEstudiantes(): void {
     this.loading = true;
-    this.usuariosService.getUsuariosPorRol('Profesor').subscribe({
+    this.usuariosService.getUsuariosPorRol('Estudiante').subscribe({
       next: (data: any[]) => {
-        this.profesores = data;
+        this.estudiantes = data;
         this.loading = false;
       },
       error: (err: any) => {
-        this.error = 'Error al cargar profesores';
+        this.error = 'Error al cargar estudiantes';
         this.loading = false;
       }
     });
   }
   
-  crearProfesor(): void {
-    if (this.profesorForm.invalid) {
+  crearEstudiante(): void {
+    if (this.estudianteForm.invalid) {
       return;
     }
     
@@ -227,21 +227,21 @@ export class ProfesoresComponent implements OnInit {
     this.mensaje = '';
     this.error = '';
     
-    // Añadir rol_id para profesor
-    const profesorData = {
-      ...this.profesorForm.value,
-      rol_id: 2 // ID del rol profesor (ajustar según tu base de datos)
+    // Añadir rol_id para estudiante
+    const estudianteData = {
+      ...this.estudianteForm.value,
+      rol_id: 2 // ID del rol estudiante (ajustar según tu base de datos)
     };
     
-    this.usuariosService.crearUsuario(profesorData).subscribe({
+    this.usuariosService.crearUsuario(estudianteData).subscribe({
       next: (response: any) => {
-        this.mensaje = response.mensaje || 'Profesor creado con éxito';
-        this.profesorForm.reset();
+        this.mensaje = response.mensaje || 'Estudiante creado con éxito';
+        this.estudianteForm.reset();
         this.loading = false;
-        this.cargarProfesores();
+        this.cargarEstudiantes();
       },
       error: (err: any) => {
-        this.error = err.error?.error || 'Error al crear profesor';
+        this.error = err.error?.error || 'Error al crear estudiante';
         this.loading = false;
       }
     });

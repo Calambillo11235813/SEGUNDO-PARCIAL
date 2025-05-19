@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './auth/components/login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { HomeComponent } from './dashboard/components/home/home.component';
-import { EstudiantesComponent } from './dashboard/components/estudiantes/estudiantes.component';
-import { ProfesoresComponent } from './dashboard/components/profesores/profesores.component';
-import { PerfilComponent } from './dashboard/components/perfil/perfil.component';
+import { DashboardComponent } from './dashboard_administrador/dashboard.component';
+import { HomeComponent } from './dashboard_administrador/components/home/home.component';
+import { EstudiantesComponent } from './dashboard_administrador/components/estudiantes/estudiantes.component';
+import { ProfesoresComponent } from './dashboard_administrador/components/profesores/profesores.component';
+import { PerfilComponent } from './dashboard_administrador/components/perfil/perfil.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { AdminGuard } from './core/guards/admin.guard';
 

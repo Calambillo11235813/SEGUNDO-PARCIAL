@@ -1,0 +1,134 @@
+<div class="profesores-container">
+  <h2>Gestión de Profesores</h2>
+  
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h3>Nuevo Profesor</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="profesorForm" (ngSubmit)="guardarProfesor()">
+            <div class="form-group">
+              <label for="codigo">Código</label>
+              <input type="text" id="codigo" formControlName="codigo" class="form-control" placeholder="Ej: 228039696">
+              <div *ngIf="profesorForm.get('codigo')?.invalid && profesorForm.get('codigo')?.touched" class="text-danger small">
+                El código es requerido
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" formControlName="nombre" class="form-control" placeholder="Nombre del profesor">
+              <div *ngIf="profesorForm.get('nombre')?.invalid && profesorForm.get('nombre')?.touched" class="text-danger small">
+                El nombre es requerido
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="apellido">Apellido</label>
+              <input type="text" id="apellido" formControlName="apellido" class="form-control" placeholder="Apellido del profesor">
+              <div *ngIf="profesorForm.get('apellido')?.invalid && profesorForm.get('apellido')?.touched" class="text-danger small">
+                El apellido es requerido
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input type="text" id="telefono" formControlName="telefono" class="form-control" placeholder="Ej: 76847107">
+              <div *ngIf="profesorForm.get('telefono')?.invalid && profesorForm.get('telefono')?.touched" class="text-danger small">
+                El teléfono es requerido
+              </div>
+            </div>
+            
+            <div class="form-group" *ngIf="!modoEdicion">
+              <label for="password">Contraseña</label>
+              <div class="password-field">
+                <input [type]="mostrarPassword ? 'text' : 'password'" id="password" formControlName="password" class="form-control" placeholder="Mínimo 6 caracteres">
+                <button type="button" class="btn-show-password" (click)="mostrarPassword = !mostrarPassword">
+                  <i class="fas" [ngClass]="{'fa-eye': !mostrarPassword, 'fa-eye-slash': mostrarPassword}"></i>
+                </button>
+              </div>
+              <div *ngIf="profesorForm.get('password')?.invalid && profesorForm.get('password')?.touched" class="text-danger small">
+                La contraseña debe tener al menos 6 caracteres
+              </div>
+            </div>
+            
+            <div *ngIf="mensaje" class="alert alert-success">
+              {{ mensaje }}
+            </div>
+            
+            <div *ngIf="error" class="alert alert-danger">
+              {{ error }}
+            </div>
+            
+            <div class="form-actions">
+              <button *ngIf="modoEdicion" type="button" class="btn btn-secondary" (click)="cancelarEdicion()">
+                Cancelar
+              </button>
+              <button type="submit" class="btn btn-primary" [disabled]="profesorForm.invalid || cargando">
+                <span *ngIf="cargando" class="spinner-border spinner-border-sm mr-1"></span>
+                {{ modoEdicion ? 'Actualizar Profesor' : 'Registrar Profesor' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <h3>Lista de Profesores</h3>
+            <div class="search-container">
+              <input 
+                type="text" 
+                placeholder="Buscar..." 
+                #searchInput
+                (keyup)="filtrarProfesores(searchInput.value)"
+                class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div *ngIf="cargando" class="text-center p-3">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Cargando...</span>
+            </div>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let profesor of profesoresFiltrados">
+                <td><span class="codigo-badge">{{ profesor.codigo }}</span></td>
+                <td>{{ profesor.nombre }}</td>
+                <td>{{ profesor.apellido }}</td>
+                <td>{{ profesor.telefono || 'N/A' }}</td>
+                <td>
+                  <button class="btn-action edit" (click)="editarProfesor(profesor)" title="Editar">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-action delete" (click)="eliminarProfesor(profesor.id)" title="Eliminar">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr *ngIf="profesoresFiltrados.length === 0 && !cargando">
+                <td colspan="5" class="text-center">No hay profesores registrados</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
