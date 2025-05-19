@@ -47,6 +47,15 @@ def login(request):
         
         if user:
             refresh = RefreshToken.for_user(user)
+            
+            # Preparar información del rol
+            rol_info = None
+            if user.rol:
+                rol_info = {
+                    'id': user.rol.id,
+                    'nombre': user.rol.nombre
+                }
+                
             return Response({
                 'mensaje': 'Inicio de sesión exitoso. ¡Bienvenido!',
                 'usuario': {
@@ -54,6 +63,7 @@ def login(request):
                     'codigo': user.codigo,
                     'nombre': user.nombre,
                     'apellido': user.apellido,
+                    'rol': rol_info  # Añadimos la información del rol
                 },
                 'tokens': {
                     'refresh': str(refresh),

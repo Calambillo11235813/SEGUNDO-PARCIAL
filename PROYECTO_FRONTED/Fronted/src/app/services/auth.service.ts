@@ -13,13 +13,15 @@ export class AuthService {
 
   // Método para iniciar sesión
   login(credenciales: {codigo: string, password: string}): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/login/`, credenciales)
+    return this.http.post<any>(`${this.apiUrl}/auth/login/`, credenciales)
       .pipe(
-        tap((response: any) => {
+        tap(response => {
           // Guardar tokens en localStorage
           localStorage.setItem('access_token', response.tokens.access);
           localStorage.setItem('refresh_token', response.tokens.refresh);
-          localStorage.setItem('usuario', JSON.stringify(response.usuario));
+          // Asegúrate de guardar el objeto completo del usuario
+          localStorage.setItem('currentUser', JSON.stringify(response.usuario));
+          localStorage.setItem('token', response.token);
         })
       );
   }
@@ -34,6 +36,8 @@ export class AuthService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('usuario');
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('token');
   }
 
   // Verificar si el usuario está autenticado
@@ -48,7 +52,26 @@ export class AuthService {
 
   // Obtener los datos del usuario actual
   getCurrentUser(): any {
-    const usuario = localStorage.getItem('usuario');
-    return usuario ? JSON.parse(usuario) : null;
+    const userStr = localStorage.getItem('currentUser');
+    return userStr ? JSON.parse(userStr) : null;
+  }
+
+  // Verificar si el usuario tiene un rol específico
+  hasRole(roleName: string): boolean {
+    const usuario = this.getCurrentUser();
+    return usuario?.rol?.nombre === roleName;
+  }
+
+  // Métodos de conveniencia para roles comunes
+  isAdmin(): boolean {
+    return this.hasRole('Administrador');
+  }
+
+  isTeacher(): boolean {
+    return this.hasRole('Profesor');
+  }
+
+  isStudent(): boolean {
+    return this.hasRole('Estudiante');
   }
 }

@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router'; // Añadir Router
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
-  standalone: true,  // El componente es standalone
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],  // Importa los módulos necesarios
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, RouterLink]
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -18,7 +18,8 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router // Añadir el Router
   ) {
     this.loginForm = this.fb.group({
       codigo: ['', Validators.required],
@@ -39,7 +40,8 @@ export class LoginComponent {
       next: (response) => {
         this.loading = false;
         console.log('Login exitoso', response);
-        // Aquí puedes redirigir al usuario
+        // Redirigir al dashboard
+        this.router.navigate(['/dashboard']);
       },
       error: (error) => {
         this.loading = false;

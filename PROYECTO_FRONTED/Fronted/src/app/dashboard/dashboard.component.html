@@ -1,0 +1,16 @@
+<div class="dashboard-container">
+  <app-sidebar [isAdmin]="isAdmin"></app-sidebar>
+  
+  <div class="content-area">
+    <div class="top-bar">
+      <div class="user-info" *ngIf="usuario">
+        <span>{{ usuario.nombre }} {{ usuario.apellido }}</span>
+        <small *ngIf="usuario.rol">({{ usuario.rol.nombre }})</small>
+      </div>
+    </div>
+    
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

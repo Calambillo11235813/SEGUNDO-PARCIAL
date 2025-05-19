@@ -1,0 +1,11 @@
+<div class="home-container">
+  <h2>Bienvenido al Sistema Educativo</h2>
+  <div class="welcome-card" *ngIf="usuario">
+    <h3>¡Hola, {{usuario.nombre}} {{usuario.apellido}}!</h3>
+    <p>Has iniciado sesión como: <strong>{{usuario.rol?.nombre || 'Usuario sin rol'}}</strong></p>
+  </div>
+  
+  <div class="dashboard-info">
+    <p>Desde este panel de control podrás administrar todas las funciones del sistema según tu nivel de acceso.</p>
+  </div>
+</div>
