@@ -2,6 +2,7 @@ from django.urls import path
 from .controllers import rol_controllers
 
 urlpatterns = [
+    
     path('roles/', rol_controllers.get_roles, name='get_roles'),
     path('roles/<int:id>/', rol_controllers.get_rol, name='get_rol'),
     path('roles/create/', rol_controllers.create_rol, name='create_rol'),

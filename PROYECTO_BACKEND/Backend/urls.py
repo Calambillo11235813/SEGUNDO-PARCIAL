@@ -17,10 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import path, include
+from rest_framework.permissions import AllowAny
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/permisos/', include('Permisos.urls')),
-     path('api/usuarios/', include('Usuarios.urls')),
+    path('api/usuarios/', include('Usuarios.urls')),
 ]
+
+
