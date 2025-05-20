@@ -14,7 +14,7 @@ class Nivel(models.Model):
 class Curso(models.Model):
     id = models.AutoField(primary_key=True)
     grado = models.IntegerField()
-    paralelo = models.IntegerField()
+    paralelo = models.CharField(max_length=1)  # Ahora puede ser 'A', 'B', etc.
     nivel = models.ForeignKey(Nivel, on_delete=models.CASCADE, related_name='cursos')
 
     class Meta:
@@ -23,6 +23,7 @@ class Curso(models.Model):
         unique_together = ('nivel', 'grado', 'paralelo')
 
     def __str__(self):
+        # Actualizamos también la representación en string
         return f"{self.nivel} - {self.grado}° {self.paralelo}"
 
 class Materia(models.Model):
@@ -33,10 +34,9 @@ class Materia(models.Model):
     class Meta:
         verbose_name = 'Materia'
         verbose_name_plural = 'Materias'
-        unique_together = ('nombre', 'curso')
 
     def __str__(self):
-        return f"{self.nombre} - {self.curso}"
+        return self.nombre
 
 class Notas(models.Model):
     id = models.AutoField(primary_key=True)
