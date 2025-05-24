@@ -186,3 +186,48 @@ def get_materias_por_nivel_grado_paralelo(request):
         
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def create_materia_por_curso(request):
+    """
+    Crea una nueva materia especificando solo el curso_id y el nombre.
+    """
+    try:
+        # Extraer datos
+        nombre = request.data.get('nombre')
+        curso_id = request.data.get('curso_id')
+        
+        # Validaciones básicas
+        if not all([nombre, curso_id]):
+            return Response(
+                {'error': 'Debe proporcionar nombre y curso_id'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Buscar el curso
+        try:
+            curso = Curso.objects.get(pk=curso_id)
+        except Curso.DoesNotExist:
+            return Response(
+                {'error': 'No se encontró el curso especificado'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+            
+        # Crear la materia
+        materia_data = {
+            'nombre': nombre,
+            'curso': curso.id
+        }
+        
+        serializer = MateriaSerializer(data=materia_data)
+        if serializer.is_valid():
+            materia = serializer.save()
+            return Response({
+                'mensaje': f'Materia {materia.nombre} creada correctamente en el curso {curso}',
+                'materia': MateriaSerializer(materia).data
+            }, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

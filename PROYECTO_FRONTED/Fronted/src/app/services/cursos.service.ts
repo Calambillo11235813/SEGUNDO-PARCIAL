@@ -10,8 +10,9 @@ export class CursosService {
 
   constructor(private http: HttpClient) { }
 
-  // Obtener todos los cursos
+  // Obtener todos los cursos con información del nivel
   getCursos(): Observable<any[]> {
+    // Asumiendo que la API devuelve información completa del curso incluyendo el nivel
     return this.http.get<any[]>(`${this.apiUrl}/cursos/`);
   }
 
