@@ -46,10 +46,12 @@ INSTALLED_APPS = [
     'Cursos',
     'Permisos',
     'rest_framework',  # Añadido para APIs REST
+    'rest_framework_simplejwt',
     'corsheaders',  # Añadido para manejar CORS
 ]
 
 MIDDLEWARE = [
+    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -141,7 +143,10 @@ AUTH_USER_MODEL = 'Usuarios.Usuario'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        # Comment out the problematic authentication class until fixed
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
 

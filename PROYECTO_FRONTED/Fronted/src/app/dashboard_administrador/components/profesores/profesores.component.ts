@@ -6,7 +6,6 @@ import { UsuariosService } from '../../../services/usuarios.service';
 @Component({
   selector: 'app-profesores',
   templateUrl: './profesores.component.html',
-  styleUrls: ['./profesores.component.css'],
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule]
 })
