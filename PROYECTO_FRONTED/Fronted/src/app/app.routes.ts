@@ -5,6 +5,7 @@ import { HomeComponent } from './dashboard_administrador/components/home/home.co
 import { EstudiantesComponent } from './dashboard_administrador/components/estudiantes/estudiantes.component';
 import { ProfesoresComponent } from './dashboard_administrador/components/profesores/profesores.component';
 import { PerfilComponent } from './dashboard_administrador/components/perfil/perfil.component';
+import { CursosComponent } from './dashboard_administrador/components/cursos/cursos.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { AdminGuard } from './core/guards/admin.guard';
 
@@ -19,6 +20,7 @@ export const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'estudiantes', component: EstudiantesComponent, canActivate: [AdminGuard] },
       { path: 'profesores', component: ProfesoresComponent, canActivate: [AdminGuard] },
+      { path: 'cursos', component: CursosComponent, canActivate: [AdminGuard] },
       { path: 'perfil', component: PerfilComponent }
     ]
   }
