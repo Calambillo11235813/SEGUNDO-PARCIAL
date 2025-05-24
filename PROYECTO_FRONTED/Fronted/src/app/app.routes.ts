@@ -6,6 +6,7 @@ import { EstudiantesComponent } from './dashboard_administrador/components/estud
 import { ProfesoresComponent } from './dashboard_administrador/components/profesores/profesores.component';
 import { PerfilComponent } from './dashboard_administrador/components/perfil/perfil.component';
 import { CursosComponent } from './dashboard_administrador/components/cursos/cursos.component';
+import { MateriasComponent } from './dashboard_administrador/components/materias/materias.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { AdminGuard } from './core/guards/admin.guard';
 
@@ -21,6 +22,7 @@ export const routes: Routes = [
       { path: 'estudiantes', component: EstudiantesComponent, canActivate: [AdminGuard] },
       { path: 'profesores', component: ProfesoresComponent, canActivate: [AdminGuard] },
       { path: 'cursos', component: CursosComponent, canActivate: [AdminGuard] },
+      { path: 'materias', component: MateriasComponent, canActivate: [AdminGuard] },
       { path: 'perfil', component: PerfilComponent }
     ]
   }

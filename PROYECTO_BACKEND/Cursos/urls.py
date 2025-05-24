@@ -5,17 +5,17 @@ urlpatterns = [
     # Rutas para materias
     path('materias/', materia_controllers.get_materias, name='get_materias'),
     path('materias/<int:id>/', materia_controllers.get_materia, name='get_materia'),
-    # Nueva ruta para crear materias por nivel, grado y paralelo
-    path('materias/create-por-nivel-grado/', materia_controllers.create_materia_por_nivel_grado, 
-         name='create_materia_por_nivel_grado'),
+    # Ruta para crear materias por curso
+    path('materias/create-por-curso/', materia_controllers.create_materia_por_curso, 
+         name='create_materia_por_curso'),
     
     path('materias/<int:id>/update/', materia_controllers.update_materia, name='update_materia'),
     path('materias/<int:id>/delete/', materia_controllers.delete_materia, name='delete_materia'),
     path('cursos/<int:curso_id>/materias/', materia_controllers.get_materias_por_curso, name='get_materias_por_curso'),
     
-    # Nueva ruta para obtener materias por nivel, grado y paralelo
-    path('materias/por-nivel-grado-paralelo/', materia_controllers.get_materias_por_nivel_grado_paralelo, 
-         name='get_materias_por_nivel_grado_paralelo'),
+    # Ruta para obtener materias por curso
+    path('materias/por-curso/', materia_controllers.get_materias_por_nivel_grado_paralelo, 
+         name='get_materias_por_curso'),
     
  
     # Rutas para cursos
