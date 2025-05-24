@@ -27,6 +27,13 @@
         </a>
       </li>
       
+      <li class="block" *ngIf="isAdmin">
+        <a routerLink="/dashboard/cursos" routerLinkActive="bg-red-100 text-red-700"
+           class="flex items-center px-6 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors">
+          <i class="fas fa-book mr-3"></i> Cursos
+        </a>
+      </li>
+      
       <li class="block">
         <a routerLink="/dashboard/perfil" routerLinkActive="bg-red-100 text-red-700"
            class="flex items-center px-6 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors">
