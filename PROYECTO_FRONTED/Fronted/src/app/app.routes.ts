@@ -38,10 +38,11 @@ export const routes: Routes = [
   {
     path: 'profesor',
     component: DashboardProfesorComponent,
-    canActivate: [AuthGuard, TeacherGuard], // Añadir TeacherGuard
+    canActivate: [AuthGuard, TeacherGuard],
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeProfesorComponent },
+      { path: 'dashboard', component: HomeProfesorComponent }, // Añadir esta línea
       { path: 'materias', component: MateriasProfesorComponent },
       { path: 'materia/:id', component: DetalleMateriaComponent }, // Nueva ruta
       { path: 'asistencias', component: AsistenciasComponent },
