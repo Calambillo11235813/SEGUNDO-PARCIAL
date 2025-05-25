@@ -1,0 +1,51 @@
+<div class="w-64 h-full bg-white shadow-lg border-r border-red-100">
+  <div class="p-6 border-b border-red-100">
+    <h2 class="text-xl font-bold text-red-600">Sistema Educativo</h2>
+  </div>
+  
+  <nav class="mt-4">
+    <ul class="space-y-1 list-none p-0 m-0">
+      <li class="block">
+        <a routerLink="/profesor" routerLinkActive="bg-red-100 text-red-700" [routerLinkActiveOptions]="{exact: true}"
+           class="flex items-center px-6 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors">
+          <i class="fas fa-home mr-3"></i> Dashboard
+        </a>
+      </li>
+      
+      <li class="block">
+        <a routerLink="/profesor/materias" routerLinkActive="bg-red-100 text-red-700"
+           class="flex items-center px-6 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors">
+          <i class="fas fa-book mr-3"></i> Mis Materias
+        </a>
+      </li>
+      
+      <li class="block">
+        <a routerLink="/profesor/asistencias" routerLinkActive="bg-red-100 text-red-700"
+           class="flex items-center px-6 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors">
+          <i class="fas fa-clipboard-check mr-3"></i> Asistencias
+        </a>
+      </li>
+      
+      <li class="block">
+        <a routerLink="/profesor/notas" routerLinkActive="bg-red-100 text-red-700"
+           class="flex items-center px-6 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors">
+          <i class="fas fa-chart-line mr-3"></i> Calificaciones
+        </a>
+      </li>
+      
+      <li class="block">
+        <a routerLink="/profesor/perfil" routerLinkActive="bg-red-100 text-red-700"
+           class="flex items-center px-6 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors">
+          <i class="fas fa-user-cog mr-3"></i> Mi Perfil
+        </a>
+      </li>
+      
+      <li class="block mt-4">
+        <a (click)="logout()" 
+           class="flex items-center px-6 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors cursor-pointer">
+          <i class="fas fa-sign-out-alt mr-3"></i> Cerrar Sesión
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

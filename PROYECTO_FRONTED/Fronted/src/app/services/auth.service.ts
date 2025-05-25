@@ -74,4 +74,12 @@ export class AuthService {
   isStudent(): boolean {
     return this.hasRole('Estudiante');
   }
+
+  /**
+   * Actualiza los datos del usuario en el almacenamiento local
+   * @param usuario Datos actualizados del usuario
+   */
+  updateUserData(usuario: any): void {
+    localStorage.setItem('currentUser', JSON.stringify(usuario));
+  }
 }

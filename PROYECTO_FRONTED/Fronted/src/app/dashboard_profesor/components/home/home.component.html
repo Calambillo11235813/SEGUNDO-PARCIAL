@@ -1,0 +1,77 @@
+<div class="p-6">
+  <div class="text-center mb-8">
+    <h2 class="text-3xl font-bold text-red-600">Bienvenido al Portal Docente</h2>
+    <p class="text-lg text-gray-600 mt-2" *ngIf="usuario">
+      ¡Hola, {{usuario.nombre}} {{usuario.apellido}}!
+    </p>
+  </div>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Tarjeta de acceso rápido: Mis Materias -->
+    <div class="bg-white border border-red-200 rounded-lg shadow-sm hover:shadow-md transition-shadow p-6">
+      <div class="flex items-start">
+        <div class="p-3 rounded-full bg-red-100 text-red-600 mr-4">
+          <i class="fas fa-book text-2xl"></i>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold text-gray-800">Mis Materias</h3>
+          <p class="text-gray-600 mt-1">Acceda a la lista de materias asignadas</p>
+          <a 
+            routerLink="/profesor/materias" 
+            class="inline-block mt-3 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors text-sm"
+          >
+            Ver Materias
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Tarjeta de acceso rápido: Asistencias -->
+    <div class="bg-white border border-red-200 rounded-lg shadow-sm hover:shadow-md transition-shadow p-6">
+      <div class="flex items-start">
+        <div class="p-3 rounded-full bg-red-100 text-red-600 mr-4">
+          <i class="fas fa-clipboard-check text-2xl"></i>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold text-gray-800">Control de Asistencias</h3>
+          <p class="text-gray-600 mt-1">Registre la asistencia de estudiantes</p>
+          <a 
+            routerLink="/profesor/asistencias" 
+            class="inline-block mt-3 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors text-sm"
+          >
+            Registrar Asistencia
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Tarjeta de acceso rápido: Calificaciones -->
+    <div class="bg-white border border-red-200 rounded-lg shadow-sm hover:shadow-md transition-shadow p-6">
+      <div class="flex items-start">
+        <div class="p-3 rounded-full bg-red-100 text-red-600 mr-4">
+          <i class="fas fa-chart-line text-2xl"></i>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold text-gray-800">Calificaciones</h3>
+          <p class="text-gray-600 mt-1">Ingrese y gestione calificaciones</p>
+          <a 
+            routerLink="/profesor/notas" 
+            class="inline-block mt-3 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors text-sm"
+          >
+            Ingresar Notas
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="mt-8 bg-white border border-red-200 rounded-lg shadow-sm p-6">
+    <h3 class="text-xl font-semibold text-red-600 mb-4">Información Importante</h3>
+    <ul class="list-disc pl-5 space-y-2 text-gray-700">
+      <li>Recuerde registrar la asistencia de sus estudiantes en cada clase.</li>
+      <li>Las calificaciones deben ser ingresadas dentro de los plazos establecidos por la institución.</li>
+      <li>Para cualquier consulta técnica, comuníquese con el departamento de sistemas.</li>
+      <li>Mantenga actualizada su información personal en la sección "Mi Perfil".</li>
+    </ul>
+  </div>
+</div>

@@ -33,14 +33,21 @@ export class LoginComponent {
 
     this.loading = true;
     this.errorMessage = '';
-
+    
     const credentials = this.loginForm.value;
     this.authService.login(credentials).subscribe({
       next: (response) => {
         this.loading = false;
-        console.log('Login exitoso', response);
-        // Redirigir al dashboard
-        this.router.navigate(['/dashboard']);
+        
+        // Redirigir según el rol del usuario
+        if (this.authService.isAdmin()) {
+          this.router.navigate(['/dashboard']);
+        } else if (this.authService.isTeacher()) {
+          this.router.navigate(['/profesor/dashboard']);
+        } else {
+          // Ruta predeterminada o ruta para estudiantes
+          this.router.navigate(['/dashboard']);
+        }
       },
       error: (error) => {
         this.loading = false;

@@ -1,0 +1,22 @@
+<div class="flex h-screen bg-red-50">
+  <!-- Sidebar component -->
+  <app-sidebar [isProfesor]="isProfesor" class="h-full"></app-sidebar>
+  
+  <!-- Main content area -->
+  <div class="flex-1 flex flex-col overflow-hidden">
+    <!-- Top navigation bar -->
+    <div class="bg-white shadow-sm border-b border-red-100 p-4">
+      <div class="flex justify-end items-center" *ngIf="usuario">
+        <div class="text-right">
+          <span class="text-gray-800 font-medium">{{ usuario.nombre }} {{ usuario.apellido }}</span>
+          <small *ngIf="usuario.rol" class="text-red-600 ml-1">({{ usuario.rol.nombre }})</small>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Main content -->
+    <div class="flex-1 overflow-auto p-4 bg-red-50">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

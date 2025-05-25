@@ -42,4 +42,13 @@ export class UsuariosService {
   eliminarUsuario(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/usuarios/${id}/delete/`);
   }
+
+  /**
+   * Cambiar la contraseña de un usuario
+   * @param id ID del usuario
+   * @param datos Objeto con passwordActual y passwordNuevo
+   */
+  cambiarPassword(id: number, datos: { passwordActual: string, passwordNuevo: string }): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/usuarios/${id}/cambiar-password/`, datos);
+  }
 }
