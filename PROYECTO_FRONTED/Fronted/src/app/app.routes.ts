@@ -16,6 +16,7 @@ import { MateriasProfesorComponent } from './dashboard_profesor/components/mater
 import { AsistenciasComponent } from './dashboard_profesor/components/asistencias/asistencias.component';
 import { NotasComponent } from './dashboard_profesor/components/notas/notas.component';
 import { PerfilProfesorComponent } from './dashboard_profesor/components/perfil/perfil.component'; // Importar PerfilProfesorComponent
+import { DetalleMateriaComponent } from './dashboard_profesor/components/materias/materia_detalle.component'; // Importar DetalleMateriaComponent
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -39,9 +40,10 @@ export const routes: Routes = [
     component: DashboardProfesorComponent,
     canActivate: [AuthGuard, TeacherGuard], // Añadir TeacherGuard
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: HomeProfesorComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeProfesorComponent },
       { path: 'materias', component: MateriasProfesorComponent },
+      { path: 'materia/:id', component: DetalleMateriaComponent }, // Nueva ruta
       { path: 'asistencias', component: AsistenciasComponent },
       { path: 'notas', component: NotasComponent },
       { path: 'perfil', component: PerfilProfesorComponent } // Añadir ruta de perfil

@@ -46,4 +46,21 @@ export class MateriasService {
   getMateriasPorCurso(cursoId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/${cursoId}/materias/`);
   }
+
+  // Asignar profesor a materia
+  asignarProfesor(materiaId: number, profesorId: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/materias/${materiaId}/asignar-profesor/`, {
+      profesor_id: profesorId
+    });
+  }
+
+  // Desasignar profesor de materia
+  desasignarProfesor(materiaId: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/materias/${materiaId}/desasignar-profesor/`, {});
+  }
+
+  // Obtener materias por profesor
+  getMateriasPorProfesor(profesorId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/profesores/${profesorId}/materias/`);
+  }
 }

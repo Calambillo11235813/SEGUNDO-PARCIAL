@@ -5,7 +5,7 @@ urlpatterns = [
     # Rutas para materias
     path('materias/', materia_controllers.get_materias, name='get_materias'),
     path('materias/<int:id>/', materia_controllers.get_materia, name='get_materia'),
-    # Ruta para crear materias por curso
+    # Ruta para crear materias por curso solo el id
     path('materias/create-por-curso/', materia_controllers.create_materia_por_curso, 
          name='create_materia_por_curso'),
     
@@ -30,4 +30,9 @@ urlpatterns = [
     path('niveles/', nivel_controllers.get_niveles, name='get_niveles'),
     path('niveles/<int:id>/', nivel_controllers.get_nivel, name='get_nivel'),
     path('niveles/create/', nivel_controllers.create_nivel, name='create_nivel'),
+
+    # Rutas para asignar y desasignar profesores
+    path('materias/<int:materia_id>/asignar-profesor/', materia_controllers.asignar_profesor, name='asignar_profesor'),
+    path('materias/<int:materia_id>/desasignar-profesor/', materia_controllers.desasignar_profesor, name='desasignar_profesor'),
+    path('profesores/<int:profesor_id>/materias/', materia_controllers.get_materias_por_profesor, name='get_materias_por_profesor'),
 ]

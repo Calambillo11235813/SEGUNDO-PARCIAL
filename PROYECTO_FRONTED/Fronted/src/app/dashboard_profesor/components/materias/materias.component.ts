@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { MateriasService } from '../../../services/materias.service';
-import { Router } from '@angular/router';
+
+interface MateriasResponse {
+  materias?: any[];
+  profesor?: string;
+  [key: string]: any;  // Permite otras propiedades
+}
 
 @Component({
   selector: 'app-materias-profesor',
@@ -15,6 +21,7 @@ export class MateriasProfesorComponent implements OnInit {
   materiasFiltradas: any[] = [];
   loading = false;
   error = '';
+  usuario: any;
   
   constructor(
     private authService: AuthService,
@@ -23,35 +30,51 @@ export class MateriasProfesorComponent implements OnInit {
   ) {}
   
   ngOnInit(): void {
+    this.usuario = this.authService.getCurrentUser();
     this.cargarMaterias();
   }
   
   cargarMaterias(): void {
     this.loading = true;
     
-    // Comentamos la llamada al API real
-    /*
-    const usuario = this.authService.getCurrentUser();
-    
-    if (usuario && usuario.id) {
-      this.materiasService.getMateriasPorProfesor(usuario.id).subscribe({
-        next: (data) => {
-          this.materias = data;
-          this.materiasFiltradas = [...data];
+    // Si estamos en producción, usar el código real
+    if (this.usuario && this.usuario.id) {
+      this.materiasService.getMateriasPorProfesor(this.usuario.id).subscribe({
+        next: (response: any) => {
+          console.log('Materias cargadas:', response);
+          
+          // Usar type assertion para ayudar a TypeScript
+          const data = response as MateriasResponse | any[];
+          
+          // Verificar si data es un array o un objeto con propiedad materias
+          if (Array.isArray(data)) {
+            this.materias = data;
+          } else {
+            // Ahora TypeScript sabe que data puede tener una propiedad 'materias'
+            this.materias = data && (data as MateriasResponse).materias ? (data as MateriasResponse).materias || [] : [];
+          }
+          
+          this.materiasFiltradas = [...this.materias];
           this.loading = false;
         },
         error: (error) => {
           console.error('Error al cargar materias:', error);
           this.error = 'Error al cargar las materias asignadas';
           this.loading = false;
+          
+          // Si hay error en producción, podemos cargar datos de prueba
+          this.cargarDatosDePrueba();
         }
       });
     } else {
-      this.loading = false;
       this.error = 'No se pudo identificar al profesor';
+      this.loading = false;
+      // Como estamos en desarrollo/prueba, cargamos datos simulados
+      this.cargarDatosDePrueba();
     }
-    */
-    
+  }
+  
+  cargarDatosDePrueba(): void {
     // Datos simulados para prueba
     setTimeout(() => {
       this.materias = [
@@ -90,36 +113,11 @@ export class MateriasProfesorComponent implements OnInit {
           },
           curso_nombre: 'Octavo B - Básica',
           estudiantes_count: 30
-        },
-        {
-          id: 4,
-          nombre: 'Historia y Geografía',
-          curso: {
-            id: 103,
-            nivel: { id: 1, nombre: 'Educación Básica' },
-            grado: 7,
-            paralelo: 'A'
-          },
-          curso_nombre: 'Séptimo A - Básica',
-          estudiantes_count: 35
-        },
-        {
-          id: 5,
-          nombre: 'Educación Física',
-          curso: {
-            id: 104,
-            nivel: { id: 2, nombre: 'Bachillerato' },
-            grado: 1,
-            paralelo: 'C'
-          },
-          curso_nombre: 'Primero C - Bachillerato',
-          estudiantes_count: 28
         }
       ];
-      
       this.materiasFiltradas = [...this.materias];
       this.loading = false;
-    }, 800); // Simulamos un pequeño retraso para ver el efecto de carga
+    }, 800);
   }
   
   filtrarMaterias(texto: string): void {
@@ -136,7 +134,28 @@ export class MateriasProfesorComponent implements OnInit {
   }
   
   verDetalle(materiaId: number): void {
-    // Implementar navegación al detalle de la materia
     this.router.navigate(['/profesor/materia', materiaId]);
+  }
+
+  // Añade este método a tu componente
+  getCursoDisplay(curso: any): string {
+    if (!curso) return 'Curso no especificado';
+    
+    let display = '';
+    
+    // Si tiene nivel
+    if (curso.nivel) {
+      display += curso.nivel.nombre + ' - ';
+    }
+    
+    // Si tiene grado y paralelo
+    if (curso.grado) {
+      display += curso.grado + '° ';
+      if (curso.paralelo) {
+        display += curso.paralelo;
+      }
+    }
+    
+    return display || 'Curso no especificado';
   }
 }

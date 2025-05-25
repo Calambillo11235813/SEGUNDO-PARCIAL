@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from ..models import Materia, Curso
 from ..serializers import MateriaSerializer
+from ..serializers import MateriaDetalleSerializer 
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -100,52 +101,6 @@ def get_materias_por_curso(request, curso_id):
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def create_materia_por_nivel_grado(request):
-    """
-    Crea una nueva materia especificando el nivel_id, grado y paralelo del curso.
-    """
-    try:
-        # Extraer datos
-        nombre = request.data.get('nombre')
-        nivel_id = request.data.get('nivel_id')
-        grado = request.data.get('grado')
-        paralelo = request.data.get('paralelo')
-        
-        # Validaciones básicas
-        if not all([nombre, nivel_id, grado, paralelo]):
-            return Response(
-                {'error': 'Debe proporcionar nombre, nivel_id, grado y paralelo'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        
-        # Buscar el curso
-        try:
-            curso = Curso.objects.get(nivel_id=nivel_id, grado=grado, paralelo=paralelo)
-        except Curso.DoesNotExist:
-            return Response(
-                {'error': 'No se encontró un curso con los parámetros especificados'},
-                status=status.HTTP_404_NOT_FOUND
-            )
-            
-        # Crear la materia
-        materia_data = {
-            'nombre': nombre,
-            'curso': curso.id
-        }
-        
-        serializer = MateriaSerializer(data=materia_data)
-        if serializer.is_valid():
-            materia = serializer.save()
-            return Response({
-                'mensaje': f'Materia {materia.nombre} creada correctamente en el curso {curso}',
-                'materia': MateriaSerializer(materia).data
-            }, status=status.HTTP_201_CREATED)
-        
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    except Exception as e:
-        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -229,5 +184,122 @@ def create_materia_por_curso(request):
             }, status=status.HTTP_201_CREATED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])  # Reemplaza con la política de permisos adecuada
+def asignar_profesor(request, materia_id):
+    """
+    Asigna un profesor a una materia específica.
+    Requiere materia_id en la URL y profesor_id en el cuerpo de la solicitud.
+    """
+    try:
+        # Verificar que la materia existe
+        try:
+            materia = Materia.objects.get(pk=materia_id)
+        except Materia.DoesNotExist:
+            return Response({'error': 'La materia no existe'}, status=status.HTTP_404_NOT_FOUND)
+        
+        # Obtener el profesor_id del cuerpo de la solicitud
+        profesor_id = request.data.get('profesor_id')
+        if not profesor_id:
+            return Response(
+                {'error': 'Debe proporcionar el ID del profesor'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Verificar que el profesor existe y tiene rol de profesor
+        try:
+            # Importamos el modelo Usuario
+            from Usuarios.models import Usuario
+            profesor = Usuario.objects.get(pk=profesor_id)
+            
+            # Verificar si tiene rol de profesor
+            if not profesor.rol or profesor.rol.nombre != 'Profesor':
+                return Response(
+                    {'error': 'El usuario seleccionado no tiene rol de profesor'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        except:
+            return Response(
+                {'error': 'El profesor no existe'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        # Asignar el profesor a la materia
+        materia.profesor = profesor
+        materia.save()
+        
+        return Response({
+            'mensaje': f'Profesor {profesor.nombre} {profesor.apellido} asignado a la materia {materia.nombre}',
+            'materia': MateriaDetalleSerializer(materia).data
+        }, status=status.HTTP_200_OK)
+        
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])  # Reemplaza con la política de permisos adecuada
+def desasignar_profesor(request, materia_id):
+    """
+    Desasigna al profesor de una materia específica.
+    """
+    try:
+        # Verificar que la materia existe
+        try:
+            materia = Materia.objects.get(pk=materia_id)
+        except Materia.DoesNotExist:
+            return Response({'error': 'La materia no existe'}, status=status.HTTP_404_NOT_FOUND)
+        
+        if not materia.profesor:
+            return Response(
+                {'error': 'La materia no tiene profesor asignado'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        nombre_profesor = f"{materia.profesor.nombre} {materia.profesor.apellido}"
+        
+        # Desasignar el profesor
+        materia.profesor = None
+        materia.save()
+        
+        return Response({
+            'mensaje': f'Profesor {nombre_profesor} desasignado de la materia {materia.nombre}',
+            'materia': MateriaDetalleSerializer(materia).data
+        }, status=status.HTTP_200_OK)
+        
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])  # Reemplaza con la política de permisos adecuada
+def get_materias_por_profesor(request, profesor_id):
+    """
+    Obtiene todas las materias asignadas a un profesor específico.
+    """
+    try:
+        # Verificar que el profesor existe
+        try:
+            # Importamos el modelo Usuario
+            from Usuarios.models import Usuario
+            profesor = Usuario.objects.get(pk=profesor_id)
+        except:
+            return Response(
+                {'error': 'El profesor no existe'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        # Obtener las materias del profesor
+        materias = Materia.objects.filter(profesor=profesor)
+        
+        # Serializar con información adicional del curso
+        serializer = MateriaDetalleSerializer(materias, many=True)
+        
+        return Response({
+            'profesor': f"{profesor.nombre} {profesor.apellido}",
+            'materias': serializer.data
+        }, status=status.HTTP_200_OK)
+        
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

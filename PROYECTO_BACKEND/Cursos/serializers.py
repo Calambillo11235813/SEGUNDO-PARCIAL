@@ -14,11 +14,23 @@ class CursoSerializer(serializers.ModelSerializer):
         fields = ['id', 'grado', 'paralelo', 'nivel', 'nivel_nombre']
 
 class MateriaSerializer(serializers.ModelSerializer):
-    nombre_curso = serializers.ReadOnlyField(source='curso.nombre')
+    class Meta:
+        model = Materia
+        fields = ['id', 'nombre', 'curso', 'profesor']
+        
+# También puedes crear un serializador especial para respuestas detalladas
+class MateriaDetalleSerializer(serializers.ModelSerializer):
+    curso_nombre = serializers.StringRelatedField(source='curso')
+    profesor_nombre = serializers.SerializerMethodField()
     
     class Meta:
         model = Materia
-        fields = ['id', 'nombre', 'curso', 'nombre_curso']
+        fields = ['id', 'nombre', 'curso', 'curso_nombre', 'profesor', 'profesor_nombre']
+    
+    def get_profesor_nombre(self, obj):
+        if obj.profesor:
+            return f"{obj.profesor.nombre} {obj.profesor.apellido}"
+        return None
 
 class NotasSerializer(serializers.ModelSerializer):
     class Meta:

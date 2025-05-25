@@ -27,16 +27,21 @@ class Curso(models.Model):
         return f"{self.nivel} - {self.grado}° {self.paralelo}"
 
 class Materia(models.Model):
-    id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
-    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, related_name='materias')
-
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    profesor = models.ForeignKey(
+        'Usuarios.Usuario',  # Referencia al modelo Usuario en la app Usuarios
+        on_delete=models.SET_NULL,  # Si se elimina el profesor, la materia queda sin profesor
+        null=True,           # Permite que una materia no tenga profesor asignado
+        blank=True,
+        related_name='materias_asignadas'  # Para acceder fácilmente a las materias de un profesor
+    )
+    
     class Meta:
-        verbose_name = 'Materia'
-        verbose_name_plural = 'Materias'
-
+        unique_together = ('nombre', 'curso')
+    
     def __str__(self):
-        return self.nombre
+        return f"{self.nombre} - {self.curso}"
 
 class Notas(models.Model):
     id = models.AutoField(primary_key=True)
