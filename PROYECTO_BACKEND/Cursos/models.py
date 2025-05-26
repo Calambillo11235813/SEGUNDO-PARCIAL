@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Nivel(models.Model):
     id = models.AutoField(primary_key=True)
@@ -48,7 +49,10 @@ class Notas(models.Model):
     valor = models.DecimalField(max_digits=4, decimal_places=2)
     concepto = models.CharField(max_length=100, null=True, blank=True)
     fecha = models.DateField(auto_now_add=True)
-    estudiante = models.ForeignKey('Usuarios.Estudiante', on_delete=models.CASCADE, related_name='notas')
+    # Cambiar a Usuario con validación de rol
+    estudiante = models.ForeignKey('Usuarios.Usuario', on_delete=models.CASCADE, 
+                                  related_name='notas',
+                                  limit_choices_to={'rol__nombre': 'Estudiante'})
     materia = models.ForeignKey(Materia, on_delete=models.CASCADE, related_name='notas')
 
     class Meta:
@@ -62,7 +66,10 @@ class Boletin(models.Model):
     id = models.AutoField(primary_key=True)
     fecha = models.DateField(auto_now_add=True)
     periodo = models.CharField(max_length=50)
-    estudiante = models.ForeignKey('Usuarios.Estudiante', on_delete=models.CASCADE, related_name='boletines')
+    # Cambiar a Usuario con validación de rol
+    estudiante = models.ForeignKey('Usuarios.Usuario', on_delete=models.CASCADE, 
+                                  related_name='boletines',
+                                  limit_choices_to={'rol__nombre': 'Estudiante'})
     notas = models.ManyToManyField(Notas, related_name='boletines')
 
     class Meta:
@@ -71,3 +78,22 @@ class Boletin(models.Model):
 
     def __str__(self):
         return f"Boletín {self.id}: {self.estudiante} - {self.periodo}"
+
+class Asistencia(models.Model):
+    estudiante = models.ForeignKey('Usuarios.Usuario', on_delete=models.CASCADE, related_name='asistencias')
+    materia = models.ForeignKey(Materia, on_delete=models.CASCADE, related_name='asistencias')
+    fecha = models.DateField(default=timezone.now)
+    presente = models.BooleanField(default=True)
+    justificada = models.BooleanField(default=False)
+    
+    class Meta:
+        verbose_name = 'Asistencia'
+        verbose_name_plural = 'Asistencias'
+        unique_together = ('estudiante', 'materia', 'fecha')  # Un estudiante solo puede tener una asistencia por materia y fecha
+        ordering = ['-fecha']  # Ordenar por fecha descendente
+    
+    def __str__(self):
+        estado = "Presente" if self.presente else "Ausente"
+        if not self.presente and self.justificada:
+            estado = "Justificado"
+        return f"{self.estudiante} - {self.materia} - {self.fecha} - {estado}"

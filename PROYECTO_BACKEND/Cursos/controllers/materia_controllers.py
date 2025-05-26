@@ -102,45 +102,6 @@ def get_materias_por_curso(request, curso_id):
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def get_materias_por_nivel_grado_paralelo(request):
-    """
-    Obtiene todas las materias de un curso específico mediante nivel_id, grado y paralelo.
-    """
-    try:
-        # Obtener parámetros de la URL
-        nivel_id = request.GET.get('nivel_id')
-        grado = request.GET.get('grado')
-        paralelo = request.GET.get('paralelo')
-        
-        # Validar que se proporcionen todos los parámetros
-        if not all([nivel_id, grado, paralelo]):
-            return Response(
-                {'error': 'Debe proporcionar nivel_id, grado y paralelo como parámetros'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        
-        # Buscar el curso
-        try:
-            curso = Curso.objects.get(nivel_id=nivel_id, grado=grado, paralelo=paralelo)
-        except Curso.DoesNotExist:
-            return Response(
-                {'error': 'No se encontró un curso con los parámetros especificados'},
-                status=status.HTTP_404_NOT_FOUND
-            )
-        
-        # Obtener las materias del curso
-        materias = Materia.objects.filter(curso=curso)
-        serializer = MateriaSerializer(materias, many=True)
-        
-        return Response({
-            'curso': str(curso),
-            'materias': serializer.data
-        }, status=status.HTTP_200_OK)
-        
-    except Exception as e:
-        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['POST'])
 @permission_classes([AllowAny])

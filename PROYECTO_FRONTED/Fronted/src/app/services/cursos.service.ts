@@ -40,4 +40,35 @@ export class CursosService {
   getCursosPorNivel(nivelId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/niveles/${nivelId}/cursos/`);
   }
+
+  /**
+   * Asigna un estudiante a un curso
+   */
+  asignarEstudianteACurso(estudianteId: number, cursoId: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/cursos/asignar-estudiante/`, {
+      estudiante_id: estudianteId,
+      curso_id: cursoId
+    });
+  }
+
+  /**
+   * Obtiene los estudiantes de un curso específico
+   */
+  getEstudiantesDeCurso(cursoId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/cursos/${cursoId}/estudiantes/`);
+  }
+
+  /**
+   * ✅ NUEVO: Obtiene estudiantes que no tienen curso asignado
+   */
+  getEstudiantesSinCurso(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/estudiantes/sin-curso/`);
+  }
+
+  /**
+   * Desasigna un estudiante de su curso
+   */
+  desasignarEstudianteDeCurso(estudianteId: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/estudiantes/${estudianteId}/desasignar-curso/`);
+  }
 }

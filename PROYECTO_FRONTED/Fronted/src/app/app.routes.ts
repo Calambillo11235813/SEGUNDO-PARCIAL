@@ -9,32 +9,52 @@ import { CursosComponent } from './dashboard_administrador/components/cursos/cur
 import { MateriasComponent } from './dashboard_administrador/components/materias/materias.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { AdminGuard } from './core/guards/admin.guard';
-import { TeacherGuard } from './core/guards/teacher.guard'; // Importar TeacherGuard
+import { TeacherGuard } from './core/guards/teacher.guard';
 import { DashboardProfesorComponent } from './dashboard_profesor/dashboard.component';
 import { HomeProfesorComponent } from './dashboard_profesor/components/home/home.component';
 import { MateriasProfesorComponent } from './dashboard_profesor/components/materias/materias.component';
 import { AsistenciasComponent } from './dashboard_profesor/components/asistencias/asistencias.component';
 import { NotasComponent } from './dashboard_profesor/components/notas/notas.component';
-import { PerfilProfesorComponent } from './dashboard_profesor/components/perfil/perfil.component'; // Importar PerfilProfesorComponent
-import { DetalleMateriaComponent } from './dashboard_profesor/components/materias/materia_detalle.component'; // Importar DetalleMateriaComponent
+import { PerfilProfesorComponent } from './dashboard_profesor/components/perfil/perfil.component';
+import { DetalleMateriaComponent } from './dashboard_profesor/components/materias/materia_detalle.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  
+  // ✅ Rutas principales de administrador
   {
-    path: 'dashboard',
+    path: 'admin',
     component: DashboardComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     children: [
-      { path: '', component: HomeComponent },
-      { path: 'estudiantes', component: EstudiantesComponent, canActivate: [AdminGuard] },
-      { path: 'profesores', component: ProfesoresComponent, canActivate: [AdminGuard] },
-      { path: 'cursos', component: CursosComponent, canActivate: [AdminGuard] },
-      { path: 'materias', component: MateriasComponent, canActivate: [AdminGuard] },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
+      { path: 'estudiantes', component: EstudiantesComponent },
+      { path: 'profesores', component: ProfesoresComponent },
+      { path: 'cursos', component: CursosComponent },
+      { path: 'materias', component: MateriasComponent },
       { path: 'perfil', component: PerfilComponent }
     ]
   },
-  // Rutas para el dashboard de profesor
+  
+  // ✅ NUEVO: Rutas legacy para mantener compatibilidad
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard, AdminGuard],
+    children: [
+      { path: '', redirectTo: '/admin/home', pathMatch: 'full' },
+      { path: 'home', redirectTo: '/admin/home' },
+      { path: 'estudiantes', redirectTo: '/admin/estudiantes' },
+      { path: 'profesores', redirectTo: '/admin/profesores' },
+      { path: 'cursos', redirectTo: '/admin/cursos' },
+      { path: 'materias', redirectTo: '/admin/materias' },
+      { path: 'perfil', redirectTo: '/admin/perfil' }
+    ]
+  },
+  
+  // ✅ Rutas de profesor
   {
     path: 'profesor',
     component: DashboardProfesorComponent,
@@ -42,12 +62,12 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeProfesorComponent },
-      { path: 'dashboard', component: HomeProfesorComponent }, // Añadir esta línea
+      { path: 'dashboard', component: HomeProfesorComponent }, 
       { path: 'materias', component: MateriasProfesorComponent },
-      { path: 'materia/:id', component: DetalleMateriaComponent }, // Nueva ruta
+      { path: 'materia/:id', component: DetalleMateriaComponent },
       { path: 'asistencias', component: AsistenciasComponent },
       { path: 'notas', component: NotasComponent },
-      { path: 'perfil', component: PerfilProfesorComponent } // Añadir ruta de perfil
+      { path: 'perfil', component: PerfilProfesorComponent }
     ]
   }
 ];

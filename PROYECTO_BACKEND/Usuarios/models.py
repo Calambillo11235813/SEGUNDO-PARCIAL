@@ -59,6 +59,13 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
         blank=True,
         related_name='usuarios_rol'  # Nombre diferenciado para la relación inversa
     )
+    
+    # Añadir este campo
+    curso = models.ForeignKey('Cursos.Curso', on_delete=models.SET_NULL, 
+                              null=True, blank=True, related_name='estudiantes_usuarios',
+                              help_text="Curso al que pertenece el estudiante (solo para estudiantes)")
+    
+
 
     objects = UsuarioManager()
     
@@ -68,9 +75,10 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = 'Usuario'
         verbose_name_plural = 'Usuarios'
+        db_table = 'usuarios'
 
     def __str__(self):
-        return f"{self.nombre} {self.apellido} (Código: {self.codigo})"
+        return f"{self.nombre} {self.apellido} - {self.rol.nombre}"
 
     def get_full_name(self):
         return f"{self.nombre} {self.apellido}"
@@ -97,7 +105,6 @@ class Profesor(models.Model):
 
 class Estudiante(models.Model):
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE, primary_key=True)
-    curso = models.ForeignKey('Cursos.Curso', on_delete=models.SET_NULL, null=True, related_name='estudiantes')
 
     class Meta:
         verbose_name = 'Estudiante'
@@ -105,6 +112,11 @@ class Estudiante(models.Model):
 
     def __str__(self):
         return f"Estudiante: {self.usuario.nombre} {self.usuario.apellido}"
+
+    # Método de conveniencia para acceder al curso
+    @property
+    def curso(self):
+        return self.usuario.curso
 
 class Tutor(models.Model):
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE, primary_key=True)

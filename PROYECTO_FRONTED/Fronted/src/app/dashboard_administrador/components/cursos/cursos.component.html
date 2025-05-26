@@ -81,50 +81,60 @@
                 [ngClass]="{'opacity-70 cursor-not-allowed': cursoForm.invalid || loading}"
               >
                 <span *ngIf="loading" class="inline-block h-4 w-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
-                {{ modoEdicion ? 'Actualizar Curso' : 'Registrar Curso' }}
+                {{ modoEdicion ? 'Actualizar' : 'Crear' }} Curso
               </button>
             </div>
           </form>
         </div>
       </div>
     </div>
-    
-    <!-- Tabla de cursos -->
+
+    <!-- Lista de cursos -->
     <div class="w-full lg:w-2/3">
       <div class="bg-white rounded-lg shadow-md border border-red-100">
-        <div class="p-4 border-b border-red-100">
-          <div class="flex justify-between items-center">
-            <h3 class="text-lg font-semibold text-red-600">Lista de Cursos</h3>
-            <div class="relative">
-              <input 
-                type="text" 
-                placeholder="Buscar..." 
-                #searchInput
-                (keyup)="filtrarCursos(searchInput.value)"
-                class="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 w-64"
-              >
-              <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
-            </div>
+        <div class="p-4 border-b border-red-100 flex justify-between items-center">
+          <h3 class="text-lg font-semibold text-red-600">Lista de Cursos</h3>
+          <div class="flex items-center space-x-2">
+            <input 
+              #searchInput
+              type="text" 
+              placeholder="Buscar cursos..." 
+              class="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 text-sm"
+              (input)="filtrarCursos(searchInput.value)"
+            >
+            <span class="text-sm text-gray-600">{{ cursosFiltrados.length }} cursos</span>
           </div>
         </div>
+        
         <div class="p-6">
-          <div *ngIf="loading" class="flex justify-center p-3">
-            <div class="h-8 w-8 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+          <!-- Loading -->
+          <div *ngIf="loading" class="flex justify-center p-8">
+            <div class="text-center">
+              <div class="h-8 w-8 border-4 border-red-600 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+              <p class="text-gray-600">Cargando cursos...</p>
+            </div>
           </div>
           
-          <div class="overflow-x-auto">
+          <!-- Sin cursos -->
+          <div *ngIf="!loading && cursosFiltrados.length === 0" class="text-center py-8 text-gray-500">
+            <i class="fas fa-graduation-cap text-4xl mb-4 text-gray-300"></i>
+            <p>No hay cursos registrados</p>
+          </div>
+          
+          <!-- Tabla de cursos -->
+          <div *ngIf="cursosFiltrados.length > 0" class="overflow-x-auto">
             <table class="min-w-full divide-y divide-red-200">
               <thead class="bg-red-50">
                 <tr>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-red-600 uppercase tracking-wider">ID</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-red-600 uppercase tracking-wider">Nivel</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-red-600 uppercase tracking-wider">Grado</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-red-600 uppercase tracking-wider">Paralelo</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-red-600 uppercase tracking-wider">Acciones</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase tracking-wider">ID</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase tracking-wider">Nivel</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase tracking-wider">Grado</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase tracking-wider">Paralelo</th>
+                  <th class="px-6 py-3 text-center text-xs font-medium text-red-500 uppercase tracking-wider">Acciones</th>
                 </tr>
               </thead>
-              <tbody class="bg-white divide-y divide-gray-200">
-                <tr *ngFor="let curso of cursosFiltrados">
+              <tbody class="bg-white divide-y divide-red-200">
+                <tr *ngFor="let curso of cursosFiltrados" class="hover:bg-red-50 transition-colors">
                   <td class="px-6 py-4 whitespace-nowrap">
                     <span class="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
                       {{ curso.id }}
@@ -134,41 +144,176 @@
                   <td class="px-6 py-4 whitespace-nowrap">{{ curso.grado }}°</td>
                   <td class="px-6 py-4 whitespace-nowrap">{{ curso.paralelo }}</td>
                   <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="flex space-x-2">
+                    <div class="flex justify-center space-x-2">
+                      <!-- ✅ NUEVO: Botón para asignar estudiantes -->
+                      <button 
+                        class="p-2 bg-green-100 text-green-600 hover:bg-green-200 rounded-md transition-colors flex items-center"
+                        (click)="abrirModalAsignacion(curso)" 
+                        title="Asignar estudiantes al curso"
+                      >
+                        <i class="fas fa-user-plus mr-1"></i>
+                        <span class="hidden sm:inline">Estudiantes</span>
+                      </button>
+                      
                       <button 
                         class="p-2 bg-blue-100 text-blue-600 hover:bg-blue-200 rounded-md transition-colors flex items-center"
                         (click)="editarCurso(curso)" 
                         title="Editar curso"
                       >
                         <i class="fas fa-edit mr-1"></i>
-                        <span>Editar</span>
+                        <span class="hidden sm:inline">Editar</span>
                       </button>
+                      
                       <button 
                         class="p-2 bg-red-100 text-red-600 hover:bg-red-200 rounded-md transition-colors flex items-center"
                         (click)="eliminarCurso(curso.id)" 
                         title="Eliminar curso"
                       >
-                        <i class="fas fa-trash-alt mr-1"></i>
-                        <span>Eliminar</span>
+                        <i class="fas fa-trash mr-1"></i>
+                        <span class="hidden sm:inline">Eliminar</span>
                       </button>
+                      
                       <button 
-                        class="p-2 bg-green-100 text-green-600 hover:bg-green-200 rounded-md transition-colors flex items-center"
+                        class="p-2 bg-purple-100 text-purple-600 hover:bg-purple-200 rounded-md transition-colors flex items-center"
                         (click)="verMaterias(curso.id)" 
-                        title="Ver materias"
+                        title="Ver materias del curso"
                       >
                         <i class="fas fa-book mr-1"></i>
-                        <span>Materias</span>
+                        <span class="hidden sm:inline">Materias</span>
                       </button>
                     </div>
                   </td>
-                </tr>
-                <tr *ngIf="cursosFiltrados.length === 0 && !loading">
-                  <td colspan="5" class="px-6 py-4 text-center text-gray-500">No hay cursos registrados</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ NUEVO: Modal de asignación de estudiantes -->
+<div *ngIf="mostrarModalAsignacion" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+  <div class="relative top-10 mx-auto p-5 border w-full max-w-4xl shadow-lg rounded-md bg-white">
+    <div class="mt-3">
+      <!-- Header del modal -->
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl font-medium text-gray-900">
+          Gestionar Estudiantes - {{ cursoSeleccionado?.grado }}° {{ cursoSeleccionado?.paralelo }}
+        </h3>
+        <button 
+          class="text-gray-400 hover:text-gray-600 transition-colors"
+          (click)="cerrarModalAsignacion()"
+        >
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Panel izquierdo: Asignar nuevo estudiante -->
+        <div class="bg-gray-50 p-4 rounded-md">
+          <h4 class="font-medium text-gray-700 mb-4">
+            <i class="fas fa-user-plus text-green-600 mr-2"></i>
+            Asignar Estudiante
+          </h4>
+          
+          <form [formGroup]="estudianteForm" (ngSubmit)="asignarEstudianteACurso()">
+            <div class="mb-4">
+              <label for="estudiante" class="block text-sm font-medium text-gray-700 mb-1">
+                Seleccionar Estudiante
+              </label>
+              <select
+                id="estudiante"
+                formControlName="estudiante"
+                class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                [ngClass]="{'border-red-500 ring-1 ring-red-500': estudianteForm.get('estudiante')?.invalid && estudianteForm.get('estudiante')?.touched}"
+              >
+                <option [value]="null" disabled>Seleccione un estudiante</option>
+                <option *ngFor="let estudiante of getEstudiantesSinCursoActualizados()" [value]="estudiante.id">
+                  {{ estudiante.codigo }} - {{ estudiante.nombre }} {{ estudiante.apellido }}
+                </option>
+              </select>
+              <div *ngIf="getEstudiantesSinCursoActualizados().length === 0" class="text-sm text-gray-500 mt-1">
+                No hay estudiantes disponibles para asignar
+              </div>
+            </div>
+
+            <!-- Mensajes -->
+            <div *ngIf="mensaje" class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded text-sm">
+              {{ mensaje }}
+            </div>
+            
+            <div *ngIf="error" class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded text-sm">
+              {{ error }}
+            </div>
+
+            <button 
+              type="submit" 
+              class="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-300 flex items-center justify-center"
+              [disabled]="estudianteForm.invalid || asignandoEstudiante || getEstudiantesSinCursoActualizados().length === 0"
+              [ngClass]="{'opacity-70 cursor-not-allowed': estudianteForm.invalid || asignandoEstudiante || getEstudiantesSinCursoActualizados().length === 0}"
+            >
+              <span *ngIf="asignandoEstudiante" class="inline-block h-4 w-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+              <i *ngIf="!asignandoEstudiante" class="fas fa-plus mr-2"></i>
+              {{ asignandoEstudiante ? 'Asignando...' : 'Asignar Estudiante' }}
+            </button>
+          </form>
+        </div>
+
+        <!-- Panel derecho: Estudiantes del curso -->
+        <div class="bg-gray-50 p-4 rounded-md">
+          <h4 class="font-medium text-gray-700 mb-4">
+            <i class="fas fa-users text-blue-600 mr-2"></i>
+            Estudiantes Asignados ({{ estudiantesDelCurso.length }})
+          </h4>
+          
+          <!-- Loading estudiantes -->
+          <div *ngIf="cargandoEstudiantes" class="flex justify-center p-4">
+            <div class="h-6 w-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+
+          <!-- Lista de estudiantes del curso -->
+          <div *ngIf="!cargandoEstudiantes" class="max-h-80 overflow-y-auto">
+            <div *ngIf="estudiantesDelCurso.length === 0" class="text-center py-8 text-gray-500">
+              <i class="fas fa-user-slash text-3xl mb-2 text-gray-300"></i>
+              <p class="text-sm">No hay estudiantes asignados a este curso</p>
+            </div>
+
+            <div *ngFor="let estudiante of estudiantesDelCurso" class="flex justify-between items-center p-3 bg-white rounded-md mb-2 shadow-sm hover:shadow-md transition-shadow">
+              <div class="flex items-center">
+                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                  <i class="fas fa-user text-blue-600 text-sm"></i>
+                </div>
+                <div>
+                  <p class="font-medium text-gray-900 text-sm">{{ estudiante.nombre }} {{ estudiante.apellido }}</p>
+                  <p class="text-gray-500 text-xs">{{ estudiante.codigo }}</p>
+                </div>
+              </div>
+              <!-- ✅ MEJORADO: Botón de desasignación más visible -->
+              <button 
+                class="px-3 py-1 text-xs bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 rounded-md transition-colors flex items-center"
+                (click)="desasignarEstudianteDeCurso(estudiante)"
+                title="Desasignar estudiante del curso"
+              >
+                <i class="fas fa-user-minus mr-1"></i>
+                Desasignar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer del modal -->
+      <div class="flex justify-end mt-6 pt-4 border-t">
+        <button 
+          type="button"
+          class="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition duration-300"
+          (click)="cerrarModalAsignacion()"
+        >
+          <i class="fas fa-times mr-2"></i>
+          Cerrar
+        </button>
       </div>
     </div>
   </div>

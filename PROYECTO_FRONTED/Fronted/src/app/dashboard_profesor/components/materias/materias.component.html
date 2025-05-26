@@ -58,26 +58,4 @@
   </div>
 </div>
 
-<script>
-// Añade este método a tu componente
-getCursoDisplay(curso: any): string {
-  if (!curso) return 'Curso no especificado';
-  
-  let display = '';
-  
-  // Si tiene nivel
-  if (curso.nivel) {
-    display += curso.nivel.nombre + ' - ';
-  }
-  
-  // Si tiene grado y paralelo
-  if (curso.grado) {
-    display += curso.grado + '° ';
-    if (curso.paralelo) {
-      display += curso.paralelo;
-    }
-  }
-  
-  return display || 'Curso no especificado';
-}
-</script>
+

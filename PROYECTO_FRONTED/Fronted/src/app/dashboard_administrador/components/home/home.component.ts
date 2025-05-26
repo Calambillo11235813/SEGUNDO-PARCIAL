@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
+import { CommonModule } from '@angular/common'; // ✅ AGREGAR ESTA IMPORTACIÓN
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  standalone: false
+  standalone: true,
+  imports: [CommonModule, RouterModule], // ✅ AGREGAR CommonModule
 })
 export class HomeComponent implements OnInit {
   usuario: any;
