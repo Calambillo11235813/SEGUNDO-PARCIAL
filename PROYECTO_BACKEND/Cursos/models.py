@@ -97,3 +97,149 @@ class Asistencia(models.Model):
         if not self.presente and self.justificada:
             estado = "Justificado"
         return f"{self.estudiante} - {self.materia} - {self.fecha} - {estado}"
+
+class TipoEvaluacion(models.Model):
+    """
+    Define los tipos de evaluación disponibles en el sistema.
+    """
+    TIPOS_CHOICES = [
+        ('EXAMEN', 'Examen'),
+        ('PARTICIPACION', 'Participación en Clase'),
+        ('TRABAJO', 'Trabajo Práctico'),
+    ]
+    
+    nombre = models.CharField(max_length=50, choices=TIPOS_CHOICES, unique=True)
+    descripcion = models.TextField(blank=True, null=True)
+    activo = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'tipos_evaluacion'
+        verbose_name = 'Tipo de Evaluación'
+        verbose_name_plural = 'Tipos de Evaluación'
+
+    def __str__(self):
+        return self.get_nombre_display()
+
+class Evaluacion(models.Model):
+    """
+    Representa una evaluación específica (examen, trabajo, etc.) para una materia.
+    """
+    materia = models.ForeignKey(Materia, on_delete=models.CASCADE, related_name='evaluaciones')
+    tipo_evaluacion = models.ForeignKey(TipoEvaluacion, on_delete=models.CASCADE)
+    titulo = models.CharField(max_length=200)
+    descripcion = models.TextField(blank=True, null=True)
+    fecha_asignacion = models.DateField()
+    fecha_entrega = models.DateField()
+    fecha_limite = models.DateField(null=True, blank=True, help_text="Fecha límite para entrega tardía")
+    
+    # Configuración de calificación
+    nota_maxima = models.DecimalField(max_digits=5, decimal_places=2, default=100.00)
+    nota_minima_aprobacion = models.DecimalField(max_digits=5, decimal_places=2, default=51.00)
+    porcentaje_nota_final = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2,
+        help_text="Porcentaje que representa en la nota final de la materia"
+    )
+    
+    # Configuración de entrega
+    permite_entrega_tardia = models.BooleanField(default=False)
+    penalizacion_tardio = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2, 
+        default=0.00,
+        help_text="Porcentaje de penalización por entrega tardía"
+    )
+    
+    # Estado
+    activo = models.BooleanField(default=True)
+    publicado = models.BooleanField(default=False, help_text="Si está visible para los estudiantes")
+    
+    # Metadatos
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'evaluaciones'
+        verbose_name = 'Evaluación'
+        verbose_name_plural = 'Evaluaciones'
+        ordering = ['-fecha_asignacion']
+
+    def __str__(self):
+        return f"{self.titulo} - {self.materia.nombre} ({self.tipo_evaluacion})"
+
+    @property
+    def esta_vencido(self):
+        from django.utils import timezone
+        return timezone.now().date() > self.fecha_entrega
+
+    @property
+    def puede_entregar_tardio(self):
+        from django.utils import timezone
+        if not self.permite_entrega_tardia or not self.fecha_limite:
+            return False
+        return timezone.now().date() <= self.fecha_limite
+
+class Calificacion(models.Model):
+    """
+    Almacena las calificaciones de los estudiantes en las evaluaciones.
+    """
+    evaluacion = models.ForeignKey(Evaluacion, on_delete=models.CASCADE, related_name='calificaciones')
+    estudiante = models.ForeignKey('Usuarios.Usuario', on_delete=models.CASCADE)
+    
+    # Calificación
+    nota = models.DecimalField(max_digits=5, decimal_places=2)
+    nota_sobre = models.DecimalField(max_digits=5, decimal_places=2, help_text="Nota máxima posible")
+    
+    # Información de entrega
+    fecha_entrega = models.DateTimeField(null=True, blank=True)
+    entrega_tardia = models.BooleanField(default=False)
+    penalizacion_aplicada = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
+    
+    # Observaciones y feedback
+    observaciones = models.TextField(blank=True, null=True)
+    retroalimentacion = models.TextField(blank=True, null=True)
+    
+    # Estado
+    finalizada = models.BooleanField(default=False)
+    
+    # Metadatos
+    calificado_por = models.ForeignKey(
+        'Usuarios.Usuario', 
+        on_delete=models.CASCADE, 
+        related_name='calificaciones_realizadas',
+        null=True, 
+        blank=True
+    )
+    fecha_calificacion = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'calificaciones'
+        verbose_name = 'Calificación'
+        verbose_name_plural = 'Calificaciones'
+        unique_together = ['evaluacion', 'estudiante']
+
+    def __str__(self):
+        return f"{self.estudiante.nombre} - {self.evaluacion.titulo}: {self.nota}/{self.nota_sobre}"
+
+    @property
+    def nota_final(self):
+        """Calcula la nota final aplicando penalizaciones"""
+        if self.penalizacion_aplicada > 0:
+            return max(0, self.nota - (self.nota * self.penalizacion_aplicada / 100))
+        return self.nota
+
+    @property
+    def porcentaje(self):
+        """Calcula el porcentaje obtenido"""
+        if self.nota_sobre > 0:
+            return (self.nota / self.nota_sobre) * 100
+        return 0
+
+    @property
+    def esta_aprobado(self):
+        """Determina si la calificación está aprobada"""
+        return self.nota_final >= self.evaluacion.nota_minima_aprobacion

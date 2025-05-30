@@ -1,5 +1,5 @@
 from django.urls import path
-from .controllers import materia_controllers, curso_controllers, nivel_controllers, asistencia_controllers
+from .controllers import materia_controllers, curso_controllers, nivel_controllers, asistencia_controllers, evaluaciones_controllers, calificaciones_controllers
 
 urlpatterns = [
     # Rutas para materias
@@ -42,4 +42,27 @@ urlpatterns = [
     path('cursos/<int:curso_id>/estudiantes/', curso_controllers.get_estudiantes_de_curso, name='get_estudiantes_de_curso'),
     path('estudiantes/<int:estudiante_id>/desasignar-curso/', curso_controllers.desasignar_estudiante_de_curso, name='desasignar_estudiante_de_curso'),
     path('estudiantes/sin-curso/', curso_controllers.get_estudiantes_sin_curso, name='get_estudiantes_sin_curso'),
+
+        # URLs para gestión de Tipos de Evaluación
+    path('tipos-evaluacion/create/', evaluaciones_controllers.create_tipo_evaluacion, name='create_tipo_evaluacion'),
+    path('tipos-evaluacion/<int:tipo_id>/', evaluaciones_controllers.get_tipo_evaluacion, name='get_tipo_evaluacion'),
+    path('tipos-evaluacion/<int:tipo_id>/update/', evaluaciones_controllers.update_tipo_evaluacion, name='update_tipo_evaluacion'),
+    path('tipos-evaluacion/<int:tipo_id>/delete/', evaluaciones_controllers.delete_tipo_evaluacion, name='delete_tipo_evaluacion'),
+
+    # NUEVAS URLs para Evaluaciones (sin grupos)
+    path('tipos-evaluacion/', evaluaciones_controllers.get_tipos_evaluacion, name='get_tipos_evaluacion'),
+    path('evaluaciones/create/', evaluaciones_controllers.create_evaluacion, name='create_evaluacion'),
+    path('evaluaciones/<int:evaluacion_id>/', evaluaciones_controllers.get_evaluacion, name='get_evaluacion'),
+    path('evaluaciones/<int:evaluacion_id>/update/', evaluaciones_controllers.update_evaluacion, name='update_evaluacion'),
+    path('evaluaciones/<int:evaluacion_id>/delete/', evaluaciones_controllers.delete_evaluacion, name='delete_evaluacion'),
+    path('materias/<int:materia_id>/evaluaciones/', evaluaciones_controllers.get_evaluaciones_por_materia, name='get_evaluaciones_por_materia'),
+    
+    # URLs para Calificaciones
+    path('calificaciones/registrar/', calificaciones_controllers.registrar_calificacion, name='registrar_calificacion'),
+    path('calificaciones/registrar-masivo/', calificaciones_controllers.registrar_calificaciones_masivo, name='registrar_calificaciones_masivo'),
+    path('evaluaciones/<int:evaluacion_id>/calificaciones/', calificaciones_controllers.get_calificaciones_por_evaluacion, name='get_calificaciones_por_evaluacion'),
+    path('estudiantes/<int:estudiante_id>/calificaciones/', calificaciones_controllers.get_calificaciones_por_estudiante, name='get_calificaciones_por_estudiante'),
+    path('materias/<int:materia_id>/reporte-calificaciones/', calificaciones_controllers.get_reporte_calificaciones_materia, name='get_reporte_calificaciones_materia'),
+
+
 ]
