@@ -50,7 +50,11 @@ def get_trimestres(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def create_trimestre(request):
-    """Crea un nuevo trimestre"""
+    """
+    Crea un nuevo trimestre para cualquier año académico (actual o anteriores)
+    
+    Se puede utilizar para crear trimestres en años pasados (2023, 2024) o futuros.
+    """
     try:
         data = request.data
         
@@ -63,6 +67,21 @@ def create_trimestre(request):
                     status=status.HTTP_400_BAD_REQUEST
                 )
         
+        # Validar número de trimestre
+        if data['numero'] not in [1, 2, 3]:
+            return Response(
+                {'error': 'El número de trimestre debe ser 1, 2 o 3'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Validar año académico - Permitir años anteriores, pero con advertencia
+        año_actual = date.today().year
+        if int(data['año_academico']) < año_actual - 5:  # Limitar a 5 años atrás como medida de seguridad
+            return Response(
+                {'error': f'El año académico no puede ser anterior a {año_actual - 5}'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+            
         # Validar que no exista el trimestre para ese año
         if Trimestre.objects.filter(numero=data['numero'], año_academico=data['año_academico']).exists():
             return Response(
@@ -88,6 +107,14 @@ def create_trimestre(request):
                 status=status.HTTP_400_BAD_REQUEST
             )
         
+        # Validar coherencia de año en fechas
+        año_trimestre = int(data['año_academico'])
+        if fecha_inicio.year != año_trimestre and fecha_fin.year != año_trimestre:
+            return Response(
+                {'advertencia': f'Las fechas proporcionadas no coinciden con el año académico {año_trimestre}'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
         # Crear trimestre
         trimestre = Trimestre.objects.create(
             numero=data['numero'],
@@ -103,14 +130,21 @@ def create_trimestre(request):
             created_by_id=data.get('created_by')
         )
         
+        # Determinar si es un año anterior
+        mensaje = 'Trimestre creado exitosamente'
+        if int(data['año_academico']) < año_actual:
+            mensaje += f' (Nota: Se ha creado un trimestre para el año {data["año_academico"]}, que es anterior al año actual)'
+        
         return Response({
-            'mensaje': 'Trimestre creado exitosamente',
+            'mensaje': mensaje,
             'trimestre': {
                 'id': trimestre.id,
                 'numero': trimestre.numero,
                 'nombre': trimestre.nombre,
                 'año_academico': trimestre.año_academico,
-                'estado': trimestre.estado
+                'estado': trimestre.estado,
+                'fecha_inicio': trimestre.fecha_inicio,
+                'fecha_fin': trimestre.fecha_fin
             }
         }, status=status.HTTP_201_CREATED)
         
@@ -171,11 +205,19 @@ def update_trimestre(request, trimestre_id):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def calcular_promedios_trimestre(request, trimestre_id):
-    """Calcula automáticamente los promedios de un trimestre"""
+    """
+    Calcula automáticamente los promedios de un trimestre
+    
+    POST /api/cursos/trimestres/{trimestre_id}/calcular-promedios/
+    """
     try:
         trimestre = Trimestre.objects.get(id=trimestre_id)
         materias = Materia.objects.all()
         resultados = []
+        
+        # Filtrar materias si se especifican en la solicitud
+        if request.data.get('solo_materias'):
+            materias = materias.filter(id__in=request.data['solo_materias'])
         
         with transaction.atomic():
             for materia in materias:
@@ -185,18 +227,24 @@ def calcular_promedios_trimestre(request, trimestre_id):
                     rol__nombre='Estudiante'
                 )
                 
+                # Filtrar estudiantes si se especifican en la solicitud
+                if request.data.get('solo_estudiantes'):
+                    estudiantes = estudiantes.filter(id__in=request.data['solo_estudiantes'])
+                
                 for estudiante in estudiantes:
-                    # Calcular promedio de evaluaciones
+                    # Obtener evaluaciones del trimestre
                     evaluaciones = Evaluacion.objects.filter(
                         materia=materia,
-                        trimestre=trimestre,
-                        activo=True,
-                        publicado=True
+                        trimestre=trimestre
                     )
                     
+                    print(f"Debug - Estudiante: {estudiante.nombre}, Materia: {materia.nombre}")
+                    print(f"Debug - Evaluaciones encontradas: {evaluaciones.count()}")
+                    
                     if evaluaciones.exists():
-                        suma_ponderada = 0.0
-                        total_porcentaje = 0.0
+                        suma_ponderada = Decimal('0.0')  # ✅ USAR DECIMAL
+                        total_porcentaje = Decimal('0.0')  # ✅ USAR DECIMAL
+                        calificaciones_encontradas = 0
                         
                         for evaluacion in evaluaciones:
                             try:
@@ -204,18 +252,43 @@ def calcular_promedios_trimestre(request, trimestre_id):
                                     evaluacion=evaluacion,
                                     estudiante=estudiante
                                 )
-                                nota_ponderada = (calificacion.nota_final * evaluacion.porcentaje_nota_final) / 100
+                                
+                                # ✅ CORRECCIÓN: Asegurar que todo sea Decimal
+                                nota_estudiante = calificacion.nota_final if calificacion.nota_final else calificacion.nota
+                                porcentaje_eval = Decimal(str(evaluacion.porcentaje_nota_final))
+                                
+                                # ✅ CORRECCIÓN: Operaciones con Decimal
+                                nota_ponderada = nota_estudiante * (porcentaje_eval / Decimal('100.0'))
                                 suma_ponderada += nota_ponderada
-                                total_porcentaje += evaluacion.porcentaje_nota_final
+                                total_porcentaje += porcentaje_eval
+                                calificaciones_encontradas += 1
+                                
+                                print(f"Debug - Evaluación: {evaluacion.titulo}")
+                                print(f"Debug - Nota estudiante: {nota_estudiante}")
+                                print(f"Debug - Porcentaje evaluación: {porcentaje_eval}")
+                                print(f"Debug - Nota ponderada: {nota_ponderada}")
+                                
                             except Calificacion.DoesNotExist:
+                                print(f"Debug - No se encontró calificación para evaluación: {evaluacion.titulo}")
                                 continue
                         
-                        if total_porcentaje > 0:
-                            promedio_evaluaciones = (suma_ponderada / total_porcentaje) * 100
+                        # ✅ CORRECCIÓN: Cálculo con Decimal
+                        if total_porcentaje > 0 and calificaciones_encontradas > 0:
+                            if total_porcentaje == Decimal('100.0'):
+                                promedio_evaluaciones = suma_ponderada
+                            else:
+                                # Normalizar proporcionalmente
+                                promedio_evaluaciones = (suma_ponderada / total_porcentaje) * Decimal('100.0')
                         else:
-                            promedio_evaluaciones = 0.0
+                            promedio_evaluaciones = Decimal('0.0')
+                            
+                        print(f"Debug - Suma ponderada total: {suma_ponderada}")
+                        print(f"Debug - Porcentaje total: {total_porcentaje}")
+                        print(f"Debug - Promedio final calculado: {promedio_evaluaciones}")
+                        
                     else:
-                        promedio_evaluaciones = 0.0
+                        promedio_evaluaciones = Decimal('0.0')
+                        print(f"Debug - No hay evaluaciones para esta materia y trimestre")
                     
                     # Calcular asistencia
                     asistencias_query = Asistencia.objects.filter(
@@ -226,7 +299,20 @@ def calcular_promedios_trimestre(request, trimestre_id):
                     
                     total_clases = asistencias_query.count()
                     asistencias_presentes = asistencias_query.filter(presente=True).count()
-                    porcentaje_asistencia = (asistencias_presentes / total_clases * 100) if total_clases > 0 else 0.0
+                    
+                    # ✅ CORRECCIÓN: Usar Decimal para porcentaje de asistencia
+                    if total_clases > 0:
+                        porcentaje_asistencia = (Decimal(str(asistencias_presentes)) / Decimal(str(total_clases))) * Decimal('100.0')
+                    else:
+                        porcentaje_asistencia = Decimal('0.0')
+                    
+                    # Promedio final igual al promedio de evaluaciones
+                    promedio_final = promedio_evaluaciones
+                    
+                    # Determinar si está aprobado
+                    nota_minima = Decimal(str(trimestre.nota_minima_aprobacion))
+                    porcentaje_minimo = Decimal(str(trimestre.porcentaje_asistencia_minima))
+                    aprobado = (promedio_final >= nota_minima and porcentaje_asistencia >= porcentaje_minimo)
                     
                     # Crear o actualizar promedio trimestral
                     promedio_trimestral, created = PromedioTrimestral.objects.update_or_create(
@@ -235,23 +321,22 @@ def calcular_promedios_trimestre(request, trimestre_id):
                         trimestre=trimestre,
                         defaults={
                             'promedio_evaluaciones': promedio_evaluaciones,
+                            'promedio_final': promedio_final,
                             'total_clases': total_clases,
                             'asistencias': asistencias_presentes,
                             'porcentaje_asistencia': porcentaje_asistencia,
+                            'aprobado': aprobado,
                             'calculado_automaticamente': True
                         }
                     )
-                    
-                    # Calcular promedio final
-                    promedio_trimestral.calcular_promedio_final()
                     
                     resultados.append({
                         'estudiante': f"{estudiante.nombre} {estudiante.apellido}",
                         'materia': materia.nombre,
                         'promedio_evaluaciones': float(promedio_evaluaciones),
-                        'promedio_final': float(promedio_trimestral.promedio_final),
+                        'promedio_final': float(promedio_final),
                         'porcentaje_asistencia': float(porcentaje_asistencia),
-                        'aprobado': promedio_trimestral.aprobado,
+                        'aprobado': aprobado,
                         'created': created
                     })
         
