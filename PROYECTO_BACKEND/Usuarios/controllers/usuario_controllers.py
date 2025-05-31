@@ -117,3 +117,103 @@ def update_rol_usuario(request, usuario_id):
         return Response({'error': 'El usuario no existe'}, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_estudiantes_por_curso(request, curso_id):
+    """
+    Obtiene todos los estudiantes asignados a un curso específico por su ID.
+    
+    URL: /api/usuarios/estudiantes/1/
+    """
+    try:
+        # Obtener estudiantes con rol "Estudiante" y del curso especificado
+        estudiantes = Usuario.objects.filter(
+            rol__nombre='Estudiante',
+            curso_id=curso_id
+        ).order_by('apellido', 'nombre')
+        
+        # Si no hay estudiantes en el curso
+        if not estudiantes.exists():
+            return Response(
+                {'mensaje': f'No hay estudiantes asignados al curso con ID {curso_id}'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+            
+        serializer = UsuarioSerializer(estudiantes, many=True)
+        
+        # Añadir metadatos al resultado
+        result = {
+            'total': estudiantes.count(),
+            'curso_id': curso_id,
+            'estudiantes': serializer.data
+        }
+        
+        return Response(result, status=status.HTTP_200_OK)
+        
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_estudiantes(request):
+    """
+    Obtiene todos los estudiantes registrados en el sistema.
+    """
+    try:
+        estudiantes = Usuario.objects.filter(rol__nombre='Estudiante').order_by('apellido', 'nombre')
+        serializer = UsuarioSerializer(estudiantes, many=True)
+        
+        result = {
+            'total': estudiantes.count(),
+            'estudiantes': serializer.data
+        }
+        
+        return Response(result, status=status.HTTP_200_OK)
+        
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_profesores(request):
+    """
+    Obtiene todos los usuarios con rol de Profesor.
+    
+    Parámetros de consulta opcionales:
+    - materia_id: Filtra profesores asignados a una materia específica
+    - activo: Filtra por estado activo (true/false)
+    
+    Ejemplo: /api/usuarios/profesores/?materia_id=10&activo=true
+    """
+    try:
+        # Obtener profesores por su rol
+        profesores = Usuario.objects.filter(rol__nombre='Profesor')
+        
+        # Aplicar filtros adicionales si se proporcionan
+        materia_id = request.GET.get('materia_id')
+        if materia_id:
+            # Filtra profesores que tengan asignada esta materia
+            profesores = profesores.filter(materias_asignadas__id=materia_id).distinct()
+            
+        activo = request.GET.get('activo')
+        if activo is not None:
+            is_active = activo.lower() == 'true'
+            profesores = profesores.filter(is_active=is_active)
+        
+        # Ordenar por apellido y nombre
+        profesores = profesores.order_by('apellido', 'nombre')
+        
+        serializer = UsuarioSerializer(profesores, many=True)
+        
+        # Añadir metadatos al resultado
+        result = {
+            'total': profesores.count(),
+            'profesores': serializer.data
+        }
+        
+        return Response(result, status=status.HTTP_200_OK)
+        
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

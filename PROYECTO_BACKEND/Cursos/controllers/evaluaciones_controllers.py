@@ -5,7 +5,7 @@ from rest_framework import status
 from django.db import transaction
 from django.utils import timezone
 from datetime import datetime, date
-from ..models import Evaluacion, TipoEvaluacion, Materia
+from ..models import Materia, TipoEvaluacion, Evaluacion, Trimestre
 from Usuarios.models import Usuario
 
 @api_view(['GET'])
@@ -61,8 +61,9 @@ def create_evaluacion(request):
     try:
         data = request.data
         
-        # Validaciones básicas
-        campos_requeridos = ['materia_id', 'tipo_evaluacion_id', 'titulo', 'fecha_asignacion', 'fecha_entrega', 'porcentaje_nota_final']
+        # Validaciones básicas (el trimestre_id ya está incluido)
+        campos_requeridos = ['materia_id', 'tipo_evaluacion_id', 'trimestre_id', 'titulo', 
+                            'fecha_asignacion', 'fecha_entrega', 'porcentaje_nota_final']
         for campo in campos_requeridos:
             if not data.get(campo):
                 return Response(
@@ -85,6 +86,15 @@ def create_evaluacion(request):
         except TipoEvaluacion.DoesNotExist:
             return Response(
                 {'error': 'Tipo de evaluación no encontrado'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+            
+        # AÑADIR ESTE BLOQUE: Verificar trimestre
+        try:
+            trimestre = Trimestre.objects.get(id=data['trimestre_id'])
+        except Trimestre.DoesNotExist:
+            return Response(
+                {'error': 'Trimestre no encontrado'},
                 status=status.HTTP_404_NOT_FOUND
             )
         
@@ -130,6 +140,7 @@ def create_evaluacion(request):
         evaluacion = Evaluacion.objects.create(
             materia=materia,
             tipo_evaluacion=tipo_evaluacion,
+            trimestre=trimestre,  # AÑADIR ESTA LÍNEA
             titulo=data['titulo'],
             descripcion=data.get('descripcion', ''),
             fecha_asignacion=fecha_asignacion,
@@ -143,14 +154,16 @@ def create_evaluacion(request):
             publicado=data.get('publicado', False)
         )
         
+        # Respuesta exitosa
         return Response({
             'mensaje': f'Evaluación "{evaluacion.titulo}" creada correctamente',
             'evaluacion': {
                 'id': evaluacion.id,
                 'titulo': evaluacion.titulo,
-                'tipo': evaluacion.tipo_evaluacion.get_nombre_display(),
+                'tipo': evaluacion.tipo_evaluacion.nombre,
                 'materia': evaluacion.materia.nombre,
-                'fecha_entrega': evaluacion.fecha_entrega,
+                'trimestre': evaluacion.trimestre.nombre,  # AÑADIR ESTA LÍNEA
+                'fecha_entrega': evaluacion.fecha_entrega.strftime('%Y-%m-%d'),
                 'nota_maxima': float(evaluacion.nota_maxima),
                 'nota_minima_aprobacion': float(evaluacion.nota_minima_aprobacion),
                 'porcentaje_nota_final': float(evaluacion.porcentaje_nota_final)
