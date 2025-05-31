@@ -122,12 +122,74 @@ class TipoEvaluacion(models.Model):
     def __str__(self):
         return self.get_nombre_display()
 
+class Trimestre(models.Model):
+    """
+    Representa un trimestre académico dentro del año escolar.
+    """
+    ESTADO_CHOICES = [
+        ('PLANIFICADO', 'Planificado'),
+        ('ACTIVO', 'Activo'),
+        ('FINALIZADO', 'Finalizado'),
+        ('CERRADO', 'Cerrado'),
+    ]
+    
+    numero = models.IntegerField(choices=[(1, 'Primer Trimestre'), (2, 'Segundo Trimestre'), (3, 'Tercer Trimestre')])
+    nombre = models.CharField(max_length=50, help_text="Ej: Primer Trimestre 2025")
+    año_academico = models.IntegerField(help_text="Año académico al que pertenece")
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField()
+    fecha_limite_evaluaciones = models.DateField(help_text="Fecha límite para registrar evaluaciones")
+    fecha_limite_calificaciones = models.DateField(help_text="Fecha límite para registrar calificaciones")
+    
+    # Configuración académica
+    nota_minima_aprobacion = models.DecimalField(max_digits=5, decimal_places=2, default=51.0)
+    porcentaje_asistencia_minima = models.DecimalField(max_digits=5, decimal_places=2, default=80.0)
+    
+    # Estado del trimestre
+    estado = models.CharField(max_length=15, choices=ESTADO_CHOICES, default='PLANIFICADO')
+    activo = models.BooleanField(default=True)
+    
+    # Metadatos
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey('Usuarios.Usuario', on_delete=models.CASCADE, related_name='trimestres_creados', null=True, blank=True)
+
+    class Meta:
+        db_table = 'trimestres'
+        verbose_name = 'Trimestre'
+        verbose_name_plural = 'Trimestres'
+        unique_together = ('numero', 'año_academico')
+        ordering = ['año_academico', 'numero']
+
+    def __str__(self):
+        return f"{self.nombre} ({self.año_academico})"
+
+    @property
+    def esta_activo(self):
+        """Verifica si el trimestre está en período activo"""
+        from django.utils import timezone
+        ahora = timezone.now().date()
+        return self.fecha_inicio <= ahora <= self.fecha_fin and self.estado == 'ACTIVO'
+
+    @property
+    def puede_registrar_evaluaciones(self):
+        """Verifica si aún se pueden registrar evaluaciones"""
+        from django.utils import timezone
+        return timezone.now().date() <= self.fecha_limite_evaluaciones and self.estado in ['PLANIFICADO', 'ACTIVO']
+
+    @property
+    def puede_registrar_calificaciones(self):
+        """Verifica si aún se pueden registrar calificaciones"""
+        from django.utils import timezone
+        return timezone.now().date() <= self.fecha_limite_calificaciones and self.estado in ['ACTIVO', 'FINALIZADO']
+
 class Evaluacion(models.Model):
     """
     Representa una evaluación específica (examen, trabajo, etc.) para una materia.
     """
     materia = models.ForeignKey(Materia, on_delete=models.CASCADE, related_name='evaluaciones')
     tipo_evaluacion = models.ForeignKey(TipoEvaluacion, on_delete=models.CASCADE)
+    trimestre = models.ForeignKey(Trimestre, on_delete=models.CASCADE, related_name='evaluaciones')  # NUEVO CAMPO
     titulo = models.CharField(max_length=200)
     descripcion = models.TextField(blank=True, null=True)
     fecha_asignacion = models.DateField()
@@ -140,7 +202,7 @@ class Evaluacion(models.Model):
     porcentaje_nota_final = models.DecimalField(
         max_digits=5, 
         decimal_places=2,
-        help_text="Porcentaje que representa en la nota final de la materia"
+        help_text="Porcentaje que representa en la nota final del trimestre"
     )
     
     # Configuración de entrega
@@ -243,3 +305,101 @@ class Calificacion(models.Model):
     def esta_aprobado(self):
         """Determina si la calificación está aprobada"""
         return self.nota_final >= self.evaluacion.nota_minima_aprobacion
+
+class PromedioTrimestral(models.Model):
+    """
+    Almacena los promedios trimestrales de cada estudiante por materia.
+    """
+    estudiante = models.ForeignKey('Usuarios.Usuario', on_delete=models.CASCADE, related_name='promedios_trimestrales')
+    materia = models.ForeignKey(Materia, on_delete=models.CASCADE, related_name='promedios_trimestrales')
+    trimestre = models.ForeignKey(Trimestre, on_delete=models.CASCADE, related_name='promedios')
+    
+    # Calificaciones
+    promedio_evaluaciones = models.DecimalField(max_digits=5, decimal_places=2, help_text="Promedio de evaluaciones del trimestre")
+    promedio_final = models.DecimalField(max_digits=5, decimal_places=2, help_text="Promedio final considerando todos los factores")
+    
+    # Asistencia
+    total_clases = models.IntegerField(default=0)
+    asistencias = models.IntegerField(default=0)
+    porcentaje_asistencia = models.DecimalField(max_digits=5, decimal_places=2, default=0.0)
+    
+    # Estado académico
+    aprobado = models.BooleanField(default=False)
+    observaciones = models.TextField(blank=True, null=True)
+    
+    # Metadatos
+    calculado_automaticamente = models.BooleanField(default=True)
+    fecha_calculo = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'promedios_trimestrales'
+        verbose_name = 'Promedio Trimestral'
+        verbose_name_plural = 'Promedios Trimestrales'
+        unique_together = ('estudiante', 'materia', 'trimestre')
+        ordering = ['-trimestre__año_academico', '-trimestre__numero', 'materia__nombre']
+
+    def __str__(self):
+        return f"{self.estudiante.nombre} - {self.materia.nombre} - {self.trimestre}"
+
+    def calcular_promedio_final(self):
+        """Calcula el promedio final considerando asistencia y evaluaciones"""
+        if self.porcentaje_asistencia < self.trimestre.porcentaje_asistencia_minima:
+            # Si no cumple asistencia mínima, automáticamente reprobado
+            self.promedio_final = 0.0
+            self.aprobado = False
+        else:
+            self.promedio_final = self.promedio_evaluaciones
+            self.aprobado = self.promedio_final >= self.trimestre.nota_minima_aprobacion
+        
+        self.save()
+        return self.promedio_final
+
+class PromedioAnual(models.Model):
+    """
+    Almacena el promedio anual de cada estudiante por materia.
+    """
+    estudiante = models.ForeignKey('Usuarios.Usuario', on_delete=models.CASCADE, related_name='promedios_anuales')
+    materia = models.ForeignKey(Materia, on_delete=models.CASCADE, related_name='promedios_anuales')
+    año_academico = models.IntegerField()
+    
+    # Promedios trimestrales
+    promedio_trimestre_1 = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    promedio_trimestre_2 = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    promedio_trimestre_3 = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    
+    # Promedio final anual
+    promedio_anual = models.DecimalField(max_digits=5, decimal_places=2, default=0.0)
+    aprobado_anual = models.BooleanField(default=False)
+    
+    # Asistencia anual
+    porcentaje_asistencia_anual = models.DecimalField(max_digits=5, decimal_places=2, default=0.0)
+    
+    # Metadatos
+    calculado_automaticamente = models.BooleanField(default=True)
+    fecha_calculo = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'promedios_anuales'
+        verbose_name = 'Promedio Anual'
+        verbose_name_plural = 'Promedios Anuales'
+        unique_together = ('estudiante', 'materia', 'año_academico')
+        ordering = ['-año_academico', 'materia__nombre']
+
+    def __str__(self):
+        return f"{self.estudiante.nombre} - {self.materia.nombre} - {self.año_academico}"
+
+    def calcular_promedio_anual(self):
+        """Calcula el promedio anual basado en los tres trimestres"""
+        promedios = [p for p in [self.promedio_trimestre_1, self.promedio_trimestre_2, self.promedio_trimestre_3] if p is not None]
+        
+        if promedios:
+            self.promedio_anual = sum(promedios) / len(promedios)
+            self.aprobado_anual = self.promedio_anual >= 51.0  # Nota mínima Bolivia
+        else:
+            self.promedio_anual = 0.0
+            self.aprobado_anual = False
+        
+        self.save()
+        return self.promedio_anual

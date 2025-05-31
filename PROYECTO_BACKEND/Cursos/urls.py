@@ -1,5 +1,5 @@
 from django.urls import path
-from .controllers import materia_controllers, curso_controllers, nivel_controllers, asistencia_controllers, evaluaciones_controllers, calificaciones_controllers
+from .controllers import materia_controllers, curso_controllers, nivel_controllers, asistencia_controllers, evaluaciones_controllers, calificaciones_controllers, trimestre_controllers
 
 urlpatterns = [
     # Rutas para materias
@@ -64,5 +64,17 @@ urlpatterns = [
     path('estudiantes/<int:estudiante_id>/calificaciones/', calificaciones_controllers.get_calificaciones_por_estudiante, name='get_calificaciones_por_estudiante'),
     path('materias/<int:materia_id>/reporte-calificaciones/', calificaciones_controllers.get_reporte_calificaciones_materia, name='get_reporte_calificaciones_materia'),
 
+    # URLs para Trimestres
+    path('trimestres/', trimestre_controllers.get_trimestres, name='get_trimestres'),
+    path('trimestres/create/', trimestre_controllers.create_trimestre, name='create_trimestre'),
+    path('trimestres/<int:trimestre_id>/', trimestre_controllers.update_trimestre, name='update_trimestre'),
+    
+    # Cálculo de promedios
+    path('trimestres/<int:trimestre_id>/calcular-promedios/', trimestre_controllers.calcular_promedios_trimestre, name='calcular_promedios_trimestre'),
+    path('años/<int:año_academico>/calcular-promedios-anuales/', trimestre_controllers.calcular_promedios_anuales, name='calcular_promedios_anuales'),
+    
+    # Reportes
+    path('trimestres/<int:trimestre_id>/reporte/', trimestre_controllers.get_reporte_trimestral, name='get_reporte_trimestral'),
+    path('años/<int:año_academico>/reporte-comparativo/', trimestre_controllers.get_reporte_anual_comparativo, name='get_reporte_anual_comparativo'),
 
 ]
