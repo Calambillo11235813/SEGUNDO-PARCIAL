@@ -30,13 +30,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
+  # La siguiente línea es la única instancia de cupertino_icons que debes mantener
+  cupertino_icons: ^1.0.8  # o la versión que prefieras
+  
+  # Añade el paquete intl que necesitas para formatear fechas
+  intl: ^0.19.0
+  
+  # Otras dependencias que puedas tener...
   http: ^1.1.0
   flutter_secure_storage: ^9.0.0
-  # Otras dependencias que uses
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.8
 
 dev_dependencies:
   flutter_test:

@@ -3,9 +3,10 @@ import '../../services/auth_service.dart';
 import '../../models/usuario.dart';
 
 class TeacherDashboardScreen extends StatefulWidget {
-  const TeacherDashboardScreen({Key? key}) : super(key: key);
+  const TeacherDashboardScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _TeacherDashboardScreenState createState() => _TeacherDashboardScreenState();
 }
 

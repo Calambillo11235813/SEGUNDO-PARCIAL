@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../services/auth_service.dart';
 import '../../models/usuario.dart';
+import './asistencias_screen.dart';
+import './evaluaciones_screen.dart';
+import './materias_screen.dart';
 
 class StudentDashboardScreen extends StatefulWidget {
   const StudentDashboardScreen({super.key});
@@ -112,11 +115,11 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
                             Icons.grade,
                             Colors.blue,
                             () {
-                              // Navegar a pantalla de calificaciones
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Función en desarrollo'),
-                                  duration: Duration(seconds: 2),
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => const EvaluacionesScreen(),
                                 ),
                               );
                             },
@@ -127,7 +130,13 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
                             Icons.assignment,
                             Colors.green,
                             () {
-                              // Navegar a pantalla de evaluaciones
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => const EvaluacionesScreen(),
+                                ),
+                              );
                             },
                           ),
                           _buildOptionCard(
@@ -136,16 +145,27 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
                             Icons.calendar_today,
                             Colors.orange,
                             () {
-                              // Navegar a pantalla de asistencia
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => const AsistenciasScreen(),
+                                ),
+                              );
                             },
                           ),
                           _buildOptionCard(
                             context,
-                            'Perfil',
-                            Icons.person,
-                            Colors.purple,
+                            'Materias',
+                            Icons.book,
+                            Colors.teal,
                             () {
-                              // Navegar a pantalla de perfil
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MateriasScreen(),
+                                ),
+                              );
                             },
                           ),
                         ],
