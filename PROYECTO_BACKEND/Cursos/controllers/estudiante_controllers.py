@@ -112,8 +112,8 @@ def obtener_estudiante_curso_materias(request, estudiante_id):
         # Obtener el curso
         curso = Curso.objects.get(id=estudiante_usuario.curso.id)
         
-        # Obtener materias del curso
-        materias = Materia.objects.filter(curso=curso)
+        # Obtener materias del curso con información del profesor
+        materias = Materia.objects.filter(curso=curso).select_related('profesor')
         
         # Formatear el nombre del curso
         nombre_curso = f"{curso.grado}° {curso.paralelo}"
@@ -126,17 +126,38 @@ def obtener_estudiante_curso_materias(request, estudiante_id):
             'codigo': estudiante_usuario.codigo,
             'curso': {
                 'id': curso.id,
-                'nombre': nombre_curso,  # CAMBIO: formateo personalizado
+                'nombre': nombre_curso,
                 'nivel': {
                     'id': curso.nivel.id,
                     'nombre': curso.nivel.nombre
                 } if curso.nivel else None,
-                'materias': [{
-                    'id': materia.id,
-                    'nombre': materia.nombre
-                } for materia in materias]
+                'materias': []
             }
         }
+        
+        # Agregar materias con información del profesor
+        for materia in materias:
+            materia_data = {
+                'id': materia.id,
+                'nombre': materia.nombre,
+                'profesor': None  # Por defecto es None
+            }
+            
+            # Añadir información del profesor si existe
+            if materia.profesor:
+                try:
+                    materia_data['profesor'] = {
+                        'id': materia.profesor.id,
+                        'nombre': materia.profesor.nombre,
+                        'apellido': materia.profesor.apellido,
+                        # Puedes añadir más campos del profesor si es necesario
+                        'nombre_completo': f"{materia.profesor.nombre} {materia.profesor.apellido}"
+                    }
+                except AttributeError:
+                    # Si hay algún problema accediendo a los campos del profesor
+                    pass
+            
+            estudiante_data['curso']['materias'].append(materia_data)
         
         return Response(estudiante_data)
         

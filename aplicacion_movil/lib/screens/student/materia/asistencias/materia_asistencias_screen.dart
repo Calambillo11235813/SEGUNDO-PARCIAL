@@ -1,6 +1,6 @@
 // lib/screens/student/materia/materia_asistencias_screen.dart
 import 'package:flutter/material.dart';
-import '../../asistencias_screen.dart';
+import 'asistencias_screen.dart';
 
 class MateriaAsistenciasScreen extends StatelessWidget {
   const MateriaAsistenciasScreen({super.key});

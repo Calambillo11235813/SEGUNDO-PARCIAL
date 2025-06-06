@@ -35,11 +35,13 @@ dependencies:
   cupertino_icons: ^1.0.8  # o la versión que prefieras
   
   # Añade el paquete intl que necesitas para formatear fechas
-  intl: ^0.19.0
+  intl: ^0.18.0 # o la versión más reciente
   
   # Otras dependencias que puedas tener...
   http: ^1.1.0
   flutter_secure_storage: ^9.0.0
+  logger: ^2.0.1 # Versión actualizada
+  table_calendar: ^3.0.9
 
 dev_dependencies:
   flutter_test:

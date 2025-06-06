@@ -55,4 +55,43 @@ class AsistenciasService {
       throw Exception('Error de conexión: $e');
     }
   }
+
+  static Future<Map<String, dynamic>> registrarAsistencia({
+    required String estudianteId,
+    required String materiaId,
+    String? fecha,
+    bool presente = true,
+    bool justificada = false,
+  }) async {
+    try {
+      final token = await AuthService.getToken();
+      if (token == null) {
+        throw Exception('No hay sesión activa');
+      }
+
+      final response = await http.post(
+        Uri.parse('${ApiConfig.baseUrl}/cursos/asistencias/registrar/'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode({
+          'estudiante_id': estudianteId,
+          'materia_id': materiaId,
+          'fecha': fecha, // Opcional, si es null el backend usa la fecha actual
+          'presente': presente,
+          'justificada': justificada,
+        }),
+      );
+
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        final errorData = jsonDecode(response.body);
+        throw Exception(errorData['error'] ?? 'Error al registrar asistencia');
+      }
+    } catch (e) {
+      throw Exception('Error de conexión: $e');
+    }
+  }
 }

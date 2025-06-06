@@ -96,4 +96,32 @@ class AuthService {
   static Future<void> logout() async {
     await storage.deleteAll();
   }
+
+  // Obtener datos del usuario decodificando el token
+  static Future<Map<String, dynamic>?> getUserData() async {
+    final token = await getToken();
+    if (token == null) return null;
+
+    // Decodificar token JWT (si usas JWT)
+    try {
+      // Esta es una implementación simple - ajusta según tu sistema
+      final parts = token.split('.');
+      if (parts.length != 3) return null;
+
+      final payload = parts[1];
+      final normalized = base64Url.normalize(payload);
+      final decoded = utf8.decode(base64Url.decode(normalized));
+      final payloadMap = jsonDecode(decoded);
+
+      return {
+        'id': payloadMap['sub'] ?? payloadMap['id'],
+        'nombre': payloadMap['name'],
+        'email': payloadMap['email'],
+        // Otros campos que necesites
+      };
+    } catch (e) {
+      print('Error decodificando token: $e');
+      return null;
+    }
+  }
 }

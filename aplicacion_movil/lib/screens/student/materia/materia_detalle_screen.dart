@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../config/theme_config.dart';
+import '../../../config/theme_config.dart';
 
 class MateriaDetalleScreen extends StatefulWidget {
   const MateriaDetalleScreen({super.key});

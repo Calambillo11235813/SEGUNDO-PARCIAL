@@ -241,7 +241,7 @@ class _MateriaTiposEvaluacionScreenState
         onTap: () {
           Navigator.pushNamed(
             context,
-            '/student/materia/evaliones_screen',
+            '/student/materia/detalles-tipo-evaluacion', // RUTA CORREGIDA
             arguments: {
               'tipo_evaluacion': tipo,
               'materia': tiposEvaluacionData!['materia'],

@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'screens/auth/logi_screen.dart';
 import 'screens/student/dashboard_screen.dart';
 import 'screens/student/materias_screen.dart';
-import 'screens/student/asistencias_screen.dart';
+import 'screens/student/materia/asistencias/asistencias_screen.dart';
 import 'screens/student/materia/evaluaciones/evaluaciones_screen.dart';
 import 'screens/student/rendimiento_screen.dart';
-import 'screens/student/materia/asistencias/materia_detalle_screen.dart';
+import 'screens/student/materia/materia_detalle_screen.dart';
 import 'screens/student/materia/evaluaciones/materia_evaluaciones_screen.dart';
 import 'screens/student/materia/asistencias/materia_asistencias_screen.dart';
 import 'screens/student/materia/evaluaciones/materia_tipo_evaluaciones_screen.dart';
+import 'screens/student/materia/evaluaciones/detalles_tipo_evaluacion.dart';
 import 'config/theme_config.dart';
+import 'screens/student/materia/asistencias/registrar_asistencia_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,6 +42,10 @@ class MyApp extends StatelessWidget {
             (context) => const MateriaAsistenciasScreen(),
         '/student/materia/tipo-evaluaciones':
             (context) => const MateriaTiposEvaluacionScreen(),
+        '/student/materia/detalles-tipo-evaluacion':
+            (context) => const DetallesTipoEvaluacionScreen(),
+        '/student/materia/registrar-asistencia':
+            (context) => const RegistrarAsistenciaScreen(),
       },
     );
   }
