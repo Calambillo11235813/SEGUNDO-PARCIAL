@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import '../../models/usuario.dart';
 import '../../services/auth_service.dart';
 import '../../services/estudiante/asistencias_service.dart';
+import '../../widgets/student_drawer.dart';
 
 class AsistenciasScreen extends StatefulWidget {
   final String? filtroMateriaId;
@@ -143,6 +144,13 @@ class _AsistenciasScreenState extends State<AsistenciasScreen> {
           ),
         ],
       ),
+      drawer:
+          currentUser != null
+              ? StudentDrawer(
+                currentUser: currentUser,
+                currentRoute: '/student/asistencias',
+              )
+              : null,
       body:
           isLoading
               ? const Center(child: CircularProgressIndicator())

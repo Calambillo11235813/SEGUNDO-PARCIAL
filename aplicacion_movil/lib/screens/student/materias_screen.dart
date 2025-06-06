@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../models/usuario.dart';
 import '../../services/auth_service.dart';
 import '../../services/estudiante/materias_service.dart';
+import '../../widgets/student_drawer.dart';
 
 class MateriasScreen extends StatefulWidget {
   const MateriasScreen({super.key});
@@ -60,6 +61,13 @@ class _MateriasScreenState extends State<MateriasScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Mis Materias')),
+      drawer:
+          currentUser != null
+              ? StudentDrawer(
+                currentUser: currentUser,
+                currentRoute: '/student/materias',
+              )
+              : null,
       body:
           isLoading
               ? const Center(child: CircularProgressIndicator())
@@ -133,7 +141,14 @@ class _MateriasScreenState extends State<MateriasScreen> {
                           : const Text('Sin profesor asignado'),
                   trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                   onTap: () {
-                    // TODO: Navegar a detalles de la materia
+                    Navigator.pushNamed(
+                      context,
+                      '/student/materia/detalle',
+                      arguments: {
+                        'materia': materia,
+                        'curso': cursoData!['curso'],
+                      },
+                    );
                   },
                 ),
               );

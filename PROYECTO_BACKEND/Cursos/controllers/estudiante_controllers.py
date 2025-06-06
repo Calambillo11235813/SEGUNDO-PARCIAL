@@ -115,6 +115,9 @@ def obtener_estudiante_curso_materias(request, estudiante_id):
         # Obtener materias del curso
         materias = Materia.objects.filter(curso=curso)
         
+        # Formatear el nombre del curso
+        nombre_curso = f"{curso.grado}° {curso.paralelo}"
+        
         # Preparar la respuesta
         estudiante_data = {
             'id': estudiante_usuario.id,
@@ -123,7 +126,7 @@ def obtener_estudiante_curso_materias(request, estudiante_id):
             'codigo': estudiante_usuario.codigo,
             'curso': {
                 'id': curso.id,
-                'nombre': str(curso),
+                'nombre': nombre_curso,  # CAMBIO: formateo personalizado
                 'nivel': {
                     'id': curso.nivel.id,
                     'nombre': curso.nivel.nombre

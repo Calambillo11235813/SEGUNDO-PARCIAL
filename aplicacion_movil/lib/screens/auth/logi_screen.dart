@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart'; // Para usar kDebugMode
 import '../../services/auth_service.dart';
+import '../../config/theme_config.dart';
+import '../../models/usuario.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _LoginScreenState createState() => _LoginScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -43,22 +45,46 @@ class _LoginScreenState extends State<LoginScreen> {
         _passwordController.text,
       );
 
-      // Ir a la pantalla de inicio según el rol
-      final rol = result['usuario']['rol']?['nombre'];
+      // Verificar que el resultado contenga el usuario
+      // CORRECCIÓN 1: Verificación más específica sin comparación innecesaria con null
+      if (result.isEmpty || !result.containsKey('usuario')) {
+        throw Exception('Error al obtener información del usuario');
+      }
+
+      // Crear el objeto Usuario desde el Map usando fromJson
+      final usuarioData = result['usuario'] as Map<String, dynamic>;
+      final usuario = Usuario.fromJson(usuarioData);
 
       if (!mounted) return;
 
-      if (rol == 'Estudiante') {
+      // Usar los getters del objeto Usuario
+      if (usuario.isEstudiante) {
         Navigator.pushReplacementNamed(context, '/student/dashboard');
-      } else if (rol == 'Profesor') {
+      } else if (usuario.isProfesor) {
+        // Mostrar mensaje informativo
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'El módulo de profesor está en desarrollo. Serás redirigido a una página informativa.',
+            ),
+            duration: Duration(seconds: 3),
+          ),
+        );
+        // Redirigir a la página placeholder
         Navigator.pushReplacementNamed(context, '/teacher/dashboard');
       } else {
+        // Rol desconocido o no definido
         Navigator.pushReplacementNamed(context, '/dashboard');
       }
     } catch (e) {
       setState(() {
         _errorMessage = e.toString().replaceAll('Exception: ', '');
       });
+
+      // CORRECCIÓN 2: Usar debugPrint solo en modo debug
+      if (kDebugMode) {
+        debugPrint('Error de login: $e');
+      }
     } finally {
       if (mounted) {
         setState(() {
@@ -81,21 +107,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // Logo o título
-                  Icon(
+                  const Icon(
                     Icons.school,
                     size: 100,
-                    color: Theme.of(context).primaryColor,
+                    color: AppTheme.primaryColor,
                   ),
                   const SizedBox(height: 24),
 
                   // Título
-                  Text(
+                  const Text(
                     'Sistema Académico',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Theme.of(context).primaryColor,
+                      color: AppTheme.primaryColor,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -147,6 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ElevatedButton(
                     onPressed: _isLoading ? null : _login,
                     style: ElevatedButton.styleFrom(
+                      backgroundColor: AppTheme.primaryColor,
                       padding: const EdgeInsets.symmetric(vertical: 16),
                     ),
                     child:
@@ -173,7 +200,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       const Text('¿Olvidaste tu contraseña? '),
                       TextButton(
                         onPressed: () {
-                          // Navegación a pantalla de recuperación de contraseña
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text(
