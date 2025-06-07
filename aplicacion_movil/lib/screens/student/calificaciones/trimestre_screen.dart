@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:aplicacion_movil/services/auth_service.dart';
 
 class TrimestresScreen extends StatelessWidget {
   const TrimestresScreen({super.key});
@@ -9,7 +10,7 @@ class TrimestresScreen extends StatelessWidget {
     // Obtener los argumentos
     final arguments =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final int anio = arguments['anio']; // Cambiado de 'año' a 'anio'
+    final int anio = arguments['anio'];
     final List<dynamic> trimestres = arguments['trimestres'];
 
     return Scaffold(
@@ -32,16 +33,37 @@ class TrimestresScreen extends StatelessWidget {
               ),
             ),
             child: InkWell(
-              onTap: () {
-                // Navegar a calificaciones con el ID del trimestre
-                Navigator.pushNamed(
-                  context,
-                  '/estudiante/calificaciones',
-                  arguments: {
-                    'trimestreId': trimestre['id'],
-                    'nombreTrimestre': trimestre['nombre'],
-                  },
-                );
+              onTap: () async {
+                try {
+                  // Obtener el ID del estudiante actual
+                  final estudianteId = await AuthService.getCurrentUserId();
+
+                  if (estudianteId != null) {
+                    // Navegar a pantalla de calificaciones con IDs necesarios
+                    Navigator.pushNamed(
+                      context,
+                      '/estudiante/calificaciones/materia',
+                      arguments: {
+                        'estudianteId': estudianteId,
+                        'trimestreId': trimestre['id'],
+                        'nombreTrimestre': trimestre['nombre'],
+                      },
+                    );
+                  } else {
+                    // Mostrar error si no se pudo obtener el ID
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'No se pudo obtener el ID del estudiante',
+                        ),
+                      ),
+                    );
+                  }
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Error: ${e.toString()}')),
+                  );
+                }
               },
               borderRadius: BorderRadius.circular(12),
               child: Padding(

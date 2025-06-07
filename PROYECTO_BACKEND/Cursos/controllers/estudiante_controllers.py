@@ -118,7 +118,7 @@ def obtener_estudiante_curso_materias(request, estudiante_id):
         # Obtener el curso
         curso = Curso.objects.get(id=estudiante_usuario.curso.id)
         
-        # Obtener materias del curso con información del profesor
+        # Obtener materias del curso with profesor info
         materias = Materia.objects.filter(curso=curso).select_related('profesor')
         
         # Formatear el nombre del curso
@@ -633,6 +633,271 @@ def calcular_promedios_trimestre(request, trimestre_id):
             'total_procesados': len(resultados),
             'resultados': resultados
         })
+        
+    except Exception as e:
+        return Response(
+            {'error': str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+@api_view(['GET'])
+def obtener_trimestres_estudiante(request, estudiante_id):
+    """
+    Obtiene los trimestres asociados a un estudiante basado en sus evaluaciones.
+    
+    GET /api/cursos/estudiantes/{estudiante_id}/trimestres/
+    """
+    try:
+        # Verificar que el estudiante existe
+        try:
+            estudiante = Usuario.objects.get(id=estudiante_id)
+        except Usuario.DoesNotExist:
+            return Response(
+                {'error': 'Estudiante no encontrado'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        # Verificar que tenga un curso asignado
+        if not estudiante.curso:
+            return Response(
+                {'error': 'El estudiante no tiene un curso asignado'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+            
+        # Obtener ContentTypes para buscar calificaciones
+        entregable_ct = ContentType.objects.get_for_model(EvaluacionEntregable)
+        participacion_ct = ContentType.objects.get_for_model(EvaluacionParticipacion)
+        
+        # Obtener IDs de evaluaciones calificadas para este estudiante
+        calificaciones = Calificacion.objects.filter(estudiante_id=estudiante_id)
+        
+        # Separar por tipo de evaluación
+        ids_entregables = calificaciones.filter(content_type=entregable_ct).values_list('object_id', flat=True)
+        ids_participacion = calificaciones.filter(content_type=participacion_ct).values_list('object_id', flat=True)
+        
+        # Obtener trimestres de evaluaciones entregables
+        trimestres_entregables = Trimestre.objects.filter(
+            evaluacionentregable_evaluaciones__id__in=ids_entregables
+        ).distinct()
+        
+        # Obtener trimestres de evaluaciones participación
+        trimestres_participacion = Trimestre.objects.filter(
+            evaluacionparticipacion_evaluaciones__id__in=ids_participacion
+        ).distinct()
+        
+        # Combinar resultados (usando union para eliminar duplicados)
+        trimestres = trimestres_entregables.union(trimestres_participacion)
+        
+        # Si no hay resultados, intentar con todas las evaluaciones del curso
+        if not trimestres.exists():
+            # Obtener todas las evaluaciones del curso del estudiante
+            trimestres = Trimestre.objects.filter(
+                Q(evaluacionentregable_evaluaciones__materia__curso=estudiante.curso) | 
+                Q(evaluacionparticipacion_evaluaciones__materia__curso=estudiante.curso)
+            ).distinct()
+        
+        # Ordenar por año académico y fecha de inicio
+        trimestres = trimestres.order_by('-año_academico', 'fecha_inicio')
+        
+        # Agrupar por año académico
+        trimestres_por_año = {}
+        for trimestre in trimestres:
+            if trimestre.año_academico not in trimestres_por_año:
+                trimestres_por_año[trimestre.año_academico] = []
+                
+            trimestres_por_año[trimestre.año_academico].append({
+                'id': trimestre.id,
+                'nombre': trimestre.nombre,
+                'numero': int(trimestre.numero if hasattr(trimestre, 'numero') else '1'),
+                'fecha_inicio': trimestre.fecha_inicio,
+                'fecha_fin': trimestre.fecha_fin,
+                'estado': trimestre.estado
+            })
+        
+        # Formato de respuesta: lista de años con sus trimestres
+        resultado = []
+        for año, lista_trimestres in trimestres_por_año.items():
+            resultado.append({
+                'año': año,
+                'trimestres': lista_trimestres
+            })
+            
+        # Ordenar resultado por año (descendente)
+        resultado.sort(key=lambda x: x['año'], reverse=True)
+        
+        return Response(resultado)
+        
+    except Exception as e:
+        return Response(
+            {'error': str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+@api_view(['GET'])
+def obtener_calificaciones_trimestre(request, estudiante_id, trimestre_id):
+    """
+    Obtiene las calificaciones/promedios de todas las materias para un estudiante
+    en un trimestre específico.
+    
+    GET /api/cursos/estudiantes/{estudiante_id}/trimestres/{trimestre_id}/calificaciones/
+    """
+    try:
+        # Verificar que el estudiante existe
+        try:
+            estudiante = Usuario.objects.get(id=estudiante_id)
+        except Usuario.DoesNotExist:
+            return Response(
+                {'error': 'Estudiante no encontrado'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        # Verificar que el trimestre existe
+        try:
+            trimestre = Trimestre.objects.get(id=trimestre_id)
+        except Trimestre.DoesNotExist:
+            return Response(
+                {'error': 'Trimestre no encontrado'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        # Obtener todas las materias del curso del estudiante
+        materias = Materia.objects.filter(curso=estudiante.curso)
+        
+        # Preparar respuesta
+        resultado = {
+            'estudiante': {
+                'id': estudiante.id,
+                'nombre': estudiante.nombre,
+                'apellido': estudiante.apellido,
+                'codigo': estudiante.codigo
+            },
+            'trimestre': {
+                'id': trimestre.id,
+                'nombre': trimestre.nombre,
+                'año_academico': trimestre.año_academico,
+                'fecha_inicio': trimestre.fecha_inicio,
+                'fecha_fin': trimestre.fecha_fin,
+                'estado': trimestre.estado
+            },
+            'materias': []
+        }
+        
+        # Buscar promedios por materia para este trimestre
+        for materia in materias:
+            # Intentar obtener el promedio trimestral calculado
+            try:
+                promedio = PromedioTrimestral.objects.get(
+                    estudiante=estudiante,
+                    materia=materia,
+                    trimestre=trimestre
+                )
+                
+                materia_data = {
+                    'id': materia.id,
+                    'nombre': materia.nombre,
+                    'promedio': float(promedio.promedio_final),
+                    'aprobado': promedio.aprobado,
+                    'asistencia': float(promedio.porcentaje_asistencia)
+                }
+                
+            except PromedioTrimestral.DoesNotExist:
+                # Si no existe promedio calculado, calcular en tiempo real
+                
+                # ContentTypes para calificaciones
+                entregable_ct = ContentType.objects.get_for_model(EvaluacionEntregable)
+                participacion_ct = ContentType.objects.get_for_model(EvaluacionParticipacion)
+                
+                # Obtener evaluaciones para la materia en este trimestre
+                evaluaciones_entregable = EvaluacionEntregable.objects.filter(
+                    materia=materia, 
+                    trimestre=trimestre
+                )
+                evaluaciones_participacion = EvaluacionParticipacion.objects.filter(
+                    materia=materia, 
+                    trimestre=trimestre
+                )
+                
+                # Variables para cálculos
+                suma_ponderada = Decimal('0.0')
+                total_porcentaje = Decimal('0.0')
+                calificaciones_encontradas = 0
+                
+                # Procesar evaluaciones entregables
+                for evaluacion in evaluaciones_entregable:
+                    try:
+                        calificacion = Calificacion.objects.get(
+                            content_type=entregable_ct,
+                            object_id=evaluacion.id,
+                            estudiante=estudiante
+                        )
+                        
+                        nota_estudiante = calificacion.nota_final if calificacion.nota_final else calificacion.nota
+                        porcentaje_eval = Decimal(str(evaluacion.porcentaje_nota_final))
+                        
+                        nota_ponderada = nota_estudiante * (porcentaje_eval / Decimal('100.0'))
+                        suma_ponderada += nota_ponderada
+                        total_porcentaje += porcentaje_eval
+                        calificaciones_encontradas += 1
+                    except Calificacion.DoesNotExist:
+                        pass
+                
+                # Procesar evaluaciones de participación
+                for evaluacion in evaluaciones_participacion:
+                    try:
+                        calificacion = Calificacion.objects.get(
+                            content_type=participacion_ct,
+                            object_id=evaluacion.id,
+                            estudiante=estudiante
+                        )
+                        
+                        nota_estudiante = calificacion.nota_final if calificacion.nota_final else calificacion.nota
+                        porcentaje_eval = Decimal(str(evaluacion.porcentaje_nota_final))
+                        
+                        nota_ponderada = nota_estudiante * (porcentaje_eval / Decimal('100.0'))
+                        suma_ponderada += nota_ponderada
+                        total_porcentaje += porcentaje_eval
+                        calificaciones_encontradas += 1
+                    except Calificacion.DoesNotExist:
+                        pass
+                
+                # Calcular promedio de evaluaciones
+                promedio_evaluaciones = Decimal('0.0')
+                if calificaciones_encontradas > 0 and total_porcentaje > 0:
+                    promedio_evaluaciones = (suma_ponderada / total_porcentaje) * 100
+                
+                # Calcular asistencia
+                asistencias = Asistencia.objects.filter(
+                    estudiante=estudiante,
+                    materia=materia,
+                    fecha__range=[trimestre.fecha_inicio, trimestre.fecha_fin]
+                )
+                
+                total_clases = asistencias.count()
+                asistencias_presentes = asistencias.filter(presente=True).count()
+                porcentaje_asistencia = Decimal('0.0')
+                
+                if total_clases > 0:
+                    porcentaje_asistencia = Decimal(asistencias_presentes) / Decimal(total_clases) * 100
+                
+                # Determinar si el estudiante aprueba el trimestre
+                aprobado = (porcentaje_asistencia >= trimestre.porcentaje_asistencia_minima and 
+                            promedio_evaluaciones >= trimestre.nota_minima_aprobacion)
+                
+                materia_data = {
+                    'id': materia.id,
+                    'nombre': materia.nombre,
+                    'promedio': float(promedio_evaluaciones),
+                    'aprobado': aprobado,
+                    'asistencia': float(porcentaje_asistencia),
+                    'calculado_tiempo_real': True
+                }
+            
+            resultado['materias'].append(materia_data)
+        
+        # Ordenar materias por nombre
+        resultado['materias'].sort(key=lambda x: x['nombre'])
+        
+        return Response(resultado)
         
     except Exception as e:
         return Response(

@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../config/api_config.dart';
 import '../models/usuario.dart';
+import '../utils/logger.dart'; // Añadir esta importación
 
 class AuthService {
   static const storage = FlutterSecureStorage();
@@ -120,7 +121,47 @@ class AuthService {
         // Otros campos que necesites
       };
     } catch (e) {
-      print('Error decodificando token: $e');
+      AppLogger.e('Error decodificando token:', e);
+      return null;
+    }
+  }
+
+  // Obtener el ID del usuario actual
+  static Future<int?> getCurrentUserId() async {
+    try {
+      AppLogger.d("Intentando leer user_id del almacenamiento");
+      final String? userId = await storage.read(key: 'user_id');
+      AppLogger.d("Resultado de user_id: $userId");
+
+      // Si userId es null, intenta buscar otras claves posibles
+      if (userId == null) {
+        final allKeys = await storage.readAll();
+        AppLogger.d("Todas las claves disponibles: ${allKeys.keys}");
+
+        // Verifica si hay un key llamado 'user' que podría contener el objeto completo
+        final userJson = await storage.read(key: 'user');
+        if (userJson != null) {
+          try {
+            final userData = jsonDecode(userJson);
+            AppLogger.d("Datos de usuario encontrados: $userData");
+            if (userData['id'] != null) {
+              return userData['id'];
+            }
+          } catch (e) {
+            AppLogger.e("Error decodificando datos de usuario", e);
+          }
+        }
+      }
+
+      if (userId != null) {
+        return int.parse(userId);
+      }
+
+      // Si no se encuentra el ID
+      AppLogger.w('No se encontró ID de usuario en el almacenamiento seguro');
+      return null;
+    } catch (e) {
+      AppLogger.e('Error obteniendo ID de usuario', e);
       return null;
     }
   }
