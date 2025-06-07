@@ -6,7 +6,9 @@ from rest_framework import status
 from django.db import transaction
 from django.utils import timezone
 from django.db.models import Avg, Count, Q
-from ..models import Calificacion, Evaluacion
+from django.contrib.contenttypes.models import ContentType
+from ..models import (Calificacion, EvaluacionEntregable, EvaluacionParticipacion,
+                      Materia, TipoEvaluacion)
 from Usuarios.models import Usuario
 
 
@@ -31,18 +33,31 @@ def registrar_calificacion(request):
         data = request.data
         
         # Validaciones básicas
-        campos_requeridos = ['evaluacion_id', 'estudiante_id', 'nota']
+        campos_requeridos = ['evaluacion_id', 'estudiante_id', 'nota', 'tipo_evaluacion']
         for campo in campos_requeridos:
-            if campo not in data or data[campo] is None:
+            if campo not in data:
                 return Response(
                     {'error': f'El campo {campo} es requerido'},
                     status=status.HTTP_400_BAD_REQUEST
                 )
         
-        # Obtener evaluación
+        # Obtener evaluación según su tipo
+        tipo_evaluacion = data['tipo_evaluacion']
+        evaluacion_id = data['evaluacion_id']
+        
         try:
-            evaluacion = Evaluacion.objects.get(id=data['evaluacion_id'])
-        except Evaluacion.DoesNotExist:
+            if tipo_evaluacion == 'entregable':
+                evaluacion = EvaluacionEntregable.objects.get(id=evaluacion_id)
+                content_type = ContentType.objects.get_for_model(EvaluacionEntregable)
+            elif tipo_evaluacion == 'participacion':
+                evaluacion = EvaluacionParticipacion.objects.get(id=evaluacion_id)
+                content_type = ContentType.objects.get_for_model(EvaluacionParticipacion)
+            else:
+                return Response(
+                    {'error': 'Tipo de evaluación no válido'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        except (EvaluacionEntregable.DoesNotExist, EvaluacionParticipacion.DoesNotExist):
             return Response(
                 {'error': 'Evaluación no encontrada'},
                 status=status.HTTP_404_NOT_FOUND
@@ -50,38 +65,31 @@ def registrar_calificacion(request):
         
         # Obtener estudiante
         try:
-            estudiante = Usuario.objects.get(id=data['estudiante_id'], rol__nombre='Estudiante')
+            estudiante = Usuario.objects.get(id=data['estudiante_id'])
         except Usuario.DoesNotExist:
             return Response(
                 {'error': 'Estudiante no encontrado'},
                 status=status.HTTP_404_NOT_FOUND
             )
         
-        # ✅ CORREGIDO: Convertir a Decimal para compatibilidad
+        # Validación de nota
         nota = Decimal(str(data['nota']))
-        if nota < 0 or nota > evaluacion.nota_maxima:
+        nota_maxima = evaluacion.nota_maxima if hasattr(evaluacion, 'nota_maxima') else Decimal('100.0')
+        
+        if nota < 0 or nota > nota_maxima:
             return Response(
-                {'error': f'La nota debe estar entre 0 y {evaluacion.nota_maxima}'},
+                {'error': f'La nota debe estar entre 0 y {nota_maxima}'},
                 status=status.HTTP_400_BAD_REQUEST
             )
         
-        # Calcular penalización por entrega tardía
-        entrega_tardia = data.get('entrega_tardia', False)
-        penalizacion_aplicada = Decimal('0.0')
-        
-        if entrega_tardia and evaluacion.penalizacion_tardio > 0:
-            penalizacion_aplicada = evaluacion.penalizacion_tardio
-        
         # Crear o actualizar calificación
         calificacion, created = Calificacion.objects.update_or_create(
-            evaluacion=evaluacion,
+            content_type=content_type,
+            object_id=evaluacion.id,
             estudiante=estudiante,
             defaults={
                 'nota': nota,
-                'nota_sobre': evaluacion.nota_maxima,
                 'fecha_entrega': data.get('fecha_entrega'),
-                'entrega_tardia': entrega_tardia,
-                'penalizacion_aplicada': penalizacion_aplicada,
                 'observaciones': data.get('observaciones', ''),
                 'retroalimentacion': data.get('retroalimentacion', ''),
                 'finalizada': data.get('finalizada', True),
@@ -97,9 +105,6 @@ def registrar_calificacion(request):
                 'evaluacion': evaluacion.titulo,
                 'nota': float(calificacion.nota),
                 'nota_final': float(calificacion.nota_final),
-                'porcentaje': round(float(calificacion.porcentaje), 2),
-                'esta_aprobado': calificacion.esta_aprobado,
-                'penalizacion_aplicada': float(calificacion.penalizacion_aplicada),
                 'created': created
             }
         }, status=status.HTTP_201_CREATED if created else status.HTTP_200_OK)
@@ -119,23 +124,38 @@ def registrar_calificaciones_masivo(request):
     try:
         data = request.data
         evaluacion_id = data.get('evaluacion_id')
+        tipo_evaluacion = data.get('tipo_evaluacion')  # Nuevo parámetro requerido
         calificaciones_data = data.get('calificaciones', [])
         
-        if not evaluacion_id or not calificaciones_data:
+        if not evaluacion_id or not tipo_evaluacion or not calificaciones_data:
             return Response(
-                {'error': 'Se requiere evaluacion_id y calificaciones'},
+                {'error': 'Se requiere evaluacion_id, tipo_evaluacion y calificaciones'},
                 status=status.HTTP_400_BAD_REQUEST
             )
         
-        # Obtener evaluación
+        # Obtener evaluación según su tipo
         try:
-            evaluacion = Evaluacion.objects.get(id=evaluacion_id)
-        except Evaluacion.DoesNotExist:
+            if tipo_evaluacion == 'entregable':
+                evaluacion = EvaluacionEntregable.objects.get(id=evaluacion_id)
+                content_type = ContentType.objects.get_for_model(EvaluacionEntregable)
+                nota_maxima = evaluacion.nota_maxima
+                nota_minima_aprobacion = evaluacion.nota_minima_aprobacion
+            elif tipo_evaluacion == 'participacion':
+                evaluacion = EvaluacionParticipacion.objects.get(id=evaluacion_id)
+                content_type = ContentType.objects.get_for_model(EvaluacionParticipacion)
+                nota_maxima = Decimal('100.0')  # Valor predeterminado
+                nota_minima_aprobacion = Decimal('51.0')  # Valor predeterminado
+            else:
+                return Response(
+                    {'error': 'Tipo de evaluación no válido'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        except (EvaluacionEntregable.DoesNotExist, EvaluacionParticipacion.DoesNotExist):
             return Response(
                 {'error': 'Evaluación no encontrada'},
                 status=status.HTTP_404_NOT_FOUND
             )
-        
+            
         resultados = []
         
         with transaction.atomic():
@@ -163,23 +183,23 @@ def registrar_calificaciones_masivo(request):
                         })
                         continue
                     
-                    # ✅ CORREGIDO: Convertir a Decimal
+                    # Convertir a Decimal
                     nota = Decimal(str(nota))
-                    if nota < 0 or nota > evaluacion.nota_maxima:
+                    if nota < 0 or nota > nota_maxima:
                         resultados.append({
                             'estudiante_id': estudiante_id,
-                            'error': f'Nota fuera del rango válido (0-{evaluacion.nota_maxima})',
+                            'error': f'Nota fuera del rango válido (0-{nota_maxima})',
                             'success': False
                         })
                         continue
                     
                     # Crear o actualizar calificación
                     calificacion, created = Calificacion.objects.update_or_create(
-                        evaluacion=evaluacion,
+                        content_type=content_type,
+                        object_id=evaluacion.id,
                         estudiante=estudiante,
                         defaults={
                             'nota': nota,
-                            'nota_sobre': evaluacion.nota_maxima,
                             'observaciones': cal_data.get('observaciones', ''),
                             'retroalimentacion': cal_data.get('retroalimentacion', ''),
                             'finalizada': True,
@@ -191,8 +211,8 @@ def registrar_calificaciones_masivo(request):
                         'estudiante_id': estudiante_id,
                         'estudiante': f"{estudiante.nombre} {estudiante.apellido}",
                         'nota': float(calificacion.nota),
-                        'porcentaje': round(float(calificacion.porcentaje), 2),
-                        'esta_aprobado': calificacion.esta_aprobado,
+                        'porcentaje': 100.0,  # O el cálculo que corresponda
+                        'esta_aprobado': float(calificacion.nota) >= float(nota_minima_aprobacion),
                         'created': created,
                         'success': True
                     })
@@ -228,20 +248,32 @@ def get_calificaciones_por_evaluacion(request, evaluacion_id):
     Obtiene todas las calificaciones de una evaluación específica.
     """
     try:
+        # Determinar el tipo de evaluación desde el query param
+        tipo_evaluacion = request.GET.get('tipo', 'entregable')
+        
         try:
-            evaluacion = Evaluacion.objects.get(id=evaluacion_id)
-        except Evaluacion.DoesNotExist:
+            if tipo_evaluacion == 'entregable':
+                evaluacion = EvaluacionEntregable.objects.get(id=evaluacion_id)
+                content_type = ContentType.objects.get_for_model(EvaluacionEntregable)
+                nota_minima_aprobacion = evaluacion.nota_minima_aprobacion
+            else:  # tipo_evaluacion == 'participacion'
+                evaluacion = EvaluacionParticipacion.objects.get(id=evaluacion_id)
+                content_type = ContentType.objects.get_for_model(EvaluacionParticipacion)
+                nota_minima_aprobacion = Decimal('51.0')  # Valor predeterminado
+        except (EvaluacionEntregable.DoesNotExist, EvaluacionParticipacion.DoesNotExist):
             return Response(
                 {'error': 'Evaluación no encontrada'},
                 status=status.HTTP_404_NOT_FOUND
             )
         
         calificaciones = Calificacion.objects.filter(
-            evaluacion=evaluacion
+            content_type=content_type,
+            object_id=evaluacion.id
         ).select_related('estudiante').order_by('estudiante__apellido', 'estudiante__nombre')
         
         calificaciones_data = []
         for calificacion in calificaciones:
+            # Quitar 'nota_sobre' del diccionario
             calificaciones_data.append({
                 'id': calificacion.id,
                 'estudiante': {
@@ -250,20 +282,22 @@ def get_calificaciones_por_evaluacion(request, evaluacion_id):
                     'codigo': calificacion.estudiante.codigo
                 },
                 'nota': float(calificacion.nota),
-                'nota_sobre': float(calificacion.nota_sobre),
-                'nota_final': float(calificacion.nota_final),
-                'porcentaje': round(calificacion.porcentaje, 2),
-                'esta_aprobado': calificacion.esta_aprobado,
+                # Calculamos directamente
+                'nota_final': float(calificacion.nota),  # Ahora nota = nota_final
+                'porcentaje': 100.0,  # O el porcentaje que corresponda
+                'esta_aprobado': float(calificacion.nota) >= float(calificacion.evaluacion.nota_minima_aprobacion 
+                                                     if hasattr(calificacion.evaluacion, 'nota_minima_aprobacion') 
+                                                     else 51.0),
                 'fecha_entrega': calificacion.fecha_entrega,
                 'entrega_tardia': calificacion.entrega_tardia,
-                'penalizacion_aplicada': float(calificacion.penalizacion_aplicada),
+                'penalizacion_aplicada': float(calificacion.penalizacion_aplicada) if hasattr(calificacion, 'penalizacion_aplicada') else 0.0,
                 'observaciones': calificacion.observaciones,
                 'retroalimentacion': calificacion.retroalimentacion,
                 'finalizada': calificacion.finalizada,
                 'fecha_calificacion': calificacion.fecha_calificacion
             })
         
-        # ✅ ACTUALIZADO: Calcular estadísticas con nota mínima de aprobación 51
+        # Calcular estadísticas
         if calificaciones:
             notas = [float(c.nota_final) for c in calificaciones]
             estadisticas = {
@@ -271,9 +305,9 @@ def get_calificaciones_por_evaluacion(request, evaluacion_id):
                 'promedio': round(sum(notas) / len(notas), 2),
                 'nota_maxima': max(notas),
                 'nota_minima': min(notas),
-                'aprobados': len([n for n in notas if n >= evaluacion.nota_minima_aprobacion]),
-                'reprobados': len([n for n in notas if n < evaluacion.nota_minima_aprobacion]),
-                'nota_minima_aprobacion': float(evaluacion.nota_minima_aprobacion)
+                'aprobados': len([n for n in notas if n >= float(nota_minima_aprobacion)]),
+                'reprobados': len([n for n in notas if n < float(nota_minima_aprobacion)]),
+                'nota_minima_aprobacion': float(nota_minima_aprobacion)
             }
         else:
             estadisticas = {
@@ -283,18 +317,31 @@ def get_calificaciones_por_evaluacion(request, evaluacion_id):
                 'nota_minima': 0,
                 'aprobados': 0,
                 'reprobados': 0,
-                'nota_minima_aprobacion': float(evaluacion.nota_minima_aprobacion)
+                'nota_minima_aprobacion': float(nota_minima_aprobacion)
             }
         
+        # Determinar los campos específicos según el tipo
+        if tipo_evaluacion == 'entregable':
+            eval_data = {
+                'nota_maxima': float(evaluacion.nota_maxima),
+                'nota_minima_aprobacion': float(evaluacion.nota_minima_aprobacion),
+                'fecha_entrega': evaluacion.fecha_entrega
+            }
+        else:
+            eval_data = {
+                'nota_maxima': 100.0,
+                'nota_minima_aprobacion': 51.0,
+                'fecha_registro': evaluacion.fecha_registro
+            }
+            
         return Response({
             'evaluacion': {
                 'id': evaluacion.id,
                 'titulo': evaluacion.titulo,
                 'tipo': evaluacion.tipo_evaluacion.get_nombre_display(),
                 'materia': evaluacion.materia.nombre,
-                'nota_maxima': float(evaluacion.nota_maxima),
-                'nota_minima_aprobacion': float(evaluacion.nota_minima_aprobacion),
-                'porcentaje_nota_final': float(evaluacion.porcentaje_nota_final)
+                'porcentaje_nota_final': float(evaluacion.porcentaje_nota_final),
+                **eval_data
             },
             'calificaciones': calificaciones_data,
             'estadisticas': estadisticas
@@ -322,46 +369,90 @@ def get_calificaciones_por_estudiante(request, estudiante_id):
                 status=status.HTTP_404_NOT_FOUND
             )
         
-        # Filtros opcionales
+        # Obtener parámetros de filtro
         materia_id = request.GET.get('materia_id')
-        tipo_evaluacion = request.GET.get('tipo_evaluacion')
+        tipo_evaluacion_nombre = request.GET.get('tipo_evaluacion')
         
-        filtros = {'estudiante': estudiante}
-        if materia_id:
-            filtros['evaluacion__materia_id'] = materia_id
-        if tipo_evaluacion:
-            filtros['evaluacion__tipo_evaluacion__nombre'] = tipo_evaluacion
+        # Obtener todas las calificaciones del estudiante
+        calificaciones = Calificacion.objects.filter(estudiante=estudiante)
         
-        calificaciones = Calificacion.objects.filter(
-            **filtros
-        ).select_related(
-            'evaluacion__materia', 
-            'evaluacion__tipo_evaluacion'
-        ).order_by('-evaluacion__fecha_asignacion')
+        # Definir los content types para cada tipo de evaluación
+        content_type_entregable = ContentType.objects.get_for_model(EvaluacionEntregable)
+        content_type_participacion = ContentType.objects.get_for_model(EvaluacionParticipacion)
         
         calificaciones_data = []
+        
+        # Procesar cada calificación y obtener su evaluación correspondiente
         for calificacion in calificaciones:
-            calificaciones_data.append({
-                'id': calificacion.id,
-                'evaluacion': {
-                    'id': calificacion.evaluacion.id,
-                    'titulo': calificacion.evaluacion.titulo,
-                    'tipo': calificacion.evaluacion.tipo_evaluacion.get_nombre_display(),
-                    'materia': calificacion.evaluacion.materia.nombre,
-                    'fecha_entrega': calificacion.evaluacion.fecha_entrega,
-                    'porcentaje_nota_final': float(calificacion.evaluacion.porcentaje_nota_final)
-                },
-                'nota': float(calificacion.nota),
-                'nota_sobre': float(calificacion.nota_sobre),
-                'nota_final': float(calificacion.nota_final),
-                'porcentaje': round(calificacion.porcentaje, 2),
-                'esta_aprobado': calificacion.esta_aprobado,
-                'entrega_tardia': calificacion.entrega_tardia,
-                'penalizacion_aplicada': float(calificacion.penalizacion_aplicada),
-                'observaciones': calificacion.observaciones,
-                'retroalimentacion': calificacion.retroalimentacion,
-                'fecha_calificacion': calificacion.fecha_calificacion
-            })
+            # Determinar qué tipo de evaluación es
+            if calificacion.content_type_id == content_type_entregable.id:
+                try:
+                    evaluacion = EvaluacionEntregable.objects.get(id=calificacion.object_id)
+                    # Aplicar filtros específicos
+                    if materia_id and str(evaluacion.materia.id) != materia_id:
+                        continue
+                    if tipo_evaluacion_nombre and evaluacion.tipo_evaluacion.nombre != tipo_evaluacion_nombre:
+                        continue
+                    
+                    calificaciones_data.append({
+                        'id': calificacion.id,
+                        'evaluacion': {
+                            'id': evaluacion.id,
+                            'titulo': evaluacion.titulo,
+                            'tipo': evaluacion.tipo_evaluacion.get_nombre_display(),
+                            'materia': evaluacion.materia.nombre,
+                            'fecha_entrega': evaluacion.fecha_entrega,
+                            'porcentaje_nota_final': float(evaluacion.porcentaje_nota_final)
+                        },
+                        'nota': float(calificacion.nota),
+                        'nota_final': float(calificacion.nota),
+                        'porcentaje': 100.0,
+                        'esta_aprobado': float(calificacion.nota) >= float(evaluacion.nota_minima_aprobacion),
+                        'entrega_tardia': calificacion.entrega_tardia,
+                        'observaciones': calificacion.observaciones,
+                        'retroalimentacion': calificacion.retroalimentacion,
+                        'fecha_calificacion': calificacion.fecha_calificacion
+                    })
+                except EvaluacionEntregable.DoesNotExist:
+                    continue
+                    
+            elif calificacion.content_type_id == content_type_participacion.id:
+                try:
+                    evaluacion = EvaluacionParticipacion.objects.get(id=calificacion.object_id)
+                    # Aplicar filtros específicos
+                    if materia_id and str(evaluacion.materia.id) != materia_id:
+                        continue
+                    if tipo_evaluacion_nombre and evaluacion.tipo_evaluacion.nombre != tipo_evaluacion_nombre:
+                        continue
+                    
+                    calificaciones_data.append({
+                        'id': calificacion.id,
+                        'evaluacion': {
+                            'id': evaluacion.id,
+                            'titulo': evaluacion.titulo,
+                            'tipo': evaluacion.tipo_evaluacion.get_nombre_display(),
+                            'materia': evaluacion.materia.nombre,
+                            'fecha_registro': evaluacion.fecha_registro,
+                            'porcentaje_nota_final': float(evaluacion.porcentaje_nota_final)
+                        },
+                        'nota': float(calificacion.nota),
+                        'nota_final': float(calificacion.nota),
+                        'porcentaje': 100.0,
+                        'esta_aprobado': float(calificacion.nota) >= 51.0,  # Valor por defecto
+                        'entrega_tardia': calificacion.entrega_tardia,
+                        'observaciones': calificacion.observaciones,
+                        'retroalimentacion': calificacion.retroalimentacion,
+                        'fecha_calificacion': calificacion.fecha_calificacion
+                    })
+                except EvaluacionParticipacion.DoesNotExist:
+                    continue
+        
+        # Ordenar por fecha (descendente)
+        calificaciones_data.sort(
+            key=lambda x: (x['evaluacion'].get('fecha_entrega') or 
+                           x['evaluacion'].get('fecha_registro')),
+            reverse=True
+        )
         
         return Response({
             'estudiante': {
@@ -386,7 +477,7 @@ def get_reporte_calificaciones_materia(request, materia_id):
     Genera un reporte completo de calificaciones por materia.
     """
     try:
-        from ..models import Materia
+        from ..utils import get_evaluaciones_activas
         
         try:
             materia = Materia.objects.get(id=materia_id)
@@ -402,15 +493,31 @@ def get_reporte_calificaciones_materia(request, materia_id):
             rol__nombre='Estudiante'
         ).order_by('apellido', 'nombre')
         
-        # Obtener evaluaciones de la materia
-        evaluaciones = Evaluacion.objects.filter(
+        # Obtener evaluaciones de la materia (ambos tipos)
+        # Se elimina el filtro de publicado=True
+        evaluaciones_entregable = EvaluacionEntregable.objects.filter(
             materia=materia,
-            activo=True,
-            publicado=True
-        ).order_by('fecha_asignacion')
+            activo=True
+            # publicado=True  <-- Se eliminó esta línea
+        )
+        evaluaciones_participacion = EvaluacionParticipacion.objects.filter(
+            materia=materia,
+            activo=True
+            # publicado=True  <-- Se eliminó esta línea
+        )
+        
+        # Combinar y ordenar todas las evaluaciones
+        evaluaciones = list(evaluaciones_entregable) + list(evaluaciones_participacion)
+        # Ordenar por fecha (primero intentar fecha_asignacion, luego fecha_registro)
+        evaluaciones.sort(key=lambda x: getattr(x, 'fecha_asignacion', getattr(x, 'fecha_registro', None)))
         
         # Construir reporte
         reporte_data = []
+        content_types = {
+            'entregable': ContentType.objects.get_for_model(EvaluacionEntregable),
+            'participacion': ContentType.objects.get_for_model(EvaluacionParticipacion)
+        }
+        
         for estudiante in estudiantes:
             estudiante_data = {
                 'estudiante': {
@@ -424,24 +531,35 @@ def get_reporte_calificaciones_materia(request, materia_id):
                 'esta_aprobado': False
             }
             
-            suma_ponderada = 0.0
-            total_porcentaje = 0.0
+            # Inicializar variables como Decimal
+            suma_ponderada = Decimal('0')
+            total_porcentaje = Decimal('0')
             
             for evaluacion in evaluaciones:
+                # Determinar el tipo y ContentType para la evaluación
+                if isinstance(evaluacion, EvaluacionEntregable):
+                    content_type = content_types['entregable']
+                    nota_minima = evaluacion.nota_minima_aprobacion
+                else:
+                    content_type = content_types['participacion']
+                    nota_minima = Decimal('51.0')  # Valor por defecto
+                
                 try:
                     calificacion = Calificacion.objects.get(
-                        evaluacion=evaluacion,
+                        content_type=content_type,
+                        object_id=evaluacion.id,
                         estudiante=estudiante
                     )
                     
-                    nota_ponderada = (calificacion.nota_final * evaluacion.porcentaje_nota_final) / 100
+                    # Ahora todas las operaciones son entre Decimal
+                    nota_ponderada = (calificacion.nota * evaluacion.porcentaje_nota_final) / Decimal('100')
                     suma_ponderada += nota_ponderada
                     total_porcentaje += evaluacion.porcentaje_nota_final
                     
                     estudiante_data['calificaciones'][str(evaluacion.id)] = {
-                        'nota': float(calificacion.nota_final),
-                        'porcentaje': round(calificacion.porcentaje, 2),
-                        'esta_aprobado': calificacion.esta_aprobado,
+                        'nota': float(calificacion.nota),
+                        'porcentaje': 100.0,  # O cálculo directo según tu lógica
+                        'esta_aprobado': float(calificacion.nota) >= float(nota_minima),
                         'entrega_tardia': calificacion.entrega_tardia
                     }
                 except Calificacion.DoesNotExist:
@@ -453,30 +571,44 @@ def get_reporte_calificaciones_materia(request, materia_id):
                     }
             
             # Calcular promedio final si hay evaluaciones
-            if total_porcentaje > 0:
-                promedio = (suma_ponderada / total_porcentaje) * 100
-                estudiante_data['promedio_final'] = round(promedio, 2)
-                # ✅ ACTUALIZADO: Verificar aprobación con nota mínima 51
-                estudiante_data['esta_aprobado'] = promedio >= 51.0
+            if total_porcentaje > Decimal('0'):
+                promedio = (suma_ponderada / total_porcentaje) * Decimal('100')
+                estudiante_data['promedio_final'] = round(float(promedio), 2)  # Convertir a float solo para la respuesta
+                estudiante_data['esta_aprobado'] = promedio >= Decimal('51.0')
             else:
                 estudiante_data['promedio_final'] = 0.0
                 estudiante_data['esta_aprobado'] = False
             
-            estudiante_data['total_porcentaje'] = float(total_porcentaje)
+            estudiante_data['total_porcentaje'] = float(total_porcentaje)  # Convertir a float solo para la respuesta
             reporte_data.append(estudiante_data)
         
         # Información de evaluaciones para el frontend
         evaluaciones_info = []
         for evaluacion in evaluaciones:
-            evaluaciones_info.append({
+            eval_data = {
                 'id': evaluacion.id,
                 'titulo': evaluacion.titulo,
                 'tipo': evaluacion.tipo_evaluacion.get_nombre_display(),
-                'fecha_entrega': evaluacion.fecha_entrega,
                 'porcentaje_nota_final': float(evaluacion.porcentaje_nota_final),
-                'nota_maxima': float(evaluacion.nota_maxima),
-                'nota_minima_aprobacion': float(evaluacion.nota_minima_aprobacion)
-            })
+            }
+            
+            # Añadir campos específicos según tipo
+            if isinstance(evaluacion, EvaluacionEntregable):
+                eval_data.update({
+                    'fecha_entrega': evaluacion.fecha_entrega,
+                    'nota_maxima': float(evaluacion.nota_maxima),
+                    'nota_minima_aprobacion': float(evaluacion.nota_minima_aprobacion),
+                    'tipo_objeto': 'entregable'
+                })
+            else:
+                eval_data.update({
+                    'fecha_registro': evaluacion.fecha_registro,
+                    'nota_maxima': 100.0,
+                    'nota_minima_aprobacion': 51.0,
+                    'tipo_objeto': 'participacion'
+                })
+                
+            evaluaciones_info.append(eval_data)
         
         return Response({
             'materia': {

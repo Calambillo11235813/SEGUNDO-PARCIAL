@@ -2,10 +2,12 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status
-from ..models import Materia, Curso, Evaluacion
+from django.contrib.contenttypes.models import ContentType
+from ..models import Materia, Curso, EvaluacionEntregable, EvaluacionParticipacion
 from ..serializers import MateriaSerializer
 from ..serializers import MateriaDetalleSerializer 
 from django.db.models import Count, Avg, Max, Min, Sum
+from ..utils import get_evaluacion_by_id, get_evaluaciones_activas
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -285,11 +287,19 @@ def get_tipos_evaluacion_por_materia(request, materia_id):
                 status=status.HTTP_404_NOT_FOUND
             )
         
-        # Obtener tipos de evaluación únicos de esta materia
-        evaluaciones = Evaluacion.objects.filter(
+        # Obtener evaluaciones de ambos tipos
+        evaluaciones_entregable = EvaluacionEntregable.objects.filter(
             materia=materia,
             activo=True
         ).select_related('tipo_evaluacion')
+        
+        evaluaciones_participacion = EvaluacionParticipacion.objects.filter(
+            materia=materia,
+            activo=True
+        ).select_related('tipo_evaluacion')
+        
+        # Combinar todas las evaluaciones
+        evaluaciones = list(evaluaciones_entregable) + list(evaluaciones_participacion)
         
         # Agrupar por tipo de evaluación y contar
         tipos_evaluacion_data = {}
@@ -310,14 +320,27 @@ def get_tipos_evaluacion_por_materia(request, materia_id):
                 }
             
             tipos_evaluacion_data[tipo_id]['cantidad_evaluaciones'] += 1
-            tipos_evaluacion_data[tipo_id]['evaluaciones'].append({
+            
+            eval_data = {
                 'id': evaluacion.id,
                 'titulo': evaluacion.titulo,
-                'fecha_entrega': evaluacion.fecha_entrega,
-                'nota_maxima': float(evaluacion.nota_maxima),
                 'porcentaje_nota_final': float(evaluacion.porcentaje_nota_final),
-                'publicado': evaluacion.publicado
-            })
+                'publicado': evaluacion.publicado,
+                'tipo_objeto': 'entregable' if isinstance(evaluacion, EvaluacionEntregable) else 'participacion'
+            }
+            
+            # Añadir campos específicos según el tipo
+            if isinstance(evaluacion, EvaluacionEntregable):
+                eval_data.update({
+                    'fecha_entrega': evaluacion.fecha_entrega,
+                    'nota_maxima': float(evaluacion.nota_maxima)
+                })
+            else:  # Es EvaluacionParticipacion
+                eval_data.update({
+                    'fecha_registro': evaluacion.fecha_registro
+                })
+                
+            tipos_evaluacion_data[tipo_id]['evaluaciones'].append(eval_data)
         
         # Convertir el diccionario a lista
         tipos_list = list(tipos_evaluacion_data.values())
@@ -361,8 +384,11 @@ def get_resumen_tipos_evaluacion_por_materia(request, materia_id):
                 status=status.HTTP_404_NOT_FOUND
             )
         
-        # Query más eficiente usando values y Count
-        tipos_resumen = Evaluacion.objects.filter(
+        # Este enfoque es más complejo ahora que tenemos dos modelos
+        # Haremos consultas separadas y luego combinaremos los resultados
+        
+        # Consulta para entregables
+        entregables_resumen = EvaluacionEntregable.objects.filter(
             materia=materia,
             activo=True
         ).values(
@@ -371,26 +397,58 @@ def get_resumen_tipos_evaluacion_por_materia(request, materia_id):
             'tipo_evaluacion__descripcion'
         ).annotate(
             cantidad=Count('id')
-        ).order_by('tipo_evaluacion__nombre')
+        )
         
-        # Formatear la respuesta
-        tipos_data = []
-        for tipo in tipos_resumen:
-            tipos_data.append({
-                'id': tipo['tipo_evaluacion__id'],
+        # Consulta para participaciones
+        participaciones_resumen = EvaluacionParticipacion.objects.filter(
+            materia=materia,
+            activo=True
+        ).values(
+            'tipo_evaluacion__id',
+            'tipo_evaluacion__nombre',
+            'tipo_evaluacion__descripcion'
+        ).annotate(
+            cantidad=Count('id')
+        )
+        
+        # Combinar resultados
+        tipos_data = {}
+        
+        # Procesar entregables
+        for tipo in entregables_resumen:
+            tipo_id = tipo['tipo_evaluacion__id']
+            tipos_data[tipo_id] = {
+                'id': tipo_id,
                 'nombre': tipo['tipo_evaluacion__nombre'],
                 'descripcion': tipo['tipo_evaluacion__descripcion'],
                 'cantidad_evaluaciones': tipo['cantidad']
-            })
+            }
+        
+        # Procesar participaciones (agregando a los existentes o creando nuevos)
+        for tipo in participaciones_resumen:
+            tipo_id = tipo['tipo_evaluacion__id']
+            if tipo_id in tipos_data:
+                tipos_data[tipo_id]['cantidad_evaluaciones'] += tipo['cantidad']
+            else:
+                tipos_data[tipo_id] = {
+                    'id': tipo_id,
+                    'nombre': tipo['tipo_evaluacion__nombre'],
+                    'descripcion': tipo['tipo_evaluacion__descripcion'],
+                    'cantidad_evaluaciones': tipo['cantidad']
+                }
+        
+        # Convertir a lista y ordenar
+        tipos_lista = list(tipos_data.values())
+        tipos_lista.sort(key=lambda x: x['nombre'])
         
         return Response({
             'materia': {
                 'id': materia.id,
                 'nombre': materia.nombre
             },
-            'tipos_evaluacion': tipos_data,
-            'total_tipos': len(tipos_data),
-            'total_evaluaciones': sum(tipo['cantidad_evaluaciones'] for tipo in tipos_data)
+            'tipos_evaluacion': tipos_lista,
+            'total_tipos': len(tipos_lista),
+            'total_evaluaciones': sum(tipo['cantidad_evaluaciones'] for tipo in tipos_lista)
         })
     
     except Exception as e:
@@ -418,45 +476,86 @@ def get_estadisticas_evaluaciones_por_materia(request, materia_id):
                 status=status.HTTP_404_NOT_FOUND
             )
         
-        # Obtener todas las evaluaciones de la materia
-        evaluaciones = Evaluacion.objects.filter(
+        # Obtener evaluaciones de ambos tipos
+        evaluaciones_entregable = EvaluacionEntregable.objects.filter(
+            materia=materia,
+            activo=True
+        ).select_related('tipo_evaluacion')
+        
+        evaluaciones_participacion = EvaluacionParticipacion.objects.filter(
             materia=materia,
             activo=True
         ).select_related('tipo_evaluacion')
         
         # Calcular estadísticas generales
-        total_evaluaciones = evaluaciones.count()
-        evaluaciones_publicadas = evaluaciones.filter(publicado=True).count()
-        evaluaciones_pendientes = evaluaciones.filter(publicado=False).count()
+        total_entregables = evaluaciones_entregable.count()
+        total_participaciones = evaluaciones_participacion.count()
+        total_evaluaciones = total_entregables + total_participaciones
+        
+        entregables_publicados = evaluaciones_entregable.filter(publicado=True).count()
+        participaciones_publicadas = evaluaciones_participacion.filter(publicado=True).count()
+        evaluaciones_publicadas = entregables_publicados + participaciones_publicadas
+        
+        evaluaciones_pendientes = total_evaluaciones - evaluaciones_publicadas
         
         # Calcular porcentajes
-        porcentaje_total = evaluaciones.aggregate(
-            total=Sum('porcentaje_nota_final')
-        )['total'] or 0
+        porcentaje_entregables = sum(float(e.porcentaje_nota_final) for e in evaluaciones_entregable)
+        porcentaje_participaciones = sum(float(e.porcentaje_nota_final) for e in evaluaciones_participacion)
+        porcentaje_total = porcentaje_entregables + porcentaje_participaciones
         
-        # Agrupar por tipo con estadísticas
-        tipos_stats = evaluaciones.values(
-            'tipo_evaluacion__id',
-            'tipo_evaluacion__nombre',
-            'tipo_evaluacion__descripcion'
-        ).annotate(
-            cantidad=Count('id'),
-            porcentaje_promedio=Avg('porcentaje_nota_final'),
-            nota_maxima_promedio=Avg('nota_maxima'),
-            porcentaje_total=Sum('porcentaje_nota_final')
-        ).order_by('tipo_evaluacion__nombre')
+        # Para estadísticas por tipo, necesitamos combinar datos de ambos modelos
+        tipos_stats = {}
         
+        # Procesar todas las evaluaciones y agrupar por tipo
+        for evaluacion in list(evaluaciones_entregable) + list(evaluaciones_participacion):
+            tipo_id = evaluacion.tipo_evaluacion.id
+            tipo_nombre = evaluacion.tipo_evaluacion.nombre
+            tipo_descripcion = evaluacion.tipo_evaluacion.descripcion
+            
+            if tipo_id not in tipos_stats:
+                tipos_stats[tipo_id] = {
+                    'id': tipo_id,
+                    'nombre': tipo_nombre,
+                    'descripcion': tipo_descripcion,
+                    'cantidad_evaluaciones': 0,
+                    'porcentaje_total': 0,
+                    'nota_maxima_suma': 0,
+                    'nota_maxima_count': 0,
+                    'porcentaje_suma': 0
+                }
+            
+            tipos_stats[tipo_id]['cantidad_evaluaciones'] += 1
+            tipos_stats[tipo_id]['porcentaje_total'] += float(evaluacion.porcentaje_nota_final)
+            tipos_stats[tipo_id]['porcentaje_suma'] += float(evaluacion.porcentaje_nota_final)
+            
+            # Solo las evaluaciones entregables tienen nota_maxima
+            if isinstance(evaluacion, EvaluacionEntregable):
+                tipos_stats[tipo_id]['nota_maxima_suma'] += float(evaluacion.nota_maxima)
+                tipos_stats[tipo_id]['nota_maxima_count'] += 1
+        
+        # Calcular promedios y formatear datos
         tipos_data = []
-        for tipo in tipos_stats:
+        for tipo_id, stats in tipos_stats.items():
+            nota_maxima_promedio = 0
+            if stats['nota_maxima_count'] > 0:
+                nota_maxima_promedio = stats['nota_maxima_suma'] / stats['nota_maxima_count']
+            
+            porcentaje_promedio = 0
+            if stats['cantidad_evaluaciones'] > 0:
+                porcentaje_promedio = stats['porcentaje_suma'] / stats['cantidad_evaluaciones']
+            
             tipos_data.append({
-                'id': tipo['tipo_evaluacion__id'],
-                'nombre': tipo['tipo_evaluacion__nombre'],
-                'descripcion': tipo['tipo_evaluacion__descripcion'],
-                'cantidad_evaluaciones': tipo['cantidad'],
-                'porcentaje_promedio': round(float(tipo['porcentaje_promedio'] or 0), 2),
-                'nota_maxima_promedio': round(float(tipo['nota_maxima_promedio'] or 0), 2),
-                'porcentaje_total': round(float(tipo['porcentaje_total'] or 0), 2)
+                'id': stats['id'],
+                'nombre': stats['nombre'],
+                'descripcion': stats['descripcion'],
+                'cantidad_evaluaciones': stats['cantidad_evaluaciones'],
+                'porcentaje_promedio': round(porcentaje_promedio, 2),
+                'nota_maxima_promedio': round(nota_maxima_promedio, 2),
+                'porcentaje_total': round(stats['porcentaje_total'], 2)
             })
+        
+        # Ordenar por nombre
+        tipos_data.sort(key=lambda x: x['nombre'])
         
         return Response({
             'materia': {
@@ -466,10 +565,12 @@ def get_estadisticas_evaluaciones_por_materia(request, materia_id):
             },
             'estadisticas_generales': {
                 'total_evaluaciones': total_evaluaciones,
+                'evaluaciones_entregables': total_entregables,
+                'evaluaciones_participacion': total_participaciones,
                 'evaluaciones_publicadas': evaluaciones_publicadas,
                 'evaluaciones_pendientes': evaluaciones_pendientes,
-                'porcentaje_total_asignado': round(float(porcentaje_total), 2),
-                'porcentaje_restante': round(100 - float(porcentaje_total), 2)
+                'porcentaje_total_asignado': round(porcentaje_total, 2),
+                'porcentaje_restante': round(100 - porcentaje_total, 2)
             },
             'tipos_evaluacion': tipos_data,
             'total_tipos_diferentes': len(tipos_data)

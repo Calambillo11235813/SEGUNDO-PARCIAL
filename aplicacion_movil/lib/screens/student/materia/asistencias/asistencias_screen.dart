@@ -125,6 +125,15 @@ class _AsistenciasScreenState extends State<AsistenciasScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // Agregar esta línea para mostrar siempre el botón de retroceso
+        // cuando se accede desde una materia específica
+        leading:
+            widget.filtroMateriaId != null
+                ? IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  onPressed: () => Navigator.of(context).pop(),
+                )
+                : null,
         title: Text(
           widget.nombreMateria != null
               ? 'Asistencia: ${widget.nombreMateria}'

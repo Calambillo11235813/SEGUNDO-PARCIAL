@@ -1,5 +1,9 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+from django.core.validators import MinValueValidator, MaxValueValidator
+from decimal import Decimal
 
 class Nivel(models.Model):
     id = models.AutoField(primary_key=True)
@@ -98,29 +102,6 @@ class Asistencia(models.Model):
             estado = "Justificado"
         return f"{self.estudiante} - {self.materia} - {self.fecha} - {estado}"
 
-class TipoEvaluacion(models.Model):
-    """
-    Define los tipos de evaluación disponibles en el sistema.
-    """
-    TIPOS_CHOICES = [
-        ('EXAMEN', 'Examen'),
-        ('PARTICIPACION', 'Participación en Clase'),
-        ('TRABAJO', 'Trabajo Práctico'),
-    ]
-    
-    nombre = models.CharField(max_length=50, choices=TIPOS_CHOICES, unique=True)
-    descripcion = models.TextField(blank=True, null=True)
-    activo = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        db_table = 'tipos_evaluacion'
-        verbose_name = 'Tipo de Evaluación'
-        verbose_name_plural = 'Tipos de Evaluación'
-
-    def __str__(self):
-        return self.get_nombre_display()
 
 class Trimestre(models.Model):
     """
@@ -183,76 +164,166 @@ class Trimestre(models.Model):
         from django.utils import timezone
         return timezone.now().date() <= self.fecha_limite_calificaciones and self.estado in ['ACTIVO', 'FINALIZADO']
 
-class Evaluacion(models.Model):
+class TipoEvaluacion(models.Model):
     """
-    Representa una evaluación específica (examen, trabajo, etc.) para una materia.
+    Define los tipos de evaluación disponibles en el sistema.
     """
-    materia = models.ForeignKey(Materia, on_delete=models.CASCADE, related_name='evaluaciones')
-    tipo_evaluacion = models.ForeignKey(TipoEvaluacion, on_delete=models.CASCADE)
-    trimestre = models.ForeignKey(Trimestre, on_delete=models.CASCADE, related_name='evaluaciones')  # NUEVO CAMPO
-    titulo = models.CharField(max_length=200)
+    TIPOS_CHOICES = [
+        ('EXAMEN', 'Examen'),
+        ('PARTICIPACION', 'Participación en Clase'),
+        ('TRABAJO', 'Trabajo Práctico'),
+    ]
+    
+    nombre = models.CharField(max_length=50, choices=TIPOS_CHOICES, unique=True)
     descripcion = models.TextField(blank=True, null=True)
-    fecha_asignacion = models.DateField()
-    fecha_entrega = models.DateField()
-    fecha_limite = models.DateField(null=True, blank=True, help_text="Fecha límite para entrega tardía")
-    
-    # Configuración de calificación
-    nota_maxima = models.DecimalField(max_digits=5, decimal_places=2, default=100.00)
-    nota_minima_aprobacion = models.DecimalField(max_digits=5, decimal_places=2, default=51.00)
-    porcentaje_nota_final = models.DecimalField(
-        max_digits=5, 
-        decimal_places=2,
-        help_text="Porcentaje que representa en la nota final del trimestre"
-    )
-    
-    # Configuración de entrega
-    permite_entrega_tardia = models.BooleanField(default=False)
-    penalizacion_tardio = models.DecimalField(
-        max_digits=5, 
-        decimal_places=2, 
-        default=0.00,
-        help_text="Porcentaje de penalización por entrega tardía"
-    )
-    
-    # Estado
     activo = models.BooleanField(default=True)
-    publicado = models.BooleanField(default=False, help_text="Si está visible para los estudiantes")
-    
-    # Metadatos
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'evaluaciones'
-        verbose_name = 'Evaluación'
-        verbose_name_plural = 'Evaluaciones'
-        ordering = ['-fecha_asignacion']
+        db_table = 'tipos_evaluacion'
+        verbose_name = 'Tipo de Evaluación'
+        verbose_name_plural = 'Tipos de Evaluación'
+
+
+
+class ConfiguracionEvaluacionMateria(models.Model):
+    """
+    Configura los tipos de evaluación aplicables para una materia específica
+    con sus respectivos porcentajes de la nota final.
+    """
+    materia = models.ForeignKey(Materia, on_delete=models.CASCADE, related_name='configuraciones_evaluacion')
+    tipo_evaluacion = models.ForeignKey(TipoEvaluacion, on_delete=models.CASCADE)
+    porcentaje = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2, 
+        help_text="Porcentaje que este tipo de evaluación representa en la nota final (0-100)"
+    )
+    activo = models.BooleanField(default=True)
+    
+    # Metadatos
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(
+        'Usuarios.Usuario', 
+        on_delete=models.CASCADE, 
+        related_name='configuraciones_evaluacion_creadas',
+        null=True, 
+        blank=True
+    )
+
+    class Meta:
+        db_table = 'configuracion_evaluacion_materia'
+        verbose_name = 'Configuración de Evaluación por Materia'
+        verbose_name_plural = 'Configuraciones de Evaluación por Materias'
+        unique_together = ['materia', 'tipo_evaluacion']
 
     def __str__(self):
-        return f"{self.titulo} - {self.materia.nombre} ({self.tipo_evaluacion})"
+        return f"{self.materia.nombre} - {self.tipo_evaluacion}: {self.porcentaje}%"
 
-    @property
-    def esta_vencido(self):
-        from django.utils import timezone
-        return timezone.now().date() > self.fecha_entrega
+    def save(self, *args, **kwargs):
+        """
+        Sobrescribimos el método save para validar que la suma de porcentajes
+        no exceda el 100% para la materia.
+        """
+        # Ejecutamos la validación solo si el objeto es nuevo o ha cambiado el porcentaje
+        if not self.pk or ConfiguracionEvaluacionMateria.objects.get(pk=self.pk).porcentaje != self.porcentaje:
+            # Calculamos la suma actual sin considerar este registro
+            configuraciones = ConfiguracionEvaluacionMateria.objects.filter(
+                materia=self.materia, 
+                activo=True
+            ).exclude(pk=self.pk)
+            
+            suma_actual = sum(conf.porcentaje for conf in configuraciones)
+            
+            # Validamos que no exceda el 100%
+            if suma_actual + self.porcentaje > 100:
+                from django.core.exceptions import ValidationError
+                raise ValidationError(
+                    f"La suma de porcentajes ({suma_actual + self.porcentaje}%) excede el 100%. "
+                    f"Porcentaje disponible: {100 - suma_actual}%"
+                )
+        
+        super().save(*args, **kwargs)
 
-    @property
-    def puede_entregar_tardio(self):
-        from django.utils import timezone
-        if not self.permite_entrega_tardia or not self.fecha_limite:
-            return False
-        return timezone.now().date() <= self.fecha_limite
+
+
+
+
+class EvaluacionBase(models.Model):
+    """Clase base abstracta para todas las evaluaciones"""
+    titulo = models.CharField(max_length=200)
+    descripcion = models.TextField(blank=True, null=True)
+    materia = models.ForeignKey(
+        Materia, 
+        on_delete=models.CASCADE,
+        related_name="%(class)s_evaluaciones"  # Esto se expandirá diferente para cada subclase
+    )
+    trimestre = models.ForeignKey(
+        Trimestre, 
+        on_delete=models.CASCADE, 
+        null=True, blank=True,
+        related_name="%(class)s_evaluaciones"  # Esto se expandirá diferente para cada subclase
+    )
+    tipo_evaluacion = models.ForeignKey(
+        TipoEvaluacion, 
+        on_delete=models.SET_NULL, 
+        null=True
+    )
+    porcentaje_nota_final = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal('0.01')), MaxValueValidator(Decimal('100'))]
+    )
+    activo = models.BooleanField(default=True)
+    publicado = models.BooleanField(default=False)
+    
+    class Meta:
+        abstract = True  # Esta clase es abstracta, no se crea tabla en la BD
+
+class EvaluacionEntregable(EvaluacionBase):
+    """Para evaluaciones con fechas de entrega como exámenes y trabajos"""
+    fecha_asignacion = models.DateField()
+    fecha_entrega = models.DateField()
+    fecha_limite = models.DateField(null=True, blank=True)
+    nota_maxima = models.DecimalField(max_digits=5, decimal_places=2, default=100.00)
+    nota_minima_aprobacion = models.DecimalField(max_digits=5, decimal_places=2, default=51.00)
+    permite_entrega_tardia = models.BooleanField(default=False)
+    penalizacion_tardio = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
+    
+    class Meta:
+        db_table = 'evaluaciones_entregables'
+
+class EvaluacionParticipacion(EvaluacionBase):
+    """Específico para participación en clase"""
+    fecha_registro = models.DateField()
+    criterios_participacion = models.TextField(null=True, blank=True)
+    escala_calificacion = models.CharField(
+        max_length=20, 
+        choices=[
+            ('NUMERICA', 'Numérica (0-100)'),
+            ('CUALITATIVA', 'Cualitativa (MB/B/R/M)')
+        ],
+        default='NUMERICA'
+    )
+    
+    class Meta:
+        db_table = 'evaluaciones_participacion'
 
 class Calificacion(models.Model):
     """
     Almacena las calificaciones de los estudiantes en las evaluaciones.
+    Puede referenciar cualquier tipo de evaluación (entregable o participación)
     """
-    evaluacion = models.ForeignKey(Evaluacion, on_delete=models.CASCADE, related_name='calificaciones')
-    estudiante = models.ForeignKey('Usuarios.Usuario', on_delete=models.CASCADE)
+    # Campos para la relación genérica
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    evaluacion = GenericForeignKey('content_type', 'object_id')
     
-    # Calificación
+    # Otros campos que ya existían
+    estudiante = models.ForeignKey('Usuarios.Usuario', on_delete=models.CASCADE)
     nota = models.DecimalField(max_digits=5, decimal_places=2)
-    nota_sobre = models.DecimalField(max_digits=5, decimal_places=2, help_text="Nota máxima posible")
+    nota_final = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     
     # Información de entrega
     fecha_entrega = models.DateTimeField(null=True, blank=True)
@@ -282,10 +353,11 @@ class Calificacion(models.Model):
         db_table = 'calificaciones'
         verbose_name = 'Calificación'
         verbose_name_plural = 'Calificaciones'
-        unique_together = ['evaluacion', 'estudiante']
+        unique_together = [('content_type', 'object_id', 'estudiante')]
 
     def __str__(self):
-        return f"{self.estudiante.nombre} - {self.evaluacion.titulo}: {self.nota}/{self.nota_sobre}"
+        evaluacion_titulo = getattr(self.evaluacion, 'titulo', 'Sin título')
+        return f"{self.estudiante.nombre} - {evaluacion_titulo}: {self.nota}/{self.nota_sobre}"
 
     @property
     def nota_final(self):
@@ -304,7 +376,14 @@ class Calificacion(models.Model):
     @property
     def esta_aprobado(self):
         """Determina si la calificación está aprobada"""
-        return self.nota_final >= self.evaluacion.nota_minima_aprobacion
+        # Adaptado para manejar cualquier tipo de evaluación
+        if hasattr(self.evaluacion, 'nota_minima_aprobacion'):
+            nota_minima = self.evaluacion.nota_minima_aprobacion
+        else:
+            # Valor por defecto si no tiene el atributo
+            nota_minima = 51.0
+        
+        return self.nota_final >= nota_minima
 
 class PromedioTrimestral(models.Model):
     """

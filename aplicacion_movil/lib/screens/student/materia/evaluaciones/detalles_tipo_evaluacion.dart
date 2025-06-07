@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../services/estudiante/evaluaciones_service.dart';
 import '../../../../services/auth_service.dart';
+import '../../../../utils/logger.dart';
 
 class DetallesTipoEvaluacionScreen extends StatefulWidget {
   const DetallesTipoEvaluacionScreen({super.key});
@@ -87,6 +88,10 @@ class _DetallesTipoEvaluacionScreenState
                         tipoEvaluacionId,
               )
               .toList();
+
+      AppLogger.d(
+        'Respuesta completa: ${evaluacionesFiltradas}',
+      ); // <-- Aquí está el cambio
 
       if (mounted) {
         setState(() {
@@ -223,14 +228,24 @@ class _DetallesTipoEvaluacionScreenState
                     ),
                     decoration: BoxDecoration(
                       color: _getCalificacionColor(
-                        evaluacion['calificacion']['nota'],
-                        evaluacion['nota_maxima'],
-                        evaluacion['nota_minima_aprobacion'],
+                        evaluacion['calificacion']['nota'] != null
+                            ? double.parse(
+                              evaluacion['calificacion']['nota'].toString(),
+                            )
+                            : null,
+                        evaluacion['nota_maxima'] != null
+                            ? double.parse(evaluacion['nota_maxima'].toString())
+                            : null,
+                        evaluacion['nota_minima_aprobacion'] != null
+                            ? double.parse(
+                              evaluacion['nota_minima_aprobacion'].toString(),
+                            )
+                            : null,
                       ),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      '${evaluacion['calificacion']['nota']}/${evaluacion['nota_maxima']}',
+                      '${evaluacion['calificacion']['nota']}/${evaluacion['nota_maxima'] ?? 100.0}',
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -352,8 +367,11 @@ class _DetallesTipoEvaluacionScreenState
   }
 
   Widget _buildEvaluacionDetails(Map<String, dynamic> evaluacion) {
+    // Determinar tipo de evaluación
+    bool esParticipacion = evaluacion['tipo_objeto'] == 'participacion';
+
     return Container(
-      padding: const EdgeInsets.all(8), // Reducido de 12
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.grey[50],
         borderRadius: BorderRadius.circular(8),
@@ -364,13 +382,11 @@ class _DetallesTipoEvaluacionScreenState
         children: [
           const Text(
             'Información de la Evaluación',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ), // Reducido de 16
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
           ),
-          const SizedBox(height: 8), // Reducido de 12
-          // Usar filas para mostrar datos relacionados juntos
+          const SizedBox(height: 8),
+
+          // Mostrar diferentes campos según el tipo de evaluación
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -379,21 +395,32 @@ class _DetallesTipoEvaluacionScreenState
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildDetalleRow(
-                      Icons.calendar_today,
-                      'Asignación:',
-                      _formatFecha(evaluacion['fecha_asignacion']),
-                    ),
-                    _buildDetalleRow(
-                      Icons.event,
-                      'Entrega:',
-                      _formatFecha(evaluacion['fecha_entrega']),
-                    ),
-                    _buildDetalleRow(
-                      Icons.timer,
-                      'Límite:',
-                      _formatFecha(evaluacion['fecha_limite']),
-                    ),
+                    // Para participación mostrar fecha_registro, para otras mostrar fechas de entrega
+                    esParticipacion
+                        ? _buildDetalleRow(
+                          Icons.calendar_today,
+                          'Registro:',
+                          _formatFecha(evaluacion['fecha_registro']),
+                        )
+                        : _buildDetalleRow(
+                          Icons.calendar_today,
+                          'Asignación:',
+                          _formatFecha(evaluacion['fecha_asignacion']),
+                        ),
+
+                    // Solo mostrar fechas de entrega para evaluaciones no-participación
+                    if (!esParticipacion) ...[
+                      _buildDetalleRow(
+                        Icons.event,
+                        'Entrega:',
+                        _formatFecha(evaluacion['fecha_entrega']),
+                      ),
+                      _buildDetalleRow(
+                        Icons.timer,
+                        'Límite:',
+                        _formatFecha(evaluacion['fecha_limite']),
+                      ),
+                    ],
                   ],
                 ),
               ),
@@ -405,12 +432,12 @@ class _DetallesTipoEvaluacionScreenState
                     _buildDetalleRow(
                       Icons.grade,
                       'Nota máx:',
-                      '${evaluacion['nota_maxima']} pts',
+                      '${evaluacion['nota_maxima'] ?? 100.0} pts',
                     ),
                     _buildDetalleRow(
                       Icons.check_circle,
                       'Aprob:',
-                      '${evaluacion['nota_minima_aprobacion']} pts',
+                      '${evaluacion['nota_minima_aprobacion'] ?? 51.0} pts',
                     ),
                     _buildDetalleRow(
                       Icons.percent,
@@ -425,18 +452,26 @@ class _DetallesTipoEvaluacionScreenState
 
           const SizedBox(height: 4),
 
-          // Fila adicional para otros datos
-          _buildDetalleRow(
-            evaluacion['permite_entrega_tardia'] ? Icons.check : Icons.close,
-            'Entrega tardía:',
-            '${evaluacion['permite_entrega_tardia'] ? 'Sí' : 'No'}${evaluacion['permite_entrega_tardia'] ? ' (Penalización: ${evaluacion['penalizacion_tardio']}%)' : ''}',
-          ),
+          // Solo mostrar campos de entrega tardía para evaluaciones no-participación
+          if (!esParticipacion)
+            _buildDetalleRow(
+              (evaluacion['permite_entrega_tardia'] ?? false)
+                  ? Icons.check
+                  : Icons.close,
+              'Entrega tardía:',
+              '${(evaluacion['permite_entrega_tardia'] ?? false) ? 'Sí' : 'No'}${(evaluacion['permite_entrega_tardia'] ?? false) ? ' (Penalización: ${evaluacion['penalizacion_tardio'] ?? 0}%)' : ''}',
+            ),
 
           _buildDetalleRow(
-            evaluacion['publicado'] ? Icons.visibility : Icons.visibility_off,
+            (evaluacion['publicado'] ?? false)
+                ? Icons.visibility
+                : Icons.visibility_off,
             'Estado:',
-            evaluacion['publicado'] ? 'Publicado' : 'No publicado',
-            color: evaluacion['publicado'] ? Colors.green : Colors.orange,
+            (evaluacion['publicado'] ?? false) ? 'Publicado' : 'No publicado',
+            color:
+                (evaluacion['publicado'] ?? false)
+                    ? Colors.green
+                    : Colors.orange,
           ),
         ],
       ),
@@ -601,14 +636,19 @@ class _DetallesTipoEvaluacionScreenState
   }
 
   Color _getCalificacionColor(
-    double nota,
-    double notaMaxima,
-    double notaMinimaAprobacion,
+    double? nota,
+    double? notaMaxima,
+    double? notaMinimaAprobacion,
   ) {
-    // Calcular porcentaje de la nota sobre el total
-    final porcentaje = (nota / notaMaxima) * 100;
+    // Proporcionar valores predeterminados
+    final notaSegura = nota ?? 0.0;
+    final notaMaximaSegura = notaMaxima ?? 100.0;
+    final notaMinimaAprobacionSegura = notaMinimaAprobacion ?? 51.0;
 
-    if (nota < notaMinimaAprobacion) {
+    // Calcular porcentaje de la nota sobre el total
+    final porcentaje = (notaSegura / notaMaximaSegura) * 100;
+
+    if (notaSegura < notaMinimaAprobacionSegura) {
       return Colors.redAccent;
     } else if (porcentaje >= 90) {
       return Colors.green[700]!;

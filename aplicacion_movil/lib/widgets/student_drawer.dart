@@ -52,12 +52,15 @@ class StudentDrawer extends StatelessWidget {
             isSelected: currentRoute == '/student/materias',
           ),
 
-          _buildMenuItem(
-            context: context,
-            title: 'Calificaciones',
-            icon: Icons.grade,
-            route: '/student/calificaciones',
-            isSelected: currentRoute == '/student/calificaciones',
+          ListTile(
+            leading: const Icon(Icons.star),
+            title: const Text('Calificaciones'),
+            onTap: () {
+              Navigator.pushNamed(context, '/student/calificaciones/');
+              // O cierra el drawer primero si es necesario
+              // Navigator.pop(context);
+              // Navigator.pushNamed(context, '/student/calificaciones/');
+            },
           ),
 
           _buildMenuItem(

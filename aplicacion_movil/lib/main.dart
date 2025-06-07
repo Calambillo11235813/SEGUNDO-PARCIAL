@@ -12,6 +12,8 @@ import 'screens/student/materia/evaluaciones/materia_tipo_evaluaciones_screen.da
 import 'screens/student/materia/evaluaciones/detalles_tipo_evaluacion.dart';
 import 'config/theme_config.dart';
 import 'screens/student/materia/asistencias/registrar_asistencia_screen.dart';
+import 'screens/student/calificaciones/anio_academico_screen.dart';
+import 'screens/student/calificaciones/trimestre_screen.dart'; // Añadir esta línea
 
 void main() {
   runApp(const MyApp());
@@ -46,6 +48,12 @@ class MyApp extends StatelessWidget {
             (context) => const DetallesTipoEvaluacionScreen(),
         '/student/materia/registrar-asistencia':
             (context) => const RegistrarAsistenciaScreen(),
+        '/student/calificaciones/':
+            (context) => const AnioAcademicoScreen(
+              titulo: 'Años Académicos',
+              nextRoute: '/estudiante/trimestres',
+            ),
+        '/estudiante/trimestres': (context) => const TrimestresScreen(),
       },
     );
   }
