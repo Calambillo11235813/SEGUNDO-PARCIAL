@@ -10,6 +10,7 @@ import { UsuarioService } from '../../../services/home.service';
 export class HomeComponent implements OnInit {
   cantidadEstudiantes: number = 0;
   cantidadProfesores: number = 0;
+  cantidadCursos: number = 0;
 
   constructor(private usuarioService: UsuarioService) {}
 
@@ -20,6 +21,10 @@ export class HomeComponent implements OnInit {
 
     this.usuarioService.getCantidadProfesores().subscribe((data) => {
       this.cantidadProfesores = data.total;
+    });
+
+    this.usuarioService.getCantidadCursos().subscribe((data) => {
+      this.cantidadCursos = data.cantidad_cursos;
     });
   }
 }

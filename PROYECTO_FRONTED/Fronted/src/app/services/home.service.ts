@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UsuarioService {
-  private apiUrl = 'http://localhost:8000/api/usuarios'; // Cambia esto por tu URL base del backend
+  private apiUrl = 'http://localhost:8000/api/usuarios'; // URL base para usuarios
+  private cursosApiUrl = 'http://localhost:8000/api/cursos'; // URL base para cursos
 
   constructor(private http: HttpClient) {}
 
@@ -24,4 +25,10 @@ export class UsuarioService {
     return this.http.get<{ total: number }>(`${this.apiUrl}/usuarios/profesores/`);
   }
 
+  /**
+   * Obtiene la cantidad total de cursos.
+   */
+  getCantidadCursos(): Observable<{ cantidad_cursos: number }> {
+    return this.http.get<{ cantidad_cursos: number }>(`${this.cursosApiUrl}/cursos/cantidad/`);
+  }
 }
