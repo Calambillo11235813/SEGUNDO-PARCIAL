@@ -1,20 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
-import { CommonModule } from '@angular/common'; // ✅ AGREGAR ESTA IMPORTACIÓN
-import { RouterModule } from '@angular/router';
+import { UsuarioService } from '../../../services/home.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   standalone: true,
-  imports: [CommonModule, RouterModule], // ✅ AGREGAR CommonModule
+  imports: [],
 })
 export class HomeComponent implements OnInit {
-  usuario: any;
-  
-  constructor(private authService: AuthService) {}
-  
+  cantidadEstudiantes: number = 0;
+  cantidadProfesores: number = 0;
+
+  constructor(private usuarioService: UsuarioService) {}
+
   ngOnInit(): void {
-    this.usuario = this.authService.getCurrentUser();
+    this.usuarioService.getCantidadEstudiantes().subscribe((data) => {
+      this.cantidadEstudiantes = data.total;
+    });
+
+    this.usuarioService.getCantidadProfesores().subscribe((data) => {
+      this.cantidadProfesores = data.total;
+    });
   }
 }
