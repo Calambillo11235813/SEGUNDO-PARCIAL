@@ -26,7 +26,7 @@ import { MateriasService } from '../../../services/materias.service';
       <div *ngIf="materia" class="bg-white rounded-lg shadow-md border border-red-100">
         <div class="p-6 border-b border-red-100">
           <h2 class="text-2xl font-bold text-red-600">{{ materia.nombre }}</h2>
-          <p class="text-gray-600 mt-2">{{ materia.curso_nombre }}</p>
+          <p class="text-gray-600 mt-2">{{ materia.curso_nombre || (cursoDetalle?.nombre || 'Sin curso asignado') }}</p>
         </div>
         
         <div class="p-6">
@@ -36,11 +36,15 @@ import { MateriasService } from '../../../services/materias.service';
               <ul class="space-y-2">
                 <li class="flex items-start">
                   <span class="font-medium w-28">Nivel:</span>
-                  <span>{{ materia.curso?.nivel?.nombre || 'No especificado' }}</span>
+                  <span>{{ cursoDetalle?.nivel_nombre || 'No especificado' }}</span>
                 </li>
                 <li class="flex items-start">
                   <span class="font-medium w-28">Grado:</span>
-                  <span>{{ materia.curso?.grado || 'No especificado' }}° {{ materia.curso?.paralelo || '' }}</span>
+                  <span>{{ cursoDetalle?.grado || 'No especificado' }}°</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="font-medium w-28">Paralelo:</span>
+                  <span>{{ cursoDetalle?.paralelo || 'No especificado' }}</span>
                 </li>
                 <li class="flex items-start">
                   <span class="font-medium w-28">Estudiantes:</span>
@@ -74,6 +78,7 @@ import { MateriasService } from '../../../services/materias.service';
 export class DetalleMateriaComponent implements OnInit {
   materiaId: number;
   materia: any = null;
+  cursoDetalle: any = null;
   loading = false;
   error = '';
   
@@ -98,12 +103,46 @@ export class DetalleMateriaComponent implements OnInit {
     this.loading = true;
     this.materiasService.getMateria(this.materiaId).subscribe({
       next: (data) => {
+        console.log('Datos de materia:', data);
         this.materia = data;
-        this.loading = false;
+        
+        // Verificar la estructura exacta de los datos para encontrar el curso ID
+        let cursoId = null;
+        if (data.curso && typeof data.curso === 'object' && data.curso.id) {
+          // Si curso es un objeto y tiene un id
+          cursoId = data.curso.id;
+        } else if (data.curso && typeof data.curso === 'number') {
+          // Si curso es directamente el ID
+          cursoId = data.curso;
+        } else if (data.curso_id) {
+          // Si hay un campo específico curso_id
+          cursoId = data.curso_id;
+        }
+        
+        if (cursoId) {
+          this.cargarDetalleCurso(cursoId);
+        } else {
+          console.warn('No se pudo determinar el ID del curso');
+          this.loading = false;
+        }
       },
       error: (error) => {
         console.error('Error al cargar detalle de materia:', error);
         this.error = 'No se pudo cargar la información de la materia';
+        this.loading = false;
+      }
+    });
+  }
+  
+  cargarDetalleCurso(cursoId: number): void {
+    this.materiasService.getCursoDetalle(cursoId).subscribe({
+      next: (data) => {
+        console.log('Datos del curso:', data);
+        this.cursoDetalle = data;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error al cargar detalle del curso:', error);
         this.loading = false;
       }
     });
