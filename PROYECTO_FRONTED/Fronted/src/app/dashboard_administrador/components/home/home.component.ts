@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { UsuarioService } from '../../../services/home.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
 })
 export class HomeComponent implements OnInit {
   cantidadEstudiantes: number = 0;
