@@ -41,12 +41,12 @@ export class LoginComponent {
         
         // Redirigir según el rol del usuario
         if (this.authService.isAdmin()) {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/admin/home']);
         } else if (this.authService.isTeacher()) {
-          this.router.navigate(['/profesor/dashboard']);
+          this.router.navigate(['/profesor/home']);
         } else {
           // Ruta predeterminada o ruta para estudiantes
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/admin/home']); // O la ruta predeterminada que corresponda
         }
       },
       error: (error) => {

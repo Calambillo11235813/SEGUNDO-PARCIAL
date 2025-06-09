@@ -38,22 +38,6 @@ export const routes: Routes = [
     ]
   },
   
-  // ✅ NUEVO: Rutas legacy para mantener compatibilidad
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuard, AdminGuard],
-    children: [
-      { path: '', redirectTo: '/admin/home', pathMatch: 'full' },
-      { path: 'home', redirectTo: '/admin/home' },
-      { path: 'estudiantes', redirectTo: '/admin/estudiantes' },
-      { path: 'profesores', redirectTo: '/admin/profesores' },
-      { path: 'cursos', redirectTo: '/admin/cursos' },
-      { path: 'materias', redirectTo: '/admin/materias' },
-      { path: 'perfil', redirectTo: '/admin/perfil' }
-    ]
-  },
-  
   // ✅ Rutas de profesor
   {
     path: 'profesor',
@@ -62,7 +46,6 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeProfesorComponent },
-      { path: 'dashboard', component: HomeProfesorComponent }, 
       { path: 'materias', component: MateriasProfesorComponent },
       { path: 'materia/:id', component: DetalleMateriaComponent },
       { path: 'asistencias', component: AsistenciasComponent },
