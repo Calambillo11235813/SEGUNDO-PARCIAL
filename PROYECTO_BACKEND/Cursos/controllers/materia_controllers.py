@@ -581,3 +581,19 @@ def get_estadisticas_evaluaciones_por_materia(request, materia_id):
             {'error': str(e)},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_cantidad_materias(request):
+    """
+    Devuelve la cantidad total de materias registradas en el sistema.
+    Acceso público para todos.
+    """
+    try:
+        cantidad = Materia.objects.count()
+        return Response({
+            'cantidad_materias': cantidad,
+            'mensaje': f'Se encontraron {cantidad} materias registradas en el sistema'
+        }, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

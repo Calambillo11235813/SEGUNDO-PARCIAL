@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   cantidadEstudiantes: number = 0;
   cantidadProfesores: number = 0;
   cantidadCursos: number = 0;
+  cantidadMaterias: number = 0;
 
   constructor(private usuarioService: UsuarioService) {}
 
@@ -25,6 +26,10 @@ export class HomeComponent implements OnInit {
 
     this.usuarioService.getCantidadCursos().subscribe((data) => {
       this.cantidadCursos = data.cantidad_cursos;
+    });
+
+    this.usuarioService.getCantidadMaterias().subscribe((data) => {
+      this.cantidadMaterias = data.cantidad_materias;
     });
   }
 }
