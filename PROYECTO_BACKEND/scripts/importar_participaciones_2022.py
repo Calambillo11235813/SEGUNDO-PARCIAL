@@ -19,9 +19,9 @@ def importar_participaciones_csv():
     """
     Importa evaluaciones de participación desde el archivo CSV a la base de datos.
     
-    Formato esperado del CSV:
+    Formato esperado del CSV (actualizado):
     materia,curso_id,tipo_evaluacion_id,trimestre_id,titulo,descripcion,porcentaje_nota_final,
-    fecha_registro,criterios_participacion,escala_calificacion
+    fecha_registro
     """
     
     csv_path = 'D:/1.CARRERA UNIVERSITARIA/8.NOVENO SEMESTRE/1.SISTEMAS DE INFORMACION 2/SEGUNDO PARCIAL/SEGUNDO-PARCIAL/PROYECTO_BACKEND/csv/participaciones_2022.csv'
@@ -111,7 +111,7 @@ def importar_participaciones_csv():
                         # Convertir valores numéricos
                         porcentaje_nota_final = Decimal(row['porcentaje_nota_final'])
                         
-                        # IMPORTANTE: Usamos EvaluacionParticipacion en lugar de EvaluacionEntregable
+                        # IMPORTANTE: Ahora usamos EvaluacionParticipacion sin los campos eliminados
                         evaluacion, created = EvaluacionParticipacion.objects.get_or_create(
                             titulo=row['titulo'],
                             materia=materia,
@@ -120,8 +120,6 @@ def importar_participaciones_csv():
                                 'descripcion': row['descripcion'],
                                 'tipo_evaluacion': tipo_evaluacion,
                                 'fecha_registro': fecha_registro,
-                                'criterios_participacion': row['criterios_participacion'],
-                                'escala_calificacion': row['escala_calificacion'],
                                 'porcentaje_nota_final': porcentaje_nota_final,
                                 'activo': True,
                                 'publicado': True
@@ -133,8 +131,6 @@ def importar_participaciones_csv():
                             evaluacion.descripcion = row['descripcion']
                             evaluacion.tipo_evaluacion = tipo_evaluacion
                             evaluacion.fecha_registro = fecha_registro
-                            evaluacion.criterios_participacion = row['criterios_participacion']
-                            evaluacion.escala_calificacion = row['escala_calificacion']
                             evaluacion.porcentaje_nota_final = porcentaje_nota_final
                             evaluacion.save()
                         

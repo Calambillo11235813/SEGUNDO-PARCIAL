@@ -297,15 +297,6 @@ class EvaluacionEntregable(EvaluacionBase):
 class EvaluacionParticipacion(EvaluacionBase):
     """Específico para participación en clase"""
     fecha_registro = models.DateField()
-    criterios_participacion = models.TextField(null=True, blank=True)
-    escala_calificacion = models.CharField(
-        max_length=20, 
-        choices=[
-            ('NUMERICA', 'Numérica (0-100)'),
-            ('CUALITATIVA', 'Cualitativa (MB/B/R/M)')
-        ],
-        default='NUMERICA'
-    )
     
     class Meta:
         db_table = 'evaluaciones_participacion'

@@ -29,11 +29,11 @@ def importar_calificaciones_participaciones_csv(actualizar_existentes=True, test
     - test_mode: Si es True, valida los datos pero no realiza cambios en la base de datos.
     """
     
-    # Definir campos requeridos para validación
+    # Definir campos requeridos para validación (eliminado escala_calificacion)
     required_fields = [
         'estudiante_codigo', 'estudiante_nombre', 'estudiante_apellido', 
         'materia', 'curso_id', 'titulo_evaluacion', 'tipo_evaluacion_id', 
-        'trimestre_id', 'nota', 'nota_final', 'escala_calificacion',
+        'trimestre_id', 'nota', 'nota_final', 
         'porcentaje_nota_final', 'fecha_calificacion'
     ]
     

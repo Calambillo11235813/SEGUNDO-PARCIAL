@@ -31,8 +31,6 @@ with open("participaciones_2022.csv", newline='', encoding="utf-8") as f:
             "trimestre_id": row["trimestre_id"],
             "tipo_evaluacion_id": row["tipo_evaluacion_id"],
             "fecha_registro": row["fecha_registro"],
-            "criterios_participacion": row["criterios_participacion"],
-            "escala_calificacion": row["escala_calificacion"],
             "porcentaje_nota_final": float(row["porcentaje_nota_final"]),
         })
 
@@ -49,8 +47,6 @@ with open("calificaciones_participaciones_2022.csv", "w", newline='', encoding="
         "trimestre_id",
         "nota",
         "nota_final",
-        "escala_calificacion",
-        "criterios_participacion",
         "porcentaje_nota_final",
         "fecha_calificacion",
         "finalizada"
@@ -70,37 +66,14 @@ with open("calificaciones_participaciones_2022.csv", "w", newline='', encoding="
         estudiantes_curso = [est for est in estudiantes if est["curso"] == participacion["curso_id"]]
         
         for estudiante in estudiantes_curso:
-            # Determinar la nota según la escala de calificación
-            if participacion["escala_calificacion"] == "NUMERICA":
-                # Generar nota aleatoria con mayor probabilidad de notas altas
-                # Distribución que favorece notas aprobatorias pero realistas
-                base_nota = random.choice([
-                    random.uniform(60, 100),  # Nota alta (70%)
-                    random.uniform(40, 59)    # Nota media (20%)
-                ] if random.random() < 0.9 else [random.uniform(0, 39)])  # Nota baja (10%)
-                
-                nota = round(base_nota, 2)
-                nota_final = nota  # No hay penalización en participaciones
+            # Distribución que favorece notas aprobatorias pero realistas
+            base_nota = random.choice([
+                random.uniform(60, 100),  # Nota alta (70%)
+                random.uniform(40, 59)    # Nota media (20%)
+            ] if random.random() < 0.9 else [random.uniform(0, 39)])  # Nota baja (10%)
             
-            else:  # CUALITATIVA
-                # Generar calificación cualitativa
-                calif_cualitativa = random.choices(
-                    ["MB", "B", "R", "M"],  # Muy Bueno, Bueno, Regular, Malo
-                    weights=[60, 25, 10, 5],  # Probabilidades (más peso a mejores calificaciones)
-                    k=1
-                )[0]
-                
-                # Convertir calificación cualitativa a numérica para almacenamiento
-                if calif_cualitativa == "MB":
-                    nota = round(random.uniform(90, 100), 2)
-                elif calif_cualitativa == "B":
-                    nota = round(random.uniform(75, 89), 2)
-                elif calif_cualitativa == "R":
-                    nota = round(random.uniform(51, 74), 2)
-                else:  # "M"
-                    nota = round(random.uniform(0, 50), 2)
-                
-                nota_final = nota
+            nota = round(base_nota, 2)
+            nota_final = nota  # No hay penalización en participaciones
             
             writer.writerow({
                 "estudiante_codigo": estudiante["codigo"],
@@ -113,8 +86,6 @@ with open("calificaciones_participaciones_2022.csv", "w", newline='', encoding="
                 "trimestre_id": participacion["trimestre_id"],
                 "nota": nota,
                 "nota_final": nota_final,
-                "escala_calificacion": participacion["escala_calificacion"],
-                "criterios_participacion": participacion["criterios_participacion"],
                 "porcentaje_nota_final": participacion["porcentaje_nota_final"],
                 "fecha_calificacion": fecha_calificacion_str,
                 "finalizada": True

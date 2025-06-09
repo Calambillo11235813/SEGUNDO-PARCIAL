@@ -11,7 +11,7 @@ TRIMESTRES = {
     6: ("Tercer Trimestre 2022", "2022-09-01", "2022-12-15")
 }
 
-# Descripción de criterios de participación
+# Descripción de criterios de participación (ahora se incluirán en la descripción)
 CRITERIOS_PARTICIPACION = [
     "Se evaluará: 1) Calidad de las intervenciones, 2) Frecuencia de participación, 3) Relevancia de los aportes",
     "Criterios: 1) Participación activa, 2) Contribución al debate, 3) Habilidad para formular preguntas",
@@ -19,7 +19,7 @@ CRITERIOS_PARTICIPACION = [
     "Se valorará: 1) Iniciativa en el diálogo, 2) Respeto a opiniones diversas, 3) Claridad de expresión"
 ]
 
-# Leer materias desde materias_por_curso.csv (igual que en generar_evaluaciones_practicos_2022.py)
+# Leer materias desde materias_por_curso.csv
 def obtener_materias():
     materias_cursos = []
     with open("materias_por_curso.csv", newline='', encoding="utf-8") as f:
@@ -51,8 +51,8 @@ def generar_participaciones():
     
     for materia in materias:
         for trimestre_id in TRIMESTRES.keys():
-            # Generamos 4 participaciones por materia por trimestre
-            for i in range(1, 5):
+            # Generamos 5 participaciones por materia por trimestre
+            for i in range(1, 6):
                 # Título de la participación
                 titulo = f"PARTICIPACION {i}"
                 
@@ -60,13 +60,13 @@ def generar_participaciones():
                 fecha_registro = generar_fecha_registro(trimestre_id)
                 
                 # Porcentaje constante de 2.5
-                porcentaje = 2.5
+                porcentaje = 1
                 
-                # Criterios de participación aleatorios
+                # Criterios de participación aleatorios (ahora parte de la descripción)
                 criterios = random.choice(CRITERIOS_PARTICIPACION)
                 
-                # Escala de calificación (mayormente numérica)
-                escala = "NUMERICA" if random.random() < 0.9 else "CUALITATIVA"
+                # Descripción combinada con criterios
+                descripcion = f"Participación en {materia['nombre']}"
                 
                 evaluaciones.append({
                     "materia": materia["nombre"],
@@ -74,11 +74,9 @@ def generar_participaciones():
                     "tipo_evaluacion_id": 3,  # ID fijo para participación
                     "trimestre_id": trimestre_id,
                     "titulo": titulo,
-                    "descripcion": f"Participación en {materia['nombre']} - {TRIMESTRES[trimestre_id][0]}",
+                    "descripcion": descripcion,
                     "porcentaje_nota_final": porcentaje,
-                    "fecha_registro": fecha_registro,
-                    "criterios_participacion": criterios,
-                    "escala_calificacion": escala
+                    "fecha_registro": fecha_registro
                 })
     
     return evaluaciones
@@ -86,11 +84,10 @@ def generar_participaciones():
 def guardar_participaciones_csv(evaluaciones, archivo_salida):
     """Guarda las evaluaciones de participación en un archivo CSV"""
     with open(archivo_salida, 'w', newline='', encoding='utf-8') as f:
-        # Definir los campos que queremos en el CSV
+        # Definir los campos que queremos en el CSV (sin los campos eliminados)
         campos = [
             "materia", "curso_id", "tipo_evaluacion_id", "trimestre_id", 
-            "titulo", "descripcion", "porcentaje_nota_final", "fecha_registro", 
-            "criterios_participacion", "escala_calificacion"
+            "titulo", "descripcion", "porcentaje_nota_final", "fecha_registro"
         ]
         
         writer = csv.DictWriter(f, fieldnames=campos)
