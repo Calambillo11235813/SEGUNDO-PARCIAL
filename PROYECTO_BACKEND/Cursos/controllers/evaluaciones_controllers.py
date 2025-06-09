@@ -6,7 +6,7 @@ from rest_framework import status
 from django.contrib.contenttypes.models import ContentType
 from ..models import (Materia, TipoEvaluacion, Trimestre, ConfiguracionEvaluacionMateria,
                     EvaluacionBase, EvaluacionEntregable, EvaluacionParticipacion,
-                    Calificacion)
+                    Calificacion, Curso)  # Añadido Curso aquí
 from ..utils import get_evaluacion_by_id, get_evaluaciones_count, get_evaluaciones_activas
 
 @api_view(['GET'])
@@ -732,6 +732,196 @@ def delete_tipo_evaluacion(request, tipo_id):
                 'mensaje': f'Tipo de evaluación "{nombre}" eliminado completamente',
                 'eliminado': True
             })
+    
+    except Exception as e:
+        return Response(
+            {'error': str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_evaluaciones_por_curso(request, curso_id):
+    """
+    Obtiene todas las evaluaciones de las materias asociadas a un curso específico.
+    Opcionalmente filtra por trimestre_id (query param) y tipo_evaluacion_id (query param).
+    """
+    try:
+        # Verificar curso
+        try:
+            curso = Curso.objects.get(id=curso_id)
+        except Curso.DoesNotExist:
+            return Response(
+                {'error': f'Curso con ID {curso_id} no encontrado'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        # Obtener todas las materias del curso
+        materias = Materia.objects.filter(curso=curso)
+        
+        if not materias.exists():
+            return Response({
+                'mensaje': f'El curso {curso} no tiene materias asignadas',
+                'curso': {
+                    'id': curso.id,
+                    'nombre': str(curso)
+                },
+                'evaluaciones': [],
+                'total': 0
+            })
+        
+        # Parámetros opcionales de filtro
+        trimestre_id = request.query_params.get('trimestre_id')
+        tipo_evaluacion_id = request.query_params.get('tipo_evaluacion_id')
+        
+        # Filtros base para ambas consultas
+        filtros_entregables = {'materia__in': materias, 'activo': True}
+        filtros_participacion = {'materia__in': materias, 'activo': True}
+        
+        # Aplicar filtros opcionales
+        if trimestre_id:
+            try:
+                trimestre = Trimestre.objects.get(id=trimestre_id)
+                filtros_entregables['trimestre'] = trimestre
+                filtros_participacion['trimestre'] = trimestre
+            except Trimestre.DoesNotExist:
+                return Response(
+                    {'error': f'Trimestre con ID {trimestre_id} no encontrado'},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+        
+        if tipo_evaluacion_id:
+            try:
+                tipo_evaluacion = TipoEvaluacion.objects.get(id=tipo_evaluacion_id)
+                filtros_entregables['tipo_evaluacion'] = tipo_evaluacion
+                filtros_participacion['tipo_evaluacion'] = tipo_evaluacion
+            except TipoEvaluacion.DoesNotExist:
+                return Response(
+                    {'error': f'Tipo de evaluación con ID {tipo_evaluacion_id} no encontrado'},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+        
+        # Consultar ambos tipos de evaluaciones
+        entregables = EvaluacionEntregable.objects.filter(
+            **filtros_entregables
+        ).select_related('materia', 'tipo_evaluacion', 'trimestre')
+        
+        participaciones = EvaluacionParticipacion.objects.filter(
+            **filtros_participacion
+        ).select_related('materia', 'tipo_evaluacion', 'trimestre')
+        
+        # Preparar los datos combinados
+        evaluaciones_data = []
+        
+        # Procesar evaluaciones entregables
+        for eval in entregables:
+            content_type = ContentType.objects.get_for_model(eval)
+            evaluaciones_data.append({
+                'id': eval.id,
+                'titulo': eval.titulo,
+                'materia': {
+                    'id': eval.materia.id,
+                    'nombre': eval.materia.nombre
+                },
+                'trimestre': {
+                    'id': eval.trimestre.id,
+                    'nombre': eval.trimestre.nombre,
+                    'numero': eval.trimestre.numero,
+                    'año_academico': eval.trimestre.año_academico
+                },
+                'tipo_evaluacion': {
+                    'id': eval.tipo_evaluacion.id,
+                    'nombre': eval.tipo_evaluacion.nombre,
+                    'nombre_display': eval.tipo_evaluacion.get_nombre_display()
+                },
+                'fecha_asignacion': eval.fecha_asignacion,
+                'fecha_entrega': eval.fecha_entrega,
+                'porcentaje_nota_final': float(eval.porcentaje_nota_final),
+                'modelo': 'entregable',
+                'content_type_id': content_type.id,
+                'esta_vencido': eval.esta_vencido if hasattr(eval, 'esta_vencido') else (eval.fecha_entrega < datetime.now().date()),
+                'publicado': eval.publicado
+            })
+        
+        # Procesar participaciones
+        for eval in participaciones:
+            content_type = ContentType.objects.get_for_model(eval)
+            evaluaciones_data.append({
+                'id': eval.id,
+                'titulo': eval.titulo,
+                'materia': {
+                    'id': eval.materia.id,
+                    'nombre': eval.materia.nombre
+                },
+                'trimestre': {
+                    'id': eval.trimestre.id,
+                    'nombre': eval.trimestre.nombre,
+                    'numero': eval.trimestre.numero,
+                    'año_academico': eval.trimestre.año_academico
+                },
+                'tipo_evaluacion': {
+                    'id': eval.tipo_evaluacion.id,
+                    'nombre': eval.tipo_evaluacion.nombre,
+                    'nombre_display': eval.tipo_evaluacion.get_nombre_display()
+                },
+                'fecha_registro': eval.fecha_registro,
+                'porcentaje_nota_final': float(eval.porcentaje_nota_final),
+                'modelo': 'participacion',
+                'content_type_id': content_type.id,
+                'publicado': eval.publicado
+            })
+        
+        # Ordenar evaluaciones (criterio combinado)
+        evaluaciones_data.sort(
+            key=lambda x: (
+                x['trimestre']['año_academico'], 
+                x['trimestre']['numero'], 
+                x.get('fecha_entrega', x.get('fecha_registro', datetime.now().date()))
+            ), 
+            reverse=True
+        )
+        
+        # Agrupar por materias para la respuesta
+        materias_dict = {}
+        for materia in materias:
+            materias_dict[materia.id] = {
+                'id': materia.id,
+                'nombre': materia.nombre,
+                'profesor': materia.profesor.get_full_name() if materia.profesor else 'Sin profesor asignado',
+                'evaluaciones': []
+            }
+        
+        # Asignar evaluaciones a sus materias
+        for eval_data in evaluaciones_data:
+            materia_id = eval_data['materia']['id'] 
+            if materia_id in materias_dict:
+                materias_dict[materia_id]['evaluaciones'].append(eval_data)
+        
+        # Convertir a lista para la respuesta
+        materias_con_evaluaciones = list(materias_dict.values())
+        
+        # Contar total de evaluaciones
+        total_evaluaciones = sum(len(m['evaluaciones']) for m in materias_con_evaluaciones)
+        
+        return Response({
+            'curso': {
+                'id': curso.id,
+                'nombre': str(curso),
+                'grado': curso.grado,
+                'paralelo': curso.paralelo,
+                'nivel': {
+                    'id': curso.nivel.id,
+                    'nombre': curso.nivel.nombre
+                }
+            },
+            'filtros_aplicados': {
+                'trimestre_id': trimestre_id,
+                'tipo_evaluacion_id': tipo_evaluacion_id
+            },
+            'materias': materias_con_evaluaciones,
+            'total_materias': len(materias),
+            'total_evaluaciones': total_evaluaciones
+        })
     
     except Exception as e:
         return Response(

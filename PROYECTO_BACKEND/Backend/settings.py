@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'Permisos',
     'rest_framework',  # Añadido para APIs REST
     'rest_framework_simplejwt',
-    'corsheaders',  # Añadido para manejar CORS
+    'corsheaders',
+    'IA',# Añadido para manejar CORS
 ]
 
 MIDDLEWARE = [

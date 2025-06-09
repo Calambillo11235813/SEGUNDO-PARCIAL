@@ -15,4 +15,7 @@ urlpatterns = [
     path('evaluaciones/<int:evaluacion_id>/update/', evaluaciones_controllers.update_evaluacion, name='update_evaluacion'),
     path('evaluaciones/<int:evaluacion_id>/delete/', evaluaciones_controllers.delete_evaluacion, name='delete_evaluacion'),
     path('materias/<int:materia_id>/evaluaciones/', evaluaciones_controllers.get_evaluaciones_por_materia, name='get_evaluaciones_por_materia'),
+    path('evaluaciones/curso/<int:curso_id>/', evaluaciones_controllers.get_evaluaciones_por_curso, 
+         name='get_evaluaciones_por_curso'),
+
 ]
