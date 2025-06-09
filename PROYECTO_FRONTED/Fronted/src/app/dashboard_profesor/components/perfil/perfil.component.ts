@@ -11,32 +11,26 @@ import { UsuariosService } from '../../../services/usuarios.service';
   imports: [CommonModule, ReactiveFormsModule]
 })
 export class PerfilProfesorComponent implements OnInit {
-  perfilForm: FormGroup;
   passwordForm: FormGroup;
   usuario: any;
-  loading = false;
   passwordLoading = false;
   mensaje = '';
   error = '';
-  mensajePassword = '';
-  errorPassword = '';
   mostrarPassword = false;
   mostrarPasswordActual = false;
+  mostrarConfirmPassword = false;
   
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private usuariosService: UsuariosService
   ) {
-    this.perfilForm = this.fb.group({
-      nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
-      telefono: ['', Validators.pattern('^[0-9]{8}$')]
-    });
-    
     this.passwordForm = this.fb.group({
-      passwordActual: ['', [Validators.required, Validators.minLength(6)]],
-      passwordNuevo: ['', [Validators.required, Validators.minLength(6)]]
+      passwordActual: ['', [Validators.required]],
+      passwordNuevo: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required]]
+    }, {
+      validators: this.passwordsMatch
     });
   }
   
@@ -45,50 +39,30 @@ export class PerfilProfesorComponent implements OnInit {
   }
   
   cargarDatosUsuario(): void {
-    this.usuario = this.authService.getCurrentUser();
+    const usuarioActual = this.authService.getCurrentUser();
     
-    if (this.usuario) {
-      this.perfilForm.patchValue({
-        nombre: this.usuario.nombre,
-        apellido: this.usuario.apellido,
-        telefono: this.usuario.telefono
+    if (usuarioActual && usuarioActual.id) {
+      // Obtener datos completos del usuario desde el API
+      this.usuariosService.getUsuario(usuarioActual.id).subscribe({
+        next: (usuarioCompleto) => {
+          this.usuario = usuarioCompleto;
+        },
+        error: (err) => {
+          console.error('Error al cargar el perfil completo:', err);
+          // Usar los datos básicos como fallback
+          this.usuario = usuarioActual;
+        }
       });
+    } else {
+      this.usuario = usuarioActual;
     }
   }
   
-  actualizarPerfil(): void {
-    if (this.perfilForm.invalid) {
-      Object.keys(this.perfilForm.controls).forEach(key => {
-        this.perfilForm.get(key)?.markAsTouched();
-      });
-      return;
-    }
+  passwordsMatch(formGroup: FormGroup): {notMatch: boolean} | null {
+    const newPassword = formGroup.get('passwordNuevo')?.value;
+    const confirmPassword = formGroup.get('confirmPassword')?.value;
     
-    this.loading = true;
-    this.mensaje = '';
-    this.error = '';
-    
-    const datosActualizados = this.perfilForm.value;
-    
-    this.usuariosService.actualizarUsuario(this.usuario.id, datosActualizados).subscribe({
-      next: (response) => {
-        this.mensaje = 'Perfil actualizado correctamente';
-        this.loading = false;
-        
-        // Actualizar datos en el localStorage
-        const usuarioActualizado = {
-          ...this.usuario,
-          ...datosActualizados
-        };
-        this.authService.updateUserData(usuarioActualizado);
-        this.usuario = usuarioActualizado;
-      },
-      error: (error) => {
-        console.error('Error al actualizar perfil:', error);
-        this.error = 'Error al actualizar los datos del perfil';
-        this.loading = false;
-      }
-    });
+    return newPassword === confirmPassword ? null : { notMatch: true };
   }
   
   cambiarPassword(): void {
@@ -100,22 +74,35 @@ export class PerfilProfesorComponent implements OnInit {
     }
     
     this.passwordLoading = true;
-    this.mensajePassword = '';
-    this.errorPassword = '';
+    this.mensaje = '';
+    this.error = '';
     
-    const datosPassword = this.passwordForm.value;
+    const passwordData = {
+      passwordActual: this.passwordForm.value.passwordActual,
+      passwordNuevo: this.passwordForm.value.passwordNuevo
+    };
     
-    this.usuariosService.cambiarPassword(this.usuario.id, datosPassword).subscribe({
+    this.usuariosService.cambiarPassword(this.usuario.id, passwordData).subscribe({
       next: () => {
-        this.mensajePassword = 'Contraseña actualizada correctamente';
+        this.mensaje = 'Contraseña actualizada correctamente';
         this.passwordLoading = false;
         this.passwordForm.reset();
       },
       error: (error) => {
         console.error('Error al cambiar contraseña:', error);
-        this.errorPassword = error.error?.error || 'Error al cambiar la contraseña';
+        this.error = error.error?.error || 'Error al cambiar la contraseña';
         this.passwordLoading = false;
       }
     });
+  }
+  
+  togglePasswordVisibility(field: string): void {
+    if (field === 'actual') {
+      this.mostrarPasswordActual = !this.mostrarPasswordActual;
+    } else if (field === 'nuevo') {
+      this.mostrarPassword = !this.mostrarPassword;
+    } else if (field === 'confirm') {
+      this.mostrarConfirmPassword = !this.mostrarConfirmPassword;
+    }
   }
 }
