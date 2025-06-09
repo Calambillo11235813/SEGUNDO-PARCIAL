@@ -26,7 +26,6 @@ import { MateriasService } from '../../../services/materias.service';
       <div *ngIf="materia" class="bg-white rounded-lg shadow-md border border-red-100">
         <div class="p-6 border-b border-red-100">
           <h2 class="text-2xl font-bold text-red-600">{{ materia.nombre }}</h2>
-          <p class="text-gray-600 mt-2">{{ materia.curso_nombre || (cursoDetalle?.nombre || 'Sin curso asignado') }}</p>
         </div>
         
         <div class="p-6">
@@ -48,7 +47,7 @@ import { MateriasService } from '../../../services/materias.service';
                 </li>
                 <li class="flex items-start">
                   <span class="font-medium w-28">Estudiantes:</span>
-                  <span>{{ materia.estudiantes_count || 0 }} estudiantes registrados</span>
+                  <span>{{ totalEstudiantes }} registrados</span>
                 </li>
               </ul>
             </div>
@@ -79,6 +78,7 @@ export class DetalleMateriaComponent implements OnInit {
   materiaId: number;
   materia: any = null;
   cursoDetalle: any = null;
+  totalEstudiantes: any = 0;
   loading = false;
   error = '';
   
@@ -121,6 +121,7 @@ export class DetalleMateriaComponent implements OnInit {
         
         if (cursoId) {
           this.cargarDetalleCurso(cursoId);
+          this.cargarTotalEstudiantes(cursoId);
         } else {
           console.warn('No se pudo determinar el ID del curso');
           this.loading = false;
@@ -144,6 +145,27 @@ export class DetalleMateriaComponent implements OnInit {
       error: (error) => {
         console.error('Error al cargar detalle del curso:', error);
         this.loading = false;
+      }
+    });
+  }
+  
+  cargarTotalEstudiantes(cursoId: number): void {
+    this.materiasService.getEstudiantesDeCurso(cursoId).subscribe({
+      next: (data) => {
+        console.log('Datos de estudiantes:', data);
+        // Usar el campo total_estudiantes directamente de la respuesta
+        if (data && typeof data === 'object' && 'total_estudiantes' in data) {
+          this.totalEstudiantes = data.total_estudiantes;
+        } else if (data && Array.isArray(data)) {
+          // Fallback: si la respuesta es un array, usar su longitud
+          this.totalEstudiantes = data.length;
+        } else {
+          this.totalEstudiantes = 0;
+        }
+      },
+      error: (error) => {
+        console.error('Error al cargar el total de estudiantes:', error);
+        this.totalEstudiantes = 0;
       }
     });
   }

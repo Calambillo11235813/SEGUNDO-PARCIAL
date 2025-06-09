@@ -69,4 +69,10 @@ export class MateriasService {
   getCursoDetalle(cursoId: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/cursos/${cursoId}/`);
   }
+  /**
+   * Obtiene los estudiantes de un curso específico
+   */
+  getEstudiantesDeCurso(cursoId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/cursos/${cursoId}/estudiantes/`);
+  }
 }
