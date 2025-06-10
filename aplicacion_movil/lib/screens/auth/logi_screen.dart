@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
     // Validación básica
     if (_codigoController.text.isEmpty) {
       setState(() {
-        _errorMessage = 'Por favor, ingresa tu código de estudiante';
+        _errorMessage = 'Por favor, ingresa tu código de usuario';
       });
       return;
     }
@@ -72,9 +72,23 @@ class _LoginScreenState extends State<LoginScreen> {
         );
         // Redirigir a la página placeholder
         Navigator.pushReplacementNamed(context, '/teacher/dashboard');
+      } else if (usuario.rol != null && usuario.rol!['nombre'] == 'Tutor') {
+        // Redirigir al dashboard de tutor
+        Navigator.pushReplacementNamed(context, '/tutor/dashboard');
       } else {
-        // Rol desconocido o no definido
-        Navigator.pushReplacementNamed(context, '/dashboard');
+        // Para casos donde el rol no está específicamente manejado
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Rol no reconocido: ${usuario.rol?['nombre'] ?? "desconocido"}',
+            ),
+            duration: const Duration(seconds: 3),
+          ),
+        );
+        // Redirigir a una página por defecto o mantener en login
+        setState(() {
+          _errorMessage = 'Tu rol no tiene acceso a esta aplicación.';
+        });
       }
     } catch (e) {
       setState(() {
@@ -136,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextField(
                     controller: _codigoController,
                     decoration: const InputDecoration(
-                      labelText: 'Código de Estudiante',
+                      labelText: 'Código de Usuario',
                       border: OutlineInputBorder(),
                       prefixIcon: Icon(Icons.person),
                     ),

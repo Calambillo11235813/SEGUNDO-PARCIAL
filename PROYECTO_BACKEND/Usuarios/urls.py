@@ -1,7 +1,7 @@
 from django.urls import path
 from .controllers import auth_controllers, usuario_controllers
 from rest_framework_simplejwt.views import TokenRefreshView
-from .controllers.usuario_controllers import get_estudiantes, get_estudiantes_por_curso, get_profesores
+from .controllers.usuario_controllers import get_estudiantes, get_estudiantes_por_curso, get_profesores, get_tutores
 
 urlpatterns = [
     # Rutas de autenticación
@@ -24,4 +24,7 @@ urlpatterns = [
     
     # Ruta de profesores
     path('usuarios/profesores/', get_profesores, name='get_profesores'),
+    
+    # Ruta para obtener todos los tutores
+    path('usuarios/tutores/', get_tutores, name='get_tutores'),
 ]

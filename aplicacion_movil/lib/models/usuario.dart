@@ -35,6 +35,9 @@ class Usuario {
     return rol!['nombre'].toString();
   }
 
+  // Añadir este getter a la clase Usuario
+  bool get isTutor => rol != null && rol!['nombre'] == 'Tutor';
+
   factory Usuario.fromJson(Map<String, dynamic> json) {
     return Usuario(
       id: json['id'] ?? 0,

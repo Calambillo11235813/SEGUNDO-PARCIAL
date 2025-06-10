@@ -217,3 +217,72 @@ def get_profesores(request):
         
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_tutores(request):
+    """
+    Obtiene todos los usuarios con rol de Tutor.
+    
+    Parámetros de consulta opcionales:
+    - estudiante_id: Filtra tutores asignados a un estudiante específico
+    - activo: Filtra por estado activo (true/false)
+    
+    Ejemplo: /api/usuarios/tutores/?estudiante_id=10&activo=true
+    """
+    try:
+        # Obtener tutores por su rol
+        tutores = Usuario.objects.filter(rol__nombre='Tutor')
+        
+        # Aplicar filtros adicionales si se proporcionan
+        estudiante_id = request.GET.get('estudiante_id')
+        if estudiante_id:
+            # Filtra tutores que tengan asignado este estudiante
+            from ..models import Tutor, Estudiante
+            try:
+                estudiante = Estudiante.objects.get(usuario_id=estudiante_id)
+                tutores_ids = Tutor.objects.filter(estudiantes=estudiante).values_list('usuario_id', flat=True)
+                tutores = tutores.filter(id__in=tutores_ids)
+            except Estudiante.DoesNotExist:
+                return Response(
+                    {'error': f'El estudiante con ID {estudiante_id} no existe'},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+            
+        activo = request.GET.get('activo')
+        if activo is not None:
+            is_active = activo.lower() == 'true'
+            tutores = tutores.filter(is_active=is_active)
+        
+        # Ordenar por apellido y nombre
+        tutores = tutores.order_by('apellido', 'nombre')
+        
+        serializer = UsuarioSerializer(tutores, many=True)
+        
+        # Añadir metadatos al resultado
+        result = {
+            'total': tutores.count(),
+            'tutores': serializer.data
+        }
+        
+        # Opcionalmente, enriquecer la respuesta con datos de Tutor
+        include_estudiantes = request.GET.get('include_estudiantes', '').lower() == 'true'
+        if include_estudiantes:
+            from ..models import Tutor
+            tutores_data = []
+            for usuario in tutores:
+                try:
+                    tutor = Tutor.objects.get(usuario=usuario)
+                    estudiantes_count = tutor.estudiantes.count()
+                    usuario_data = serializer.to_representation(usuario)
+                    usuario_data['estudiantes_count'] = estudiantes_count
+                    tutores_data.append(usuario_data)
+                except Tutor.DoesNotExist:
+                    pass
+            
+            result['tutores'] = tutores_data
+        
+        return Response(result, status=status.HTTP_200_OK)
+        
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -40,6 +40,7 @@ class AppTheme {
         1,
       );
     }
+    // ignore: deprecated_member_use
     return MaterialColor(color.value, swatch);
   }
 

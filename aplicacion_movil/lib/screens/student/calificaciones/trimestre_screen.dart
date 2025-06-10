@@ -41,6 +41,7 @@ class TrimestresScreen extends StatelessWidget {
                   if (estudianteId != null) {
                     // Navegar a pantalla de calificaciones con IDs necesarios
                     Navigator.pushNamed(
+                      // ignore: use_build_context_synchronously
                       context,
                       '/estudiante/calificaciones/materia',
                       arguments: {

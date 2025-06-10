@@ -8,6 +8,7 @@ from .urls_trimestre import urlpatterns as trimestre_urls
 from .urls_asistencia import urlpatterns as asistencia_urls
 from .urls_calificacion import urlpatterns as calificacion_urls
 from .urls_nivel import urlpatterns as nivel_urls
+from .urls_tutor import urlpatterns as tutor_urls   
 
 
 # Combinar todos los patrones
@@ -21,3 +22,4 @@ urlpatterns.extend(asistencia_urls)
 urlpatterns.extend(calificacion_urls)
 urlpatterns.extend(nivel_urls)
 urlpatterns.extend(config_evaluacion_urls)
+urlpatterns.extend(tutor_urls)

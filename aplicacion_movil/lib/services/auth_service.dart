@@ -165,4 +165,15 @@ class AuthService {
       return null;
     }
   }
+
+  // Añadir este método para verificar el rol del usuario
+  static Future<String?> getCurrentUserRole() async {
+    try {
+      final rolNombre = await storage.read(key: 'user_role');
+      return rolNombre;
+    } catch (e) {
+      AppLogger.e('Error obteniendo rol de usuario', e);
+      return null;
+    }
+  }
 }

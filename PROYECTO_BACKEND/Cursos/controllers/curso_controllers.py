@@ -2,8 +2,9 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status
-from ..models import Curso, Nivel  # Eliminar Usuario de aquí
+from ..models import Curso, Nivel, Trimestre  # Eliminar Usuario de aquí
 from ..serializers import CursoSerializer
+from django.db.models import F
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -324,3 +325,50 @@ def desasignar_estudiante_de_curso(request, estudiante_id):
             {'error': str(e)},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_años_academicos(request):
+    """
+    Obtiene todos los años académicos disponibles en el sistema.
+    """
+    try:
+        # Obtener años académicos distintos de los trimestres
+        años = Trimestre.objects.values_list('año_academico', flat=True).distinct().order_by('-año_academico')
+        return Response(list(años), status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_trimestres(request):
+    """
+    Obtiene todos los trimestres, con opción de filtrar por año académico.
+    """
+    try:
+        # Obtener parámetros de filtro
+        año_academico = request.query_params.get('año_academico')
+        
+        # Aplicar filtros si se proporcionan
+        trimestres = Trimestre.objects.all()
+        if año_academico:
+            trimestres = trimestres.filter(año_academico=año_academico)
+        
+        # Ordenar por año académico (descendente) y luego por el orden natural de los trimestres
+        trimestres = trimestres.order_by('-año_academico', 'id')
+        
+        # Crear respuesta manual para controlar exactamente qué campos devolver
+        resultado = []
+        for trimestre in trimestres:
+            resultado.append({
+                'id': trimestre.id,
+                'nombre': trimestre.nombre,
+                'año_academico': trimestre.año_academico,
+                'fecha_inicio': trimestre.fecha_inicio,
+                'fecha_fin': trimestre.fecha_fin,
+                'activo': trimestre.activo
+            })
+        
+        return Response(resultado, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
