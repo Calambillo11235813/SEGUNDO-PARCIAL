@@ -39,10 +39,11 @@ class _MateriaTiposEvaluacionScreenState
 
     try {
       final materia = arguments!['materia'] as Map<String, dynamic>;
-      final materiaId = materia['id'];
+      final materiaId = materia['id'].toString();
 
       final data = await MateriasService.obtenerTiposEvaluacionPorMateria(
         materiaId,
+        anio: 2025, // Siempre filtrar por el año 2025
       );
 
       if (mounted) {
@@ -76,7 +77,9 @@ class _MateriaTiposEvaluacionScreenState
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Evaluaciones - ${materia['nombre']}'),
+        title: Text(
+          'Evaluaciones 2025 - ${materia['nombre']}',
+        ), // Indicar año en el título
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -88,15 +91,18 @@ class _MateriaTiposEvaluacionScreenState
               _cargarTiposEvaluacion();
             },
           ),
-          // Botón para ver todas las evaluaciones sin filtro
+          // Botón para ver todas las evaluaciones sin filtro (también filtrado por año)
           IconButton(
             icon: const Icon(Icons.list),
-            tooltip: 'Ver todas las evaluaciones',
+            tooltip: 'Ver todas las evaluaciones de 2025',
             onPressed: () {
               Navigator.pushNamed(
                 context,
                 '/student/materia/evaluaciones',
-                arguments: arguments,
+                arguments: {
+                  ...arguments!,
+                  'anio': 2025, // Pasar el año al abrir la lista completa
+                },
               );
             },
           ),
@@ -159,7 +165,34 @@ class _MateriaTiposEvaluacionScreenState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Tipos de evaluación (ahora directamente sin espaciado adicional)
+          // Banner indicando año académico
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            margin: const EdgeInsets.only(bottom: 16),
+            decoration: BoxDecoration(
+              color: AppTheme.primaryColor.withAlpha(25),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: AppTheme.primaryColor.withAlpha(76)),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.calendar_today,
+                  size: 20,
+                  color: AppTheme.primaryColor,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  'Año académico: 2025',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: AppTheme.primaryColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Tipos de evaluación
           _buildTiposEvaluacionGrid(tiposEvaluacion),
         ],
       ),
@@ -174,12 +207,12 @@ class _MateriaTiposEvaluacionScreenState
           Icon(Icons.assignment_outlined, size: 64, color: Colors.grey[400]),
           const SizedBox(height: 16),
           Text(
-            'No hay evaluaciones registradas',
+            'No hay evaluaciones para 2025',
             style: TextStyle(fontSize: 18, color: Colors.grey[600]),
           ),
           const SizedBox(height: 8),
           Text(
-            'Las evaluaciones aparecerán aquí cuando el profesor las publique',
+            'Las evaluaciones del año 2025 aparecerán aquí cuando estén disponibles',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.grey[500]),
           ),
@@ -228,12 +261,7 @@ class _MateriaTiposEvaluacionScreenState
 
     final colorIndex = tipo['id'] % colors.length;
     final color = colors[colorIndex];
-
-    // Nueva función para obtener el texto apropiado
-    final cantidadTexto = _getCantidadTexto(
-      tipo['nombre'],
-      tipo['cantidad_evaluaciones'],
-    );
+    final tipoNombre = tipo['nombre'] ?? 'Tipo sin nombre';
 
     return Card(
       elevation: 4,
@@ -241,7 +269,7 @@ class _MateriaTiposEvaluacionScreenState
         onTap: () {
           Navigator.pushNamed(
             context,
-            '/student/materia/detalles-tipo-evaluacion', // RUTA CORREGIDA
+            '/student/materia/detalles-tipo-evaluacion',
             arguments: {
               'tipo_evaluacion': tipo,
               'materia': tiposEvaluacionData!['materia'],
@@ -257,7 +285,7 @@ class _MateriaTiposEvaluacionScreenState
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
+                  color: color.withAlpha(25),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Icon(
@@ -268,17 +296,11 @@ class _MateriaTiposEvaluacionScreenState
               ),
               const SizedBox(height: 8),
               Text(
-                tipo['nombre'],
+                tipoNombre, // Usar la variable en lugar de tipo['nombre']
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 4),
-              Text(
-                cantidadTexto, // CAMBIO: usar el texto personalizado
-                style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -304,32 +326,6 @@ class _MateriaTiposEvaluacionScreenState
         return Icons.science_outlined;
       default:
         return Icons.assignment_outlined;
-    }
-  }
-
-  // NUEVO MÉTODO: Obtener el texto apropiado según el tipo
-  String _getCantidadTexto(String tipoNombre, int cantidad) {
-    switch (tipoNombre.toUpperCase()) {
-      case 'EXAMEN':
-        return cantidad == 1 ? '1 examen' : '$cantidad exámenes';
-      case 'TAREA':
-        return cantidad == 1 ? '1 tarea' : '$cantidad tareas';
-      case 'PROYECTO':
-        return cantidad == 1 ? '1 proyecto' : '$cantidad proyectos';
-      case 'PARTICIPACION':
-        return cantidad == 1 ? '1 participación' : '$cantidad participaciones';
-      case 'LABORATORIO':
-        return cantidad == 1 ? '1 laboratorio' : '$cantidad laboratorios';
-      case 'PRACTICOS':
-        return cantidad == 1 ? '1 práctico' : '$cantidad prácticos';
-      case 'QUIZ':
-        return cantidad == 1 ? '1 quiz' : '$cantidad quizzes';
-      case 'ENSAYO':
-        return cantidad == 1 ? '1 ensayo' : '$cantidad ensayos';
-      case 'PRESENTACION':
-        return cantidad == 1 ? '1 presentación' : '$cantidad presentaciones';
-      default:
-        return cantidad == 1 ? '1 evaluación' : '$cantidad evaluaciones';
     }
   }
 }

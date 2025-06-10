@@ -121,7 +121,7 @@ class TrimestresScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Nota mínima: ${trimestre['nota_minima_aprobacion']}',
+                          'Nota mínima: 51',
                           style: const TextStyle(color: Colors.grey),
                         ),
                         Text(

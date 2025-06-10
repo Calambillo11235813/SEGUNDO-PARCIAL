@@ -197,7 +197,7 @@ def create_evaluacion(request):
                     {'error': 'Para evaluaciones de participación, se requiere fecha_registro'},
                     status=status.HTTP_400_BAD_REQUEST
                 )
-                
+            
             try:
                 fecha_registro = datetime.strptime(data['fecha_registro'], '%Y-%m-%d').date()
             except ValueError:
@@ -205,7 +205,7 @@ def create_evaluacion(request):
                     {'error': 'Formato de fecha_registro inválido. Usar YYYY-MM-DD'},
                     status=status.HTTP_400_BAD_REQUEST
                 )
-                
+            
             evaluacion = EvaluacionParticipacion.objects.create(
                 materia=materia,
                 tipo_evaluacion=tipo_evaluacion,
@@ -214,8 +214,6 @@ def create_evaluacion(request):
                 descripcion=data.get('descripcion', ''),
                 porcentaje_nota_final=data['porcentaje_nota_final'],
                 fecha_registro=fecha_registro,
-                criterios_participacion=data.get('criterios_participacion', ''),
-                escala_calificacion=data.get('escala_calificacion', 'NUMERICA'),
                 publicado=data.get('publicado', False)
             )
         else:
@@ -392,8 +390,9 @@ def get_evaluacion(request, evaluacion_id):
         elif isinstance(evaluacion, EvaluacionParticipacion):
             response_data.update({
                 'fecha_registro': evaluacion.fecha_registro,
-                'criterios_participacion': evaluacion.criterios_participacion,
-                'escala_calificacion': evaluacion.escala_calificacion,
+                # Eliminar los campos que ya no existen
+                # 'criterios_participacion': evaluacion.criterios_participacion,
+                # 'escala_calificacion': evaluacion.escala_calificacion,
                 'tipo': 'participacion'
             })
         
@@ -475,10 +474,11 @@ def update_evaluacion(request, evaluacion_id):
                     )
         
         elif isinstance(evaluacion, EvaluacionParticipacion):
-            if 'criterios_participacion' in data:
-                evaluacion.criterios_participacion = data['criterios_participacion']
-            if 'escala_calificacion' in data:
-                evaluacion.escala_calificacion = data['escala_calificacion']
+            # Eliminar las líneas que actualizan campos eliminados
+            # if 'criterios_participacion' in data:
+            #     evaluacion.criterios_participacion = data['criterios_participacion']
+            # if 'escala_calificacion' in data:
+            #     evaluacion.escala_calificacion = data['escala_calificacion']
             if 'fecha_registro' in data:
                 try:
                     evaluacion.fecha_registro = datetime.strptime(data['fecha_registro'], '%Y-%m-%d').date()

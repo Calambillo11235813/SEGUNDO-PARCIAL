@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../../config/api_config.dart';
 import '../auth_service.dart';
+import '../../utils/logger.dart'; // Importar el logger
 
 class MateriasService {
   static Future<Map<String, dynamic>> obtenerMateriasPorEstudiante(
@@ -37,35 +38,39 @@ class MateriasService {
 
   // NUEVA FUNCIÓN: Obtener tipos de evaluación por materia
   static Future<Map<String, dynamic>> obtenerTiposEvaluacionPorMateria(
-    int materiaId,
-  ) async {
+    String materiaId, {
+    int? anio, // Añadir parámetro opcional para año
+  }) async {
     try {
       final token = await AuthService.getToken();
+      String url =
+          '${ApiConfig.baseUrl}/cursos/materias/$materiaId/tipos-evaluacion/';
 
-      if (token == null) {
-        throw Exception('No hay sesión activa');
+      // Construir parámetros de consulta
+      Map<String, String> queryParams = {};
+      if (anio != null) {
+        queryParams['anio'] = anio.toString();
       }
 
+      final uri = Uri.parse(url).replace(queryParameters: queryParams);
+
       final response = await http.get(
-        Uri.parse(
-          '${ApiConfig.baseUrl}/cursos/materias/$materiaId/tipos-evaluacion/',
-        ),
+        uri,
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
         },
       );
 
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
       } else {
-        final errorData = jsonDecode(response.body);
-        throw Exception(
-          errorData['error'] ?? 'Error al obtener tipos de evaluación',
-        );
+        AppLogger.e('Error al obtener tipos de evaluación', response.body);
+        throw Exception('Error al obtener tipos de evaluación');
       }
     } catch (e) {
-      throw Exception('Error de conexión: $e');
+      AppLogger.e('Error en servicio de materias', e);
+      rethrow;
     }
   }
 }

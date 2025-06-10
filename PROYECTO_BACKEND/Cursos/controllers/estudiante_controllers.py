@@ -182,6 +182,7 @@ def obtener_evaluaciones_estudiante(request, estudiante_id):
     Parámetros opcionales:
     - materia_id: Filtra por materia específica
     - trimestre_id: Filtra por trimestre específico
+    - anio: Filtra por año académico
     """
     try:
         # Obtener el estudiante
@@ -203,6 +204,7 @@ def obtener_evaluaciones_estudiante(request, estudiante_id):
         # Filtros adicionales
         materia_id = request.query_params.get('materia_id')
         trimestre_id = request.query_params.get('trimestre_id')
+        anio = request.query_params.get('anio')  # Nuevo parámetro
         
         # Construir filtros para las evaluaciones
         filtros_evaluacion = Q(materia__curso=estudiante.curso)
@@ -212,6 +214,12 @@ def obtener_evaluaciones_estudiante(request, estudiante_id):
             
         if trimestre_id:
             filtros_evaluacion &= Q(trimestre_id=trimestre_id)
+            
+        # Confirmar que el filtro se está aplicando correctamente en el backend
+        if anio:
+            # Usar un log para verificar que el parámetro llegue correctamente
+            print(f"Filtrando por año: {anio}")
+            filtros_evaluacion &= Q(trimestre__año_academico=anio)
         
         # Obtener evaluaciones de ambos tipos
         evaluaciones_entregables = EvaluacionEntregable.objects.filter(

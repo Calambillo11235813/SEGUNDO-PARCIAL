@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'dart:convert'; // Importar para JsonEncoder
 import '../../../../services/estudiante/evaluaciones_service.dart';
 import '../../../../services/auth_service.dart';
-import '../../../../utils/logger.dart';
+import '../../../../utils/logger.dart'; // Asegúrate de importar el logger
 
 class DetallesTipoEvaluacionScreen extends StatefulWidget {
   const DetallesTipoEvaluacionScreen({super.key});
@@ -62,23 +63,15 @@ class _DetallesTipoEvaluacionScreenState
       final materiaId = materia!['id'].toString();
       final tipoEvaluacionId = tipoEvaluacion!['id'].toString();
 
-      // Verificación adicional para evitar null
-      if (estudianteId == 'null' || estudianteId.isEmpty) {
-        setState(() {
-          error = 'ID de estudiante no válido';
-          isLoading = false;
-        });
-        return;
-      }
-
-      // Cargar todas las evaluaciones del estudiante para esta materia
+      // MODIFICACIÓN: Añadir filtrado por año 2025
       final listaEvaluaciones =
           await EvaluacionesService.obtenerEvaluacionesPorEstudiante(
             estudianteId,
             materiaId: materiaId,
+            anio: 2025, // Restaurar el filtro por año 2025
           );
 
-      // Filtrar solo las evaluaciones del tipo seleccionado
+      // Filtrar solo las evaluaciones del tipo seleccionado, sin filtrar por activo
       final evaluacionesFiltradas =
           listaEvaluaciones
               .where(
@@ -86,12 +79,40 @@ class _DetallesTipoEvaluacionScreenState
                     eval['tipo_evaluacion'] != null &&
                     eval['tipo_evaluacion']['id'].toString() ==
                         tipoEvaluacionId,
+                // Incluir todos sin importar si están activos o no
               )
               .toList();
 
-      AppLogger.d(
-        'Respuesta completa: ${evaluacionesFiltradas}',
-      ); // <-- Aquí está el cambio
+      // Verificar si hay evaluaciones y mostrar en consola para depuración
+      AppLogger.i("Evaluaciones filtradas: ${evaluacionesFiltradas.length}");
+      for (var eval in evaluacionesFiltradas) {
+        AppLogger.d(
+          "Evaluación: ${eval['titulo']} - Activo: ${eval['activo']} - ID: ${eval['id']}",
+        );
+
+        // Inspeccionar estructura completa de la evaluación para depurar
+        if (eval['calificacion'] == null) {
+          AppLogger.w(
+            "Calificación nula para ${eval['titulo']}, buscando información adicional...",
+          );
+        } else {
+          AppLogger.i(
+            "Calificación encontrada: ${eval['calificacion']['nota']}",
+          );
+        }
+      }
+
+      // En _cargarEvaluaciones(), después de obtener los datos
+      AppLogger.i(
+        "✨ Obteniendo evaluaciones para estudiante: $estudianteId, materia: $materiaId",
+      );
+
+      // Depurar la primera evaluación completa para verificar su estructura
+      if (evaluacionesFiltradas.isNotEmpty) {
+        AppLogger.i("🔍 Primera evaluación (estructura completa):");
+        final primeraEval = evaluacionesFiltradas.first;
+        AppLogger.i(JsonEncoder.withIndent('  ').convert(primeraEval));
+      }
 
       if (mounted) {
         setState(() {
@@ -190,6 +211,7 @@ class _DetallesTipoEvaluacionScreenState
         IconData statusIcon;
         String statusText;
 
+        // Modificación: Mostrar calificación siempre que exista, sin importar publicación
         if (evaluacion['calificacion'] != null) {
           statusColor = Colors.green;
           statusIcon = Icons.check_circle;
@@ -228,19 +250,19 @@ class _DetallesTipoEvaluacionScreenState
                     ),
                     decoration: BoxDecoration(
                       color: _getCalificacionColor(
-                        evaluacion['calificacion']['nota'] != null
+                        evaluacion['calificacion'] != null
                             ? double.parse(
                               evaluacion['calificacion']['nota'].toString(),
                             )
-                            : null,
+                            : 0.0,
                         evaluacion['nota_maxima'] != null
                             ? double.parse(evaluacion['nota_maxima'].toString())
-                            : null,
+                            : 100.0,
                         evaluacion['nota_minima_aprobacion'] != null
                             ? double.parse(
                               evaluacion['nota_minima_aprobacion'].toString(),
                             )
-                            : null,
+                            : 51.0,
                       ),
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -649,7 +671,7 @@ class _DetallesTipoEvaluacionScreenState
     final porcentaje = (notaSegura / notaMaximaSegura) * 100;
 
     if (notaSegura < notaMinimaAprobacionSegura) {
-      return Colors.redAccent;
+      return Colors.red;
     } else if (porcentaje >= 90) {
       return Colors.green[700]!;
     } else if (porcentaje >= 80) {

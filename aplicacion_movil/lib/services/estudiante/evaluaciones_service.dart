@@ -2,93 +2,72 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../../config/api_config.dart';
 import '../auth_service.dart';
-import '../../utils/logger.dart'; // Importar el logger
+import '../../utils/logger.dart';
 
 class EvaluacionesService {
+  // Método actualizado con filtro por año
   static Future<List<dynamic>> obtenerEvaluacionesPorEstudiante(
     String estudianteId, {
     String? materiaId,
-    String? trimestreId,
+    int? anio,
   }) async {
     try {
       final token = await AuthService.getToken();
 
-      if (token == null) {
-        throw Exception('No hay sesión activa');
-      }
-
-      // Construir URL con parámetros opcionales
+      // Restaurar la URL original usando el estudianteId dinámico
       String url =
           '${ApiConfig.baseUrl}/cursos/estudiantes/$estudianteId/evaluaciones/';
 
-      // Añadir parámetros de consulta si existen
-      final queryParams = <String>[];
+      // Restaurar los parámetros de consulta originales
+      Map<String, String> queryParams = {};
       if (materiaId != null) {
-        queryParams.add('materia_id=$materiaId');
+        queryParams['materia_id'] = materiaId;
       }
-      if (trimestreId != null) {
-        queryParams.add('trimestre_id=$trimestreId');
-      }
-
-      if (queryParams.isNotEmpty) {
-        url += '?${queryParams.join('&')}';
+      if (anio != null) {
+        queryParams['anio'] = anio.toString();
       }
 
-      // Usar logger en vez de print
-      AppLogger.d('Realizando petición a: $url');
+      final uri = Uri.parse(url).replace(queryParameters: queryParams);
+      AppLogger.i("📡 Request URL: $uri");
 
       final response = await http.get(
-        Uri.parse(url),
+        uri,
         headers: {
-          'Accept': 'application/json',
           'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
         },
       );
 
-      // Respuesta de depuración con logger
-      AppLogger.i('Código de estado: ${response.statusCode}');
-      AppLogger.d(
-        'Primeros 100 caracteres de respuesta: ${response.body.length > 100 ? response.body.substring(0, 100) : response.body}',
-      );
-
       if (response.statusCode == 200) {
-        // Verificar que la respuesta parece JSON antes de decodificar
-        if (response.body.trim().startsWith('{') ||
-            response.body.trim().startsWith('[')) {
-          return jsonDecode(response.body);
-        } else {
-          throw Exception('La respuesta no es un JSON válido');
-        }
-      } else {
-        // Intentar decodificar solo si parece JSON
-        if (response.body.trim().startsWith('{') ||
-            response.body.trim().startsWith('[')) {
-          try {
-            final errorData = jsonDecode(response.body);
-            throw Exception(
-              errorData['error'] ?? 'Error al obtener evaluaciones',
-            );
-          } catch (e) {
-            throw Exception(
-              'Error de servidor (${response.statusCode}): Formato de respuesta inválido',
+        final data = jsonDecode(response.body);
+        AppLogger.i("📥 Evaluaciones recibidas: ${data.length}");
+
+        // Revisar si hay evaluaciones con calificaciones
+        int conCalificacion = 0;
+        for (var eval in data) {
+          if (eval['calificacion'] != null) {
+            conCalificacion++;
+            AppLogger.i(
+              "✅ Evaluación con calificación: ID=${eval['id']}, Nota=${eval['calificacion']['nota']}",
             );
           }
-        } else {
-          throw Exception(
-            'Error de servidor (${response.statusCode}): No se recibió un JSON',
-          );
         }
-      }
-    } catch (e) {
-      // Al capturar excepciones, usa el logger
-      if (e is FormatException) {
-        AppLogger.e('Error de formato al procesar la respuesta', e);
+        AppLogger.i(
+          "📊 Total evaluaciones con calificación: $conCalificacion/${data.length}",
+        );
+
+        return data;
+      } else {
+        AppLogger.w(
+          "❌ Error en respuesta: ${response.statusCode} - ${response.body}",
+        );
         throw Exception(
-          'Error de formato al procesar la respuesta: ${e.message}',
+          'Error al obtener evaluaciones: ${response.statusCode}',
         );
       }
-      AppLogger.e('Error de conexión', e);
-      throw Exception('Error de conexión: $e');
+    } catch (e) {
+      AppLogger.e("🔥 Exception en evaluaciones_service: $e");
+      rethrow;
     }
   }
 }

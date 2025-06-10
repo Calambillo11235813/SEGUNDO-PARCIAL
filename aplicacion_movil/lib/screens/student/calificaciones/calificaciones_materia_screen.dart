@@ -14,8 +14,9 @@ class _CalificacionesMateriaScreenState
     extends State<CalificacionesMateriaScreen> {
   final TrimestreService _trimestreService = TrimestreService();
   bool _isLoading = true;
-  Map<String, dynamic>? _datos;
   String? _error;
+  Map<String, dynamic>? _datos;
+  int estudianteId = 0; // Nueva variable
 
   @override
   void initState() {
@@ -27,6 +28,11 @@ class _CalificacionesMateriaScreenState
   }
 
   Future<void> _cargarCalificaciones() async {
+    setState(() {
+      _isLoading = true;
+      _error = null;
+    });
+
     try {
       final arguments =
           ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
@@ -39,8 +45,11 @@ class _CalificacionesMateriaScreenState
         return;
       }
 
-      final int estudianteId = arguments['estudianteId'] as int? ?? 0;
+      final int estudianteIdArg = arguments['estudianteId'] as int? ?? 0;
       final int trimestreId = arguments['trimestreId'] as int? ?? 0;
+
+      // Guardar el ID del estudiante
+      estudianteId = estudianteIdArg;
 
       if (estudianteId == 0 || trimestreId == 0) {
         setState(() {
@@ -164,7 +173,6 @@ class _CalificacionesMateriaScreenState
                 itemCount: materias.length,
                 itemBuilder: (context, index) {
                   final materia = materias[index] as Map<String, dynamic>;
-                  final bool aprobado = materia['aprobado'] as bool? ?? false;
                   final double promedio =
                       (materia['promedio'] as num?)?.toDouble() ?? 0.0;
                   final String nombreMateria =
@@ -176,46 +184,79 @@ class _CalificacionesMateriaScreenState
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                       side: BorderSide(
-                        color: aprobado ? Colors.green : Colors.red.shade300,
+                        color:
+                            promedio >= 51 ? Colors.green : Colors.red.shade300,
                         width: 1,
                       ),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              nombreMateria,
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                color: Theme.of(context).primaryColor,
+                    // Agregar InkWell para detectar taps
+                    child: InkWell(
+                      // Agregar esta función onTap
+                      onTap: () {
+                        // Navegar a la pantalla de evaluaciones con el ID de materia
+                        Navigator.pushNamed(
+                          context,
+                          '/student/materia/evaluaciones',
+                          arguments: {
+                            'materia': {
+                              'id': materia['id'],
+                              'nombre': nombreMateria,
+                            },
+                            'anio':
+                                int.tryParse(
+                                  _datos?['trimestre']?['año_academico']
+                                          ?.toString() ??
+                                      "2025",
+                                ) ??
+                                2025,
+                          },
+                        );
+                      },
+                      borderRadius: BorderRadius.circular(12),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                nombreMateria,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  color: Theme.of(context).primaryColor,
+                                ),
                               ),
                             ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
-                            decoration: BoxDecoration(
-                              color:
-                                  aprobado
-                                      ? Colors.green.withOpacity(0.2)
-                                      : Colors.red.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Text(
-                              promedio.toStringAsFixed(0),
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: aprobado ? Colors.green : Colors.red,
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                // Reemplazar esto:
+                                // color: promedio >= 51 ? Colors.green.withOpacity(0.2) : Colors.red.withOpacity(0.2),
+
+                                // Con esto:
+                                color: (promedio >= 51
+                                        ? Colors.green
+                                        : Colors.red)
+                                    .withAlpha(51),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Text(
+                                promedio.toStringAsFixed(0),
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color:
+                                      promedio >= 51
+                                          ? Colors.green
+                                          : Colors.red,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   );
