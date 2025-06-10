@@ -4,6 +4,12 @@ class ApiConfig {
   // Para dispositivos físicos: usar tu dirección IP local (ej: 192.168.1.5)
   static const String baseUrl = 'http://192.168.0.5:8000/api';
 
+  // URL base para las APIs de IA (está fuera de /api según el error)
+  static const String baseIaUrl = 'http://192.168.0.5:8000/ia';
+
+  // IA endpoints
+  static const String predecirRendimientoEndpoint = '$baseIaUrl/predecir/';
+
   // Auth endpoints
   static const String loginEndpoint = '$baseUrl/usuarios/auth/login/';
   static const String registerEndpoint = '$baseUrl/usuarios/auth/register/';
