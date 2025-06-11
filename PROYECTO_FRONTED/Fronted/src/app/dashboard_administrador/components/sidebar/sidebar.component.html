@@ -6,7 +6,7 @@
   <nav class="mt-4">
     <ul class="space-y-1 list-none p-0 m-0">
       <li class="block">
-        <a routerLink="/dashboard" routerLinkActive="bg-red-100 text-red-700" [routerLinkActiveOptions]="{exact: true}"
+        <a routerLink="/admin/home" routerLinkActive="bg-red-100 text-red-700" [routerLinkActiveOptions]="{exact: true}"
            class="flex items-center px-6 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors">
           <i class="fas fa-home mr-3"></i> Dashboard
         </a>
@@ -14,35 +14,35 @@
       
       <!-- Opciones solo para administradores -->
       <li class="block" *ngIf="isAdmin">
-        <a routerLink="/dashboard/estudiantes" routerLinkActive="bg-red-100 text-red-700"
+        <a routerLink="/admin/estudiantes" routerLinkActive="bg-red-100 text-red-700"
            class="flex items-center px-6 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors">
           <i class="fas fa-user-graduate mr-3"></i> Estudiantes
         </a>
       </li>
       
       <li class="block" *ngIf="isAdmin">
-        <a routerLink="/dashboard/profesores" routerLinkActive="bg-red-100 text-red-700"
+        <a routerLink="/admin/profesores" routerLinkActive="bg-red-100 text-red-700"
            class="flex items-center px-6 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors">
           <i class="fas fa-chalkboard-teacher mr-3"></i> Profesores
         </a>
       </li>
       
       <li class="block" *ngIf="isAdmin">
-        <a routerLink="/dashboard/cursos" routerLinkActive="bg-red-100 text-red-700"
+        <a routerLink="/admin/cursos" routerLinkActive="bg-red-100 text-red-700"
            class="flex items-center px-6 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors">
           <i class="fas fa-book mr-3"></i> Cursos
         </a>
       </li>
       
       <li class="block" *ngIf="isAdmin">
-        <a routerLink="/dashboard/materias" routerLinkActive="bg-red-100 text-red-700"
+        <a routerLink="/admin/materias" routerLinkActive="bg-red-100 text-red-700"
            class="flex items-center px-6 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors">
           <i class="fas fa-book-open mr-3"></i> Materias
         </a>
       </li>
       
       <li class="block">
-        <a routerLink="/dashboard/perfil" routerLinkActive="bg-red-100 text-red-700"
+        <a routerLink="/admin/perfil" routerLinkActive="bg-red-100 text-red-700"
            class="flex items-center px-6 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors">
           <i class="fas fa-user-cog mr-3"></i> Mi Perfil
         </a>

@@ -63,4 +63,16 @@ export class MateriasService {
   getMateriasPorProfesor(profesorId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/profesores/${profesorId}/materias/`);
   }
+  /**
+   * Obtiene los datos completos de un curso específico por ID
+   */
+  getCursoDetalle(cursoId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/cursos/${cursoId}/`);
+  }
+  /**
+   * Obtiene los estudiantes de un curso específico
+   */
+  getEstudiantesDeCurso(cursoId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/cursos/${cursoId}/estudiantes/`);
+  }
 }

@@ -14,9 +14,10 @@ import { DashboardProfesorComponent } from './dashboard_profesor/dashboard.compo
 import { HomeProfesorComponent } from './dashboard_profesor/components/home/home.component';
 import { MateriasProfesorComponent } from './dashboard_profesor/components/materias/materias.component';
 import { AsistenciasComponent } from './dashboard_profesor/components/asistencias/asistencias.component';
-import { NotasComponent } from './dashboard_profesor/components/notas/notas.component';
 import { PerfilProfesorComponent } from './dashboard_profesor/components/perfil/perfil.component';
 import { DetalleMateriaComponent } from './dashboard_profesor/components/materias/materia_detalle.component';
+import { ListaAsistenciasComponent } from './dashboard_profesor/components/asistencias/lista-asistencias.component';
+import { EvaluacionesComponent } from './dashboard_profesor/components/evaluaciones/evaluaciones.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -38,22 +39,6 @@ export const routes: Routes = [
     ]
   },
   
-  // ✅ NUEVO: Rutas legacy para mantener compatibilidad
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuard, AdminGuard],
-    children: [
-      { path: '', redirectTo: '/admin/home', pathMatch: 'full' },
-      { path: 'home', redirectTo: '/admin/home' },
-      { path: 'estudiantes', redirectTo: '/admin/estudiantes' },
-      { path: 'profesores', redirectTo: '/admin/profesores' },
-      { path: 'cursos', redirectTo: '/admin/cursos' },
-      { path: 'materias', redirectTo: '/admin/materias' },
-      { path: 'perfil', redirectTo: '/admin/perfil' }
-    ]
-  },
-  
   // ✅ Rutas de profesor
   {
     path: 'profesor',
@@ -62,11 +47,11 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeProfesorComponent },
-      { path: 'dashboard', component: HomeProfesorComponent }, 
       { path: 'materias', component: MateriasProfesorComponent },
       { path: 'materia/:id', component: DetalleMateriaComponent },
       { path: 'asistencias', component: AsistenciasComponent },
-      { path: 'notas', component: NotasComponent },
+      { path: 'lista-asistencias', component: ListaAsistenciasComponent },
+      { path: 'evaluaciones', component: EvaluacionesComponent },
       { path: 'perfil', component: PerfilProfesorComponent }
     ]
   }

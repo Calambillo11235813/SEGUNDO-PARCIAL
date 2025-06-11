@@ -52,8 +52,76 @@ export class MateriasComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarCursos();
-    this.cargarMaterias();
-    this.cargarProfesores();
+    // Cambiamos el orden: primero cargar profesores, luego materias
+    this.cargarProfesores().then(() => {
+      this.cargarMaterias();
+    });
+  }
+
+  // Convertir cargarProfesores a Promise
+  cargarProfesores(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.loadingProfesores = true;
+      this.usuariosService.getUsuariosPorRol('Profesor').subscribe({
+        next: (data) => {
+          this.profesores = data;
+          this.loadingProfesores = false;
+          resolve();
+        },
+        error: (error) => {
+          console.error('Error al cargar profesores:', error);
+          this.loadingProfesores = false;
+          reject(error);
+        }
+      });
+    });
+  }
+
+  cargarMaterias(): void {
+    this.loading = true;
+    this.materiasService.getMaterias().subscribe({
+      next: (data) => {
+        // Normalizar la estructura de datos
+        this.materias = data.map(materia => {
+          // Asegurar que siempre tengamos un nombre de profesor
+          if (materia.profesor) {
+            // Si profesor es solo un ID
+            if (typeof materia.profesor === 'number') {
+              const profesorInfo = this.profesores.find(p => p.id === materia.profesor);
+              if (profesorInfo) {
+                materia.profesor_nombre = `${profesorInfo.nombre} ${profesorInfo.apellido}`;
+              } else {
+                materia.profesor_nombre = 'Profesor no encontrado';
+              }
+            } 
+            // Si profesor es un objeto completo
+            else if (typeof materia.profesor === 'object' && materia.profesor.nombre) {
+              materia.profesor_nombre = `${materia.profesor.nombre} ${materia.profesor.apellido}`;
+            }
+            // Si ya tiene profesor_nombre definido
+            else if (materia.profesor_nombre) {
+              // Mantener el valor existente
+            }
+            // Fallback
+            else {
+              materia.profesor_nombre = 'Profesor asignado';
+            }
+          } else {
+            // No hay profesor asignado
+            materia.profesor_nombre = null;
+          }
+          return materia;
+        });
+        
+        this.materiasFiltradas = [...this.materias];
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error al cargar materias:', error);
+        this.error = 'Error al cargar materias';
+        this.loading = false;
+      }
+    });
   }
 
   // Cargar datos iniciales
@@ -70,54 +138,6 @@ export class MateriasComponent implements OnInit {
         console.error('Error al cargar cursos:', error);
         this.error = 'Error al cargar cursos';
         this.loading = false;
-      }
-    });
-  }
-
-  cargarMaterias(): void {
-    this.loading = true;
-    this.materiasService.getMaterias().subscribe({
-      next: (data) => {
-        // Normalizar la estructura de datos
-        this.materias = data.map(materia => {
-          if (materia.profesor) {
-            // Si profesor es solo un ID
-            if (typeof materia.profesor === 'number') {
-              const profesorInfo = this.profesores.find(p => p.id === materia.profesor);
-              if (profesorInfo) {
-                materia.profesor_nombre = `${profesorInfo.nombre} ${profesorInfo.apellido}`;
-              }
-            } 
-            // Si profesor es un objeto pero no tiene la estructura esperada
-            else if (!materia.profesor.nombre) {
-              materia.profesor_nombre = materia.profesor_nombre || 'Profesor asignado';
-            }
-          }
-          return materia;
-        });
-        
-        this.materiasFiltradas = [...this.materias];
-        this.loading = false;
-      },
-      error: (error) => {
-        console.error('Error al cargar materias:', error);
-        this.error = 'Error al cargar materias';
-        this.loading = false;
-      }
-    });
-  }
-
-  // Cargar profesores disponibles
-  cargarProfesores(): void {
-    this.loadingProfesores = true;
-    this.usuariosService.getUsuariosPorRol('Profesor').subscribe({
-      next: (data) => {
-        this.profesores = data;
-        this.loadingProfesores = false;
-      },
-      error: (error) => {
-        console.error('Error al cargar profesores:', error);
-        this.loadingProfesores = false;
       }
     });
   }

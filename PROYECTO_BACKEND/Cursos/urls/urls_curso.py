@@ -16,6 +16,8 @@ urlpatterns = [
     path('estudiantes/<int:estudiante_id>/desasignar-curso/', curso_controllers.desasignar_estudiante_de_curso, name='desasignar_estudiante_de_curso'),
     path('estudiantes/sin-curso/', curso_controllers.get_estudiantes_sin_curso, name='get_estudiantes_sin_curso'),
 
+    path('cursos/cantidad/', curso_controllers.get_cantidad_cursos, name='get_cantidad_cursos'),
+
     # Añadir estas rutas
     path('años-academicos/', curso_controllers.get_años_academicos, name='get_años_academicos'),
     path('trimestres/', curso_controllers.get_trimestres, name='get_trimestres'),

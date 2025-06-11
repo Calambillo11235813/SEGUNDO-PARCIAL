@@ -10,6 +10,7 @@ urlpatterns = [
     path('materias/<int:id>/update/', materia_controllers.update_materia, name='update_materia'),
     path('materias/<int:id>/delete/', materia_controllers.delete_materia, name='delete_materia'),
     path('cursos/<int:curso_id>/materias/', materia_controllers.get_materias_por_curso, name='get_materias_por_curso'),
+    path('materias/cantidad/', materia_controllers.get_cantidad_materias, name='get_cantidad_materias'),
 
     # Rutas para asignar y desasignar profesores
     path('materias/<int:materia_id>/asignar-profesor/', materia_controllers.asignar_profesor, name='asignar_profesor'),

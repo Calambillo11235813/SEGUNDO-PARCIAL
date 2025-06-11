@@ -41,9 +41,6 @@
               <span>{{ materia.curso_nombre || getCursoDisplay(materia.curso) }}</span>
             </p>
             <div class="flex justify-between mt-4 pt-4 border-t border-gray-100">
-              <span class="text-sm text-gray-500">
-                <i class="fas fa-user-graduate mr-1"></i> {{ materia.estudiantes_count || 0 }} estudiantes
-              </span>
               <button 
                 class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors text-sm"
                 (click)="verDetalle(materia.id)"

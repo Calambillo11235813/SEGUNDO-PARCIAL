@@ -37,7 +37,6 @@ export class MateriasProfesorComponent implements OnInit {
   cargarMaterias(): void {
     this.loading = true;
     
-    // Si estamos en producción, usar el código real
     if (this.usuario && this.usuario.id) {
       this.materiasService.getMateriasPorProfesor(this.usuario.id).subscribe({
         next: (response: any) => {
@@ -61,63 +60,12 @@ export class MateriasProfesorComponent implements OnInit {
           console.error('Error al cargar materias:', error);
           this.error = 'Error al cargar las materias asignadas';
           this.loading = false;
-          
-          // Si hay error en producción, podemos cargar datos de prueba
-          this.cargarDatosDePrueba();
         }
       });
     } else {
       this.error = 'No se pudo identificar al profesor';
       this.loading = false;
-      // Como estamos en desarrollo/prueba, cargamos datos simulados
-      this.cargarDatosDePrueba();
     }
-  }
-  
-  cargarDatosDePrueba(): void {
-    // Datos simulados para prueba
-    setTimeout(() => {
-      this.materias = [
-        {
-          id: 1,
-          nombre: 'Matemáticas',
-          curso: {
-            id: 101,
-            nivel: { id: 1, nombre: 'Educación Básica' },
-            grado: 8,
-            paralelo: 'A'
-          },
-          curso_nombre: 'Octavo A - Básica',
-          estudiantes_count: 32
-        },
-        {
-          id: 2,
-          nombre: 'Lenguaje y Literatura',
-          curso: {
-            id: 101,
-            nivel: { id: 1, nombre: 'Educación Básica' },
-            grado: 8,
-            paralelo: 'A'
-          },
-          curso_nombre: 'Octavo A - Básica',
-          estudiantes_count: 32
-        },
-        {
-          id: 3,
-          nombre: 'Ciencias Naturales',
-          curso: {
-            id: 102,
-            nivel: { id: 1, nombre: 'Educación Básica' },
-            grado: 8,
-            paralelo: 'B'
-          },
-          curso_nombre: 'Octavo B - Básica',
-          estudiantes_count: 30
-        }
-      ];
-      this.materiasFiltradas = [...this.materias];
-      this.loading = false;
-    }, 800);
   }
   
   filtrarMaterias(texto: string): void {
@@ -137,7 +85,6 @@ export class MateriasProfesorComponent implements OnInit {
     this.router.navigate(['/profesor/materia', materiaId]);
   }
 
-  // Añade este método a tu componente
   getCursoDisplay(curso: any): string {
     if (!curso) return 'Curso no especificado';
     

@@ -372,3 +372,20 @@ def get_trimestres(request):
         return Response(resultado, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+def get_cantidad_cursos(request):
+    """
+    Devuelve la cantidad total de cursos registrados en el sistema.
+    """
+    try:
+        cantidad_cursos = Curso.objects.count()
+        
+        return Response({
+            'cantidad_cursos': cantidad_cursos,
+            'mensaje': f'Hay {cantidad_cursos} cursos registrados en el sistema'
+        }, status=status.HTTP_200_OK)
+    
+    except Exception as e:
+        return Response(
+            {'error': str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )

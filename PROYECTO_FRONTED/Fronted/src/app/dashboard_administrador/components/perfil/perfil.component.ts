@@ -39,7 +39,24 @@ export class PerfilComponent implements OnInit {
   }
   
   cargarPerfil(): void {
-    this.usuario = this.authService.getCurrentUser();
+    const usuarioActual = this.authService.getCurrentUser();
+    
+    if (usuarioActual && usuarioActual.id) {
+      // Obtener datos completos del usuario desde el API
+      this.usuariosService.getUsuario(usuarioActual.id).subscribe({
+        next: (usuarioCompleto) => {
+          this.usuario = usuarioCompleto;
+          console.log('Datos completos:', this.usuario);
+        },
+        error: (err) => {
+          console.error('Error al cargar el perfil completo:', err);
+          // Usar los datos básicos como fallback
+          this.usuario = usuarioActual;
+        }
+      });
+    } else {
+      this.usuario = usuarioActual;
+    }
   }
   
   passwordsMatch(formGroup: FormGroup): {notMatch: boolean} | null {
