@@ -17,6 +17,7 @@ import { AsistenciasComponent } from './dashboard_profesor/components/asistencia
 import { NotasComponent } from './dashboard_profesor/components/notas/notas.component';
 import { PerfilProfesorComponent } from './dashboard_profesor/components/perfil/perfil.component';
 import { DetalleMateriaComponent } from './dashboard_profesor/components/materias/materia_detalle.component';
+import { ListaAsistenciasComponent } from './dashboard_profesor/components/asistencias/lista-asistencias.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -49,6 +50,7 @@ export const routes: Routes = [
       { path: 'materias', component: MateriasProfesorComponent },
       { path: 'materia/:id', component: DetalleMateriaComponent },
       { path: 'asistencias', component: AsistenciasComponent },
+      { path: 'lista-asistencias', component: ListaAsistenciasComponent },
       { path: 'notas', component: NotasComponent },
       { path: 'perfil', component: PerfilProfesorComponent }
     ]
