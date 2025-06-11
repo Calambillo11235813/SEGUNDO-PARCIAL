@@ -122,10 +122,15 @@
                   <td class="px-6 py-4 whitespace-nowrap">{{ getNombreCurso(materia.curso) }}</td>
                   <td class="px-6 py-4 whitespace-nowrap">{{ materia.nombre }}</td>
                   <td class="px-6 py-4 whitespace-nowrap">
-                    <span *ngIf="materia.profesor">
-            {{ materia.profesor_nombre || (materia.profesor.nombre + ' ' + materia.profesor.apellido) }}
-          </span>
-          <span *ngIf="!materia.profesor" class="text-gray-400 italic">Sin asignar</span>
+                    <span *ngIf="materia.profesor && materia.profesor_nombre">
+                      {{ materia.profesor_nombre }}
+                    </span>
+                    <span *ngIf="materia.profesor && !materia.profesor_nombre" class="text-yellow-600 italic">
+                      Profesor asignado (datos no disponibles)
+                    </span>
+                    <span *ngIf="!materia.profesor" class="text-gray-400 italic">
+                      Sin asignar
+                    </span>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">
                     <div class="flex space-x-2">
