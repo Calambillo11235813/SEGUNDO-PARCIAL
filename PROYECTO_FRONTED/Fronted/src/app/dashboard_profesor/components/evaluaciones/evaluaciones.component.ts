@@ -1,0 +1,583 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../../services/auth.service';
+import { MateriasService } from '../../../services/materias.service';
+import { EvaluacionesService } from '../../../services/evaluaciones.service';
+import { ActivatedRoute } from '@angular/router';
+import { TrimestreService } from '../../../services/trimestre.service';
+
+interface Materia {
+  id: number;
+  nombre: string;
+  curso_nombre?: string;
+  curso?: any;
+}
+
+interface TrimestresResponse {
+  trimestres: any[];
+}
+
+interface TipoEvaluacion {
+  id: number;
+  nombre: string;
+  nombre_display: string;
+  descripcion: string;
+}
+
+@Component({
+  selector: 'app-evaluaciones',
+  templateUrl: './evaluaciones.component.html',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule]
+})
+export class EvaluacionesComponent implements OnInit {
+  // Lista de datos necesarios
+  materias: Materia[] = [];
+  tiposEvaluacion: TipoEvaluacion[] = [];
+  trimestres: any[] = [];
+  evaluaciones: any[] = [];
+  
+  // Estado de carga
+  materiasLoading: boolean = false;
+  tiposEvaluacionLoading: boolean = false;
+  trimestresLoading: boolean = false;
+  evaluacionesLoading: boolean = false;
+  guardandoEvaluacion: boolean = false;
+
+  // Formularios
+  evaluacionForm: FormGroup;
+  
+  // Control de errores y mensajes
+  error: string = '';
+  mensaje: string = '';
+  
+  // Flags de control
+  mostrarFormulario: boolean = false;
+  esEntregable: boolean = true;
+  materiaSeleccionada: number | null = null;
+  
+  // Datos del usuario
+  usuario: any;
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private materiasService: MateriasService,
+    private evaluacionesService: EvaluacionesService,
+    private trimestreService: TrimestreService, 
+    private route: ActivatedRoute
+  ) {
+    this.evaluacionForm = this.fb.group({
+      materia_id: [null, Validators.required],
+      tipo_evaluacion_id: [null, Validators.required],
+      trimestre_id: [null, Validators.required],
+      titulo: ['', Validators.required],
+      descripcion: [''],
+      porcentaje_nota_final: [10, [Validators.required, Validators.min(1), Validators.max(100)]],
+      publicado: [false],
+      
+      // Campos para evaluaciones entregables
+      fecha_asignacion: [this.obtenerFechaActual()],
+      fecha_entrega: ['', Validators.required],
+      fecha_limite: [''],
+      nota_maxima: [100],
+      nota_minima_aprobacion: [51],
+      permite_entrega_tardia: [false],
+      penalizacion_tardio: [0],
+      
+      // Campos para evaluaciones de participación
+      fecha_registro: [this.obtenerFechaActual()],
+      criterios_participacion: [''],
+      escala_calificacion: ['NUMERICA']
+    });
+  }
+  
+  ngOnInit(): void {
+    this.usuario = this.authService.getCurrentUser();
+    this.cargarMaterias();
+    this.cargarTiposEvaluacion();
+    this.cargarTrimestres();
+    
+    // Verificar si hay un parámetro de materia en la URL
+    this.route.queryParams.subscribe(params => {
+      const materiaId = params['materia'];
+      if (materiaId) {
+        this.materiaSeleccionada = +materiaId;
+        this.evaluacionForm.patchValue({ materia_id: +materiaId });
+        this.cargarEvaluaciones(+materiaId);
+      }
+    });
+    
+    // Observar cambios en el tipo de evaluación
+    this.evaluacionForm.get('tipo_evaluacion_id')?.valueChanges.subscribe(value => {
+      if (value) {
+        const tipoSeleccionado = this.tiposEvaluacion.find(tipo => tipo.id == value);
+        this.esEntregable = tipoSeleccionado ? tipoSeleccionado.nombre !== 'PARTICIPACION' : true;
+        this.actualizarValidacionesPorTipo();
+      }
+    });
+    
+    // Observar cambios en la materia seleccionada
+    this.evaluacionForm.get('materia_id')?.valueChanges.subscribe(value => {
+      if (value && (!this.materiaSeleccionada || this.materiaSeleccionada !== value)) {
+        this.materiaSeleccionada = value;
+        this.cargarEvaluaciones(value);
+      }
+    });
+  }
+  
+  obtenerFechaActual(): string {
+    const hoy = new Date();
+    const año = hoy.getFullYear();
+    const mes = String(hoy.getMonth() + 1).padStart(2, '0');
+    const dia = String(hoy.getDate()).padStart(2, '0');
+    return `${año}-${mes}-${dia}`;
+  }
+  
+  cargarMaterias(): void {
+    this.materiasLoading = true;
+    this.error = '';
+    
+    if (this.usuario && this.usuario.id) {
+      this.materiasService.getMateriasPorProfesor(this.usuario.id).subscribe({
+        next: (response: any) => {
+          console.log('Respuesta de materias:', response);
+          
+          if (response && response.materias) {
+            this.materias = response.materias;
+          } else if (response && Array.isArray(response)) {
+            this.materias = response;
+          } else if (response && response.data && Array.isArray(response.data)) {
+            this.materias = response.data;
+          } else {
+            console.warn('Formato de respuesta inesperado:', response);
+            this.materias = [];
+          }
+          
+          this.materiasLoading = false;
+          
+          if (this.materias.length === 0) {
+            this.error = 'No tienes materias asignadas';
+          }
+        },
+        error: (error) => {
+          console.error('Error al cargar materias:', error);
+          this.error = 'Error al cargar materias. Intenta nuevamente.';
+          this.materiasLoading = false;
+          
+          // Fallback a datos simulados en caso de error
+          this.cargarMateriasSimuladas();
+        }
+      });
+    } else {
+      this.materiasLoading = false;
+      this.error = 'No se pudo identificar al profesor';
+      this.cargarMateriasSimuladas();
+    }
+  }
+  
+  cargarMateriasSimuladas(): void {
+    setTimeout(() => {
+      this.materias = [
+        {
+          id: 1,
+          nombre: 'Matemáticas',
+          curso: {
+            id: 101,
+            nivel: { id: 1, nombre: 'Educación Básica' },
+            grado: 8,
+            paralelo: 'A'
+          },
+          curso_nombre: 'Octavo A - Básica'
+        },
+        {
+          id: 2,
+          nombre: 'Lenguaje y Literatura',
+          curso: {
+            id: 101,
+            nivel: { id: 1, nombre: 'Educación Básica' },
+            grado: 8,
+            paralelo: 'A'
+          },
+          curso_nombre: 'Octavo A - Básica'
+        }
+      ];
+      this.materiasLoading = false;
+    }, 500);
+  }
+  
+  cargarTiposEvaluacion(): void {
+    this.tiposEvaluacionLoading = true;
+    
+    this.evaluacionesService.getTiposEvaluacion().subscribe({
+      next: (response: any) => {
+        console.log('Tipos de evaluación:', response);
+        
+        if (response && response.tipos_evaluacion) {
+          this.tiposEvaluacion = response.tipos_evaluacion;
+        } else {
+          this.tiposEvaluacion = [];
+        }
+        this.tiposEvaluacionLoading = false;
+      },
+      error: (error) => {
+        console.error('Error al cargar tipos de evaluación:', error);
+        this.tiposEvaluacionLoading = false;
+        
+        // Fallback a datos simulados
+        this.tiposEvaluacion = [
+          { id: 1, nombre: 'TAREA', nombre_display: 'Tarea', descripcion: 'Tareas cortas' },
+          { id: 2, nombre: 'EXAMEN', nombre_display: 'Examen', descripcion: 'Exámenes escritos' },
+          { id: 3, nombre: 'PARTICIPACION', nombre_display: 'Participación', descripcion: 'Participación en clase' },
+          { id: 4, nombre: 'PROYECTO', nombre_display: 'Proyecto', descripcion: 'Proyectos extensos' }
+        ];
+      }
+    });
+  }
+  
+  cargarTrimestres(): void {
+    this.trimestresLoading = true;
+    
+    this.trimestreService.getTrimestresActuales().subscribe({
+      next: (response: any) => {
+        console.log('Trimestres:', response);
+        
+        if (response && response.trimestres) {
+          this.trimestres = response.trimestres;
+        } else if (Array.isArray(response)) {
+          this.trimestres = response;
+        } else {
+          this.trimestres = [];
+        }
+        
+        this.trimestresLoading = false;
+      },
+      error: (error) => {
+        console.error('Error al cargar trimestres:', error);
+        this.trimestresLoading = false;
+        
+        // Fallback a datos simulados
+        this.trimestres = [
+          { id: 1, nombre: 'Primer Trimestre', fecha_inicio: '2023-05-01', fecha_fin: '2023-07-31' },
+          { id: 2, nombre: 'Segundo Trimestre', fecha_inicio: '2023-08-01', fecha_fin: '2023-10-31' },
+          { id: 3, nombre: 'Tercer Trimestre', fecha_inicio: '2023-11-01', fecha_fin: '2023-01-31' }
+        ];
+      }
+    });
+  }
+  
+  cargarEvaluaciones(materiaId: number): void {
+    this.evaluacionesLoading = true;
+    this.evaluaciones = [];
+    
+    this.evaluacionesService.getEvaluacionesPorMateria(materiaId).subscribe({
+      next: (response: any) => {
+        console.log('Evaluaciones por materia:', response);
+        
+        if (response && response.evaluaciones) {
+          this.evaluaciones = response.evaluaciones;
+        } else {
+          this.evaluaciones = [];
+        }
+        
+        this.evaluacionesLoading = false;
+      },
+      error: (error) => {
+        console.error('Error al cargar evaluaciones:', error);
+        this.evaluacionesLoading = false;
+        
+        // Fallback a datos simulados
+        this.cargarEvaluacionesSimuladas();
+      }
+    });
+  }
+  
+  cargarEvaluacionesSimuladas(): void {
+    setTimeout(() => {
+      this.evaluaciones = [
+        {
+          id: 1,
+          titulo: 'Examen parcial',
+          tipo_evaluacion: { id: 2, nombre: 'EXAMEN', nombre_display: 'Examen' },
+          fecha_asignacion: '2023-06-10',
+          fecha_entrega: '2023-06-15',
+          porcentaje_nota_final: 20,
+          modelo: 'entregable'
+        },
+        {
+          id: 2,
+          titulo: 'Participación semana 1',
+          tipo_evaluacion: { id: 3, nombre: 'PARTICIPACION', nombre_display: 'Participación' },
+          fecha_registro: '2023-06-05',
+          porcentaje_nota_final: 5,
+          modelo: 'participacion'
+        }
+      ];
+      this.evaluacionesLoading = false;
+    }, 500);
+  }
+  
+  toggleFormulario(): void {
+    this.mostrarFormulario = !this.mostrarFormulario;
+    if (this.mostrarFormulario) {
+      this.resetearFormulario();
+    }
+  }
+  
+  resetearFormulario(): void {
+    this.evaluacionForm.reset({
+      materia_id: this.materiaSeleccionada,
+      tipo_evaluacion_id: null,
+      trimestre_id: null,
+      titulo: '',
+      descripcion: '',
+      porcentaje_nota_final: 10,
+      publicado: false,
+      fecha_asignacion: this.obtenerFechaActual(),
+      fecha_entrega: '',
+      fecha_limite: '',
+      nota_maxima: 100,
+      nota_minima_aprobacion: 51,
+      permite_entrega_tardia: false,
+      penalizacion_tardio: 0,
+      fecha_registro: this.obtenerFechaActual(),
+      criterios_participacion: '',
+      escala_calificacion: 'NUMERICA'
+    });
+    this.error = '';
+    this.mensaje = '';
+  }
+  
+  actualizarValidacionesPorTipo(): void {
+    const fechaAsignacionControl = this.evaluacionForm.get('fecha_asignacion');
+    const fechaEntregaControl = this.evaluacionForm.get('fecha_entrega');
+    const fechaRegistroControl = this.evaluacionForm.get('fecha_registro');
+    
+    if (this.esEntregable) {
+      // Para evaluaciones entregables
+      fechaAsignacionControl?.setValidators([Validators.required]);
+      fechaEntregaControl?.setValidators([Validators.required]);
+      fechaRegistroControl?.clearValidators();
+    } else {
+      // Para evaluaciones de participación
+      fechaAsignacionControl?.clearValidators();
+      fechaEntregaControl?.clearValidators();
+      fechaRegistroControl?.setValidators([Validators.required]);
+    }
+    
+    fechaAsignacionControl?.updateValueAndValidity();
+    fechaEntregaControl?.updateValueAndValidity();
+    fechaRegistroControl?.updateValueAndValidity();
+  }
+  
+  crearEvaluacion(): void {
+    if (this.evaluacionForm.invalid) {
+      this.marcarCamposInvalidos();
+      this.error = "Por favor complete todos los campos requeridos";
+      return;
+    }
+    
+    const formData = this.prepararDatosEvaluacion();
+    
+    // Validar datos antes de enviar
+    const validacion = this.evaluacionesService.validarDatosEvaluacion(formData);
+    
+    if (!validacion.valido) {
+      this.error = `Por favor corrija los siguientes errores: ${validacion.errores.join(', ')}`;
+      return;
+    }
+    
+    this.guardandoEvaluacion = true;
+    this.error = '';
+    this.mensaje = '';
+    
+    console.log('Creando evaluación con datos:', JSON.stringify(formData, null, 2));
+    
+    this.evaluacionesService.createEvaluacion(formData).subscribe({
+      next: (response: any) => {
+        console.log('Respuesta exitosa al crear evaluación:', response);
+        this.mensaje = response.mensaje || 'Evaluación creada con éxito';
+        this.guardandoEvaluacion = false;
+        
+        // Recargar evaluaciones y ocultar formulario
+        if (this.materiaSeleccionada) {
+          this.cargarEvaluaciones(this.materiaSeleccionada);
+        }
+        this.mostrarFormulario = false;
+      },
+      error: (error) => {
+        console.error('Error detallado al crear evaluación:', error);
+        
+        // Mostrar mensaje de error específico si está disponible
+        if (error.error && error.error.error) {
+          this.error = error.error.error;
+        } else if (error.error && error.error.detail) {
+          this.error = error.error.detail;
+        } else if (error.message) {
+          this.error = error.message;
+        } else {
+          this.error = 'Error al crear la evaluación. Intente nuevamente.';
+        }
+        
+        this.guardandoEvaluacion = false;
+      }
+    });
+  }
+  
+  prepararDatosEvaluacion(): any {
+    const formData = { ...this.evaluacionForm.value };
+    
+    // Formatear fechas en YYYY-MM-DD
+    if (formData.fecha_asignacion) {
+      formData.fecha_asignacion = this.evaluacionesService.formatearFechaParaBackend(formData.fecha_asignacion);
+    }
+    
+    if (formData.fecha_entrega) {
+      formData.fecha_entrega = this.evaluacionesService.formatearFechaParaBackend(formData.fecha_entrega);
+    }
+    
+    if (formData.fecha_limite) {
+      formData.fecha_limite = this.evaluacionesService.formatearFechaParaBackend(formData.fecha_limite);
+    }
+    
+    if (formData.fecha_registro) {
+      formData.fecha_registro = this.evaluacionesService.formatearFechaParaBackend(formData.fecha_registro);
+    }
+    
+    // Convertir valores numéricos string a números
+    formData.materia_id = Number(formData.materia_id);
+    formData.tipo_evaluacion_id = Number(formData.tipo_evaluacion_id);
+    formData.trimestre_id = Number(formData.trimestre_id);
+    formData.porcentaje_nota_final = Number(formData.porcentaje_nota_final);
+    
+    if (formData.nota_maxima) {
+      formData.nota_maxima = Number(formData.nota_maxima);
+    }
+    
+    if (formData.nota_minima_aprobacion) {
+      formData.nota_minima_aprobacion = Number(formData.nota_minima_aprobacion);
+    }
+    
+    if (formData.penalizacion_tardio) {
+      formData.penalizacion_tardio = Number(formData.penalizacion_tardio);
+    }
+    
+    // Eliminar campos innecesarios según el tipo
+    if (this.esEntregable) {
+      delete formData.fecha_registro;
+      delete formData.criterios_participacion;
+      delete formData.escala_calificacion;
+    } else {
+      delete formData.fecha_asignacion;
+      delete formData.fecha_entrega;
+      delete formData.fecha_limite;
+      delete formData.nota_maxima;
+      delete formData.nota_minima_aprobacion;
+      delete formData.permite_entrega_tardia;
+      delete formData.penalizacion_tardio;
+    }
+    
+    // Si fecha_limite está vacía, eliminarla
+    if (formData.fecha_limite === '') {
+      delete formData.fecha_limite;
+    }
+    
+    // Asegurar valores booleanos correctos
+    if (formData.publicado === '') {
+      formData.publicado = false;
+    }
+    
+    if (formData.permite_entrega_tardia === '') {
+      formData.permite_entrega_tardia = false;
+    }
+    
+    // Agregar el modelo explícitamente
+    formData.modelo = this.esEntregable ? 'entregable' : 'participacion';
+    
+    console.log('Datos a enviar para crear evaluación:', formData);
+    
+    return formData;
+  }
+  
+  marcarCamposInvalidos(): void {
+    Object.keys(this.evaluacionForm.controls).forEach(field => {
+      const control = this.evaluacionForm.get(field);
+      if (control?.invalid) {
+        control.markAsTouched({ onlySelf: true });
+      }
+    });
+  }
+  
+  getMateriaSeleccionada(): Materia | undefined {
+    const materiaId = this.evaluacionForm.get('materia_id')?.value;
+    return this.materias.find(m => m.id == materiaId);
+  }
+  
+  getTipoEvaluacionSeleccionado(): TipoEvaluacion | undefined {
+    const tipoId = this.evaluacionForm.get('tipo_evaluacion_id')?.value;
+    return this.tiposEvaluacion.find(t => t.id == tipoId);
+  }
+  
+  getTrimestreSeleccionado(): any | undefined {
+    const trimestreId = this.evaluacionForm.get('trimestre_id')?.value;
+    return this.trimestres.find(t => t.id == trimestreId);
+  }
+  
+  getEstadoEvaluacion(evaluacion: any): any {
+    return this.evaluacionesService.getEstadoEvaluacion(evaluacion);
+  }
+  
+  eliminarEvaluacion(evaluacion: any): void {
+    if (!confirm(`¿Está seguro que desea eliminar la evaluación "${evaluacion.titulo}"?`)) {
+      return;
+    }
+    
+    this.evaluacionesService.deleteEvaluacion(evaluacion.id).subscribe({
+      next: (response: any) => {
+        console.log('Respuesta de eliminar evaluación:', response);
+        this.mensaje = response.mensaje || 'Evaluación eliminada con éxito';
+        
+        // Recargar evaluaciones
+        if (this.materiaSeleccionada) {
+          this.cargarEvaluaciones(this.materiaSeleccionada);
+        }
+      },
+      error: (error) => {
+        console.error('Error al eliminar evaluación:', error);
+        this.error = error.error?.error || 'Error al eliminar la evaluación. Intente nuevamente.';
+      }
+    });
+  }
+  
+  formatearFecha(fecha: string): string {
+    if (!fecha) return '-';
+    
+    const fechaObj = new Date(fecha);
+    return fechaObj.toLocaleDateString('es-ES');
+  }
+  
+  formatearPorcentaje(valor: number): string {
+    return `${valor}%`;
+  }
+  
+  calcularPorcentajeRestante(): number {
+    const tipoEvaluacionId = this.evaluacionForm.get('tipo_evaluacion_id')?.value;
+    
+    if (!tipoEvaluacionId || !this.materiaSeleccionada) {
+      return 100;
+    }
+    
+    // Calcular el porcentaje ya utilizado para este tipo de evaluación
+    const porcentajeUsado = this.evaluacionesService.calcularPorcentajeUsado(
+      this.evaluaciones, 
+      tipoEvaluacionId
+    );
+    
+    // Obtener el porcentaje máximo permitido (simulado como 100 - podría venir de configuración)
+    const porcentajeMaximo = 100;
+    
+    // Calcular el restante
+    return Math.max(0, porcentajeMaximo - porcentajeUsado);
+  }
+}
