@@ -63,3 +63,60 @@ class Usuario {
     return '$nombreCompleto - $rolNombre';
   }
 }
+
+extension UsuarioExtensions on Usuario {
+  /// Obtiene el nombre completo del usuario
+  String get nombreCompleto => '$nombre $apellido';
+
+  /// Obtiene las iniciales del usuario
+  String get iniciales {
+    final nombreInicial = nombre.isNotEmpty ? nombre[0].toUpperCase() : '';
+    final apellidoInicial =
+        apellido.isNotEmpty ? apellido[0].toUpperCase() : '';
+    return '$nombreInicial$apellidoInicial'.isEmpty
+        ? 'U'
+        : '$nombreInicial$apellidoInicial';
+  }
+
+  /// Obtiene el nombre del rol de forma segura
+  String get rolNombre => rol?['nombre'] ?? 'Sin rol';
+
+  /// Verifica si el usuario es estudiante
+  bool get isEstudiante => rolNombre == 'Estudiante';
+
+  /// Verifica si el usuario es tutor
+  bool get isTutor => rolNombre == 'Tutor';
+
+  /// Verifica si el usuario es profesor
+  bool get isProfesor => rolNombre == 'Profesor';
+
+  /// Verifica si el usuario tiene un rol específico
+  bool hasRole(String roleName) => rolNombre == roleName;
+}
+
+// Extension para manejo de nullable Usuario
+extension UsuarioNullableExtensions on Usuario? {
+  /// Obtiene el nombre completo de forma segura
+  String get safeNombreCompleto {
+    if (this == null) return 'Usuario';
+    return this!.nombreCompleto;
+  }
+
+  /// Obtiene las iniciales de forma segura
+  String get safeIniciales {
+    if (this == null) return 'U';
+    return this!.iniciales;
+  }
+
+  /// Obtiene el código de forma segura
+  String get safeCodigo {
+    if (this == null) return 'Sin código';
+    return this!.codigo;
+  }
+
+  /// Verifica si el usuario tiene un rol específico de forma segura
+  bool hasSafeRole(String roleName) {
+    if (this == null) return false;
+    return this!.hasRole(roleName);
+  }
+}

@@ -141,7 +141,7 @@ class TutorService {
         queryParams.add('tipo_evaluacion_id=$tipoEvaluacionId');
       }
       if (anioAcademico != null) {
-        queryParams.add('año_academico=$anioAcademico');
+        queryParams.add('año_academico=$anioAcademico'); // AHORA FUNCIONAL
       }
 
       String urlString =
@@ -165,9 +165,34 @@ class TutorService {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> resultado = jsonDecode(response.body);
+
+        // ✅ NORMALIZACIÓN: Mover materias a la raíz si están en estudiante
+        if (resultado['estudiante'] != null &&
+            resultado['estudiante']['materias'] != null &&
+            resultado['materias'] == null) {
+          AppLogger.d(
+            'Normalizando estructura: moviendo materias de estudiante a raíz',
+          );
+          resultado['materias'] = resultado['estudiante']['materias'];
+
+          // Opcional: limpiar materias del objeto estudiante para evitar duplicación
+          final estudianteData = Map<String, dynamic>.from(
+            resultado['estudiante'],
+          );
+          estudianteData.remove('materias');
+          resultado['estudiante'] = estudianteData;
+        }
+
         AppLogger.i(
           'Calificaciones detalladas obtenidas para el estudiante ${resultado['estudiante']['nombre']}',
         );
+
+        // Validar estructura final
+        if (resultado['materias'] == null) {
+          AppLogger.w('No se encontraron materias después de la normalización');
+          resultado['materias'] = <dynamic>[];
+        }
+
         return resultado;
       } else {
         AppLogger.e(

@@ -145,7 +145,13 @@ class AuthService {
             final userData = jsonDecode(userJson);
             AppLogger.d("Datos de usuario encontrados: $userData");
             if (userData['id'] != null) {
-              return userData['id'];
+              // ✅ CORRECCIÓN: Validar antes de parsear
+              final id = userData['id'];
+              if (id is int) {
+                return id;
+              } else if (id is String) {
+                return int.tryParse(id); // Usar tryParse en lugar de parse
+              }
             }
           } catch (e) {
             AppLogger.e("Error decodificando datos de usuario", e);
@@ -154,7 +160,8 @@ class AuthService {
       }
 
       if (userId != null) {
-        return int.parse(userId);
+        // ✅ CORRECCIÓN: Usar tryParse para evitar excepciones
+        return int.tryParse(userId);
       }
 
       // Si no se encuentra el ID

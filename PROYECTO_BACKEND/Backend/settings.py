@@ -35,7 +35,7 @@ ALLOWED_HOSTS = [
     'localhost',  # Localhost
     '10.0.2.2',   # Dirección desde el emulador de Android
     '0.0.0.0',    # Permite todas las direcciones IP (útil para pruebas)
-    '192.168.0.5',
+    '192.168.0.7',
 ]
 
 

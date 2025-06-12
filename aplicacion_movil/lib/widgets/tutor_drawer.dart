@@ -7,11 +7,7 @@ class TutorDrawer extends StatelessWidget {
   final Usuario? currentUser;
   final String currentRoute;
 
-  const TutorDrawer({
-    super.key,
-    required this.currentUser,
-    required this.currentRoute,
-  });
+  const TutorDrawer({super.key, this.currentUser, required this.currentRoute});
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +16,14 @@ class TutorDrawer extends StatelessWidget {
         children: [
           // Encabezado del drawer con información del usuario
           UserAccountsDrawerHeader(
-            accountName: Text(currentUser?.nombreCompleto ?? 'Tutor'),
-            accountEmail: Text(currentUser?.codigo ?? ""),
+            accountName: Text(currentUser?.safeNombreCompleto ?? 'Usuario'),
+            accountEmail: Text(
+              'Código: ${currentUser?.safeCodigo ?? "Sin código"}',
+            ),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.white,
               child: Text(
-                currentUser?.nombre[0].toUpperCase() ?? 'T',
+                currentUser?.safeIniciales ?? 'U',
                 style: const TextStyle(
                   fontSize: 24.0,
                   color: AppTheme.primaryColor,
@@ -119,7 +117,9 @@ class TutorDrawer extends StatelessWidget {
       ),
       selected: isSelected,
       selectedTileColor:
-          isSelected ? AppTheme.primaryColor.withOpacity(0.1) : null,
+          isSelected
+              ? AppTheme.primaryColor.withValues(alpha: 0.1) // ✅ Corregido
+              : null,
       onTap: () {
         if (route != currentRoute) {
           Navigator.pop(context); // Cerrar el drawer

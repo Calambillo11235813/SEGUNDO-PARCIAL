@@ -393,6 +393,7 @@ def obtener_calificaciones_estudiante_detalle(request, tutor_id, estudiante_id):
         materia_id = request.query_params.get('materia_id')
         trimestre_id = request.query_params.get('trimestre_id')
         tipo_evaluacion_id = request.query_params.get('tipo_evaluacion_id')
+        año_academico = request.query_params.get('año_academico')  # NUEVO PARÁMETRO
         
         # ContentTypes para consultas
         entregable_ct = ContentType.objects.get_for_model(EvaluacionEntregable)
@@ -457,6 +458,10 @@ def obtener_calificaciones_estudiante_detalle(request, tutor_id, estudiante_id):
                 
             if tipo_evaluacion_id:
                 filtros_evaluacion['tipo_evaluacion_id'] = tipo_evaluacion_id
+            
+            # NUEVO: Filtrar por año académico
+            if año_academico:
+                filtros_evaluacion['trimestre__año_academico'] = año_academico
             
             # Obtener evaluaciones
             evaluaciones_entregable = EvaluacionEntregable.objects.filter(

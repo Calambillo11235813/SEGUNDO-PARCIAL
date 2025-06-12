@@ -31,7 +31,18 @@ class _DashboardTutorScreenState extends State<DashboardTutorScreen> {
         _error = null;
       });
 
+      // ✅ CORRECCIÓN: Validación completa del usuario
       final usuario = await AuthService.getCurrentUser();
+
+      if (usuario == null) {
+        throw Exception('No se pudo obtener la información del usuario');
+      }
+
+      // Validar que sea un tutor
+      final userRole = await AuthService.getCurrentUserRole();
+      if (userRole != 'Tutor') {
+        throw Exception('Usuario sin permisos de tutor');
+      }
 
       setState(() {
         _usuario = usuario;
@@ -40,7 +51,7 @@ class _DashboardTutorScreenState extends State<DashboardTutorScreen> {
     } catch (e) {
       AppLogger.e("Error cargando información del usuario: $e");
       setState(() {
-        _error = "No se pudo cargar la información del usuario";
+        _error = "No se pudo cargar la información del usuario: $e";
         _isLoading = false;
       });
     }
@@ -51,10 +62,10 @@ class _DashboardTutorScreenState extends State<DashboardTutorScreen> {
     return Scaffold(
       appBar: DashboardAppBar(
         title: 'Panel de Tutor',
-        subtitle: _usuario?.nombreCompleto ?? 'Cargando...',
+        // ✅ USANDO EXTENSION SEGURA
+        subtitle: _usuario?.safeNombreCompleto ?? 'Cargando...',
         onRefresh: _loadUserInfo,
       ),
-      // Agregar el drawer
       drawer: TutorDrawer(
         currentUser: _usuario,
         currentRoute: '/tutor/dashboard',
@@ -64,7 +75,23 @@ class _DashboardTutorScreenState extends State<DashboardTutorScreen> {
               ? const Center(child: CircularProgressIndicator())
               : _error != null
               ? Center(
-                child: Text(_error!, style: const TextStyle(color: Colors.red)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.error_outline, size: 64, color: Colors.red),
+                    const SizedBox(height: 16),
+                    Text(
+                      _error!,
+                      style: const TextStyle(color: Colors.red),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: _loadUserInfo,
+                      child: const Text('Reintentar'),
+                    ),
+                  ],
+                ),
               )
               : _buildDashboardContent(),
     );
@@ -81,7 +108,7 @@ class _DashboardTutorScreenState extends State<DashboardTutorScreen> {
           children: [
             // Mensaje de bienvenida
             Text(
-              'Bienvenido, ${_usuario?.nombre}',
+              'Bienvenido, ${_usuario?.nombre ?? 'Usuario'}',
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
