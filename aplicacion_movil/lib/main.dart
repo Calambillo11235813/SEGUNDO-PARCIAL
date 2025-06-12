@@ -46,7 +46,24 @@ class MyApp extends StatelessWidget {
         '/student/materias': (context) => const MateriasScreen(),
         '/student/evaluaciones': (context) => const EvaluacionesScreen(),
         '/student/asistencias': (context) => const AsistenciasScreen(),
-        '/student/rendimiento': (context) => const RendimientoScreen(),
+        '/student/rendimiento': (context) {
+          final args = ModalRoute.of(context)!.settings.arguments;
+          if (args == null ||
+              args is! Map<String, dynamic> ||
+              !args.containsKey('estudianteId')) {
+            // Puedes mostrar una pantalla de error o redirigir
+            return Scaffold(
+              appBar: AppBar(title: const Text('Error')),
+              body: const Center(
+                child: Text('Faltan argumentos para mostrar el rendimiento.'),
+              ),
+            );
+          }
+          return RendimientoScreen(
+            estudianteId: args['estudianteId'],
+            estudianteCodigo: args['estudianteCodigo'],
+          );
+        },
         '/student/materia/detalle': (context) => const MateriaDetalleScreen(),
         '/student/materia/tipos-evaluacion':
             (context) => const MateriaTiposEvaluacionScreen(),

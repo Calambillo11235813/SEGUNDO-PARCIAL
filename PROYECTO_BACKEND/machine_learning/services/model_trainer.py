@@ -175,3 +175,6 @@ class ModelTrainerServiceSimplificado:
         except Exception as e:
             logger.error(f"Error en predicción: {str(e)}")
             return None
+
+# Crear una instancia del servicio (ejemplo)
+# trainer = ModelTrainerServiceSimplificado()

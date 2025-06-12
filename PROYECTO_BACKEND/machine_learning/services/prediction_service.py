@@ -215,37 +215,46 @@ class PredictionService:
             return {'error': f'Error en predicción: {str(e)}'}
     
     def _aplicar_logica_realista(self, prediccion_raw, promedio_anterior, asistencia, participaciones):
-        """Aplicar lógica realista a la predicción"""
-        
-        # Factores de calidad del estudiante
+        """Aplicar lógica más optimista pero realista"""
+    
+        # Factores de bonificación más generosos
         factor_asistencia = 1.0
         if asistencia >= 85:
-            factor_asistencia = 1.05  # Bonus por buena asistencia
+            factor_asistencia = 1.08  # Aumentado de 1.05
         elif asistencia >= 75:
-            factor_asistencia = 1.02  # Bonus moderado
-        elif asistencia < 65:
-            factor_asistencia = 0.95  # Penalización por baja asistencia
-        
+            factor_asistencia = 1.05  # Aumentado de 1.02
+        elif asistencia >= 65:
+            factor_asistencia = 1.02  # Nuevo bonus
+        elif asistencia < 60:
+            factor_asistencia = 0.97  # Menos penalización
+    
         factor_participaciones = 1.0
         if participaciones >= 80:
-            factor_participaciones = 1.03  # Bonus por buena participación
-        elif participaciones < 60:
-            factor_participaciones = 0.97  # Penalización por baja participación
-        
+            factor_participaciones = 1.06  # Aumentado de 1.03
+        elif participaciones >= 70:
+            factor_participaciones = 1.03  # Nuevo bonus
+        elif participaciones >= 60:
+            factor_participaciones = 1.01  # Nuevo bonus
+        elif participaciones < 50:
+            factor_participaciones = 0.98  # Menos penalización
+    
         # Aplicar factores
         prediccion_ajustada = prediccion_raw * factor_asistencia * factor_participaciones
-        
-        # Regla de persistencia: no puede caer más del 15% del promedio anterior
-        caida_maxima = promedio_anterior * 0.15
+    
+        # Reglas más optimistas
+        caida_maxima = promedio_anterior * 0.10  # Reducido de 0.15 a 0.10
         prediccion_minima = promedio_anterior - caida_maxima
-        
-        # Regla de mejora realista: no puede subir más del 20% del promedio anterior
-        mejora_maxima = promedio_anterior * 0.20
-        prediccion_maxima = promedio_anterior + mejora_maxima
-        
+    
+        mejora_maxima = promedio_anterior * 0.25  # Aumentado de 0.20 a 0.25
+        prediccion_maxima = min(100.0, promedio_anterior + mejora_maxima)
+    
+        # Bonus por buen comportamiento
+        if asistencia >= 75 and participaciones >= 65:
+            prediccion_ajustada += 2
+    
         # Aplicar límites
         prediccion_final = max(prediccion_minima, min(prediccion_maxima, prediccion_ajustada))
-        
+    
         return prediccion_final
     
     def _calcular_confianza_mejorada(self, datos, prediccion):
@@ -276,17 +285,16 @@ class PredictionService:
         return max(65.0, min(95.0, confianza_base))
     
     def _categorizar_rendimiento_realista(self, prediccion):
-        """Categorización realista del rendimiento"""
-        
+        """Categorización más optimista y realista"""
         if prediccion >= 90:
             return "Excelente"
-        elif prediccion >= 85:
+        elif prediccion >= 80:  # Cambio: de 85 a 80
             return "Muy Bueno"
-        elif prediccion >= 75:
+        elif prediccion >= 70:  # Cambio: de 75 a 70
             return "Bueno"
-        elif prediccion >= 65:
+        elif prediccion >= 60:  # Cambio: de 65 a 60
             return "Regular"
-        elif prediccion >= 55:
+        elif prediccion >= 50:  # Cambio: de 55 a 50
             return "Bajo"
         else:
             return "Crítico"

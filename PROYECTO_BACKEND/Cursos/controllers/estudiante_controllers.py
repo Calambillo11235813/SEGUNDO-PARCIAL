@@ -912,3 +912,106 @@ def obtener_calificaciones_trimestre(request, estudiante_id, trimestre_id):
             {'error': str(e)},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+
+@api_view(['GET'])
+def historial_academico_estudiante(request, estudiante_id):
+    """
+    Devuelve el historial académico consolidado del estudiante:
+    - Notas por trimestre y materia (solo promedio)
+    - Porcentaje de asistencia por trimestre y materia
+    - Participaciones por trimestre y materia (solo promedio)
+
+    GET /api/cursos/estudiantes/{estudiante_id}/historial-academico/
+    """
+    try:
+        # Verificar que el estudiante existe
+        try:
+            estudiante = Usuario.objects.get(id=estudiante_id)
+        except Usuario.DoesNotExist:
+            return Response(
+                {'error': 'Estudiante no encontrado'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        if not estudiante.curso:
+            return Response(
+                {'error': 'El estudiante no tiene un curso asignado'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        materias = Materia.objects.filter(curso=estudiante.curso)
+        trimestres = Trimestre.objects.all().order_by('año_academico', 'fecha_inicio')
+
+        historial = []
+
+        for trimestre in trimestres:
+            trimestre_data = {
+                'id': trimestre.id,
+                'nombre': trimestre.nombre,
+                'año_academico': trimestre.año_academico,
+                'materias': []
+            }
+            for materia in materias:
+                # Notas (promedio de evaluaciones)
+                entregable_ct = ContentType.objects.get_for_model(EvaluacionEntregable)
+                participacion_ct = ContentType.objects.get_for_model(EvaluacionParticipacion)
+
+                # Evaluaciones entregables - solo calcular promedio
+                calificaciones_entregable = Calificacion.objects.filter(
+                    content_type=entregable_ct,
+                    object_id__in=EvaluacionEntregable.objects.filter(
+                        materia=materia, trimestre=trimestre
+                    ).values_list('id', flat=True),
+                    estudiante=estudiante
+                )
+                
+                notas_valores = [
+                    float(c.nota_final if c.nota_final is not None else c.nota)
+                    for c in calificaciones_entregable
+                ]
+                promedio_notas = round(sum(notas_valores) / len(notas_valores), 2) if notas_valores else None
+
+                # Evaluaciones de participación - solo calcular promedio
+                calificaciones_participacion = Calificacion.objects.filter(
+                    content_type=participacion_ct,
+                    object_id__in=EvaluacionParticipacion.objects.filter(
+                        materia=materia, trimestre=trimestre
+                    ).values_list('id', flat=True),
+                    estudiante=estudiante
+                )
+                
+                participaciones_valores = [
+                    float(c.nota_final if c.nota_final is not None else c.nota)
+                    for c in calificaciones_participacion
+                ]
+                promedio_participacion = round(sum(participaciones_valores) / len(participaciones_valores), 2) if participaciones_valores else None
+
+                # Asistencias
+                asistencias = Asistencia.objects.filter(
+                    estudiante=estudiante,
+                    materia=materia,
+                    fecha__range=[trimestre.fecha_inicio, trimestre.fecha_fin]
+                )
+                total_clases = asistencias.count()
+                asistencias_presentes = asistencias.filter(presente=True).count()
+                porcentaje_asistencia = (asistencias_presentes / total_clases * 100) if total_clases > 0 else None
+
+                materia_data = {
+                    'id': materia.id,
+                    'nombre': materia.nombre,
+                    'promedio_nota': promedio_notas,
+                    'promedio_participacion': promedio_participacion,
+                    'porcentaje_asistencia': round(porcentaje_asistencia, 2) if porcentaje_asistencia is not None else None,
+                    'total_clases': total_clases,
+                    'asistencias_presentes': asistencias_presentes
+                }
+                trimestre_data['materias'].append(materia_data)
+            historial.append(trimestre_data)
+
+        return Response({'historial': historial})
+
+    except Exception as e:
+        return Response(
+            {'error': str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )

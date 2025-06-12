@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
-import '../../services/auth_service.dart';
-import '../../services/estudiante/evaluaciones_service.dart';
+import '../../services/estudiante/historial_service.dart';
 import '../../services/estudiante/prediccion_service.dart';
+// ignore: unused_import
 import '../../utils/logger.dart';
 import '../../widgets/student_drawer.dart';
 
 class RendimientoScreen extends StatefulWidget {
-  const RendimientoScreen({super.key});
+  final int estudianteId;
+  final String? estudianteCodigo;
+
+  const RendimientoScreen({
+    required this.estudianteId,
+    this.estudianteCodigo,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<RendimientoScreen> createState() => _RendimientoScreenState();
@@ -15,8 +22,14 @@ class RendimientoScreen extends StatefulWidget {
 class _RendimientoScreenState extends State<RendimientoScreen> {
   bool _isLoading = true;
   String? _error;
-  Map<String, dynamic>? _prediccion;
-  Map<String, dynamic> _datosPrediccion = {};
+  List<dynamic> _historial = [];
+  final Map<String, dynamic> _predicciones = {}; // key: "materiaId-trimestreId"
+
+  // Filtros
+  List<int> _anios = [];
+  Map<int, List<dynamic>> _trimestresPorAnio = {};
+  int? _anioSeleccionado;
+  dynamic _trimestreSeleccionado;
 
   @override
   void initState() {
@@ -25,282 +38,475 @@ class _RendimientoScreenState extends State<RendimientoScreen> {
   }
 
   Future<void> _cargarDatos() async {
-    setState(() {
-      _isLoading = true;
-      _error = null;
-    });
-
     try {
-      // Obtener usuario actual
-      final usuario = await AuthService.getCurrentUser();
-      if (usuario == null) {
+      setState(() {
+        _isLoading = true;
+        _error = null;
+      });
+
+      // 1. Cargar historial académico
+      final historialData = await HistorialService.obtenerHistorialAcademico(
+        widget.estudianteId,
+      );
+
+      if (historialData == null) {
         setState(() {
-          _error = 'No hay sesión activa';
+          _error = "No se pudo cargar el historial académico";
           _isLoading = false;
         });
         return;
       }
 
-      // Usar ID 145 directamente como en el ejemplo
-      final estudianteId = "145"; // Para coincidir con el ejemplo
+      // 2. Procesar datos del historial
+      _historial = historialData['historial'] ?? [];
 
-      // 1. Cargar evaluaciones
-      final evaluaciones =
-          await EvaluacionesService.obtenerEvaluacionesPorEstudiante(
-            estudianteId,
-          );
+      // Extraer años académicos únicos
+      _anios =
+          _historial
+              .map<int>((trimestre) => trimestre['año_academico'] as int)
+              .toSet()
+              .toList()
+            ..sort((a, b) => b.compareTo(a)); // Orden descendente
 
-      // 2. Preparar datos para predicción
-      final datosPrediccion = PrediccionService.prepararDatosPrediccion(
-        evaluaciones,
-      );
+      // Agrupar trimestres por año
+      _trimestresPorAnio = {};
+      for (var trimestre in _historial) {
+        final anio = trimestre['año_academico'] as int;
+        if (!_trimestresPorAnio.containsKey(anio)) {
+          _trimestresPorAnio[anio] = [];
+        }
+        _trimestresPorAnio[anio]!.add(trimestre);
+      }
 
-      // 3. Realizar predicción
-      final prediccion = await PrediccionService.predecirRendimiento(
-        datosPrediccion,
-      );
+      // Establecer valores iniciales de filtro
+      if (_anios.isNotEmpty) {
+        _anioSeleccionado = _anios.first;
+        if (_trimestresPorAnio[_anioSeleccionado]!.isNotEmpty) {
+          _trimestreSeleccionado = _trimestresPorAnio[_anioSeleccionado]!.first;
+        }
+      }
 
       setState(() {
-        _datosPrediccion = datosPrediccion;
-        _prediccion = prediccion;
         _isLoading = false;
       });
+
+      // 3. Generar predicciones (después de actualizar UI con datos básicos)
+      await _generarPredicciones();
     } catch (e) {
-      AppLogger.e("Error cargando datos de rendimiento: $e");
       setState(() {
-        _error = "Error: $e";
+        _error = "Error al cargar datos: $e";
         _isLoading = false;
       });
     }
+  }
+
+  Future<void> _generarPredicciones() async {
+    if (_historial.isEmpty) return;
+
+    // Para cada trimestre y materia, generar predicción
+    for (var trimestre in _historial) {
+      for (var materia in trimestre['materias']) {
+        final key = "${materia['id']}-${trimestre['id']}";
+
+        try {
+          final prediccion = await PrediccionService.predecirRendimiento(
+            promedioNotasAnterior: _castToDouble(materia['promedio_nota']) ?? 0,
+            porcentajeAsistencia:
+                _castToDouble(materia['porcentaje_asistencia']) ?? 0,
+            promedioParticipaciones:
+                _castToDouble(materia['promedio_participacion']) ?? 0,
+            materiasCursadas:
+                1, // Asumimos que el estudiante está cursando esta materia
+            evaluacionesCompletadas: materia['total_clases'] ?? 0,
+            estudianteCodigo: widget.estudianteCodigo,
+          );
+
+          if (prediccion != null) {
+            setState(() {
+              _predicciones[key] = prediccion;
+            });
+          }
+        } catch (e) {
+          print("Error generando predicción para $key: $e");
+        }
+      }
+    }
+  }
+
+  // Utilidad para convertir valores a double de forma segura
+  double? _castToDouble(dynamic value) {
+    if (value == null) return null;
+    if (value is double) return value;
+    if (value is int) return value.toDouble();
+    if (value is String) return double.tryParse(value);
+    return null;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Predicción de Rendimiento'),
-        actions: [
-          IconButton(icon: const Icon(Icons.refresh), onPressed: _cargarDatos),
-        ],
-      ),
-      drawer: StudentDrawer(
-        currentUser: null,
-        currentRoute: '/student/rendimiento',
-      ),
-      body:
-          _isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : _error != null
-              ? _buildErrorWidget()
-              : _buildResultadoWidget(),
+      appBar: AppBar(title: const Text('Rendimiento Académico'), elevation: 2),
+      drawer:
+          // ignore: unnecessary_null_comparison
+          widget.estudianteId != null
+              ? StudentDrawer(
+                currentUser: null, // Deberías pasar el usuario actual aquí
+                currentRoute: '/student/rendimiento',
+              )
+              : null,
+      body: _buildBody(),
     );
   }
 
-  Widget _buildErrorWidget() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.error_outline, size: 60, color: Colors.red),
-          const SizedBox(height: 16),
-          Text(
-            _error!,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 16),
-          ),
-          const SizedBox(height: 24),
-          ElevatedButton(
-            onPressed: _cargarDatos,
-            child: const Text('Reintentar'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildResultadoWidget() {
-    if (_prediccion == null) {
-      return const Center(child: Text('No se pudo realizar la predicción'));
+  Widget _buildBody() {
+    if (_isLoading) {
+      return const Center(child: CircularProgressIndicator());
     }
 
-    final notaPredicha = _prediccion!['nota_predicha'] ?? 0.0;
-    final estado = _prediccion!['estado'] ?? 'Desconocido';
-
-    Color estadoColor = estado == 'Aprobado' ? Colors.green : Colors.red;
-
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Tarjeta principal con la predicción
-          Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Predicción de Nota Final',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 24),
-                  CircleAvatar(
-                    radius: 60,
-                    backgroundColor: _getColorForNota(notaPredicha),
-                    child: Text(
-                      notaPredicha.toStringAsFixed(1),
-                      style: const TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    decoration: BoxDecoration(
-                      color: estadoColor.withAlpha(51), // 0.2 * 255 = 51
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      estado,
-                      style: TextStyle(
-                        color: estadoColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'Basado en tus calificaciones actuales y asistencia',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.grey, fontSize: 12),
-                  ),
-                ],
-              ),
-            ),
-          ),
-
-          const SizedBox(height: 24),
-
-          // Sección de datos usados para la predicción
-          const Text(
-            'Datos utilizados para la predicción',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 8),
-          _buildDatosPrediccionList(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDatosPrediccionList() {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
+    if (_error != null) {
+      return Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            _buildDatoSection('Parciales', [
-              {'nombre': 'Parcial 1', 'valor': _datosPrediccion['parcial1']},
-              {'nombre': 'Parcial 2', 'valor': _datosPrediccion['parcial2']},
-              {'nombre': 'Parcial 3', 'valor': _datosPrediccion['parcial3']},
-            ]),
-            const Divider(),
-            _buildDatoSection('Prácticos', [
-              {'nombre': 'Práctico 1', 'valor': _datosPrediccion['practico1']},
-              {'nombre': 'Práctico 2', 'valor': _datosPrediccion['practico2']},
-              {'nombre': 'Práctico 3', 'valor': _datosPrediccion['practico3']},
-              {'nombre': 'Práctico 4', 'valor': _datosPrediccion['practico4']},
-              {'nombre': 'Práctico 5', 'valor': _datosPrediccion['practico5']},
-              {'nombre': 'Práctico 6', 'valor': _datosPrediccion['practico6']},
-            ]),
-            const Divider(),
-            _buildDatoSection('Participaciones', [
-              {
-                'nombre': 'Participación 1',
-                'valor': _datosPrediccion['participacion1'],
-              },
-              {
-                'nombre': 'Participación 2',
-                'valor': _datosPrediccion['participacion2'],
-              },
-              {
-                'nombre': 'Participación 3',
-                'valor': _datosPrediccion['participacion3'],
-              },
-              {
-                'nombre': 'Participación 4',
-                'valor': _datosPrediccion['participacion4'],
-              },
-            ]),
-            const Divider(),
-            _buildDatoSection('Asistencia', [
-              {
-                'nombre': 'Porcentaje',
-                'valor': _datosPrediccion['asistencias'],
-              },
-            ]),
+            const Icon(Icons.error_outline, size: 48, color: Colors.red),
+            const SizedBox(height: 16),
+            Text(_error!, style: const TextStyle(fontSize: 16)),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: _cargarDatos,
+              child: const Text('Reintentar'),
+            ),
           ],
         ),
-      ),
-    );
-  }
+      );
+    }
 
-  Widget _buildDatoSection(String titulo, List<Map<String, dynamic>> datos) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          titulo,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+    if (_historial.isEmpty) {
+      return const Center(
+        child: Text(
+          'No hay datos de rendimiento académico disponibles',
+          style: TextStyle(fontSize: 16),
         ),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children:
-              datos.map((dato) {
-                final valor = (dato['valor'] as num?)?.toDouble() ?? 0.0;
-                return Chip(
-                  backgroundColor: _getColorForNota(valor).withAlpha(51),
-                  label: Text(
-                    '${dato['nombre']}: ${valor.toStringAsFixed(1)}',
-                    style: TextStyle(
-                      color: _getColorForNota(valor),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                );
-              }).toList(),
+      );
+    }
+
+    return Column(
+      children: [
+        // Filtros de año y trimestre
+        _buildFilters(),
+
+        // Lista de materias del trimestre seleccionado
+        Expanded(
+          child:
+              _trimestreSeleccionado != null
+                  ? _buildMateriasList(_trimestreSeleccionado)
+                  : const Center(child: Text('Seleccione un trimestre')),
         ),
       ],
     );
   }
 
-  Color _getColorForNota(double nota) {
-    if (nota >= 90) {
-      return Colors.green[700]!;
-    } else if (nota >= 80) {
-      return Colors.lightGreen;
-    } else if (nota >= 70) {
-      return Colors.amber[700]!;
-    } else if (nota >= 51) {
-      return Colors.orange;
-    } else {
-      return Colors.red;
+  Widget _buildFilters() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        children: [
+          // Filtro de año académico
+          Expanded(
+            child: DropdownButtonFormField<int>(
+              decoration: const InputDecoration(
+                labelText: 'Año Académico',
+                border: OutlineInputBorder(),
+              ),
+              value: _anioSeleccionado,
+              items:
+                  _anios.map((anio) {
+                    return DropdownMenuItem<int>(
+                      value: anio,
+                      child: Text('$anio'),
+                    );
+                  }).toList(),
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    _anioSeleccionado = value;
+                    _trimestreSeleccionado = _trimestresPorAnio[value]?.first;
+                  });
+                }
+              },
+            ),
+          ),
+          const SizedBox(width: 16),
+
+          // Filtro de trimestre
+          Expanded(
+            child: DropdownButtonFormField<dynamic>(
+              decoration: const InputDecoration(
+                labelText: 'Trimestre',
+                border: OutlineInputBorder(),
+              ),
+              value: _trimestreSeleccionado,
+              items:
+                  _anioSeleccionado != null
+                      ? _trimestresPorAnio[_anioSeleccionado]!.map((trimestre) {
+                        return DropdownMenuItem<dynamic>(
+                          value: trimestre,
+                          child: Text(trimestre['nombre']),
+                        );
+                      }).toList()
+                      : [],
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    _trimestreSeleccionado = value;
+                  });
+                }
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMateriasList(dynamic trimestre) {
+    final materias = trimestre['materias'] as List;
+
+    if (materias.isEmpty) {
+      return const Center(child: Text('No hay materias para este trimestre'));
+    }
+
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      itemCount: materias.length,
+      itemBuilder: (context, index) {
+        final materia = materias[index];
+        final key = "${materia['id']}-${trimestre['id']}";
+        final prediccion = _predicciones[key];
+
+        return Card(
+          margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+          elevation: 3,
+          child: ExpansionTile(
+            title: Text(
+              materia['nombre'],
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text('Promedio: ${materia['promedio_nota'] ?? "N/A"}'),
+            children: [
+              // Detalles de la materia
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Estadísticas de la materia
+                    _buildStatisticRow(
+                      'Notas',
+                      materia['promedio_nota']?.toString() ?? 'N/A',
+                      Icons.star,
+                      Colors.amber,
+                    ),
+                    _buildStatisticRow(
+                      'Participación',
+                      materia['promedio_participacion']?.toString() ?? 'N/A',
+                      Icons.record_voice_over,
+                      Colors.blue,
+                    ),
+                    _buildStatisticRow(
+                      'Asistencia',
+                      '${materia['porcentaje_asistencia']?.toString() ?? 'N/A'}%',
+                      Icons.calendar_today,
+                      Colors.green,
+                    ),
+                    _buildStatisticRow(
+                      'Clases asistidas',
+                      '${materia['asistencias_presentes'] ?? 0}/${materia['total_clases'] ?? 0}',
+                      Icons.people,
+                      Colors.purple,
+                    ),
+                    const Divider(height: 32),
+
+                    // Predicción
+                    if (prediccion != null) ...[
+                      const Text(
+                        'Predicción de Rendimiento',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+
+                      // Rendimiento predicho
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: _getPrediccionColor(
+                            prediccion['prediccion']['categoria'],
+                          ).withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: _getPrediccionColor(
+                              prediccion['prediccion']['categoria'],
+                            ),
+                            width: 1,
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  _getPrediccionIcon(
+                                    prediccion['prediccion']['categoria'],
+                                  ),
+                                  color: _getPrediccionColor(
+                                    prediccion['prediccion']['categoria'],
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  'Rendimiento esperado: ${prediccion['prediccion']['rendimiento_predicho']} - ${prediccion['prediccion']['categoria']}',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: _getPrediccionColor(
+                                      prediccion['prediccion']['categoria'],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Nivel de confianza: ${prediccion['prediccion']['nivel_confianza']}%',
+                            ),
+
+                            // Recomendaciones
+                            if (prediccion['prediccion']['recomendaciones'] !=
+                                null) ...[
+                              const SizedBox(height: 16),
+                              const Text(
+                                'Recomendaciones:',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(height: 8),
+                              ...(prediccion['prediccion']['recomendaciones']
+                                      as List)
+                                  .map<Widget>((recomendacion) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(
+                                        bottom: 8.0,
+                                      ),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Icon(
+                                            Icons.lightbulb_outline,
+                                            size: 18,
+                                            color: Colors.amber,
+                                          ),
+                                          const SizedBox(width: 8),
+                                          Expanded(
+                                            child: Text(
+                                              recomendacion['mensaje'] ?? '',
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  })
+                                  .toList(),
+                            ],
+                          ],
+                        ),
+                      ),
+                    ] else ...[
+                      // Si no hay predicción, mostrar un mensaje
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16),
+                        child: Text(
+                          'Generando predicción...',
+                          style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildStatisticRow(
+    String label,
+    String value,
+    IconData icon,
+    Color color,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      child: Row(
+        children: [
+          Icon(icon, color: color, size: 20),
+          const SizedBox(width: 8),
+          Text('$label:', style: const TextStyle(fontWeight: FontWeight.w500)),
+          const Spacer(),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: color.withOpacity(0.3)),
+            ),
+            child: Text(
+              value,
+              style: TextStyle(
+                color: color.withOpacity(0.8),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Color _getPrediccionColor(String categoria) {
+    switch (categoria.toLowerCase()) {
+      case 'excelente':
+        return Colors.green;
+      case 'bueno':
+        return Colors.lightGreen;
+      case 'regular':
+        return Colors.orange;
+      case 'bajo':
+        return Colors.red;
+      default:
+        return Colors.blue;
+    }
+  }
+
+  IconData _getPrediccionIcon(String categoria) {
+    switch (categoria.toLowerCase()) {
+      case 'excelente':
+        return Icons.emoji_events;
+      case 'bueno':
+        return Icons.thumb_up;
+      case 'regular':
+        return Icons.thumbs_up_down;
+      case 'bajo':
+        return Icons.warning;
+      default:
+        return Icons.insights;
     }
   }
 }

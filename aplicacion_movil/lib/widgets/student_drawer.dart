@@ -77,6 +77,17 @@ class StudentDrawer extends StatelessWidget {
             icon: Icons.insights,
             route: '/student/rendimiento',
             isSelected: currentRoute == '/student/rendimiento',
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(
+                context,
+                '/student/rendimiento',
+                arguments: {
+                  'estudianteId': currentUser?.id,
+                  'estudianteCodigo': currentUser?.codigo,
+                },
+              );
+            },
           ),
 
           const Spacer(),
@@ -107,6 +118,7 @@ class StudentDrawer extends StatelessWidget {
     required IconData icon,
     required String route,
     required bool isSelected,
+    VoidCallback? onTap, // <-- Agrega esto
   }) {
     return ListTile(
       leading: Icon(
@@ -122,22 +134,23 @@ class StudentDrawer extends StatelessWidget {
       ),
       selected: isSelected,
       selectedTileColor:
-          isSelected ? AppTheme.primaryColor.withOpacity(0.1) : null,
-      onTap: () {
-        if (route != currentRoute) {
-          Navigator.pop(context); // Cerrar el drawer
-
-          // Si ya estamos en una ruta del estudiante, usamos pushReplacementNamed
-          // para evitar apilar pantallas innecesariamente
-          if (currentRoute.startsWith('/student/')) {
-            Navigator.pushReplacementNamed(context, route);
-          } else {
-            Navigator.pushNamed(context, route);
-          }
-        } else {
-          Navigator.pop(context); // Solo cerramos el drawer
-        }
-      },
+          isSelected
+              ? AppTheme.primaryColor.withAlpha((0.1 * 255).toInt())
+              : null,
+      onTap:
+          onTap ??
+          () {
+            if (route != currentRoute) {
+              Navigator.pop(context); // Cerrar el drawer
+              if (currentRoute.startsWith('/student/')) {
+                Navigator.pushReplacementNamed(context, route);
+              } else {
+                Navigator.pushNamed(context, route);
+              }
+            } else {
+              Navigator.pop(context); // Solo cerramos el drawer
+            }
+          },
     );
   }
 }

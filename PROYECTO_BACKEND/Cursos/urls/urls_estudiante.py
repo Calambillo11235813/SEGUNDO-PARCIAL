@@ -21,4 +21,7 @@ urlpatterns = [
     path('estudiantes/<int:estudiante_id>/trimestres/<int:trimestre_id>/calificaciones/', 
          estudiante_controllers.obtener_calificaciones_trimestre, 
          name='obtener_calificaciones_trimestre'),
+
+    # Nueva URL para obtener el historial académico de un estudiante
+    path('estudiantes/<int:estudiante_id>/historial-academico/', estudiante_controllers.historial_academico_estudiante, name='historial_academico_estudiante'),
 ]

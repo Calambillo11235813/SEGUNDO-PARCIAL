@@ -2,10 +2,10 @@ class ApiConfig {
   // Cambia esto a la dirección IP de tu máquina si estás usando un emulador
   // Para Android emulator: usar 10.0.2.2 en lugar de localhost
   // Para dispositivos físicos: usar tu dirección IP local (ej: 192.168.1.5)
-  static const String baseUrl = 'http://192.168.0.7:8000/api';
+  static const String baseUrl = 'http://192.168.0.5:8000/api';
 
   // URL base para las APIs de IA (está fuera de /api según el error)
-  static const String baseIaUrl = 'http://192.168.0.7:8000/ia';
+  static const String baseIaUrl = 'http://192.168.0.5:8000/api/ml';
 
   // IA endpoints
   static const String predecirRendimientoEndpoint = '$baseIaUrl/predecir/';
