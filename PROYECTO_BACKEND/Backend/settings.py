@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'IA',# Añadido para manejar CORS
+    'machine_learning',
 ]
 
 MIDDLEWARE = [
@@ -180,3 +181,50 @@ CORS_ALLOW_ALL_ORIGINS = True  # Para desarrollo - en producción es mejor espec
 
 # Permitir credenciales (cookies, encabezados de autorización)
 CORS_ALLOW_CREDENTIALS = True
+
+# Configuración para Machine Learning
+ML_SETTINGS = {
+    'MODELS_DIR': os.path.join(BASE_DIR, 'machine_learning', 'models'),
+    'DEFAULT_TRAIN_TEST_SPLIT': 0.2,
+    'DEFAULT_CV_FOLDS': 5,
+    'MAX_PREDICTIONS_HISTORY': 50
+}
+
+# Logging específico para ML
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'django_ia.log'),
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'machine_learning': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
