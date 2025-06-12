@@ -1,0 +1,1711 @@
+materia,curso_id,tipo_evaluacion_id,trimestre_id,titulo,descripcion,porcentaje_nota_final,fecha_registro
+Matemáticas,1,3,7,PARTICIPACION 1,Participación en Matemáticas,1,2023-03-31
+Matemáticas,1,3,7,PARTICIPACION 2,Participación en Matemáticas,1,2023-02-23
+Matemáticas,1,3,7,PARTICIPACION 3,Participación en Matemáticas,1,2023-04-30
+Matemáticas,1,3,7,PARTICIPACION 4,Participación en Matemáticas,1,2023-03-30
+Matemáticas,1,3,7,PARTICIPACION 5,Participación en Matemáticas,1,2023-03-06
+Matemáticas,1,3,8,PARTICIPACION 1,Participación en Matemáticas,1,2023-05-06
+Matemáticas,1,3,8,PARTICIPACION 2,Participación en Matemáticas,1,2023-07-05
+Matemáticas,1,3,8,PARTICIPACION 3,Participación en Matemáticas,1,2023-07-03
+Matemáticas,1,3,8,PARTICIPACION 4,Participación en Matemáticas,1,2023-07-24
+Matemáticas,1,3,8,PARTICIPACION 5,Participación en Matemáticas,1,2023-05-13
+Matemáticas,1,3,9,PARTICIPACION 1,Participación en Matemáticas,1,2023-10-05
+Matemáticas,1,3,9,PARTICIPACION 2,Participación en Matemáticas,1,2023-12-18
+Matemáticas,1,3,9,PARTICIPACION 3,Participación en Matemáticas,1,2023-10-16
+Matemáticas,1,3,9,PARTICIPACION 4,Participación en Matemáticas,1,2023-12-19
+Matemáticas,1,3,9,PARTICIPACION 5,Participación en Matemáticas,1,2023-10-07
+Lenguaje,1,3,7,PARTICIPACION 1,Participación en Lenguaje,1,2023-04-19
+Lenguaje,1,3,7,PARTICIPACION 2,Participación en Lenguaje,1,2023-03-06
+Lenguaje,1,3,7,PARTICIPACION 3,Participación en Lenguaje,1,2023-03-27
+Lenguaje,1,3,7,PARTICIPACION 4,Participación en Lenguaje,1,2023-03-12
+Lenguaje,1,3,7,PARTICIPACION 5,Participación en Lenguaje,1,2023-04-19
+Lenguaje,1,3,8,PARTICIPACION 1,Participación en Lenguaje,1,2023-07-13
+Lenguaje,1,3,8,PARTICIPACION 2,Participación en Lenguaje,1,2023-05-14
+Lenguaje,1,3,8,PARTICIPACION 3,Participación en Lenguaje,1,2023-08-04
+Lenguaje,1,3,8,PARTICIPACION 4,Participación en Lenguaje,1,2023-05-09
+Lenguaje,1,3,8,PARTICIPACION 5,Participación en Lenguaje,1,2023-06-18
+Lenguaje,1,3,9,PARTICIPACION 1,Participación en Lenguaje,1,2023-11-30
+Lenguaje,1,3,9,PARTICIPACION 2,Participación en Lenguaje,1,2023-11-28
+Lenguaje,1,3,9,PARTICIPACION 3,Participación en Lenguaje,1,2023-12-12
+Lenguaje,1,3,9,PARTICIPACION 4,Participación en Lenguaje,1,2023-12-04
+Lenguaje,1,3,9,PARTICIPACION 5,Participación en Lenguaje,1,2023-10-04
+Ciencias Naturales,1,3,7,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-04-01
+Ciencias Naturales,1,3,7,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-04-13
+Ciencias Naturales,1,3,7,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-04-12
+Ciencias Naturales,1,3,7,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-02-26
+Ciencias Naturales,1,3,7,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-03-05
+Ciencias Naturales,1,3,8,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-07-22
+Ciencias Naturales,1,3,8,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-08-14
+Ciencias Naturales,1,3,8,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-08-11
+Ciencias Naturales,1,3,8,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-06-15
+Ciencias Naturales,1,3,8,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-08-14
+Ciencias Naturales,1,3,9,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-11-13
+Ciencias Naturales,1,3,9,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-11-02
+Ciencias Naturales,1,3,9,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-11-25
+Ciencias Naturales,1,3,9,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-12-04
+Ciencias Naturales,1,3,9,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-11-25
+Ciencias Sociales,1,3,7,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-04-02
+Ciencias Sociales,1,3,7,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-04-05
+Ciencias Sociales,1,3,7,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-02-12
+Ciencias Sociales,1,3,7,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-03-20
+Ciencias Sociales,1,3,7,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-03-14
+Ciencias Sociales,1,3,8,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-08-28
+Ciencias Sociales,1,3,8,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-05-23
+Ciencias Sociales,1,3,8,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-06-15
+Ciencias Sociales,1,3,8,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-05-12
+Ciencias Sociales,1,3,8,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-06-02
+Ciencias Sociales,1,3,9,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-11-26
+Ciencias Sociales,1,3,9,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-12-16
+Ciencias Sociales,1,3,9,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-12-20
+Ciencias Sociales,1,3,9,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-10-13
+Ciencias Sociales,1,3,9,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-12-09
+Educación Física,1,3,7,PARTICIPACION 1,Participación en Educación Física,1,2023-04-09
+Educación Física,1,3,7,PARTICIPACION 2,Participación en Educación Física,1,2023-04-10
+Educación Física,1,3,7,PARTICIPACION 3,Participación en Educación Física,1,2023-03-15
+Educación Física,1,3,7,PARTICIPACION 4,Participación en Educación Física,1,2023-03-07
+Educación Física,1,3,7,PARTICIPACION 5,Participación en Educación Física,1,2023-04-28
+Educación Física,1,3,8,PARTICIPACION 1,Participación en Educación Física,1,2023-05-28
+Educación Física,1,3,8,PARTICIPACION 2,Participación en Educación Física,1,2023-08-03
+Educación Física,1,3,8,PARTICIPACION 3,Participación en Educación Física,1,2023-08-07
+Educación Física,1,3,8,PARTICIPACION 4,Participación en Educación Física,1,2023-06-06
+Educación Física,1,3,8,PARTICIPACION 5,Participación en Educación Física,1,2023-05-21
+Educación Física,1,3,9,PARTICIPACION 1,Participación en Educación Física,1,2023-11-09
+Educación Física,1,3,9,PARTICIPACION 2,Participación en Educación Física,1,2023-12-19
+Educación Física,1,3,9,PARTICIPACION 3,Participación en Educación Física,1,2023-11-27
+Educación Física,1,3,9,PARTICIPACION 4,Participación en Educación Física,1,2023-10-27
+Educación Física,1,3,9,PARTICIPACION 5,Participación en Educación Física,1,2023-10-25
+Artes Plásticas,1,3,7,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-03-13
+Artes Plásticas,1,3,7,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-02-13
+Artes Plásticas,1,3,7,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-04-28
+Artes Plásticas,1,3,7,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-04-25
+Artes Plásticas,1,3,7,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-03-09
+Artes Plásticas,1,3,8,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-06-12
+Artes Plásticas,1,3,8,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-05-07
+Artes Plásticas,1,3,8,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-08-03
+Artes Plásticas,1,3,8,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-07-28
+Artes Plásticas,1,3,8,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-08-08
+Artes Plásticas,1,3,9,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-11-06
+Artes Plásticas,1,3,9,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-12-01
+Artes Plásticas,1,3,9,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-12-15
+Artes Plásticas,1,3,9,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-11-08
+Artes Plásticas,1,3,9,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-12-16
+Música,1,3,7,PARTICIPACION 1,Participación en Música,1,2023-02-14
+Música,1,3,7,PARTICIPACION 2,Participación en Música,1,2023-04-15
+Música,1,3,7,PARTICIPACION 3,Participación en Música,1,2023-04-06
+Música,1,3,7,PARTICIPACION 4,Participación en Música,1,2023-02-27
+Música,1,3,7,PARTICIPACION 5,Participación en Música,1,2023-03-07
+Música,1,3,8,PARTICIPACION 1,Participación en Música,1,2023-08-01
+Música,1,3,8,PARTICIPACION 2,Participación en Música,1,2023-07-17
+Música,1,3,8,PARTICIPACION 3,Participación en Música,1,2023-06-18
+Música,1,3,8,PARTICIPACION 4,Participación en Música,1,2023-06-15
+Música,1,3,8,PARTICIPACION 5,Participación en Música,1,2023-08-30
+Música,1,3,9,PARTICIPACION 1,Participación en Música,1,2023-11-21
+Música,1,3,9,PARTICIPACION 2,Participación en Música,1,2023-12-10
+Música,1,3,9,PARTICIPACION 3,Participación en Música,1,2023-10-25
+Música,1,3,9,PARTICIPACION 4,Participación en Música,1,2023-10-16
+Música,1,3,9,PARTICIPACION 5,Participación en Música,1,2023-10-21
+Religión,1,3,7,PARTICIPACION 1,Participación en Religión,1,2023-04-19
+Religión,1,3,7,PARTICIPACION 2,Participación en Religión,1,2023-02-27
+Religión,1,3,7,PARTICIPACION 3,Participación en Religión,1,2023-03-01
+Religión,1,3,7,PARTICIPACION 4,Participación en Religión,1,2023-03-27
+Religión,1,3,7,PARTICIPACION 5,Participación en Religión,1,2023-04-01
+Religión,1,3,8,PARTICIPACION 1,Participación en Religión,1,2023-05-02
+Religión,1,3,8,PARTICIPACION 2,Participación en Religión,1,2023-06-17
+Religión,1,3,8,PARTICIPACION 3,Participación en Religión,1,2023-08-12
+Religión,1,3,8,PARTICIPACION 4,Participación en Religión,1,2023-08-03
+Religión,1,3,8,PARTICIPACION 5,Participación en Religión,1,2023-05-16
+Religión,1,3,9,PARTICIPACION 1,Participación en Religión,1,2023-10-27
+Religión,1,3,9,PARTICIPACION 2,Participación en Religión,1,2023-10-16
+Religión,1,3,9,PARTICIPACION 3,Participación en Religión,1,2023-12-02
+Religión,1,3,9,PARTICIPACION 4,Participación en Religión,1,2023-11-24
+Religión,1,3,9,PARTICIPACION 5,Participación en Religión,1,2023-10-30
+Matemáticas,2,3,7,PARTICIPACION 1,Participación en Matemáticas,1,2023-03-13
+Matemáticas,2,3,7,PARTICIPACION 2,Participación en Matemáticas,1,2023-02-24
+Matemáticas,2,3,7,PARTICIPACION 3,Participación en Matemáticas,1,2023-02-20
+Matemáticas,2,3,7,PARTICIPACION 4,Participación en Matemáticas,1,2023-04-28
+Matemáticas,2,3,7,PARTICIPACION 5,Participación en Matemáticas,1,2023-02-26
+Matemáticas,2,3,8,PARTICIPACION 1,Participación en Matemáticas,1,2023-08-19
+Matemáticas,2,3,8,PARTICIPACION 2,Participación en Matemáticas,1,2023-06-17
+Matemáticas,2,3,8,PARTICIPACION 3,Participación en Matemáticas,1,2023-06-10
+Matemáticas,2,3,8,PARTICIPACION 4,Participación en Matemáticas,1,2023-06-18
+Matemáticas,2,3,8,PARTICIPACION 5,Participación en Matemáticas,1,2023-07-24
+Matemáticas,2,3,9,PARTICIPACION 1,Participación en Matemáticas,1,2023-12-04
+Matemáticas,2,3,9,PARTICIPACION 2,Participación en Matemáticas,1,2023-11-16
+Matemáticas,2,3,9,PARTICIPACION 3,Participación en Matemáticas,1,2023-10-30
+Matemáticas,2,3,9,PARTICIPACION 4,Participación en Matemáticas,1,2023-10-04
+Matemáticas,2,3,9,PARTICIPACION 5,Participación en Matemáticas,1,2023-10-15
+Lenguaje,2,3,7,PARTICIPACION 1,Participación en Lenguaje,1,2023-03-27
+Lenguaje,2,3,7,PARTICIPACION 2,Participación en Lenguaje,1,2023-04-30
+Lenguaje,2,3,7,PARTICIPACION 3,Participación en Lenguaje,1,2023-02-07
+Lenguaje,2,3,7,PARTICIPACION 4,Participación en Lenguaje,1,2023-04-15
+Lenguaje,2,3,7,PARTICIPACION 5,Participación en Lenguaje,1,2023-03-21
+Lenguaje,2,3,8,PARTICIPACION 1,Participación en Lenguaje,1,2023-08-02
+Lenguaje,2,3,8,PARTICIPACION 2,Participación en Lenguaje,1,2023-08-23
+Lenguaje,2,3,8,PARTICIPACION 3,Participación en Lenguaje,1,2023-08-10
+Lenguaje,2,3,8,PARTICIPACION 4,Participación en Lenguaje,1,2023-06-09
+Lenguaje,2,3,8,PARTICIPACION 5,Participación en Lenguaje,1,2023-06-17
+Lenguaje,2,3,9,PARTICIPACION 1,Participación en Lenguaje,1,2023-11-12
+Lenguaje,2,3,9,PARTICIPACION 2,Participación en Lenguaje,1,2023-12-13
+Lenguaje,2,3,9,PARTICIPACION 3,Participación en Lenguaje,1,2023-10-06
+Lenguaje,2,3,9,PARTICIPACION 4,Participación en Lenguaje,1,2023-10-15
+Lenguaje,2,3,9,PARTICIPACION 5,Participación en Lenguaje,1,2023-11-03
+Ciencias Naturales,2,3,7,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-03-06
+Ciencias Naturales,2,3,7,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-02-26
+Ciencias Naturales,2,3,7,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-04-15
+Ciencias Naturales,2,3,7,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-02-25
+Ciencias Naturales,2,3,7,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-03-28
+Ciencias Naturales,2,3,8,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-07-28
+Ciencias Naturales,2,3,8,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-05-29
+Ciencias Naturales,2,3,8,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-07-01
+Ciencias Naturales,2,3,8,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-05-03
+Ciencias Naturales,2,3,8,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-07-17
+Ciencias Naturales,2,3,9,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-12-13
+Ciencias Naturales,2,3,9,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-12-18
+Ciencias Naturales,2,3,9,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-11-30
+Ciencias Naturales,2,3,9,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-10-02
+Ciencias Naturales,2,3,9,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-10-08
+Ciencias Sociales,2,3,7,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-02-26
+Ciencias Sociales,2,3,7,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-02-17
+Ciencias Sociales,2,3,7,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-04-12
+Ciencias Sociales,2,3,7,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-03-06
+Ciencias Sociales,2,3,7,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-02-12
+Ciencias Sociales,2,3,8,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-07-24
+Ciencias Sociales,2,3,8,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-05-17
+Ciencias Sociales,2,3,8,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-06-14
+Ciencias Sociales,2,3,8,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-08-24
+Ciencias Sociales,2,3,8,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-08-16
+Ciencias Sociales,2,3,9,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-12-13
+Ciencias Sociales,2,3,9,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-10-28
+Ciencias Sociales,2,3,9,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-11-30
+Ciencias Sociales,2,3,9,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-11-22
+Ciencias Sociales,2,3,9,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-12-08
+Educación Física,2,3,7,PARTICIPACION 1,Participación en Educación Física,1,2023-02-03
+Educación Física,2,3,7,PARTICIPACION 2,Participación en Educación Física,1,2023-03-05
+Educación Física,2,3,7,PARTICIPACION 3,Participación en Educación Física,1,2023-02-09
+Educación Física,2,3,7,PARTICIPACION 4,Participación en Educación Física,1,2023-02-19
+Educación Física,2,3,7,PARTICIPACION 5,Participación en Educación Física,1,2023-03-23
+Educación Física,2,3,8,PARTICIPACION 1,Participación en Educación Física,1,2023-05-29
+Educación Física,2,3,8,PARTICIPACION 2,Participación en Educación Física,1,2023-08-12
+Educación Física,2,3,8,PARTICIPACION 3,Participación en Educación Física,1,2023-07-30
+Educación Física,2,3,8,PARTICIPACION 4,Participación en Educación Física,1,2023-07-10
+Educación Física,2,3,8,PARTICIPACION 5,Participación en Educación Física,1,2023-08-07
+Educación Física,2,3,9,PARTICIPACION 1,Participación en Educación Física,1,2023-10-28
+Educación Física,2,3,9,PARTICIPACION 2,Participación en Educación Física,1,2023-10-03
+Educación Física,2,3,9,PARTICIPACION 3,Participación en Educación Física,1,2023-11-03
+Educación Física,2,3,9,PARTICIPACION 4,Participación en Educación Física,1,2023-10-28
+Educación Física,2,3,9,PARTICIPACION 5,Participación en Educación Física,1,2023-11-21
+Artes Plásticas,2,3,7,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-04-09
+Artes Plásticas,2,3,7,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-03-23
+Artes Plásticas,2,3,7,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-03-02
+Artes Plásticas,2,3,7,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-04-16
+Artes Plásticas,2,3,7,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-03-04
+Artes Plásticas,2,3,8,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-07-16
+Artes Plásticas,2,3,8,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-07-18
+Artes Plásticas,2,3,8,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-06-06
+Artes Plásticas,2,3,8,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-05-28
+Artes Plásticas,2,3,8,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-05-17
+Artes Plásticas,2,3,9,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-12-10
+Artes Plásticas,2,3,9,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-10-10
+Artes Plásticas,2,3,9,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-11-07
+Artes Plásticas,2,3,9,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-12-17
+Artes Plásticas,2,3,9,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-11-21
+Música,2,3,7,PARTICIPACION 1,Participación en Música,1,2023-02-04
+Música,2,3,7,PARTICIPACION 2,Participación en Música,1,2023-03-20
+Música,2,3,7,PARTICIPACION 3,Participación en Música,1,2023-03-09
+Música,2,3,7,PARTICIPACION 4,Participación en Música,1,2023-03-12
+Música,2,3,7,PARTICIPACION 5,Participación en Música,1,2023-03-08
+Música,2,3,8,PARTICIPACION 1,Participación en Música,1,2023-08-01
+Música,2,3,8,PARTICIPACION 2,Participación en Música,1,2023-05-29
+Música,2,3,8,PARTICIPACION 3,Participación en Música,1,2023-07-04
+Música,2,3,8,PARTICIPACION 4,Participación en Música,1,2023-08-19
+Música,2,3,8,PARTICIPACION 5,Participación en Música,1,2023-08-18
+Música,2,3,9,PARTICIPACION 1,Participación en Música,1,2023-10-28
+Música,2,3,9,PARTICIPACION 2,Participación en Música,1,2023-11-22
+Música,2,3,9,PARTICIPACION 3,Participación en Música,1,2023-12-17
+Música,2,3,9,PARTICIPACION 4,Participación en Música,1,2023-11-04
+Música,2,3,9,PARTICIPACION 5,Participación en Música,1,2023-10-23
+Religión,2,3,7,PARTICIPACION 1,Participación en Religión,1,2023-03-26
+Religión,2,3,7,PARTICIPACION 2,Participación en Religión,1,2023-02-28
+Religión,2,3,7,PARTICIPACION 3,Participación en Religión,1,2023-02-07
+Religión,2,3,7,PARTICIPACION 4,Participación en Religión,1,2023-04-08
+Religión,2,3,7,PARTICIPACION 5,Participación en Religión,1,2023-02-14
+Religión,2,3,8,PARTICIPACION 1,Participación en Religión,1,2023-05-06
+Religión,2,3,8,PARTICIPACION 2,Participación en Religión,1,2023-05-06
+Religión,2,3,8,PARTICIPACION 3,Participación en Religión,1,2023-06-12
+Religión,2,3,8,PARTICIPACION 4,Participación en Religión,1,2023-08-21
+Religión,2,3,8,PARTICIPACION 5,Participación en Religión,1,2023-07-02
+Religión,2,3,9,PARTICIPACION 1,Participación en Religión,1,2023-11-10
+Religión,2,3,9,PARTICIPACION 2,Participación en Religión,1,2023-10-25
+Religión,2,3,9,PARTICIPACION 3,Participación en Religión,1,2023-11-16
+Religión,2,3,9,PARTICIPACION 4,Participación en Religión,1,2023-11-19
+Religión,2,3,9,PARTICIPACION 5,Participación en Religión,1,2023-12-19
+Matemáticas,3,3,7,PARTICIPACION 1,Participación en Matemáticas,1,2023-02-09
+Matemáticas,3,3,7,PARTICIPACION 2,Participación en Matemáticas,1,2023-03-05
+Matemáticas,3,3,7,PARTICIPACION 3,Participación en Matemáticas,1,2023-04-04
+Matemáticas,3,3,7,PARTICIPACION 4,Participación en Matemáticas,1,2023-03-07
+Matemáticas,3,3,7,PARTICIPACION 5,Participación en Matemáticas,1,2023-02-20
+Matemáticas,3,3,8,PARTICIPACION 1,Participación en Matemáticas,1,2023-05-07
+Matemáticas,3,3,8,PARTICIPACION 2,Participación en Matemáticas,1,2023-05-16
+Matemáticas,3,3,8,PARTICIPACION 3,Participación en Matemáticas,1,2023-08-09
+Matemáticas,3,3,8,PARTICIPACION 4,Participación en Matemáticas,1,2023-07-11
+Matemáticas,3,3,8,PARTICIPACION 5,Participación en Matemáticas,1,2023-08-18
+Matemáticas,3,3,9,PARTICIPACION 1,Participación en Matemáticas,1,2023-10-17
+Matemáticas,3,3,9,PARTICIPACION 2,Participación en Matemáticas,1,2023-10-01
+Matemáticas,3,3,9,PARTICIPACION 3,Participación en Matemáticas,1,2023-12-09
+Matemáticas,3,3,9,PARTICIPACION 4,Participación en Matemáticas,1,2023-11-12
+Matemáticas,3,3,9,PARTICIPACION 5,Participación en Matemáticas,1,2023-10-27
+Lenguaje,3,3,7,PARTICIPACION 1,Participación en Lenguaje,1,2023-02-21
+Lenguaje,3,3,7,PARTICIPACION 2,Participación en Lenguaje,1,2023-02-21
+Lenguaje,3,3,7,PARTICIPACION 3,Participación en Lenguaje,1,2023-04-20
+Lenguaje,3,3,7,PARTICIPACION 4,Participación en Lenguaje,1,2023-03-29
+Lenguaje,3,3,7,PARTICIPACION 5,Participación en Lenguaje,1,2023-02-04
+Lenguaje,3,3,8,PARTICIPACION 1,Participación en Lenguaje,1,2023-08-04
+Lenguaje,3,3,8,PARTICIPACION 2,Participación en Lenguaje,1,2023-07-14
+Lenguaje,3,3,8,PARTICIPACION 3,Participación en Lenguaje,1,2023-07-03
+Lenguaje,3,3,8,PARTICIPACION 4,Participación en Lenguaje,1,2023-08-12
+Lenguaje,3,3,8,PARTICIPACION 5,Participación en Lenguaje,1,2023-06-03
+Lenguaje,3,3,9,PARTICIPACION 1,Participación en Lenguaje,1,2023-10-02
+Lenguaje,3,3,9,PARTICIPACION 2,Participación en Lenguaje,1,2023-10-07
+Lenguaje,3,3,9,PARTICIPACION 3,Participación en Lenguaje,1,2023-11-01
+Lenguaje,3,3,9,PARTICIPACION 4,Participación en Lenguaje,1,2023-12-16
+Lenguaje,3,3,9,PARTICIPACION 5,Participación en Lenguaje,1,2023-12-14
+Ciencias Naturales,3,3,7,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-02-27
+Ciencias Naturales,3,3,7,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-03-22
+Ciencias Naturales,3,3,7,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-04-06
+Ciencias Naturales,3,3,7,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-04-15
+Ciencias Naturales,3,3,7,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-02-20
+Ciencias Naturales,3,3,8,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-08-23
+Ciencias Naturales,3,3,8,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-06-17
+Ciencias Naturales,3,3,8,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-07-09
+Ciencias Naturales,3,3,8,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-08-21
+Ciencias Naturales,3,3,8,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-07-30
+Ciencias Naturales,3,3,9,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-10-10
+Ciencias Naturales,3,3,9,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-12-17
+Ciencias Naturales,3,3,9,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-10-24
+Ciencias Naturales,3,3,9,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-11-07
+Ciencias Naturales,3,3,9,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-10-24
+Ciencias Sociales,3,3,7,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-03-08
+Ciencias Sociales,3,3,7,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-03-20
+Ciencias Sociales,3,3,7,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-03-23
+Ciencias Sociales,3,3,7,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-03-22
+Ciencias Sociales,3,3,7,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-03-05
+Ciencias Sociales,3,3,8,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-08-13
+Ciencias Sociales,3,3,8,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-06-19
+Ciencias Sociales,3,3,8,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-05-24
+Ciencias Sociales,3,3,8,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-05-30
+Ciencias Sociales,3,3,8,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-06-11
+Ciencias Sociales,3,3,9,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-12-10
+Ciencias Sociales,3,3,9,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-12-03
+Ciencias Sociales,3,3,9,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-11-30
+Ciencias Sociales,3,3,9,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-10-05
+Ciencias Sociales,3,3,9,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-12-02
+Educación Física,3,3,7,PARTICIPACION 1,Participación en Educación Física,1,2023-04-08
+Educación Física,3,3,7,PARTICIPACION 2,Participación en Educación Física,1,2023-02-09
+Educación Física,3,3,7,PARTICIPACION 3,Participación en Educación Física,1,2023-03-15
+Educación Física,3,3,7,PARTICIPACION 4,Participación en Educación Física,1,2023-02-03
+Educación Física,3,3,7,PARTICIPACION 5,Participación en Educación Física,1,2023-02-10
+Educación Física,3,3,8,PARTICIPACION 1,Participación en Educación Física,1,2023-08-22
+Educación Física,3,3,8,PARTICIPACION 2,Participación en Educación Física,1,2023-06-19
+Educación Física,3,3,8,PARTICIPACION 3,Participación en Educación Física,1,2023-08-14
+Educación Física,3,3,8,PARTICIPACION 4,Participación en Educación Física,1,2023-06-22
+Educación Física,3,3,8,PARTICIPACION 5,Participación en Educación Física,1,2023-08-28
+Educación Física,3,3,9,PARTICIPACION 1,Participación en Educación Física,1,2023-10-03
+Educación Física,3,3,9,PARTICIPACION 2,Participación en Educación Física,1,2023-10-23
+Educación Física,3,3,9,PARTICIPACION 3,Participación en Educación Física,1,2023-11-22
+Educación Física,3,3,9,PARTICIPACION 4,Participación en Educación Física,1,2023-10-23
+Educación Física,3,3,9,PARTICIPACION 5,Participación en Educación Física,1,2023-11-27
+Artes Plásticas,3,3,7,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-04-12
+Artes Plásticas,3,3,7,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-04-04
+Artes Plásticas,3,3,7,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-04-05
+Artes Plásticas,3,3,7,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-02-25
+Artes Plásticas,3,3,7,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-02-21
+Artes Plásticas,3,3,8,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-05-21
+Artes Plásticas,3,3,8,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-07-07
+Artes Plásticas,3,3,8,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-08-16
+Artes Plásticas,3,3,8,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-08-21
+Artes Plásticas,3,3,8,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-06-11
+Artes Plásticas,3,3,9,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-10-02
+Artes Plásticas,3,3,9,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-12-16
+Artes Plásticas,3,3,9,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-12-10
+Artes Plásticas,3,3,9,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-11-24
+Artes Plásticas,3,3,9,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-10-13
+Música,3,3,7,PARTICIPACION 1,Participación en Música,1,2023-04-16
+Música,3,3,7,PARTICIPACION 2,Participación en Música,1,2023-02-09
+Música,3,3,7,PARTICIPACION 3,Participación en Música,1,2023-03-05
+Música,3,3,7,PARTICIPACION 4,Participación en Música,1,2023-02-20
+Música,3,3,7,PARTICIPACION 5,Participación en Música,1,2023-04-28
+Música,3,3,8,PARTICIPACION 1,Participación en Música,1,2023-07-15
+Música,3,3,8,PARTICIPACION 2,Participación en Música,1,2023-06-21
+Música,3,3,8,PARTICIPACION 3,Participación en Música,1,2023-06-17
+Música,3,3,8,PARTICIPACION 4,Participación en Música,1,2023-07-15
+Música,3,3,8,PARTICIPACION 5,Participación en Música,1,2023-06-22
+Música,3,3,9,PARTICIPACION 1,Participación en Música,1,2023-10-14
+Música,3,3,9,PARTICIPACION 2,Participación en Música,1,2023-12-15
+Música,3,3,9,PARTICIPACION 3,Participación en Música,1,2023-11-10
+Música,3,3,9,PARTICIPACION 4,Participación en Música,1,2023-11-04
+Música,3,3,9,PARTICIPACION 5,Participación en Música,1,2023-10-26
+Religión,3,3,7,PARTICIPACION 1,Participación en Religión,1,2023-02-22
+Religión,3,3,7,PARTICIPACION 2,Participación en Religión,1,2023-03-08
+Religión,3,3,7,PARTICIPACION 3,Participación en Religión,1,2023-04-28
+Religión,3,3,7,PARTICIPACION 4,Participación en Religión,1,2023-04-05
+Religión,3,3,7,PARTICIPACION 5,Participación en Religión,1,2023-03-22
+Religión,3,3,8,PARTICIPACION 1,Participación en Religión,1,2023-06-15
+Religión,3,3,8,PARTICIPACION 2,Participación en Religión,1,2023-07-30
+Religión,3,3,8,PARTICIPACION 3,Participación en Religión,1,2023-05-15
+Religión,3,3,8,PARTICIPACION 4,Participación en Religión,1,2023-05-03
+Religión,3,3,8,PARTICIPACION 5,Participación en Religión,1,2023-07-15
+Religión,3,3,9,PARTICIPACION 1,Participación en Religión,1,2023-11-25
+Religión,3,3,9,PARTICIPACION 2,Participación en Religión,1,2023-11-21
+Religión,3,3,9,PARTICIPACION 3,Participación en Religión,1,2023-11-03
+Religión,3,3,9,PARTICIPACION 4,Participación en Religión,1,2023-10-16
+Religión,3,3,9,PARTICIPACION 5,Participación en Religión,1,2023-10-31
+Matemáticas,4,3,7,PARTICIPACION 1,Participación en Matemáticas,1,2023-02-24
+Matemáticas,4,3,7,PARTICIPACION 2,Participación en Matemáticas,1,2023-04-22
+Matemáticas,4,3,7,PARTICIPACION 3,Participación en Matemáticas,1,2023-03-06
+Matemáticas,4,3,7,PARTICIPACION 4,Participación en Matemáticas,1,2023-02-22
+Matemáticas,4,3,7,PARTICIPACION 5,Participación en Matemáticas,1,2023-02-07
+Matemáticas,4,3,8,PARTICIPACION 1,Participación en Matemáticas,1,2023-07-05
+Matemáticas,4,3,8,PARTICIPACION 2,Participación en Matemáticas,1,2023-06-28
+Matemáticas,4,3,8,PARTICIPACION 3,Participación en Matemáticas,1,2023-08-19
+Matemáticas,4,3,8,PARTICIPACION 4,Participación en Matemáticas,1,2023-08-07
+Matemáticas,4,3,8,PARTICIPACION 5,Participación en Matemáticas,1,2023-08-27
+Matemáticas,4,3,9,PARTICIPACION 1,Participación en Matemáticas,1,2023-11-01
+Matemáticas,4,3,9,PARTICIPACION 2,Participación en Matemáticas,1,2023-11-03
+Matemáticas,4,3,9,PARTICIPACION 3,Participación en Matemáticas,1,2023-11-27
+Matemáticas,4,3,9,PARTICIPACION 4,Participación en Matemáticas,1,2023-12-15
+Matemáticas,4,3,9,PARTICIPACION 5,Participación en Matemáticas,1,2023-12-20
+Lenguaje,4,3,7,PARTICIPACION 1,Participación en Lenguaje,1,2023-03-27
+Lenguaje,4,3,7,PARTICIPACION 2,Participación en Lenguaje,1,2023-02-24
+Lenguaje,4,3,7,PARTICIPACION 3,Participación en Lenguaje,1,2023-04-04
+Lenguaje,4,3,7,PARTICIPACION 4,Participación en Lenguaje,1,2023-02-08
+Lenguaje,4,3,7,PARTICIPACION 5,Participación en Lenguaje,1,2023-04-11
+Lenguaje,4,3,8,PARTICIPACION 1,Participación en Lenguaje,1,2023-07-15
+Lenguaje,4,3,8,PARTICIPACION 2,Participación en Lenguaje,1,2023-05-18
+Lenguaje,4,3,8,PARTICIPACION 3,Participación en Lenguaje,1,2023-05-19
+Lenguaje,4,3,8,PARTICIPACION 4,Participación en Lenguaje,1,2023-08-20
+Lenguaje,4,3,8,PARTICIPACION 5,Participación en Lenguaje,1,2023-08-01
+Lenguaje,4,3,9,PARTICIPACION 1,Participación en Lenguaje,1,2023-11-03
+Lenguaje,4,3,9,PARTICIPACION 2,Participación en Lenguaje,1,2023-10-10
+Lenguaje,4,3,9,PARTICIPACION 3,Participación en Lenguaje,1,2023-10-24
+Lenguaje,4,3,9,PARTICIPACION 4,Participación en Lenguaje,1,2023-12-17
+Lenguaje,4,3,9,PARTICIPACION 5,Participación en Lenguaje,1,2023-10-27
+Ciencias Naturales,4,3,7,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-04-15
+Ciencias Naturales,4,3,7,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-04-01
+Ciencias Naturales,4,3,7,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-04-10
+Ciencias Naturales,4,3,7,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-04-30
+Ciencias Naturales,4,3,7,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-04-10
+Ciencias Naturales,4,3,8,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-08-17
+Ciencias Naturales,4,3,8,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-08-31
+Ciencias Naturales,4,3,8,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-07-11
+Ciencias Naturales,4,3,8,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-07-10
+Ciencias Naturales,4,3,8,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-07-03
+Ciencias Naturales,4,3,9,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-10-16
+Ciencias Naturales,4,3,9,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-11-05
+Ciencias Naturales,4,3,9,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-10-13
+Ciencias Naturales,4,3,9,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-11-10
+Ciencias Naturales,4,3,9,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-10-28
+Ciencias Sociales,4,3,7,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-02-13
+Ciencias Sociales,4,3,7,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-03-02
+Ciencias Sociales,4,3,7,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-03-14
+Ciencias Sociales,4,3,7,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-02-06
+Ciencias Sociales,4,3,7,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-02-28
+Ciencias Sociales,4,3,8,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-08-30
+Ciencias Sociales,4,3,8,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-05-08
+Ciencias Sociales,4,3,8,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-07-11
+Ciencias Sociales,4,3,8,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-08-02
+Ciencias Sociales,4,3,8,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-06-24
+Ciencias Sociales,4,3,9,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-12-10
+Ciencias Sociales,4,3,9,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-11-28
+Ciencias Sociales,4,3,9,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-10-31
+Ciencias Sociales,4,3,9,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-12-15
+Ciencias Sociales,4,3,9,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-12-15
+Educación Física,4,3,7,PARTICIPACION 1,Participación en Educación Física,1,2023-04-23
+Educación Física,4,3,7,PARTICIPACION 2,Participación en Educación Física,1,2023-03-31
+Educación Física,4,3,7,PARTICIPACION 3,Participación en Educación Física,1,2023-03-31
+Educación Física,4,3,7,PARTICIPACION 4,Participación en Educación Física,1,2023-02-10
+Educación Física,4,3,7,PARTICIPACION 5,Participación en Educación Física,1,2023-02-28
+Educación Física,4,3,8,PARTICIPACION 1,Participación en Educación Física,1,2023-07-02
+Educación Física,4,3,8,PARTICIPACION 2,Participación en Educación Física,1,2023-08-14
+Educación Física,4,3,8,PARTICIPACION 3,Participación en Educación Física,1,2023-08-06
+Educación Física,4,3,8,PARTICIPACION 4,Participación en Educación Física,1,2023-05-10
+Educación Física,4,3,8,PARTICIPACION 5,Participación en Educación Física,1,2023-06-27
+Educación Física,4,3,9,PARTICIPACION 1,Participación en Educación Física,1,2023-10-29
+Educación Física,4,3,9,PARTICIPACION 2,Participación en Educación Física,1,2023-11-19
+Educación Física,4,3,9,PARTICIPACION 3,Participación en Educación Física,1,2023-11-11
+Educación Física,4,3,9,PARTICIPACION 4,Participación en Educación Física,1,2023-10-18
+Educación Física,4,3,9,PARTICIPACION 5,Participación en Educación Física,1,2023-10-19
+Artes Plásticas,4,3,7,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-03-30
+Artes Plásticas,4,3,7,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-04-14
+Artes Plásticas,4,3,7,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-03-03
+Artes Plásticas,4,3,7,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-03-30
+Artes Plásticas,4,3,7,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-02-25
+Artes Plásticas,4,3,8,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-06-24
+Artes Plásticas,4,3,8,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-08-02
+Artes Plásticas,4,3,8,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-05-15
+Artes Plásticas,4,3,8,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-07-08
+Artes Plásticas,4,3,8,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-08-21
+Artes Plásticas,4,3,9,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-10-03
+Artes Plásticas,4,3,9,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-11-21
+Artes Plásticas,4,3,9,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-10-09
+Artes Plásticas,4,3,9,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-10-10
+Artes Plásticas,4,3,9,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-10-22
+Música,4,3,7,PARTICIPACION 1,Participación en Música,1,2023-02-26
+Música,4,3,7,PARTICIPACION 2,Participación en Música,1,2023-04-26
+Música,4,3,7,PARTICIPACION 3,Participación en Música,1,2023-02-23
+Música,4,3,7,PARTICIPACION 4,Participación en Música,1,2023-03-18
+Música,4,3,7,PARTICIPACION 5,Participación en Música,1,2023-03-28
+Música,4,3,8,PARTICIPACION 1,Participación en Música,1,2023-05-26
+Música,4,3,8,PARTICIPACION 2,Participación en Música,1,2023-08-14
+Música,4,3,8,PARTICIPACION 3,Participación en Música,1,2023-07-25
+Música,4,3,8,PARTICIPACION 4,Participación en Música,1,2023-08-10
+Música,4,3,8,PARTICIPACION 5,Participación en Música,1,2023-05-02
+Música,4,3,9,PARTICIPACION 1,Participación en Música,1,2023-12-17
+Música,4,3,9,PARTICIPACION 2,Participación en Música,1,2023-10-02
+Música,4,3,9,PARTICIPACION 3,Participación en Música,1,2023-10-07
+Música,4,3,9,PARTICIPACION 4,Participación en Música,1,2023-10-09
+Música,4,3,9,PARTICIPACION 5,Participación en Música,1,2023-12-07
+Religión,4,3,7,PARTICIPACION 1,Participación en Religión,1,2023-03-13
+Religión,4,3,7,PARTICIPACION 2,Participación en Religión,1,2023-02-25
+Religión,4,3,7,PARTICIPACION 3,Participación en Religión,1,2023-02-21
+Religión,4,3,7,PARTICIPACION 4,Participación en Religión,1,2023-02-05
+Religión,4,3,7,PARTICIPACION 5,Participación en Religión,1,2023-04-23
+Religión,4,3,8,PARTICIPACION 1,Participación en Religión,1,2023-05-04
+Religión,4,3,8,PARTICIPACION 2,Participación en Religión,1,2023-05-28
+Religión,4,3,8,PARTICIPACION 3,Participación en Religión,1,2023-08-25
+Religión,4,3,8,PARTICIPACION 4,Participación en Religión,1,2023-07-01
+Religión,4,3,8,PARTICIPACION 5,Participación en Religión,1,2023-07-09
+Religión,4,3,9,PARTICIPACION 1,Participación en Religión,1,2023-12-06
+Religión,4,3,9,PARTICIPACION 2,Participación en Religión,1,2023-10-26
+Religión,4,3,9,PARTICIPACION 3,Participación en Religión,1,2023-10-30
+Religión,4,3,9,PARTICIPACION 4,Participación en Religión,1,2023-10-28
+Religión,4,3,9,PARTICIPACION 5,Participación en Religión,1,2023-10-10
+Matemáticas,5,3,7,PARTICIPACION 1,Participación en Matemáticas,1,2023-02-14
+Matemáticas,5,3,7,PARTICIPACION 2,Participación en Matemáticas,1,2023-04-30
+Matemáticas,5,3,7,PARTICIPACION 3,Participación en Matemáticas,1,2023-03-17
+Matemáticas,5,3,7,PARTICIPACION 4,Participación en Matemáticas,1,2023-03-22
+Matemáticas,5,3,7,PARTICIPACION 5,Participación en Matemáticas,1,2023-04-02
+Matemáticas,5,3,8,PARTICIPACION 1,Participación en Matemáticas,1,2023-06-03
+Matemáticas,5,3,8,PARTICIPACION 2,Participación en Matemáticas,1,2023-06-21
+Matemáticas,5,3,8,PARTICIPACION 3,Participación en Matemáticas,1,2023-08-13
+Matemáticas,5,3,8,PARTICIPACION 4,Participación en Matemáticas,1,2023-07-15
+Matemáticas,5,3,8,PARTICIPACION 5,Participación en Matemáticas,1,2023-05-03
+Matemáticas,5,3,9,PARTICIPACION 1,Participación en Matemáticas,1,2023-10-14
+Matemáticas,5,3,9,PARTICIPACION 2,Participación en Matemáticas,1,2023-10-21
+Matemáticas,5,3,9,PARTICIPACION 3,Participación en Matemáticas,1,2023-11-23
+Matemáticas,5,3,9,PARTICIPACION 4,Participación en Matemáticas,1,2023-12-06
+Matemáticas,5,3,9,PARTICIPACION 5,Participación en Matemáticas,1,2023-10-16
+Lenguaje,5,3,7,PARTICIPACION 1,Participación en Lenguaje,1,2023-02-05
+Lenguaje,5,3,7,PARTICIPACION 2,Participación en Lenguaje,1,2023-04-06
+Lenguaje,5,3,7,PARTICIPACION 3,Participación en Lenguaje,1,2023-02-19
+Lenguaje,5,3,7,PARTICIPACION 4,Participación en Lenguaje,1,2023-03-26
+Lenguaje,5,3,7,PARTICIPACION 5,Participación en Lenguaje,1,2023-03-20
+Lenguaje,5,3,8,PARTICIPACION 1,Participación en Lenguaje,1,2023-07-29
+Lenguaje,5,3,8,PARTICIPACION 2,Participación en Lenguaje,1,2023-08-09
+Lenguaje,5,3,8,PARTICIPACION 3,Participación en Lenguaje,1,2023-07-18
+Lenguaje,5,3,8,PARTICIPACION 4,Participación en Lenguaje,1,2023-08-03
+Lenguaje,5,3,8,PARTICIPACION 5,Participación en Lenguaje,1,2023-06-13
+Lenguaje,5,3,9,PARTICIPACION 1,Participación en Lenguaje,1,2023-12-05
+Lenguaje,5,3,9,PARTICIPACION 2,Participación en Lenguaje,1,2023-12-05
+Lenguaje,5,3,9,PARTICIPACION 3,Participación en Lenguaje,1,2023-12-04
+Lenguaje,5,3,9,PARTICIPACION 4,Participación en Lenguaje,1,2023-10-19
+Lenguaje,5,3,9,PARTICIPACION 5,Participación en Lenguaje,1,2023-10-10
+Ciencias Naturales,5,3,7,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-03-16
+Ciencias Naturales,5,3,7,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-03-15
+Ciencias Naturales,5,3,7,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-03-28
+Ciencias Naturales,5,3,7,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-04-14
+Ciencias Naturales,5,3,7,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-03-18
+Ciencias Naturales,5,3,8,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-08-20
+Ciencias Naturales,5,3,8,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-06-18
+Ciencias Naturales,5,3,8,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-06-15
+Ciencias Naturales,5,3,8,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-08-10
+Ciencias Naturales,5,3,8,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-06-24
+Ciencias Naturales,5,3,9,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-11-12
+Ciencias Naturales,5,3,9,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-11-10
+Ciencias Naturales,5,3,9,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-12-20
+Ciencias Naturales,5,3,9,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-10-14
+Ciencias Naturales,5,3,9,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-12-17
+Ciencias Sociales,5,3,7,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-02-13
+Ciencias Sociales,5,3,7,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-04-03
+Ciencias Sociales,5,3,7,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-03-04
+Ciencias Sociales,5,3,7,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-03-31
+Ciencias Sociales,5,3,7,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-02-16
+Ciencias Sociales,5,3,8,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-06-20
+Ciencias Sociales,5,3,8,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-08-20
+Ciencias Sociales,5,3,8,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-06-28
+Ciencias Sociales,5,3,8,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-08-06
+Ciencias Sociales,5,3,8,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-07-17
+Ciencias Sociales,5,3,9,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-10-11
+Ciencias Sociales,5,3,9,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-10-31
+Ciencias Sociales,5,3,9,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-10-13
+Ciencias Sociales,5,3,9,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-11-02
+Ciencias Sociales,5,3,9,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-12-14
+Educación Física,5,3,7,PARTICIPACION 1,Participación en Educación Física,1,2023-02-21
+Educación Física,5,3,7,PARTICIPACION 2,Participación en Educación Física,1,2023-03-17
+Educación Física,5,3,7,PARTICIPACION 3,Participación en Educación Física,1,2023-02-28
+Educación Física,5,3,7,PARTICIPACION 4,Participación en Educación Física,1,2023-03-21
+Educación Física,5,3,7,PARTICIPACION 5,Participación en Educación Física,1,2023-03-12
+Educación Física,5,3,8,PARTICIPACION 1,Participación en Educación Física,1,2023-05-16
+Educación Física,5,3,8,PARTICIPACION 2,Participación en Educación Física,1,2023-08-07
+Educación Física,5,3,8,PARTICIPACION 3,Participación en Educación Física,1,2023-08-17
+Educación Física,5,3,8,PARTICIPACION 4,Participación en Educación Física,1,2023-08-19
+Educación Física,5,3,8,PARTICIPACION 5,Participación en Educación Física,1,2023-06-12
+Educación Física,5,3,9,PARTICIPACION 1,Participación en Educación Física,1,2023-11-06
+Educación Física,5,3,9,PARTICIPACION 2,Participación en Educación Física,1,2023-10-15
+Educación Física,5,3,9,PARTICIPACION 3,Participación en Educación Física,1,2023-11-17
+Educación Física,5,3,9,PARTICIPACION 4,Participación en Educación Física,1,2023-11-15
+Educación Física,5,3,9,PARTICIPACION 5,Participación en Educación Física,1,2023-10-09
+Artes Plásticas,5,3,7,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-03-07
+Artes Plásticas,5,3,7,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-03-31
+Artes Plásticas,5,3,7,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-02-22
+Artes Plásticas,5,3,7,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-03-11
+Artes Plásticas,5,3,7,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-04-07
+Artes Plásticas,5,3,8,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-06-17
+Artes Plásticas,5,3,8,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-07-07
+Artes Plásticas,5,3,8,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-06-21
+Artes Plásticas,5,3,8,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-07-24
+Artes Plásticas,5,3,8,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-05-02
+Artes Plásticas,5,3,9,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-10-29
+Artes Plásticas,5,3,9,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-10-24
+Artes Plásticas,5,3,9,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-10-26
+Artes Plásticas,5,3,9,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-10-20
+Artes Plásticas,5,3,9,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-12-04
+Música,5,3,7,PARTICIPACION 1,Participación en Música,1,2023-03-07
+Música,5,3,7,PARTICIPACION 2,Participación en Música,1,2023-02-21
+Música,5,3,7,PARTICIPACION 3,Participación en Música,1,2023-02-06
+Música,5,3,7,PARTICIPACION 4,Participación en Música,1,2023-03-18
+Música,5,3,7,PARTICIPACION 5,Participación en Música,1,2023-03-07
+Música,5,3,8,PARTICIPACION 1,Participación en Música,1,2023-05-02
+Música,5,3,8,PARTICIPACION 2,Participación en Música,1,2023-05-01
+Música,5,3,8,PARTICIPACION 3,Participación en Música,1,2023-05-17
+Música,5,3,8,PARTICIPACION 4,Participación en Música,1,2023-08-31
+Música,5,3,8,PARTICIPACION 5,Participación en Música,1,2023-07-06
+Música,5,3,9,PARTICIPACION 1,Participación en Música,1,2023-10-11
+Música,5,3,9,PARTICIPACION 2,Participación en Música,1,2023-10-07
+Música,5,3,9,PARTICIPACION 3,Participación en Música,1,2023-11-05
+Música,5,3,9,PARTICIPACION 4,Participación en Música,1,2023-11-02
+Música,5,3,9,PARTICIPACION 5,Participación en Música,1,2023-11-25
+Religión,5,3,7,PARTICIPACION 1,Participación en Religión,1,2023-02-04
+Religión,5,3,7,PARTICIPACION 2,Participación en Religión,1,2023-03-26
+Religión,5,3,7,PARTICIPACION 3,Participación en Religión,1,2023-03-14
+Religión,5,3,7,PARTICIPACION 4,Participación en Religión,1,2023-02-09
+Religión,5,3,7,PARTICIPACION 5,Participación en Religión,1,2023-03-16
+Religión,5,3,8,PARTICIPACION 1,Participación en Religión,1,2023-07-19
+Religión,5,3,8,PARTICIPACION 2,Participación en Religión,1,2023-06-01
+Religión,5,3,8,PARTICIPACION 3,Participación en Religión,1,2023-06-05
+Religión,5,3,8,PARTICIPACION 4,Participación en Religión,1,2023-07-05
+Religión,5,3,8,PARTICIPACION 5,Participación en Religión,1,2023-08-16
+Religión,5,3,9,PARTICIPACION 1,Participación en Religión,1,2023-12-17
+Religión,5,3,9,PARTICIPACION 2,Participación en Religión,1,2023-11-05
+Religión,5,3,9,PARTICIPACION 3,Participación en Religión,1,2023-11-13
+Religión,5,3,9,PARTICIPACION 4,Participación en Religión,1,2023-11-19
+Religión,5,3,9,PARTICIPACION 5,Participación en Religión,1,2023-12-13
+Matemáticas,6,3,7,PARTICIPACION 1,Participación en Matemáticas,1,2023-02-23
+Matemáticas,6,3,7,PARTICIPACION 2,Participación en Matemáticas,1,2023-03-05
+Matemáticas,6,3,7,PARTICIPACION 3,Participación en Matemáticas,1,2023-02-14
+Matemáticas,6,3,7,PARTICIPACION 4,Participación en Matemáticas,1,2023-02-09
+Matemáticas,6,3,7,PARTICIPACION 5,Participación en Matemáticas,1,2023-04-19
+Matemáticas,6,3,8,PARTICIPACION 1,Participación en Matemáticas,1,2023-08-14
+Matemáticas,6,3,8,PARTICIPACION 2,Participación en Matemáticas,1,2023-08-17
+Matemáticas,6,3,8,PARTICIPACION 3,Participación en Matemáticas,1,2023-08-26
+Matemáticas,6,3,8,PARTICIPACION 4,Participación en Matemáticas,1,2023-06-26
+Matemáticas,6,3,8,PARTICIPACION 5,Participación en Matemáticas,1,2023-08-10
+Matemáticas,6,3,9,PARTICIPACION 1,Participación en Matemáticas,1,2023-12-18
+Matemáticas,6,3,9,PARTICIPACION 2,Participación en Matemáticas,1,2023-12-11
+Matemáticas,6,3,9,PARTICIPACION 3,Participación en Matemáticas,1,2023-10-14
+Matemáticas,6,3,9,PARTICIPACION 4,Participación en Matemáticas,1,2023-11-13
+Matemáticas,6,3,9,PARTICIPACION 5,Participación en Matemáticas,1,2023-12-04
+Lenguaje,6,3,7,PARTICIPACION 1,Participación en Lenguaje,1,2023-04-24
+Lenguaje,6,3,7,PARTICIPACION 2,Participación en Lenguaje,1,2023-04-21
+Lenguaje,6,3,7,PARTICIPACION 3,Participación en Lenguaje,1,2023-02-19
+Lenguaje,6,3,7,PARTICIPACION 4,Participación en Lenguaje,1,2023-02-18
+Lenguaje,6,3,7,PARTICIPACION 5,Participación en Lenguaje,1,2023-04-22
+Lenguaje,6,3,8,PARTICIPACION 1,Participación en Lenguaje,1,2023-05-22
+Lenguaje,6,3,8,PARTICIPACION 2,Participación en Lenguaje,1,2023-07-09
+Lenguaje,6,3,8,PARTICIPACION 3,Participación en Lenguaje,1,2023-07-21
+Lenguaje,6,3,8,PARTICIPACION 4,Participación en Lenguaje,1,2023-06-16
+Lenguaje,6,3,8,PARTICIPACION 5,Participación en Lenguaje,1,2023-06-26
+Lenguaje,6,3,9,PARTICIPACION 1,Participación en Lenguaje,1,2023-12-07
+Lenguaje,6,3,9,PARTICIPACION 2,Participación en Lenguaje,1,2023-11-10
+Lenguaje,6,3,9,PARTICIPACION 3,Participación en Lenguaje,1,2023-12-16
+Lenguaje,6,3,9,PARTICIPACION 4,Participación en Lenguaje,1,2023-10-04
+Lenguaje,6,3,9,PARTICIPACION 5,Participación en Lenguaje,1,2023-12-06
+Ciencias Naturales,6,3,7,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-02-17
+Ciencias Naturales,6,3,7,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-03-16
+Ciencias Naturales,6,3,7,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-04-16
+Ciencias Naturales,6,3,7,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-03-30
+Ciencias Naturales,6,3,7,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-04-28
+Ciencias Naturales,6,3,8,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-06-18
+Ciencias Naturales,6,3,8,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-05-13
+Ciencias Naturales,6,3,8,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-07-16
+Ciencias Naturales,6,3,8,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-05-29
+Ciencias Naturales,6,3,8,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-07-01
+Ciencias Naturales,6,3,9,PARTICIPACION 1,Participación en Ciencias Naturales,1,2023-10-04
+Ciencias Naturales,6,3,9,PARTICIPACION 2,Participación en Ciencias Naturales,1,2023-11-28
+Ciencias Naturales,6,3,9,PARTICIPACION 3,Participación en Ciencias Naturales,1,2023-12-14
+Ciencias Naturales,6,3,9,PARTICIPACION 4,Participación en Ciencias Naturales,1,2023-10-15
+Ciencias Naturales,6,3,9,PARTICIPACION 5,Participación en Ciencias Naturales,1,2023-12-18
+Ciencias Sociales,6,3,7,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-04-08
+Ciencias Sociales,6,3,7,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-02-14
+Ciencias Sociales,6,3,7,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-02-17
+Ciencias Sociales,6,3,7,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-02-04
+Ciencias Sociales,6,3,7,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-03-13
+Ciencias Sociales,6,3,8,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-06-28
+Ciencias Sociales,6,3,8,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-05-03
+Ciencias Sociales,6,3,8,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-08-21
+Ciencias Sociales,6,3,8,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-08-24
+Ciencias Sociales,6,3,8,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-06-25
+Ciencias Sociales,6,3,9,PARTICIPACION 1,Participación en Ciencias Sociales,1,2023-12-14
+Ciencias Sociales,6,3,9,PARTICIPACION 2,Participación en Ciencias Sociales,1,2023-10-22
+Ciencias Sociales,6,3,9,PARTICIPACION 3,Participación en Ciencias Sociales,1,2023-11-17
+Ciencias Sociales,6,3,9,PARTICIPACION 4,Participación en Ciencias Sociales,1,2023-12-15
+Ciencias Sociales,6,3,9,PARTICIPACION 5,Participación en Ciencias Sociales,1,2023-10-30
+Educación Física,6,3,7,PARTICIPACION 1,Participación en Educación Física,1,2023-03-15
+Educación Física,6,3,7,PARTICIPACION 2,Participación en Educación Física,1,2023-02-27
+Educación Física,6,3,7,PARTICIPACION 3,Participación en Educación Física,1,2023-03-15
+Educación Física,6,3,7,PARTICIPACION 4,Participación en Educación Física,1,2023-03-30
+Educación Física,6,3,7,PARTICIPACION 5,Participación en Educación Física,1,2023-02-27
+Educación Física,6,3,8,PARTICIPACION 1,Participación en Educación Física,1,2023-07-06
+Educación Física,6,3,8,PARTICIPACION 2,Participación en Educación Física,1,2023-05-29
+Educación Física,6,3,8,PARTICIPACION 3,Participación en Educación Física,1,2023-08-06
+Educación Física,6,3,8,PARTICIPACION 4,Participación en Educación Física,1,2023-08-09
+Educación Física,6,3,8,PARTICIPACION 5,Participación en Educación Física,1,2023-07-25
+Educación Física,6,3,9,PARTICIPACION 1,Participación en Educación Física,1,2023-12-15
+Educación Física,6,3,9,PARTICIPACION 2,Participación en Educación Física,1,2023-11-08
+Educación Física,6,3,9,PARTICIPACION 3,Participación en Educación Física,1,2023-11-27
+Educación Física,6,3,9,PARTICIPACION 4,Participación en Educación Física,1,2023-12-05
+Educación Física,6,3,9,PARTICIPACION 5,Participación en Educación Física,1,2023-11-06
+Artes Plásticas,6,3,7,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-04-30
+Artes Plásticas,6,3,7,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-02-20
+Artes Plásticas,6,3,7,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-03-22
+Artes Plásticas,6,3,7,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-03-30
+Artes Plásticas,6,3,7,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-04-10
+Artes Plásticas,6,3,8,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-06-13
+Artes Plásticas,6,3,8,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-05-13
+Artes Plásticas,6,3,8,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-08-31
+Artes Plásticas,6,3,8,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-06-17
+Artes Plásticas,6,3,8,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-08-14
+Artes Plásticas,6,3,9,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-10-23
+Artes Plásticas,6,3,9,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-10-06
+Artes Plásticas,6,3,9,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-11-29
+Artes Plásticas,6,3,9,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-11-29
+Artes Plásticas,6,3,9,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-12-10
+Música,6,3,7,PARTICIPACION 1,Participación en Música,1,2023-04-07
+Música,6,3,7,PARTICIPACION 2,Participación en Música,1,2023-02-13
+Música,6,3,7,PARTICIPACION 3,Participación en Música,1,2023-04-07
+Música,6,3,7,PARTICIPACION 4,Participación en Música,1,2023-04-02
+Música,6,3,7,PARTICIPACION 5,Participación en Música,1,2023-02-26
+Música,6,3,8,PARTICIPACION 1,Participación en Música,1,2023-06-11
+Música,6,3,8,PARTICIPACION 2,Participación en Música,1,2023-06-21
+Música,6,3,8,PARTICIPACION 3,Participación en Música,1,2023-08-31
+Música,6,3,8,PARTICIPACION 4,Participación en Música,1,2023-08-02
+Música,6,3,8,PARTICIPACION 5,Participación en Música,1,2023-05-05
+Música,6,3,9,PARTICIPACION 1,Participación en Música,1,2023-10-04
+Música,6,3,9,PARTICIPACION 2,Participación en Música,1,2023-11-17
+Música,6,3,9,PARTICIPACION 3,Participación en Música,1,2023-12-12
+Música,6,3,9,PARTICIPACION 4,Participación en Música,1,2023-11-16
+Música,6,3,9,PARTICIPACION 5,Participación en Música,1,2023-12-06
+Religión,6,3,7,PARTICIPACION 1,Participación en Religión,1,2023-03-18
+Religión,6,3,7,PARTICIPACION 2,Participación en Religión,1,2023-03-20
+Religión,6,3,7,PARTICIPACION 3,Participación en Religión,1,2023-02-12
+Religión,6,3,7,PARTICIPACION 4,Participación en Religión,1,2023-03-27
+Religión,6,3,7,PARTICIPACION 5,Participación en Religión,1,2023-02-11
+Religión,6,3,8,PARTICIPACION 1,Participación en Religión,1,2023-05-14
+Religión,6,3,8,PARTICIPACION 2,Participación en Religión,1,2023-06-16
+Religión,6,3,8,PARTICIPACION 3,Participación en Religión,1,2023-08-20
+Religión,6,3,8,PARTICIPACION 4,Participación en Religión,1,2023-08-20
+Religión,6,3,8,PARTICIPACION 5,Participación en Religión,1,2023-05-27
+Religión,6,3,9,PARTICIPACION 1,Participación en Religión,1,2023-11-02
+Religión,6,3,9,PARTICIPACION 2,Participación en Religión,1,2023-10-11
+Religión,6,3,9,PARTICIPACION 3,Participación en Religión,1,2023-10-31
+Religión,6,3,9,PARTICIPACION 4,Participación en Religión,1,2023-12-10
+Religión,6,3,9,PARTICIPACION 5,Participación en Religión,1,2023-10-16
+Matemáticas,7,3,7,PARTICIPACION 1,Participación en Matemáticas,1,2023-03-12
+Matemáticas,7,3,7,PARTICIPACION 2,Participación en Matemáticas,1,2023-02-18
+Matemáticas,7,3,7,PARTICIPACION 3,Participación en Matemáticas,1,2023-03-27
+Matemáticas,7,3,7,PARTICIPACION 4,Participación en Matemáticas,1,2023-02-25
+Matemáticas,7,3,7,PARTICIPACION 5,Participación en Matemáticas,1,2023-02-22
+Matemáticas,7,3,8,PARTICIPACION 1,Participación en Matemáticas,1,2023-07-01
+Matemáticas,7,3,8,PARTICIPACION 2,Participación en Matemáticas,1,2023-05-23
+Matemáticas,7,3,8,PARTICIPACION 3,Participación en Matemáticas,1,2023-07-15
+Matemáticas,7,3,8,PARTICIPACION 4,Participación en Matemáticas,1,2023-08-11
+Matemáticas,7,3,8,PARTICIPACION 5,Participación en Matemáticas,1,2023-06-18
+Matemáticas,7,3,9,PARTICIPACION 1,Participación en Matemáticas,1,2023-11-13
+Matemáticas,7,3,9,PARTICIPACION 2,Participación en Matemáticas,1,2023-11-19
+Matemáticas,7,3,9,PARTICIPACION 3,Participación en Matemáticas,1,2023-12-17
+Matemáticas,7,3,9,PARTICIPACION 4,Participación en Matemáticas,1,2023-12-07
+Matemáticas,7,3,9,PARTICIPACION 5,Participación en Matemáticas,1,2023-12-19
+Lenguaje,7,3,7,PARTICIPACION 1,Participación en Lenguaje,1,2023-04-28
+Lenguaje,7,3,7,PARTICIPACION 2,Participación en Lenguaje,1,2023-03-04
+Lenguaje,7,3,7,PARTICIPACION 3,Participación en Lenguaje,1,2023-02-04
+Lenguaje,7,3,7,PARTICIPACION 4,Participación en Lenguaje,1,2023-04-29
+Lenguaje,7,3,7,PARTICIPACION 5,Participación en Lenguaje,1,2023-04-27
+Lenguaje,7,3,8,PARTICIPACION 1,Participación en Lenguaje,1,2023-07-15
+Lenguaje,7,3,8,PARTICIPACION 2,Participación en Lenguaje,1,2023-08-21
+Lenguaje,7,3,8,PARTICIPACION 3,Participación en Lenguaje,1,2023-08-01
+Lenguaje,7,3,8,PARTICIPACION 4,Participación en Lenguaje,1,2023-08-23
+Lenguaje,7,3,8,PARTICIPACION 5,Participación en Lenguaje,1,2023-08-09
+Lenguaje,7,3,9,PARTICIPACION 1,Participación en Lenguaje,1,2023-10-24
+Lenguaje,7,3,9,PARTICIPACION 2,Participación en Lenguaje,1,2023-10-06
+Lenguaje,7,3,9,PARTICIPACION 3,Participación en Lenguaje,1,2023-10-31
+Lenguaje,7,3,9,PARTICIPACION 4,Participación en Lenguaje,1,2023-10-10
+Lenguaje,7,3,9,PARTICIPACION 5,Participación en Lenguaje,1,2023-11-04
+Física,7,3,7,PARTICIPACION 1,Participación en Física,1,2023-04-09
+Física,7,3,7,PARTICIPACION 2,Participación en Física,1,2023-02-17
+Física,7,3,7,PARTICIPACION 3,Participación en Física,1,2023-04-17
+Física,7,3,7,PARTICIPACION 4,Participación en Física,1,2023-02-21
+Física,7,3,7,PARTICIPACION 5,Participación en Física,1,2023-03-01
+Física,7,3,8,PARTICIPACION 1,Participación en Física,1,2023-08-31
+Física,7,3,8,PARTICIPACION 2,Participación en Física,1,2023-07-21
+Física,7,3,8,PARTICIPACION 3,Participación en Física,1,2023-07-05
+Física,7,3,8,PARTICIPACION 4,Participación en Física,1,2023-06-27
+Física,7,3,8,PARTICIPACION 5,Participación en Física,1,2023-05-28
+Física,7,3,9,PARTICIPACION 1,Participación en Física,1,2023-11-04
+Física,7,3,9,PARTICIPACION 2,Participación en Física,1,2023-11-25
+Física,7,3,9,PARTICIPACION 3,Participación en Física,1,2023-11-19
+Física,7,3,9,PARTICIPACION 4,Participación en Física,1,2023-10-02
+Física,7,3,9,PARTICIPACION 5,Participación en Física,1,2023-11-26
+Química,7,3,7,PARTICIPACION 1,Participación en Química,1,2023-04-20
+Química,7,3,7,PARTICIPACION 2,Participación en Química,1,2023-02-16
+Química,7,3,7,PARTICIPACION 3,Participación en Química,1,2023-03-22
+Química,7,3,7,PARTICIPACION 4,Participación en Química,1,2023-02-03
+Química,7,3,7,PARTICIPACION 5,Participación en Química,1,2023-04-28
+Química,7,3,8,PARTICIPACION 1,Participación en Química,1,2023-08-30
+Química,7,3,8,PARTICIPACION 2,Participación en Química,1,2023-08-13
+Química,7,3,8,PARTICIPACION 3,Participación en Química,1,2023-06-01
+Química,7,3,8,PARTICIPACION 4,Participación en Química,1,2023-05-30
+Química,7,3,8,PARTICIPACION 5,Participación en Química,1,2023-05-20
+Química,7,3,9,PARTICIPACION 1,Participación en Química,1,2023-10-16
+Química,7,3,9,PARTICIPACION 2,Participación en Química,1,2023-10-11
+Química,7,3,9,PARTICIPACION 3,Participación en Química,1,2023-10-20
+Química,7,3,9,PARTICIPACION 4,Participación en Química,1,2023-10-31
+Química,7,3,9,PARTICIPACION 5,Participación en Química,1,2023-11-05
+Biología,7,3,7,PARTICIPACION 1,Participación en Biología,1,2023-04-10
+Biología,7,3,7,PARTICIPACION 2,Participación en Biología,1,2023-02-26
+Biología,7,3,7,PARTICIPACION 3,Participación en Biología,1,2023-04-28
+Biología,7,3,7,PARTICIPACION 4,Participación en Biología,1,2023-04-07
+Biología,7,3,7,PARTICIPACION 5,Participación en Biología,1,2023-02-06
+Biología,7,3,8,PARTICIPACION 1,Participación en Biología,1,2023-07-22
+Biología,7,3,8,PARTICIPACION 2,Participación en Biología,1,2023-07-19
+Biología,7,3,8,PARTICIPACION 3,Participación en Biología,1,2023-08-20
+Biología,7,3,8,PARTICIPACION 4,Participación en Biología,1,2023-07-15
+Biología,7,3,8,PARTICIPACION 5,Participación en Biología,1,2023-06-01
+Biología,7,3,9,PARTICIPACION 1,Participación en Biología,1,2023-10-02
+Biología,7,3,9,PARTICIPACION 2,Participación en Biología,1,2023-12-18
+Biología,7,3,9,PARTICIPACION 3,Participación en Biología,1,2023-10-29
+Biología,7,3,9,PARTICIPACION 4,Participación en Biología,1,2023-10-29
+Biología,7,3,9,PARTICIPACION 5,Participación en Biología,1,2023-11-14
+Historia,7,3,7,PARTICIPACION 1,Participación en Historia,1,2023-04-06
+Historia,7,3,7,PARTICIPACION 2,Participación en Historia,1,2023-03-27
+Historia,7,3,7,PARTICIPACION 3,Participación en Historia,1,2023-03-03
+Historia,7,3,7,PARTICIPACION 4,Participación en Historia,1,2023-04-07
+Historia,7,3,7,PARTICIPACION 5,Participación en Historia,1,2023-03-30
+Historia,7,3,8,PARTICIPACION 1,Participación en Historia,1,2023-06-28
+Historia,7,3,8,PARTICIPACION 2,Participación en Historia,1,2023-05-26
+Historia,7,3,8,PARTICIPACION 3,Participación en Historia,1,2023-08-17
+Historia,7,3,8,PARTICIPACION 4,Participación en Historia,1,2023-07-25
+Historia,7,3,8,PARTICIPACION 5,Participación en Historia,1,2023-06-24
+Historia,7,3,9,PARTICIPACION 1,Participación en Historia,1,2023-11-22
+Historia,7,3,9,PARTICIPACION 2,Participación en Historia,1,2023-10-17
+Historia,7,3,9,PARTICIPACION 3,Participación en Historia,1,2023-12-06
+Historia,7,3,9,PARTICIPACION 4,Participación en Historia,1,2023-10-20
+Historia,7,3,9,PARTICIPACION 5,Participación en Historia,1,2023-11-25
+Geografía,7,3,7,PARTICIPACION 1,Participación en Geografía,1,2023-03-15
+Geografía,7,3,7,PARTICIPACION 2,Participación en Geografía,1,2023-03-14
+Geografía,7,3,7,PARTICIPACION 3,Participación en Geografía,1,2023-02-02
+Geografía,7,3,7,PARTICIPACION 4,Participación en Geografía,1,2023-02-25
+Geografía,7,3,7,PARTICIPACION 5,Participación en Geografía,1,2023-04-18
+Geografía,7,3,8,PARTICIPACION 1,Participación en Geografía,1,2023-08-18
+Geografía,7,3,8,PARTICIPACION 2,Participación en Geografía,1,2023-06-18
+Geografía,7,3,8,PARTICIPACION 3,Participación en Geografía,1,2023-08-31
+Geografía,7,3,8,PARTICIPACION 4,Participación en Geografía,1,2023-07-09
+Geografía,7,3,8,PARTICIPACION 5,Participación en Geografía,1,2023-06-06
+Geografía,7,3,9,PARTICIPACION 1,Participación en Geografía,1,2023-10-27
+Geografía,7,3,9,PARTICIPACION 2,Participación en Geografía,1,2023-11-02
+Geografía,7,3,9,PARTICIPACION 3,Participación en Geografía,1,2023-10-10
+Geografía,7,3,9,PARTICIPACION 4,Participación en Geografía,1,2023-10-30
+Geografía,7,3,9,PARTICIPACION 5,Participación en Geografía,1,2023-11-29
+Idioma Extranjero,7,3,7,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-02-10
+Idioma Extranjero,7,3,7,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-03-25
+Idioma Extranjero,7,3,7,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-04-18
+Idioma Extranjero,7,3,7,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-04-19
+Idioma Extranjero,7,3,7,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-02-15
+Idioma Extranjero,7,3,8,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-06-05
+Idioma Extranjero,7,3,8,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-06-22
+Idioma Extranjero,7,3,8,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-08-26
+Idioma Extranjero,7,3,8,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-08-26
+Idioma Extranjero,7,3,8,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-06-17
+Idioma Extranjero,7,3,9,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-10-20
+Idioma Extranjero,7,3,9,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-12-13
+Idioma Extranjero,7,3,9,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-11-28
+Idioma Extranjero,7,3,9,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-10-31
+Idioma Extranjero,7,3,9,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-11-30
+Educación Física,7,3,7,PARTICIPACION 1,Participación en Educación Física,1,2023-03-28
+Educación Física,7,3,7,PARTICIPACION 2,Participación en Educación Física,1,2023-03-30
+Educación Física,7,3,7,PARTICIPACION 3,Participación en Educación Física,1,2023-04-29
+Educación Física,7,3,7,PARTICIPACION 4,Participación en Educación Física,1,2023-02-02
+Educación Física,7,3,7,PARTICIPACION 5,Participación en Educación Física,1,2023-03-29
+Educación Física,7,3,8,PARTICIPACION 1,Participación en Educación Física,1,2023-07-25
+Educación Física,7,3,8,PARTICIPACION 2,Participación en Educación Física,1,2023-06-30
+Educación Física,7,3,8,PARTICIPACION 3,Participación en Educación Física,1,2023-06-29
+Educación Física,7,3,8,PARTICIPACION 4,Participación en Educación Física,1,2023-06-18
+Educación Física,7,3,8,PARTICIPACION 5,Participación en Educación Física,1,2023-06-06
+Educación Física,7,3,9,PARTICIPACION 1,Participación en Educación Física,1,2023-11-24
+Educación Física,7,3,9,PARTICIPACION 2,Participación en Educación Física,1,2023-11-07
+Educación Física,7,3,9,PARTICIPACION 3,Participación en Educación Física,1,2023-10-23
+Educación Física,7,3,9,PARTICIPACION 4,Participación en Educación Física,1,2023-12-10
+Educación Física,7,3,9,PARTICIPACION 5,Participación en Educación Física,1,2023-12-05
+Artes Plásticas,7,3,7,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-03-03
+Artes Plásticas,7,3,7,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-02-12
+Artes Plásticas,7,3,7,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-04-04
+Artes Plásticas,7,3,7,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-04-25
+Artes Plásticas,7,3,7,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-02-22
+Artes Plásticas,7,3,8,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-06-06
+Artes Plásticas,7,3,8,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-08-03
+Artes Plásticas,7,3,8,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-05-10
+Artes Plásticas,7,3,8,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-08-20
+Artes Plásticas,7,3,8,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-08-08
+Artes Plásticas,7,3,9,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-12-16
+Artes Plásticas,7,3,9,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-10-07
+Artes Plásticas,7,3,9,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-10-09
+Artes Plásticas,7,3,9,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-11-23
+Artes Plásticas,7,3,9,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-12-11
+Música,7,3,7,PARTICIPACION 1,Participación en Música,1,2023-03-08
+Música,7,3,7,PARTICIPACION 2,Participación en Música,1,2023-02-25
+Música,7,3,7,PARTICIPACION 3,Participación en Música,1,2023-04-03
+Música,7,3,7,PARTICIPACION 4,Participación en Música,1,2023-03-11
+Música,7,3,7,PARTICIPACION 5,Participación en Música,1,2023-04-03
+Música,7,3,8,PARTICIPACION 1,Participación en Música,1,2023-06-21
+Música,7,3,8,PARTICIPACION 2,Participación en Música,1,2023-08-05
+Música,7,3,8,PARTICIPACION 3,Participación en Música,1,2023-08-07
+Música,7,3,8,PARTICIPACION 4,Participación en Música,1,2023-07-06
+Música,7,3,8,PARTICIPACION 5,Participación en Música,1,2023-06-10
+Música,7,3,9,PARTICIPACION 1,Participación en Música,1,2023-12-09
+Música,7,3,9,PARTICIPACION 2,Participación en Música,1,2023-12-09
+Música,7,3,9,PARTICIPACION 3,Participación en Música,1,2023-12-09
+Música,7,3,9,PARTICIPACION 4,Participación en Música,1,2023-12-04
+Música,7,3,9,PARTICIPACION 5,Participación en Música,1,2023-12-15
+Matemáticas,8,3,7,PARTICIPACION 1,Participación en Matemáticas,1,2023-04-29
+Matemáticas,8,3,7,PARTICIPACION 2,Participación en Matemáticas,1,2023-03-03
+Matemáticas,8,3,7,PARTICIPACION 3,Participación en Matemáticas,1,2023-02-20
+Matemáticas,8,3,7,PARTICIPACION 4,Participación en Matemáticas,1,2023-03-03
+Matemáticas,8,3,7,PARTICIPACION 5,Participación en Matemáticas,1,2023-04-17
+Matemáticas,8,3,8,PARTICIPACION 1,Participación en Matemáticas,1,2023-08-13
+Matemáticas,8,3,8,PARTICIPACION 2,Participación en Matemáticas,1,2023-08-16
+Matemáticas,8,3,8,PARTICIPACION 3,Participación en Matemáticas,1,2023-07-02
+Matemáticas,8,3,8,PARTICIPACION 4,Participación en Matemáticas,1,2023-08-19
+Matemáticas,8,3,8,PARTICIPACION 5,Participación en Matemáticas,1,2023-07-04
+Matemáticas,8,3,9,PARTICIPACION 1,Participación en Matemáticas,1,2023-11-03
+Matemáticas,8,3,9,PARTICIPACION 2,Participación en Matemáticas,1,2023-12-06
+Matemáticas,8,3,9,PARTICIPACION 3,Participación en Matemáticas,1,2023-11-04
+Matemáticas,8,3,9,PARTICIPACION 4,Participación en Matemáticas,1,2023-11-21
+Matemáticas,8,3,9,PARTICIPACION 5,Participación en Matemáticas,1,2023-11-21
+Lenguaje,8,3,7,PARTICIPACION 1,Participación en Lenguaje,1,2023-03-04
+Lenguaje,8,3,7,PARTICIPACION 2,Participación en Lenguaje,1,2023-02-02
+Lenguaje,8,3,7,PARTICIPACION 3,Participación en Lenguaje,1,2023-03-26
+Lenguaje,8,3,7,PARTICIPACION 4,Participación en Lenguaje,1,2023-02-05
+Lenguaje,8,3,7,PARTICIPACION 5,Participación en Lenguaje,1,2023-03-15
+Lenguaje,8,3,8,PARTICIPACION 1,Participación en Lenguaje,1,2023-05-18
+Lenguaje,8,3,8,PARTICIPACION 2,Participación en Lenguaje,1,2023-06-27
+Lenguaje,8,3,8,PARTICIPACION 3,Participación en Lenguaje,1,2023-06-06
+Lenguaje,8,3,8,PARTICIPACION 4,Participación en Lenguaje,1,2023-06-21
+Lenguaje,8,3,8,PARTICIPACION 5,Participación en Lenguaje,1,2023-06-21
+Lenguaje,8,3,9,PARTICIPACION 1,Participación en Lenguaje,1,2023-10-11
+Lenguaje,8,3,9,PARTICIPACION 2,Participación en Lenguaje,1,2023-11-09
+Lenguaje,8,3,9,PARTICIPACION 3,Participación en Lenguaje,1,2023-11-12
+Lenguaje,8,3,9,PARTICIPACION 4,Participación en Lenguaje,1,2023-11-06
+Lenguaje,8,3,9,PARTICIPACION 5,Participación en Lenguaje,1,2023-10-09
+Física,8,3,7,PARTICIPACION 1,Participación en Física,1,2023-02-19
+Física,8,3,7,PARTICIPACION 2,Participación en Física,1,2023-02-20
+Física,8,3,7,PARTICIPACION 3,Participación en Física,1,2023-04-29
+Física,8,3,7,PARTICIPACION 4,Participación en Física,1,2023-02-04
+Física,8,3,7,PARTICIPACION 5,Participación en Física,1,2023-02-09
+Física,8,3,8,PARTICIPACION 1,Participación en Física,1,2023-08-21
+Física,8,3,8,PARTICIPACION 2,Participación en Física,1,2023-06-16
+Física,8,3,8,PARTICIPACION 3,Participación en Física,1,2023-06-21
+Física,8,3,8,PARTICIPACION 4,Participación en Física,1,2023-07-09
+Física,8,3,8,PARTICIPACION 5,Participación en Física,1,2023-08-21
+Física,8,3,9,PARTICIPACION 1,Participación en Física,1,2023-11-30
+Física,8,3,9,PARTICIPACION 2,Participación en Física,1,2023-11-29
+Física,8,3,9,PARTICIPACION 3,Participación en Física,1,2023-10-23
+Física,8,3,9,PARTICIPACION 4,Participación en Física,1,2023-11-01
+Física,8,3,9,PARTICIPACION 5,Participación en Física,1,2023-11-03
+Química,8,3,7,PARTICIPACION 1,Participación en Química,1,2023-04-26
+Química,8,3,7,PARTICIPACION 2,Participación en Química,1,2023-02-11
+Química,8,3,7,PARTICIPACION 3,Participación en Química,1,2023-03-20
+Química,8,3,7,PARTICIPACION 4,Participación en Química,1,2023-04-10
+Química,8,3,7,PARTICIPACION 5,Participación en Química,1,2023-02-26
+Química,8,3,8,PARTICIPACION 1,Participación en Química,1,2023-06-05
+Química,8,3,8,PARTICIPACION 2,Participación en Química,1,2023-08-01
+Química,8,3,8,PARTICIPACION 3,Participación en Química,1,2023-08-10
+Química,8,3,8,PARTICIPACION 4,Participación en Química,1,2023-08-13
+Química,8,3,8,PARTICIPACION 5,Participación en Química,1,2023-06-09
+Química,8,3,9,PARTICIPACION 1,Participación en Química,1,2023-11-30
+Química,8,3,9,PARTICIPACION 2,Participación en Química,1,2023-11-08
+Química,8,3,9,PARTICIPACION 3,Participación en Química,1,2023-11-12
+Química,8,3,9,PARTICIPACION 4,Participación en Química,1,2023-10-30
+Química,8,3,9,PARTICIPACION 5,Participación en Química,1,2023-11-16
+Biología,8,3,7,PARTICIPACION 1,Participación en Biología,1,2023-02-16
+Biología,8,3,7,PARTICIPACION 2,Participación en Biología,1,2023-04-22
+Biología,8,3,7,PARTICIPACION 3,Participación en Biología,1,2023-02-01
+Biología,8,3,7,PARTICIPACION 4,Participación en Biología,1,2023-04-20
+Biología,8,3,7,PARTICIPACION 5,Participación en Biología,1,2023-04-17
+Biología,8,3,8,PARTICIPACION 1,Participación en Biología,1,2023-07-19
+Biología,8,3,8,PARTICIPACION 2,Participación en Biología,1,2023-07-25
+Biología,8,3,8,PARTICIPACION 3,Participación en Biología,1,2023-06-11
+Biología,8,3,8,PARTICIPACION 4,Participación en Biología,1,2023-08-23
+Biología,8,3,8,PARTICIPACION 5,Participación en Biología,1,2023-08-13
+Biología,8,3,9,PARTICIPACION 1,Participación en Biología,1,2023-10-27
+Biología,8,3,9,PARTICIPACION 2,Participación en Biología,1,2023-12-13
+Biología,8,3,9,PARTICIPACION 3,Participación en Biología,1,2023-11-14
+Biología,8,3,9,PARTICIPACION 4,Participación en Biología,1,2023-11-02
+Biología,8,3,9,PARTICIPACION 5,Participación en Biología,1,2023-10-10
+Historia,8,3,7,PARTICIPACION 1,Participación en Historia,1,2023-04-24
+Historia,8,3,7,PARTICIPACION 2,Participación en Historia,1,2023-04-16
+Historia,8,3,7,PARTICIPACION 3,Participación en Historia,1,2023-04-14
+Historia,8,3,7,PARTICIPACION 4,Participación en Historia,1,2023-03-19
+Historia,8,3,7,PARTICIPACION 5,Participación en Historia,1,2023-04-13
+Historia,8,3,8,PARTICIPACION 1,Participación en Historia,1,2023-08-07
+Historia,8,3,8,PARTICIPACION 2,Participación en Historia,1,2023-07-11
+Historia,8,3,8,PARTICIPACION 3,Participación en Historia,1,2023-06-27
+Historia,8,3,8,PARTICIPACION 4,Participación en Historia,1,2023-07-30
+Historia,8,3,8,PARTICIPACION 5,Participación en Historia,1,2023-05-09
+Historia,8,3,9,PARTICIPACION 1,Participación en Historia,1,2023-10-06
+Historia,8,3,9,PARTICIPACION 2,Participación en Historia,1,2023-11-08
+Historia,8,3,9,PARTICIPACION 3,Participación en Historia,1,2023-11-02
+Historia,8,3,9,PARTICIPACION 4,Participación en Historia,1,2023-10-20
+Historia,8,3,9,PARTICIPACION 5,Participación en Historia,1,2023-10-20
+Geografía,8,3,7,PARTICIPACION 1,Participación en Geografía,1,2023-03-03
+Geografía,8,3,7,PARTICIPACION 2,Participación en Geografía,1,2023-04-11
+Geografía,8,3,7,PARTICIPACION 3,Participación en Geografía,1,2023-02-27
+Geografía,8,3,7,PARTICIPACION 4,Participación en Geografía,1,2023-04-15
+Geografía,8,3,7,PARTICIPACION 5,Participación en Geografía,1,2023-03-18
+Geografía,8,3,8,PARTICIPACION 1,Participación en Geografía,1,2023-07-08
+Geografía,8,3,8,PARTICIPACION 2,Participación en Geografía,1,2023-08-03
+Geografía,8,3,8,PARTICIPACION 3,Participación en Geografía,1,2023-07-07
+Geografía,8,3,8,PARTICIPACION 4,Participación en Geografía,1,2023-07-26
+Geografía,8,3,8,PARTICIPACION 5,Participación en Geografía,1,2023-06-19
+Geografía,8,3,9,PARTICIPACION 1,Participación en Geografía,1,2023-12-20
+Geografía,8,3,9,PARTICIPACION 2,Participación en Geografía,1,2023-11-27
+Geografía,8,3,9,PARTICIPACION 3,Participación en Geografía,1,2023-12-13
+Geografía,8,3,9,PARTICIPACION 4,Participación en Geografía,1,2023-10-14
+Geografía,8,3,9,PARTICIPACION 5,Participación en Geografía,1,2023-10-10
+Idioma Extranjero,8,3,7,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-03-23
+Idioma Extranjero,8,3,7,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-02-07
+Idioma Extranjero,8,3,7,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-02-24
+Idioma Extranjero,8,3,7,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-04-01
+Idioma Extranjero,8,3,7,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-03-18
+Idioma Extranjero,8,3,8,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-06-05
+Idioma Extranjero,8,3,8,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-08-07
+Idioma Extranjero,8,3,8,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-07-27
+Idioma Extranjero,8,3,8,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-06-30
+Idioma Extranjero,8,3,8,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-06-19
+Idioma Extranjero,8,3,9,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-10-25
+Idioma Extranjero,8,3,9,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-12-17
+Idioma Extranjero,8,3,9,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-12-11
+Idioma Extranjero,8,3,9,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-10-12
+Idioma Extranjero,8,3,9,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-12-15
+Educación Física,8,3,7,PARTICIPACION 1,Participación en Educación Física,1,2023-04-22
+Educación Física,8,3,7,PARTICIPACION 2,Participación en Educación Física,1,2023-03-05
+Educación Física,8,3,7,PARTICIPACION 3,Participación en Educación Física,1,2023-03-30
+Educación Física,8,3,7,PARTICIPACION 4,Participación en Educación Física,1,2023-04-29
+Educación Física,8,3,7,PARTICIPACION 5,Participación en Educación Física,1,2023-02-09
+Educación Física,8,3,8,PARTICIPACION 1,Participación en Educación Física,1,2023-05-25
+Educación Física,8,3,8,PARTICIPACION 2,Participación en Educación Física,1,2023-07-10
+Educación Física,8,3,8,PARTICIPACION 3,Participación en Educación Física,1,2023-08-08
+Educación Física,8,3,8,PARTICIPACION 4,Participación en Educación Física,1,2023-08-12
+Educación Física,8,3,8,PARTICIPACION 5,Participación en Educación Física,1,2023-07-31
+Educación Física,8,3,9,PARTICIPACION 1,Participación en Educación Física,1,2023-11-11
+Educación Física,8,3,9,PARTICIPACION 2,Participación en Educación Física,1,2023-11-28
+Educación Física,8,3,9,PARTICIPACION 3,Participación en Educación Física,1,2023-12-09
+Educación Física,8,3,9,PARTICIPACION 4,Participación en Educación Física,1,2023-11-25
+Educación Física,8,3,9,PARTICIPACION 5,Participación en Educación Física,1,2023-10-04
+Artes Plásticas,8,3,7,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-03-16
+Artes Plásticas,8,3,7,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-02-17
+Artes Plásticas,8,3,7,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-04-04
+Artes Plásticas,8,3,7,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-03-17
+Artes Plásticas,8,3,7,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-03-16
+Artes Plásticas,8,3,8,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-06-13
+Artes Plásticas,8,3,8,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-06-15
+Artes Plásticas,8,3,8,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-07-06
+Artes Plásticas,8,3,8,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-08-14
+Artes Plásticas,8,3,8,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-06-21
+Artes Plásticas,8,3,9,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-10-27
+Artes Plásticas,8,3,9,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-11-01
+Artes Plásticas,8,3,9,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-11-24
+Artes Plásticas,8,3,9,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-11-19
+Artes Plásticas,8,3,9,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-12-04
+Música,8,3,7,PARTICIPACION 1,Participación en Música,1,2023-04-11
+Música,8,3,7,PARTICIPACION 2,Participación en Música,1,2023-02-11
+Música,8,3,7,PARTICIPACION 3,Participación en Música,1,2023-03-27
+Música,8,3,7,PARTICIPACION 4,Participación en Música,1,2023-03-14
+Música,8,3,7,PARTICIPACION 5,Participación en Música,1,2023-04-09
+Música,8,3,8,PARTICIPACION 1,Participación en Música,1,2023-07-26
+Música,8,3,8,PARTICIPACION 2,Participación en Música,1,2023-07-26
+Música,8,3,8,PARTICIPACION 3,Participación en Música,1,2023-07-19
+Música,8,3,8,PARTICIPACION 4,Participación en Música,1,2023-07-15
+Música,8,3,8,PARTICIPACION 5,Participación en Música,1,2023-05-13
+Música,8,3,9,PARTICIPACION 1,Participación en Música,1,2023-11-04
+Música,8,3,9,PARTICIPACION 2,Participación en Música,1,2023-11-26
+Música,8,3,9,PARTICIPACION 3,Participación en Música,1,2023-11-28
+Música,8,3,9,PARTICIPACION 4,Participación en Música,1,2023-11-13
+Música,8,3,9,PARTICIPACION 5,Participación en Música,1,2023-10-24
+Matemáticas,9,3,7,PARTICIPACION 1,Participación en Matemáticas,1,2023-03-26
+Matemáticas,9,3,7,PARTICIPACION 2,Participación en Matemáticas,1,2023-03-21
+Matemáticas,9,3,7,PARTICIPACION 3,Participación en Matemáticas,1,2023-03-20
+Matemáticas,9,3,7,PARTICIPACION 4,Participación en Matemáticas,1,2023-04-17
+Matemáticas,9,3,7,PARTICIPACION 5,Participación en Matemáticas,1,2023-03-10
+Matemáticas,9,3,8,PARTICIPACION 1,Participación en Matemáticas,1,2023-05-14
+Matemáticas,9,3,8,PARTICIPACION 2,Participación en Matemáticas,1,2023-08-20
+Matemáticas,9,3,8,PARTICIPACION 3,Participación en Matemáticas,1,2023-06-26
+Matemáticas,9,3,8,PARTICIPACION 4,Participación en Matemáticas,1,2023-06-14
+Matemáticas,9,3,8,PARTICIPACION 5,Participación en Matemáticas,1,2023-06-09
+Matemáticas,9,3,9,PARTICIPACION 1,Participación en Matemáticas,1,2023-10-06
+Matemáticas,9,3,9,PARTICIPACION 2,Participación en Matemáticas,1,2023-11-11
+Matemáticas,9,3,9,PARTICIPACION 3,Participación en Matemáticas,1,2023-11-13
+Matemáticas,9,3,9,PARTICIPACION 4,Participación en Matemáticas,1,2023-11-06
+Matemáticas,9,3,9,PARTICIPACION 5,Participación en Matemáticas,1,2023-10-13
+Lenguaje,9,3,7,PARTICIPACION 1,Participación en Lenguaje,1,2023-02-03
+Lenguaje,9,3,7,PARTICIPACION 2,Participación en Lenguaje,1,2023-02-18
+Lenguaje,9,3,7,PARTICIPACION 3,Participación en Lenguaje,1,2023-02-06
+Lenguaje,9,3,7,PARTICIPACION 4,Participación en Lenguaje,1,2023-02-21
+Lenguaje,9,3,7,PARTICIPACION 5,Participación en Lenguaje,1,2023-02-04
+Lenguaje,9,3,8,PARTICIPACION 1,Participación en Lenguaje,1,2023-08-27
+Lenguaje,9,3,8,PARTICIPACION 2,Participación en Lenguaje,1,2023-05-30
+Lenguaje,9,3,8,PARTICIPACION 3,Participación en Lenguaje,1,2023-06-17
+Lenguaje,9,3,8,PARTICIPACION 4,Participación en Lenguaje,1,2023-07-09
+Lenguaje,9,3,8,PARTICIPACION 5,Participación en Lenguaje,1,2023-05-18
+Lenguaje,9,3,9,PARTICIPACION 1,Participación en Lenguaje,1,2023-10-09
+Lenguaje,9,3,9,PARTICIPACION 2,Participación en Lenguaje,1,2023-11-04
+Lenguaje,9,3,9,PARTICIPACION 3,Participación en Lenguaje,1,2023-12-06
+Lenguaje,9,3,9,PARTICIPACION 4,Participación en Lenguaje,1,2023-12-17
+Lenguaje,9,3,9,PARTICIPACION 5,Participación en Lenguaje,1,2023-11-16
+Física,9,3,7,PARTICIPACION 1,Participación en Física,1,2023-02-19
+Física,9,3,7,PARTICIPACION 2,Participación en Física,1,2023-02-17
+Física,9,3,7,PARTICIPACION 3,Participación en Física,1,2023-03-29
+Física,9,3,7,PARTICIPACION 4,Participación en Física,1,2023-02-06
+Física,9,3,7,PARTICIPACION 5,Participación en Física,1,2023-03-05
+Física,9,3,8,PARTICIPACION 1,Participación en Física,1,2023-08-26
+Física,9,3,8,PARTICIPACION 2,Participación en Física,1,2023-05-24
+Física,9,3,8,PARTICIPACION 3,Participación en Física,1,2023-08-23
+Física,9,3,8,PARTICIPACION 4,Participación en Física,1,2023-05-04
+Física,9,3,8,PARTICIPACION 5,Participación en Física,1,2023-08-16
+Física,9,3,9,PARTICIPACION 1,Participación en Física,1,2023-11-10
+Física,9,3,9,PARTICIPACION 2,Participación en Física,1,2023-10-08
+Física,9,3,9,PARTICIPACION 3,Participación en Física,1,2023-10-27
+Física,9,3,9,PARTICIPACION 4,Participación en Física,1,2023-12-12
+Física,9,3,9,PARTICIPACION 5,Participación en Física,1,2023-11-04
+Química,9,3,7,PARTICIPACION 1,Participación en Química,1,2023-02-18
+Química,9,3,7,PARTICIPACION 2,Participación en Química,1,2023-02-22
+Química,9,3,7,PARTICIPACION 3,Participación en Química,1,2023-02-23
+Química,9,3,7,PARTICIPACION 4,Participación en Química,1,2023-02-15
+Química,9,3,7,PARTICIPACION 5,Participación en Química,1,2023-03-14
+Química,9,3,8,PARTICIPACION 1,Participación en Química,1,2023-06-21
+Química,9,3,8,PARTICIPACION 2,Participación en Química,1,2023-08-12
+Química,9,3,8,PARTICIPACION 3,Participación en Química,1,2023-06-08
+Química,9,3,8,PARTICIPACION 4,Participación en Química,1,2023-05-27
+Química,9,3,8,PARTICIPACION 5,Participación en Química,1,2023-05-25
+Química,9,3,9,PARTICIPACION 1,Participación en Química,1,2023-12-11
+Química,9,3,9,PARTICIPACION 2,Participación en Química,1,2023-11-07
+Química,9,3,9,PARTICIPACION 3,Participación en Química,1,2023-10-04
+Química,9,3,9,PARTICIPACION 4,Participación en Química,1,2023-12-17
+Química,9,3,9,PARTICIPACION 5,Participación en Química,1,2023-11-19
+Biología,9,3,7,PARTICIPACION 1,Participación en Biología,1,2023-02-15
+Biología,9,3,7,PARTICIPACION 2,Participación en Biología,1,2023-04-14
+Biología,9,3,7,PARTICIPACION 3,Participación en Biología,1,2023-04-15
+Biología,9,3,7,PARTICIPACION 4,Participación en Biología,1,2023-04-18
+Biología,9,3,7,PARTICIPACION 5,Participación en Biología,1,2023-02-02
+Biología,9,3,8,PARTICIPACION 1,Participación en Biología,1,2023-06-22
+Biología,9,3,8,PARTICIPACION 2,Participación en Biología,1,2023-07-12
+Biología,9,3,8,PARTICIPACION 3,Participación en Biología,1,2023-05-24
+Biología,9,3,8,PARTICIPACION 4,Participación en Biología,1,2023-07-06
+Biología,9,3,8,PARTICIPACION 5,Participación en Biología,1,2023-06-09
+Biología,9,3,9,PARTICIPACION 1,Participación en Biología,1,2023-10-10
+Biología,9,3,9,PARTICIPACION 2,Participación en Biología,1,2023-11-12
+Biología,9,3,9,PARTICIPACION 3,Participación en Biología,1,2023-11-19
+Biología,9,3,9,PARTICIPACION 4,Participación en Biología,1,2023-11-09
+Biología,9,3,9,PARTICIPACION 5,Participación en Biología,1,2023-11-01
+Historia,9,3,7,PARTICIPACION 1,Participación en Historia,1,2023-04-15
+Historia,9,3,7,PARTICIPACION 2,Participación en Historia,1,2023-02-05
+Historia,9,3,7,PARTICIPACION 3,Participación en Historia,1,2023-04-16
+Historia,9,3,7,PARTICIPACION 4,Participación en Historia,1,2023-03-16
+Historia,9,3,7,PARTICIPACION 5,Participación en Historia,1,2023-04-14
+Historia,9,3,8,PARTICIPACION 1,Participación en Historia,1,2023-07-30
+Historia,9,3,8,PARTICIPACION 2,Participación en Historia,1,2023-06-25
+Historia,9,3,8,PARTICIPACION 3,Participación en Historia,1,2023-05-13
+Historia,9,3,8,PARTICIPACION 4,Participación en Historia,1,2023-05-05
+Historia,9,3,8,PARTICIPACION 5,Participación en Historia,1,2023-05-11
+Historia,9,3,9,PARTICIPACION 1,Participación en Historia,1,2023-12-09
+Historia,9,3,9,PARTICIPACION 2,Participación en Historia,1,2023-11-18
+Historia,9,3,9,PARTICIPACION 3,Participación en Historia,1,2023-12-06
+Historia,9,3,9,PARTICIPACION 4,Participación en Historia,1,2023-10-13
+Historia,9,3,9,PARTICIPACION 5,Participación en Historia,1,2023-10-15
+Geografía,9,3,7,PARTICIPACION 1,Participación en Geografía,1,2023-03-17
+Geografía,9,3,7,PARTICIPACION 2,Participación en Geografía,1,2023-02-13
+Geografía,9,3,7,PARTICIPACION 3,Participación en Geografía,1,2023-04-30
+Geografía,9,3,7,PARTICIPACION 4,Participación en Geografía,1,2023-03-09
+Geografía,9,3,7,PARTICIPACION 5,Participación en Geografía,1,2023-03-22
+Geografía,9,3,8,PARTICIPACION 1,Participación en Geografía,1,2023-07-07
+Geografía,9,3,8,PARTICIPACION 2,Participación en Geografía,1,2023-06-01
+Geografía,9,3,8,PARTICIPACION 3,Participación en Geografía,1,2023-08-21
+Geografía,9,3,8,PARTICIPACION 4,Participación en Geografía,1,2023-07-14
+Geografía,9,3,8,PARTICIPACION 5,Participación en Geografía,1,2023-05-27
+Geografía,9,3,9,PARTICIPACION 1,Participación en Geografía,1,2023-12-14
+Geografía,9,3,9,PARTICIPACION 2,Participación en Geografía,1,2023-12-15
+Geografía,9,3,9,PARTICIPACION 3,Participación en Geografía,1,2023-11-11
+Geografía,9,3,9,PARTICIPACION 4,Participación en Geografía,1,2023-11-27
+Geografía,9,3,9,PARTICIPACION 5,Participación en Geografía,1,2023-11-11
+Idioma Extranjero,9,3,7,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-03-22
+Idioma Extranjero,9,3,7,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-03-22
+Idioma Extranjero,9,3,7,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-02-01
+Idioma Extranjero,9,3,7,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-03-13
+Idioma Extranjero,9,3,7,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-02-25
+Idioma Extranjero,9,3,8,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-07-17
+Idioma Extranjero,9,3,8,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-05-14
+Idioma Extranjero,9,3,8,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-08-08
+Idioma Extranjero,9,3,8,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-06-15
+Idioma Extranjero,9,3,8,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-07-13
+Idioma Extranjero,9,3,9,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-10-15
+Idioma Extranjero,9,3,9,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-11-11
+Idioma Extranjero,9,3,9,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-10-01
+Idioma Extranjero,9,3,9,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-10-05
+Idioma Extranjero,9,3,9,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-10-04
+Educación Física,9,3,7,PARTICIPACION 1,Participación en Educación Física,1,2023-02-26
+Educación Física,9,3,7,PARTICIPACION 2,Participación en Educación Física,1,2023-03-23
+Educación Física,9,3,7,PARTICIPACION 3,Participación en Educación Física,1,2023-02-06
+Educación Física,9,3,7,PARTICIPACION 4,Participación en Educación Física,1,2023-03-16
+Educación Física,9,3,7,PARTICIPACION 5,Participación en Educación Física,1,2023-02-12
+Educación Física,9,3,8,PARTICIPACION 1,Participación en Educación Física,1,2023-06-02
+Educación Física,9,3,8,PARTICIPACION 2,Participación en Educación Física,1,2023-05-25
+Educación Física,9,3,8,PARTICIPACION 3,Participación en Educación Física,1,2023-05-26
+Educación Física,9,3,8,PARTICIPACION 4,Participación en Educación Física,1,2023-05-22
+Educación Física,9,3,8,PARTICIPACION 5,Participación en Educación Física,1,2023-06-11
+Educación Física,9,3,9,PARTICIPACION 1,Participación en Educación Física,1,2023-10-01
+Educación Física,9,3,9,PARTICIPACION 2,Participación en Educación Física,1,2023-11-25
+Educación Física,9,3,9,PARTICIPACION 3,Participación en Educación Física,1,2023-10-26
+Educación Física,9,3,9,PARTICIPACION 4,Participación en Educación Física,1,2023-10-10
+Educación Física,9,3,9,PARTICIPACION 5,Participación en Educación Física,1,2023-11-22
+Artes Plásticas,9,3,7,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-04-23
+Artes Plásticas,9,3,7,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-03-20
+Artes Plásticas,9,3,7,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-02-17
+Artes Plásticas,9,3,7,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-02-18
+Artes Plásticas,9,3,7,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-02-16
+Artes Plásticas,9,3,8,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-07-08
+Artes Plásticas,9,3,8,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-07-06
+Artes Plásticas,9,3,8,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-07-15
+Artes Plásticas,9,3,8,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-08-17
+Artes Plásticas,9,3,8,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-05-11
+Artes Plásticas,9,3,9,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-10-06
+Artes Plásticas,9,3,9,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-11-18
+Artes Plásticas,9,3,9,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-11-23
+Artes Plásticas,9,3,9,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-11-02
+Artes Plásticas,9,3,9,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-10-17
+Música,9,3,7,PARTICIPACION 1,Participación en Música,1,2023-03-09
+Música,9,3,7,PARTICIPACION 2,Participación en Música,1,2023-02-17
+Música,9,3,7,PARTICIPACION 3,Participación en Música,1,2023-02-11
+Música,9,3,7,PARTICIPACION 4,Participación en Música,1,2023-03-24
+Música,9,3,7,PARTICIPACION 5,Participación en Música,1,2023-04-13
+Música,9,3,8,PARTICIPACION 1,Participación en Música,1,2023-07-06
+Música,9,3,8,PARTICIPACION 2,Participación en Música,1,2023-06-22
+Música,9,3,8,PARTICIPACION 3,Participación en Música,1,2023-07-19
+Música,9,3,8,PARTICIPACION 4,Participación en Música,1,2023-07-04
+Música,9,3,8,PARTICIPACION 5,Participación en Música,1,2023-08-15
+Música,9,3,9,PARTICIPACION 1,Participación en Música,1,2023-12-04
+Música,9,3,9,PARTICIPACION 2,Participación en Música,1,2023-10-27
+Música,9,3,9,PARTICIPACION 3,Participación en Música,1,2023-10-02
+Música,9,3,9,PARTICIPACION 4,Participación en Música,1,2023-12-17
+Música,9,3,9,PARTICIPACION 5,Participación en Música,1,2023-10-25
+Matemáticas,10,3,7,PARTICIPACION 1,Participación en Matemáticas,1,2023-03-29
+Matemáticas,10,3,7,PARTICIPACION 2,Participación en Matemáticas,1,2023-04-16
+Matemáticas,10,3,7,PARTICIPACION 3,Participación en Matemáticas,1,2023-03-28
+Matemáticas,10,3,7,PARTICIPACION 4,Participación en Matemáticas,1,2023-03-30
+Matemáticas,10,3,7,PARTICIPACION 5,Participación en Matemáticas,1,2023-03-16
+Matemáticas,10,3,8,PARTICIPACION 1,Participación en Matemáticas,1,2023-06-27
+Matemáticas,10,3,8,PARTICIPACION 2,Participación en Matemáticas,1,2023-07-11
+Matemáticas,10,3,8,PARTICIPACION 3,Participación en Matemáticas,1,2023-07-09
+Matemáticas,10,3,8,PARTICIPACION 4,Participación en Matemáticas,1,2023-07-10
+Matemáticas,10,3,8,PARTICIPACION 5,Participación en Matemáticas,1,2023-08-26
+Matemáticas,10,3,9,PARTICIPACION 1,Participación en Matemáticas,1,2023-12-08
+Matemáticas,10,3,9,PARTICIPACION 2,Participación en Matemáticas,1,2023-10-19
+Matemáticas,10,3,9,PARTICIPACION 3,Participación en Matemáticas,1,2023-10-31
+Matemáticas,10,3,9,PARTICIPACION 4,Participación en Matemáticas,1,2023-10-25
+Matemáticas,10,3,9,PARTICIPACION 5,Participación en Matemáticas,1,2023-11-10
+Lenguaje,10,3,7,PARTICIPACION 1,Participación en Lenguaje,1,2023-04-19
+Lenguaje,10,3,7,PARTICIPACION 2,Participación en Lenguaje,1,2023-03-22
+Lenguaje,10,3,7,PARTICIPACION 3,Participación en Lenguaje,1,2023-02-08
+Lenguaje,10,3,7,PARTICIPACION 4,Participación en Lenguaje,1,2023-04-26
+Lenguaje,10,3,7,PARTICIPACION 5,Participación en Lenguaje,1,2023-02-03
+Lenguaje,10,3,8,PARTICIPACION 1,Participación en Lenguaje,1,2023-07-09
+Lenguaje,10,3,8,PARTICIPACION 2,Participación en Lenguaje,1,2023-05-18
+Lenguaje,10,3,8,PARTICIPACION 3,Participación en Lenguaje,1,2023-06-04
+Lenguaje,10,3,8,PARTICIPACION 4,Participación en Lenguaje,1,2023-08-22
+Lenguaje,10,3,8,PARTICIPACION 5,Participación en Lenguaje,1,2023-06-12
+Lenguaje,10,3,9,PARTICIPACION 1,Participación en Lenguaje,1,2023-10-05
+Lenguaje,10,3,9,PARTICIPACION 2,Participación en Lenguaje,1,2023-12-13
+Lenguaje,10,3,9,PARTICIPACION 3,Participación en Lenguaje,1,2023-10-20
+Lenguaje,10,3,9,PARTICIPACION 4,Participación en Lenguaje,1,2023-10-31
+Lenguaje,10,3,9,PARTICIPACION 5,Participación en Lenguaje,1,2023-10-23
+Física,10,3,7,PARTICIPACION 1,Participación en Física,1,2023-03-13
+Física,10,3,7,PARTICIPACION 2,Participación en Física,1,2023-02-12
+Física,10,3,7,PARTICIPACION 3,Participación en Física,1,2023-02-13
+Física,10,3,7,PARTICIPACION 4,Participación en Física,1,2023-03-16
+Física,10,3,7,PARTICIPACION 5,Participación en Física,1,2023-03-31
+Física,10,3,8,PARTICIPACION 1,Participación en Física,1,2023-05-30
+Física,10,3,8,PARTICIPACION 2,Participación en Física,1,2023-08-11
+Física,10,3,8,PARTICIPACION 3,Participación en Física,1,2023-07-04
+Física,10,3,8,PARTICIPACION 4,Participación en Física,1,2023-07-25
+Física,10,3,8,PARTICIPACION 5,Participación en Física,1,2023-06-13
+Física,10,3,9,PARTICIPACION 1,Participación en Física,1,2023-10-25
+Física,10,3,9,PARTICIPACION 2,Participación en Física,1,2023-12-15
+Física,10,3,9,PARTICIPACION 3,Participación en Física,1,2023-12-19
+Física,10,3,9,PARTICIPACION 4,Participación en Física,1,2023-11-02
+Física,10,3,9,PARTICIPACION 5,Participación en Física,1,2023-11-04
+Química,10,3,7,PARTICIPACION 1,Participación en Química,1,2023-03-15
+Química,10,3,7,PARTICIPACION 2,Participación en Química,1,2023-03-02
+Química,10,3,7,PARTICIPACION 3,Participación en Química,1,2023-03-06
+Química,10,3,7,PARTICIPACION 4,Participación en Química,1,2023-04-04
+Química,10,3,7,PARTICIPACION 5,Participación en Química,1,2023-04-01
+Química,10,3,8,PARTICIPACION 1,Participación en Química,1,2023-06-12
+Química,10,3,8,PARTICIPACION 2,Participación en Química,1,2023-08-15
+Química,10,3,8,PARTICIPACION 3,Participación en Química,1,2023-08-17
+Química,10,3,8,PARTICIPACION 4,Participación en Química,1,2023-08-24
+Química,10,3,8,PARTICIPACION 5,Participación en Química,1,2023-06-26
+Química,10,3,9,PARTICIPACION 1,Participación en Química,1,2023-10-22
+Química,10,3,9,PARTICIPACION 2,Participación en Química,1,2023-10-13
+Química,10,3,9,PARTICIPACION 3,Participación en Química,1,2023-11-30
+Química,10,3,9,PARTICIPACION 4,Participación en Química,1,2023-11-13
+Química,10,3,9,PARTICIPACION 5,Participación en Química,1,2023-10-14
+Biología,10,3,7,PARTICIPACION 1,Participación en Biología,1,2023-04-14
+Biología,10,3,7,PARTICIPACION 2,Participación en Biología,1,2023-03-12
+Biología,10,3,7,PARTICIPACION 3,Participación en Biología,1,2023-02-18
+Biología,10,3,7,PARTICIPACION 4,Participación en Biología,1,2023-04-25
+Biología,10,3,7,PARTICIPACION 5,Participación en Biología,1,2023-03-12
+Biología,10,3,8,PARTICIPACION 1,Participación en Biología,1,2023-05-17
+Biología,10,3,8,PARTICIPACION 2,Participación en Biología,1,2023-05-06
+Biología,10,3,8,PARTICIPACION 3,Participación en Biología,1,2023-07-08
+Biología,10,3,8,PARTICIPACION 4,Participación en Biología,1,2023-06-08
+Biología,10,3,8,PARTICIPACION 5,Participación en Biología,1,2023-05-11
+Biología,10,3,9,PARTICIPACION 1,Participación en Biología,1,2023-11-08
+Biología,10,3,9,PARTICIPACION 2,Participación en Biología,1,2023-10-08
+Biología,10,3,9,PARTICIPACION 3,Participación en Biología,1,2023-11-22
+Biología,10,3,9,PARTICIPACION 4,Participación en Biología,1,2023-12-02
+Biología,10,3,9,PARTICIPACION 5,Participación en Biología,1,2023-10-29
+Historia,10,3,7,PARTICIPACION 1,Participación en Historia,1,2023-02-10
+Historia,10,3,7,PARTICIPACION 2,Participación en Historia,1,2023-04-29
+Historia,10,3,7,PARTICIPACION 3,Participación en Historia,1,2023-02-15
+Historia,10,3,7,PARTICIPACION 4,Participación en Historia,1,2023-04-20
+Historia,10,3,7,PARTICIPACION 5,Participación en Historia,1,2023-02-06
+Historia,10,3,8,PARTICIPACION 1,Participación en Historia,1,2023-07-05
+Historia,10,3,8,PARTICIPACION 2,Participación en Historia,1,2023-06-21
+Historia,10,3,8,PARTICIPACION 3,Participación en Historia,1,2023-08-26
+Historia,10,3,8,PARTICIPACION 4,Participación en Historia,1,2023-08-22
+Historia,10,3,8,PARTICIPACION 5,Participación en Historia,1,2023-07-17
+Historia,10,3,9,PARTICIPACION 1,Participación en Historia,1,2023-10-28
+Historia,10,3,9,PARTICIPACION 2,Participación en Historia,1,2023-11-11
+Historia,10,3,9,PARTICIPACION 3,Participación en Historia,1,2023-11-26
+Historia,10,3,9,PARTICIPACION 4,Participación en Historia,1,2023-11-19
+Historia,10,3,9,PARTICIPACION 5,Participación en Historia,1,2023-10-21
+Geografía,10,3,7,PARTICIPACION 1,Participación en Geografía,1,2023-02-25
+Geografía,10,3,7,PARTICIPACION 2,Participación en Geografía,1,2023-02-11
+Geografía,10,3,7,PARTICIPACION 3,Participación en Geografía,1,2023-02-02
+Geografía,10,3,7,PARTICIPACION 4,Participación en Geografía,1,2023-03-03
+Geografía,10,3,7,PARTICIPACION 5,Participación en Geografía,1,2023-04-11
+Geografía,10,3,8,PARTICIPACION 1,Participación en Geografía,1,2023-08-31
+Geografía,10,3,8,PARTICIPACION 2,Participación en Geografía,1,2023-05-17
+Geografía,10,3,8,PARTICIPACION 3,Participación en Geografía,1,2023-06-10
+Geografía,10,3,8,PARTICIPACION 4,Participación en Geografía,1,2023-08-20
+Geografía,10,3,8,PARTICIPACION 5,Participación en Geografía,1,2023-05-19
+Geografía,10,3,9,PARTICIPACION 1,Participación en Geografía,1,2023-12-07
+Geografía,10,3,9,PARTICIPACION 2,Participación en Geografía,1,2023-11-30
+Geografía,10,3,9,PARTICIPACION 3,Participación en Geografía,1,2023-12-07
+Geografía,10,3,9,PARTICIPACION 4,Participación en Geografía,1,2023-12-08
+Geografía,10,3,9,PARTICIPACION 5,Participación en Geografía,1,2023-11-26
+Idioma Extranjero,10,3,7,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-04-13
+Idioma Extranjero,10,3,7,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-04-20
+Idioma Extranjero,10,3,7,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-03-27
+Idioma Extranjero,10,3,7,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-02-05
+Idioma Extranjero,10,3,7,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-03-26
+Idioma Extranjero,10,3,8,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-08-18
+Idioma Extranjero,10,3,8,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-06-05
+Idioma Extranjero,10,3,8,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-05-31
+Idioma Extranjero,10,3,8,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-06-25
+Idioma Extranjero,10,3,8,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-07-08
+Idioma Extranjero,10,3,9,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-12-06
+Idioma Extranjero,10,3,9,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-11-01
+Idioma Extranjero,10,3,9,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-10-01
+Idioma Extranjero,10,3,9,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-11-17
+Idioma Extranjero,10,3,9,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-11-18
+Educación Física,10,3,7,PARTICIPACION 1,Participación en Educación Física,1,2023-04-23
+Educación Física,10,3,7,PARTICIPACION 2,Participación en Educación Física,1,2023-02-24
+Educación Física,10,3,7,PARTICIPACION 3,Participación en Educación Física,1,2023-04-03
+Educación Física,10,3,7,PARTICIPACION 4,Participación en Educación Física,1,2023-03-26
+Educación Física,10,3,7,PARTICIPACION 5,Participación en Educación Física,1,2023-03-17
+Educación Física,10,3,8,PARTICIPACION 1,Participación en Educación Física,1,2023-06-23
+Educación Física,10,3,8,PARTICIPACION 2,Participación en Educación Física,1,2023-05-21
+Educación Física,10,3,8,PARTICIPACION 3,Participación en Educación Física,1,2023-08-11
+Educación Física,10,3,8,PARTICIPACION 4,Participación en Educación Física,1,2023-05-03
+Educación Física,10,3,8,PARTICIPACION 5,Participación en Educación Física,1,2023-07-16
+Educación Física,10,3,9,PARTICIPACION 1,Participación en Educación Física,1,2023-10-27
+Educación Física,10,3,9,PARTICIPACION 2,Participación en Educación Física,1,2023-11-18
+Educación Física,10,3,9,PARTICIPACION 3,Participación en Educación Física,1,2023-10-15
+Educación Física,10,3,9,PARTICIPACION 4,Participación en Educación Física,1,2023-11-20
+Educación Física,10,3,9,PARTICIPACION 5,Participación en Educación Física,1,2023-10-31
+Artes Plásticas,10,3,7,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-03-06
+Artes Plásticas,10,3,7,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-04-03
+Artes Plásticas,10,3,7,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-02-06
+Artes Plásticas,10,3,7,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-02-05
+Artes Plásticas,10,3,7,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-02-27
+Artes Plásticas,10,3,8,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-08-25
+Artes Plásticas,10,3,8,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-06-30
+Artes Plásticas,10,3,8,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-06-07
+Artes Plásticas,10,3,8,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-05-21
+Artes Plásticas,10,3,8,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-05-21
+Artes Plásticas,10,3,9,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-10-11
+Artes Plásticas,10,3,9,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-11-28
+Artes Plásticas,10,3,9,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-12-12
+Artes Plásticas,10,3,9,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-10-30
+Artes Plásticas,10,3,9,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-10-21
+Música,10,3,7,PARTICIPACION 1,Participación en Música,1,2023-02-18
+Música,10,3,7,PARTICIPACION 2,Participación en Música,1,2023-04-05
+Música,10,3,7,PARTICIPACION 3,Participación en Música,1,2023-04-11
+Música,10,3,7,PARTICIPACION 4,Participación en Música,1,2023-03-28
+Música,10,3,7,PARTICIPACION 5,Participación en Música,1,2023-02-09
+Música,10,3,8,PARTICIPACION 1,Participación en Música,1,2023-05-28
+Música,10,3,8,PARTICIPACION 2,Participación en Música,1,2023-08-13
+Música,10,3,8,PARTICIPACION 3,Participación en Música,1,2023-07-16
+Música,10,3,8,PARTICIPACION 4,Participación en Música,1,2023-08-11
+Música,10,3,8,PARTICIPACION 5,Participación en Música,1,2023-05-05
+Música,10,3,9,PARTICIPACION 1,Participación en Música,1,2023-11-18
+Música,10,3,9,PARTICIPACION 2,Participación en Música,1,2023-11-03
+Música,10,3,9,PARTICIPACION 3,Participación en Música,1,2023-11-10
+Música,10,3,9,PARTICIPACION 4,Participación en Música,1,2023-11-05
+Música,10,3,9,PARTICIPACION 5,Participación en Música,1,2023-10-22
+Matemáticas,11,3,7,PARTICIPACION 1,Participación en Matemáticas,1,2023-04-11
+Matemáticas,11,3,7,PARTICIPACION 2,Participación en Matemáticas,1,2023-04-25
+Matemáticas,11,3,7,PARTICIPACION 3,Participación en Matemáticas,1,2023-02-28
+Matemáticas,11,3,7,PARTICIPACION 4,Participación en Matemáticas,1,2023-04-28
+Matemáticas,11,3,7,PARTICIPACION 5,Participación en Matemáticas,1,2023-04-11
+Matemáticas,11,3,8,PARTICIPACION 1,Participación en Matemáticas,1,2023-06-14
+Matemáticas,11,3,8,PARTICIPACION 2,Participación en Matemáticas,1,2023-07-14
+Matemáticas,11,3,8,PARTICIPACION 3,Participación en Matemáticas,1,2023-05-04
+Matemáticas,11,3,8,PARTICIPACION 4,Participación en Matemáticas,1,2023-08-18
+Matemáticas,11,3,8,PARTICIPACION 5,Participación en Matemáticas,1,2023-08-06
+Matemáticas,11,3,9,PARTICIPACION 1,Participación en Matemáticas,1,2023-12-18
+Matemáticas,11,3,9,PARTICIPACION 2,Participación en Matemáticas,1,2023-11-26
+Matemáticas,11,3,9,PARTICIPACION 3,Participación en Matemáticas,1,2023-10-14
+Matemáticas,11,3,9,PARTICIPACION 4,Participación en Matemáticas,1,2023-10-18
+Matemáticas,11,3,9,PARTICIPACION 5,Participación en Matemáticas,1,2023-11-25
+Lenguaje,11,3,7,PARTICIPACION 1,Participación en Lenguaje,1,2023-04-25
+Lenguaje,11,3,7,PARTICIPACION 2,Participación en Lenguaje,1,2023-04-10
+Lenguaje,11,3,7,PARTICIPACION 3,Participación en Lenguaje,1,2023-03-02
+Lenguaje,11,3,7,PARTICIPACION 4,Participación en Lenguaje,1,2023-02-28
+Lenguaje,11,3,7,PARTICIPACION 5,Participación en Lenguaje,1,2023-02-26
+Lenguaje,11,3,8,PARTICIPACION 1,Participación en Lenguaje,1,2023-05-31
+Lenguaje,11,3,8,PARTICIPACION 2,Participación en Lenguaje,1,2023-05-15
+Lenguaje,11,3,8,PARTICIPACION 3,Participación en Lenguaje,1,2023-08-17
+Lenguaje,11,3,8,PARTICIPACION 4,Participación en Lenguaje,1,2023-06-08
+Lenguaje,11,3,8,PARTICIPACION 5,Participación en Lenguaje,1,2023-06-21
+Lenguaje,11,3,9,PARTICIPACION 1,Participación en Lenguaje,1,2023-12-13
+Lenguaje,11,3,9,PARTICIPACION 2,Participación en Lenguaje,1,2023-11-09
+Lenguaje,11,3,9,PARTICIPACION 3,Participación en Lenguaje,1,2023-10-01
+Lenguaje,11,3,9,PARTICIPACION 4,Participación en Lenguaje,1,2023-10-01
+Lenguaje,11,3,9,PARTICIPACION 5,Participación en Lenguaje,1,2023-10-15
+Física,11,3,7,PARTICIPACION 1,Participación en Física,1,2023-03-23
+Física,11,3,7,PARTICIPACION 2,Participación en Física,1,2023-04-13
+Física,11,3,7,PARTICIPACION 3,Participación en Física,1,2023-04-25
+Física,11,3,7,PARTICIPACION 4,Participación en Física,1,2023-02-20
+Física,11,3,7,PARTICIPACION 5,Participación en Física,1,2023-04-27
+Física,11,3,8,PARTICIPACION 1,Participación en Física,1,2023-08-08
+Física,11,3,8,PARTICIPACION 2,Participación en Física,1,2023-06-22
+Física,11,3,8,PARTICIPACION 3,Participación en Física,1,2023-08-01
+Física,11,3,8,PARTICIPACION 4,Participación en Física,1,2023-07-18
+Física,11,3,8,PARTICIPACION 5,Participación en Física,1,2023-06-21
+Física,11,3,9,PARTICIPACION 1,Participación en Física,1,2023-10-20
+Física,11,3,9,PARTICIPACION 2,Participación en Física,1,2023-10-16
+Física,11,3,9,PARTICIPACION 3,Participación en Física,1,2023-12-08
+Física,11,3,9,PARTICIPACION 4,Participación en Física,1,2023-11-21
+Física,11,3,9,PARTICIPACION 5,Participación en Física,1,2023-11-11
+Química,11,3,7,PARTICIPACION 1,Participación en Química,1,2023-04-21
+Química,11,3,7,PARTICIPACION 2,Participación en Química,1,2023-03-28
+Química,11,3,7,PARTICIPACION 3,Participación en Química,1,2023-02-07
+Química,11,3,7,PARTICIPACION 4,Participación en Química,1,2023-04-10
+Química,11,3,7,PARTICIPACION 5,Participación en Química,1,2023-03-10
+Química,11,3,8,PARTICIPACION 1,Participación en Química,1,2023-08-01
+Química,11,3,8,PARTICIPACION 2,Participación en Química,1,2023-07-04
+Química,11,3,8,PARTICIPACION 3,Participación en Química,1,2023-05-31
+Química,11,3,8,PARTICIPACION 4,Participación en Química,1,2023-07-28
+Química,11,3,8,PARTICIPACION 5,Participación en Química,1,2023-08-21
+Química,11,3,9,PARTICIPACION 1,Participación en Química,1,2023-10-13
+Química,11,3,9,PARTICIPACION 2,Participación en Química,1,2023-12-03
+Química,11,3,9,PARTICIPACION 3,Participación en Química,1,2023-11-25
+Química,11,3,9,PARTICIPACION 4,Participación en Química,1,2023-11-12
+Química,11,3,9,PARTICIPACION 5,Participación en Química,1,2023-10-18
+Biología,11,3,7,PARTICIPACION 1,Participación en Biología,1,2023-02-01
+Biología,11,3,7,PARTICIPACION 2,Participación en Biología,1,2023-04-15
+Biología,11,3,7,PARTICIPACION 3,Participación en Biología,1,2023-04-15
+Biología,11,3,7,PARTICIPACION 4,Participación en Biología,1,2023-02-01
+Biología,11,3,7,PARTICIPACION 5,Participación en Biología,1,2023-03-25
+Biología,11,3,8,PARTICIPACION 1,Participación en Biología,1,2023-07-02
+Biología,11,3,8,PARTICIPACION 2,Participación en Biología,1,2023-08-21
+Biología,11,3,8,PARTICIPACION 3,Participación en Biología,1,2023-06-09
+Biología,11,3,8,PARTICIPACION 4,Participación en Biología,1,2023-05-27
+Biología,11,3,8,PARTICIPACION 5,Participación en Biología,1,2023-05-18
+Biología,11,3,9,PARTICIPACION 1,Participación en Biología,1,2023-10-17
+Biología,11,3,9,PARTICIPACION 2,Participación en Biología,1,2023-12-03
+Biología,11,3,9,PARTICIPACION 3,Participación en Biología,1,2023-10-04
+Biología,11,3,9,PARTICIPACION 4,Participación en Biología,1,2023-12-15
+Biología,11,3,9,PARTICIPACION 5,Participación en Biología,1,2023-10-31
+Historia,11,3,7,PARTICIPACION 1,Participación en Historia,1,2023-04-25
+Historia,11,3,7,PARTICIPACION 2,Participación en Historia,1,2023-03-26
+Historia,11,3,7,PARTICIPACION 3,Participación en Historia,1,2023-02-03
+Historia,11,3,7,PARTICIPACION 4,Participación en Historia,1,2023-02-20
+Historia,11,3,7,PARTICIPACION 5,Participación en Historia,1,2023-04-19
+Historia,11,3,8,PARTICIPACION 1,Participación en Historia,1,2023-05-16
+Historia,11,3,8,PARTICIPACION 2,Participación en Historia,1,2023-05-10
+Historia,11,3,8,PARTICIPACION 3,Participación en Historia,1,2023-06-30
+Historia,11,3,8,PARTICIPACION 4,Participación en Historia,1,2023-07-26
+Historia,11,3,8,PARTICIPACION 5,Participación en Historia,1,2023-05-31
+Historia,11,3,9,PARTICIPACION 1,Participación en Historia,1,2023-10-31
+Historia,11,3,9,PARTICIPACION 2,Participación en Historia,1,2023-12-11
+Historia,11,3,9,PARTICIPACION 3,Participación en Historia,1,2023-10-20
+Historia,11,3,9,PARTICIPACION 4,Participación en Historia,1,2023-10-22
+Historia,11,3,9,PARTICIPACION 5,Participación en Historia,1,2023-10-12
+Geografía,11,3,7,PARTICIPACION 1,Participación en Geografía,1,2023-04-20
+Geografía,11,3,7,PARTICIPACION 2,Participación en Geografía,1,2023-03-10
+Geografía,11,3,7,PARTICIPACION 3,Participación en Geografía,1,2023-03-03
+Geografía,11,3,7,PARTICIPACION 4,Participación en Geografía,1,2023-02-11
+Geografía,11,3,7,PARTICIPACION 5,Participación en Geografía,1,2023-04-12
+Geografía,11,3,8,PARTICIPACION 1,Participación en Geografía,1,2023-05-25
+Geografía,11,3,8,PARTICIPACION 2,Participación en Geografía,1,2023-08-23
+Geografía,11,3,8,PARTICIPACION 3,Participación en Geografía,1,2023-06-17
+Geografía,11,3,8,PARTICIPACION 4,Participación en Geografía,1,2023-08-12
+Geografía,11,3,8,PARTICIPACION 5,Participación en Geografía,1,2023-08-17
+Geografía,11,3,9,PARTICIPACION 1,Participación en Geografía,1,2023-11-26
+Geografía,11,3,9,PARTICIPACION 2,Participación en Geografía,1,2023-10-23
+Geografía,11,3,9,PARTICIPACION 3,Participación en Geografía,1,2023-11-23
+Geografía,11,3,9,PARTICIPACION 4,Participación en Geografía,1,2023-11-13
+Geografía,11,3,9,PARTICIPACION 5,Participación en Geografía,1,2023-11-09
+Idioma Extranjero,11,3,7,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-03-02
+Idioma Extranjero,11,3,7,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-04-08
+Idioma Extranjero,11,3,7,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-02-27
+Idioma Extranjero,11,3,7,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-04-09
+Idioma Extranjero,11,3,7,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-04-29
+Idioma Extranjero,11,3,8,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-08-06
+Idioma Extranjero,11,3,8,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-08-16
+Idioma Extranjero,11,3,8,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-07-27
+Idioma Extranjero,11,3,8,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-07-15
+Idioma Extranjero,11,3,8,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-06-11
+Idioma Extranjero,11,3,9,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-12-04
+Idioma Extranjero,11,3,9,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-12-13
+Idioma Extranjero,11,3,9,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-12-06
+Idioma Extranjero,11,3,9,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-12-13
+Idioma Extranjero,11,3,9,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-12-11
+Educación Física,11,3,7,PARTICIPACION 1,Participación en Educación Física,1,2023-02-26
+Educación Física,11,3,7,PARTICIPACION 2,Participación en Educación Física,1,2023-02-08
+Educación Física,11,3,7,PARTICIPACION 3,Participación en Educación Física,1,2023-02-20
+Educación Física,11,3,7,PARTICIPACION 4,Participación en Educación Física,1,2023-02-08
+Educación Física,11,3,7,PARTICIPACION 5,Participación en Educación Física,1,2023-03-12
+Educación Física,11,3,8,PARTICIPACION 1,Participación en Educación Física,1,2023-05-05
+Educación Física,11,3,8,PARTICIPACION 2,Participación en Educación Física,1,2023-07-18
+Educación Física,11,3,8,PARTICIPACION 3,Participación en Educación Física,1,2023-05-17
+Educación Física,11,3,8,PARTICIPACION 4,Participación en Educación Física,1,2023-06-20
+Educación Física,11,3,8,PARTICIPACION 5,Participación en Educación Física,1,2023-08-23
+Educación Física,11,3,9,PARTICIPACION 1,Participación en Educación Física,1,2023-10-29
+Educación Física,11,3,9,PARTICIPACION 2,Participación en Educación Física,1,2023-11-30
+Educación Física,11,3,9,PARTICIPACION 3,Participación en Educación Física,1,2023-10-21
+Educación Física,11,3,9,PARTICIPACION 4,Participación en Educación Física,1,2023-11-20
+Educación Física,11,3,9,PARTICIPACION 5,Participación en Educación Física,1,2023-11-03
+Artes Plásticas,11,3,7,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-02-08
+Artes Plásticas,11,3,7,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-04-17
+Artes Plásticas,11,3,7,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-04-06
+Artes Plásticas,11,3,7,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-02-17
+Artes Plásticas,11,3,7,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-04-25
+Artes Plásticas,11,3,8,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-05-26
+Artes Plásticas,11,3,8,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-08-11
+Artes Plásticas,11,3,8,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-08-07
+Artes Plásticas,11,3,8,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-08-26
+Artes Plásticas,11,3,8,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-05-25
+Artes Plásticas,11,3,9,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-12-03
+Artes Plásticas,11,3,9,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-10-27
+Artes Plásticas,11,3,9,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-12-03
+Artes Plásticas,11,3,9,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-11-30
+Artes Plásticas,11,3,9,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-11-23
+Música,11,3,7,PARTICIPACION 1,Participación en Música,1,2023-02-02
+Música,11,3,7,PARTICIPACION 2,Participación en Música,1,2023-04-18
+Música,11,3,7,PARTICIPACION 3,Participación en Música,1,2023-03-16
+Música,11,3,7,PARTICIPACION 4,Participación en Música,1,2023-04-21
+Música,11,3,7,PARTICIPACION 5,Participación en Música,1,2023-04-05
+Música,11,3,8,PARTICIPACION 1,Participación en Música,1,2023-06-24
+Música,11,3,8,PARTICIPACION 2,Participación en Música,1,2023-08-28
+Música,11,3,8,PARTICIPACION 3,Participación en Música,1,2023-05-13
+Música,11,3,8,PARTICIPACION 4,Participación en Música,1,2023-08-01
+Música,11,3,8,PARTICIPACION 5,Participación en Música,1,2023-06-29
+Música,11,3,9,PARTICIPACION 1,Participación en Música,1,2023-10-14
+Música,11,3,9,PARTICIPACION 2,Participación en Música,1,2023-12-07
+Música,11,3,9,PARTICIPACION 3,Participación en Música,1,2023-11-12
+Música,11,3,9,PARTICIPACION 4,Participación en Música,1,2023-12-20
+Música,11,3,9,PARTICIPACION 5,Participación en Música,1,2023-10-23
+Matemáticas,12,3,7,PARTICIPACION 1,Participación en Matemáticas,1,2023-03-13
+Matemáticas,12,3,7,PARTICIPACION 2,Participación en Matemáticas,1,2023-03-28
+Matemáticas,12,3,7,PARTICIPACION 3,Participación en Matemáticas,1,2023-02-07
+Matemáticas,12,3,7,PARTICIPACION 4,Participación en Matemáticas,1,2023-03-20
+Matemáticas,12,3,7,PARTICIPACION 5,Participación en Matemáticas,1,2023-04-06
+Matemáticas,12,3,8,PARTICIPACION 1,Participación en Matemáticas,1,2023-05-18
+Matemáticas,12,3,8,PARTICIPACION 2,Participación en Matemáticas,1,2023-07-29
+Matemáticas,12,3,8,PARTICIPACION 3,Participación en Matemáticas,1,2023-07-06
+Matemáticas,12,3,8,PARTICIPACION 4,Participación en Matemáticas,1,2023-06-19
+Matemáticas,12,3,8,PARTICIPACION 5,Participación en Matemáticas,1,2023-07-17
+Matemáticas,12,3,9,PARTICIPACION 1,Participación en Matemáticas,1,2023-11-14
+Matemáticas,12,3,9,PARTICIPACION 2,Participación en Matemáticas,1,2023-11-27
+Matemáticas,12,3,9,PARTICIPACION 3,Participación en Matemáticas,1,2023-11-23
+Matemáticas,12,3,9,PARTICIPACION 4,Participación en Matemáticas,1,2023-12-08
+Matemáticas,12,3,9,PARTICIPACION 5,Participación en Matemáticas,1,2023-11-11
+Lenguaje,12,3,7,PARTICIPACION 1,Participación en Lenguaje,1,2023-03-28
+Lenguaje,12,3,7,PARTICIPACION 2,Participación en Lenguaje,1,2023-04-11
+Lenguaje,12,3,7,PARTICIPACION 3,Participación en Lenguaje,1,2023-02-21
+Lenguaje,12,3,7,PARTICIPACION 4,Participación en Lenguaje,1,2023-03-02
+Lenguaje,12,3,7,PARTICIPACION 5,Participación en Lenguaje,1,2023-03-04
+Lenguaje,12,3,8,PARTICIPACION 1,Participación en Lenguaje,1,2023-05-08
+Lenguaje,12,3,8,PARTICIPACION 2,Participación en Lenguaje,1,2023-05-08
+Lenguaje,12,3,8,PARTICIPACION 3,Participación en Lenguaje,1,2023-06-04
+Lenguaje,12,3,8,PARTICIPACION 4,Participación en Lenguaje,1,2023-07-10
+Lenguaje,12,3,8,PARTICIPACION 5,Participación en Lenguaje,1,2023-05-10
+Lenguaje,12,3,9,PARTICIPACION 1,Participación en Lenguaje,1,2023-11-05
+Lenguaje,12,3,9,PARTICIPACION 2,Participación en Lenguaje,1,2023-10-17
+Lenguaje,12,3,9,PARTICIPACION 3,Participación en Lenguaje,1,2023-11-17
+Lenguaje,12,3,9,PARTICIPACION 4,Participación en Lenguaje,1,2023-10-03
+Lenguaje,12,3,9,PARTICIPACION 5,Participación en Lenguaje,1,2023-10-10
+Física,12,3,7,PARTICIPACION 1,Participación en Física,1,2023-02-22
+Física,12,3,7,PARTICIPACION 2,Participación en Física,1,2023-04-18
+Física,12,3,7,PARTICIPACION 3,Participación en Física,1,2023-02-11
+Física,12,3,7,PARTICIPACION 4,Participación en Física,1,2023-04-25
+Física,12,3,7,PARTICIPACION 5,Participación en Física,1,2023-02-28
+Física,12,3,8,PARTICIPACION 1,Participación en Física,1,2023-05-14
+Física,12,3,8,PARTICIPACION 2,Participación en Física,1,2023-08-09
+Física,12,3,8,PARTICIPACION 3,Participación en Física,1,2023-07-07
+Física,12,3,8,PARTICIPACION 4,Participación en Física,1,2023-06-29
+Física,12,3,8,PARTICIPACION 5,Participación en Física,1,2023-05-07
+Física,12,3,9,PARTICIPACION 1,Participación en Física,1,2023-10-10
+Física,12,3,9,PARTICIPACION 2,Participación en Física,1,2023-11-23
+Física,12,3,9,PARTICIPACION 3,Participación en Física,1,2023-10-08
+Física,12,3,9,PARTICIPACION 4,Participación en Física,1,2023-12-02
+Física,12,3,9,PARTICIPACION 5,Participación en Física,1,2023-10-02
+Química,12,3,7,PARTICIPACION 1,Participación en Química,1,2023-02-06
+Química,12,3,7,PARTICIPACION 2,Participación en Química,1,2023-04-06
+Química,12,3,7,PARTICIPACION 3,Participación en Química,1,2023-02-27
+Química,12,3,7,PARTICIPACION 4,Participación en Química,1,2023-03-18
+Química,12,3,7,PARTICIPACION 5,Participación en Química,1,2023-03-27
+Química,12,3,8,PARTICIPACION 1,Participación en Química,1,2023-07-22
+Química,12,3,8,PARTICIPACION 2,Participación en Química,1,2023-07-14
+Química,12,3,8,PARTICIPACION 3,Participación en Química,1,2023-07-16
+Química,12,3,8,PARTICIPACION 4,Participación en Química,1,2023-05-22
+Química,12,3,8,PARTICIPACION 5,Participación en Química,1,2023-06-10
+Química,12,3,9,PARTICIPACION 1,Participación en Química,1,2023-10-25
+Química,12,3,9,PARTICIPACION 2,Participación en Química,1,2023-11-27
+Química,12,3,9,PARTICIPACION 3,Participación en Química,1,2023-10-26
+Química,12,3,9,PARTICIPACION 4,Participación en Química,1,2023-11-22
+Química,12,3,9,PARTICIPACION 5,Participación en Química,1,2023-10-24
+Biología,12,3,7,PARTICIPACION 1,Participación en Biología,1,2023-04-04
+Biología,12,3,7,PARTICIPACION 2,Participación en Biología,1,2023-03-26
+Biología,12,3,7,PARTICIPACION 3,Participación en Biología,1,2023-03-30
+Biología,12,3,7,PARTICIPACION 4,Participación en Biología,1,2023-02-20
+Biología,12,3,7,PARTICIPACION 5,Participación en Biología,1,2023-02-16
+Biología,12,3,8,PARTICIPACION 1,Participación en Biología,1,2023-07-06
+Biología,12,3,8,PARTICIPACION 2,Participación en Biología,1,2023-06-16
+Biología,12,3,8,PARTICIPACION 3,Participación en Biología,1,2023-08-27
+Biología,12,3,8,PARTICIPACION 4,Participación en Biología,1,2023-07-09
+Biología,12,3,8,PARTICIPACION 5,Participación en Biología,1,2023-05-04
+Biología,12,3,9,PARTICIPACION 1,Participación en Biología,1,2023-11-12
+Biología,12,3,9,PARTICIPACION 2,Participación en Biología,1,2023-10-27
+Biología,12,3,9,PARTICIPACION 3,Participación en Biología,1,2023-11-28
+Biología,12,3,9,PARTICIPACION 4,Participación en Biología,1,2023-12-07
+Biología,12,3,9,PARTICIPACION 5,Participación en Biología,1,2023-10-22
+Historia,12,3,7,PARTICIPACION 1,Participación en Historia,1,2023-02-10
+Historia,12,3,7,PARTICIPACION 2,Participación en Historia,1,2023-03-28
+Historia,12,3,7,PARTICIPACION 3,Participación en Historia,1,2023-04-11
+Historia,12,3,7,PARTICIPACION 4,Participación en Historia,1,2023-02-18
+Historia,12,3,7,PARTICIPACION 5,Participación en Historia,1,2023-02-24
+Historia,12,3,8,PARTICIPACION 1,Participación en Historia,1,2023-06-16
+Historia,12,3,8,PARTICIPACION 2,Participación en Historia,1,2023-06-12
+Historia,12,3,8,PARTICIPACION 3,Participación en Historia,1,2023-06-26
+Historia,12,3,8,PARTICIPACION 4,Participación en Historia,1,2023-06-09
+Historia,12,3,8,PARTICIPACION 5,Participación en Historia,1,2023-07-08
+Historia,12,3,9,PARTICIPACION 1,Participación en Historia,1,2023-10-06
+Historia,12,3,9,PARTICIPACION 2,Participación en Historia,1,2023-11-01
+Historia,12,3,9,PARTICIPACION 3,Participación en Historia,1,2023-10-12
+Historia,12,3,9,PARTICIPACION 4,Participación en Historia,1,2023-12-09
+Historia,12,3,9,PARTICIPACION 5,Participación en Historia,1,2023-11-07
+Geografía,12,3,7,PARTICIPACION 1,Participación en Geografía,1,2023-02-27
+Geografía,12,3,7,PARTICIPACION 2,Participación en Geografía,1,2023-04-18
+Geografía,12,3,7,PARTICIPACION 3,Participación en Geografía,1,2023-04-19
+Geografía,12,3,7,PARTICIPACION 4,Participación en Geografía,1,2023-03-10
+Geografía,12,3,7,PARTICIPACION 5,Participación en Geografía,1,2023-02-21
+Geografía,12,3,8,PARTICIPACION 1,Participación en Geografía,1,2023-05-05
+Geografía,12,3,8,PARTICIPACION 2,Participación en Geografía,1,2023-05-25
+Geografía,12,3,8,PARTICIPACION 3,Participación en Geografía,1,2023-06-10
+Geografía,12,3,8,PARTICIPACION 4,Participación en Geografía,1,2023-07-02
+Geografía,12,3,8,PARTICIPACION 5,Participación en Geografía,1,2023-07-15
+Geografía,12,3,9,PARTICIPACION 1,Participación en Geografía,1,2023-11-07
+Geografía,12,3,9,PARTICIPACION 2,Participación en Geografía,1,2023-11-18
+Geografía,12,3,9,PARTICIPACION 3,Participación en Geografía,1,2023-10-08
+Geografía,12,3,9,PARTICIPACION 4,Participación en Geografía,1,2023-10-08
+Geografía,12,3,9,PARTICIPACION 5,Participación en Geografía,1,2023-12-01
+Idioma Extranjero,12,3,7,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-04-09
+Idioma Extranjero,12,3,7,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-02-16
+Idioma Extranjero,12,3,7,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-02-11
+Idioma Extranjero,12,3,7,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-04-07
+Idioma Extranjero,12,3,7,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-02-14
+Idioma Extranjero,12,3,8,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-08-27
+Idioma Extranjero,12,3,8,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-05-21
+Idioma Extranjero,12,3,8,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-08-26
+Idioma Extranjero,12,3,8,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-07-30
+Idioma Extranjero,12,3,8,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-05-07
+Idioma Extranjero,12,3,9,PARTICIPACION 1,Participación en Idioma Extranjero,1,2023-12-13
+Idioma Extranjero,12,3,9,PARTICIPACION 2,Participación en Idioma Extranjero,1,2023-10-04
+Idioma Extranjero,12,3,9,PARTICIPACION 3,Participación en Idioma Extranjero,1,2023-10-05
+Idioma Extranjero,12,3,9,PARTICIPACION 4,Participación en Idioma Extranjero,1,2023-10-27
+Idioma Extranjero,12,3,9,PARTICIPACION 5,Participación en Idioma Extranjero,1,2023-11-11
+Educación Física,12,3,7,PARTICIPACION 1,Participación en Educación Física,1,2023-02-23
+Educación Física,12,3,7,PARTICIPACION 2,Participación en Educación Física,1,2023-02-20
+Educación Física,12,3,7,PARTICIPACION 3,Participación en Educación Física,1,2023-03-25
+Educación Física,12,3,7,PARTICIPACION 4,Participación en Educación Física,1,2023-03-26
+Educación Física,12,3,7,PARTICIPACION 5,Participación en Educación Física,1,2023-03-06
+Educación Física,12,3,8,PARTICIPACION 1,Participación en Educación Física,1,2023-05-21
+Educación Física,12,3,8,PARTICIPACION 2,Participación en Educación Física,1,2023-06-16
+Educación Física,12,3,8,PARTICIPACION 3,Participación en Educación Física,1,2023-05-07
+Educación Física,12,3,8,PARTICIPACION 4,Participación en Educación Física,1,2023-08-27
+Educación Física,12,3,8,PARTICIPACION 5,Participación en Educación Física,1,2023-07-25
+Educación Física,12,3,9,PARTICIPACION 1,Participación en Educación Física,1,2023-12-10
+Educación Física,12,3,9,PARTICIPACION 2,Participación en Educación Física,1,2023-11-30
+Educación Física,12,3,9,PARTICIPACION 3,Participación en Educación Física,1,2023-10-20
+Educación Física,12,3,9,PARTICIPACION 4,Participación en Educación Física,1,2023-10-26
+Educación Física,12,3,9,PARTICIPACION 5,Participación en Educación Física,1,2023-11-13
+Artes Plásticas,12,3,7,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-03-09
+Artes Plásticas,12,3,7,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-04-05
+Artes Plásticas,12,3,7,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-03-25
+Artes Plásticas,12,3,7,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-02-20
+Artes Plásticas,12,3,7,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-04-01
+Artes Plásticas,12,3,8,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-05-10
+Artes Plásticas,12,3,8,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-06-29
+Artes Plásticas,12,3,8,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-07-05
+Artes Plásticas,12,3,8,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-08-20
+Artes Plásticas,12,3,8,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-08-28
+Artes Plásticas,12,3,9,PARTICIPACION 1,Participación en Artes Plásticas,1,2023-12-06
+Artes Plásticas,12,3,9,PARTICIPACION 2,Participación en Artes Plásticas,1,2023-10-05
+Artes Plásticas,12,3,9,PARTICIPACION 3,Participación en Artes Plásticas,1,2023-12-03
+Artes Plásticas,12,3,9,PARTICIPACION 4,Participación en Artes Plásticas,1,2023-10-23
+Artes Plásticas,12,3,9,PARTICIPACION 5,Participación en Artes Plásticas,1,2023-12-10
+Música,12,3,7,PARTICIPACION 1,Participación en Música,1,2023-02-24
+Música,12,3,7,PARTICIPACION 2,Participación en Música,1,2023-04-09
+Música,12,3,7,PARTICIPACION 3,Participación en Música,1,2023-02-18
+Música,12,3,7,PARTICIPACION 4,Participación en Música,1,2023-04-25
+Música,12,3,7,PARTICIPACION 5,Participación en Música,1,2023-02-13
+Música,12,3,8,PARTICIPACION 1,Participación en Música,1,2023-08-20
+Música,12,3,8,PARTICIPACION 2,Participación en Música,1,2023-06-04
+Música,12,3,8,PARTICIPACION 3,Participación en Música,1,2023-07-01
+Música,12,3,8,PARTICIPACION 4,Participación en Música,1,2023-06-11
+Música,12,3,8,PARTICIPACION 5,Participación en Música,1,2023-07-15
+Música,12,3,9,PARTICIPACION 1,Participación en Música,1,2023-12-02
+Música,12,3,9,PARTICIPACION 2,Participación en Música,1,2023-10-12
+Música,12,3,9,PARTICIPACION 3,Participación en Música,1,2023-10-05
+Música,12,3,9,PARTICIPACION 4,Participación en Música,1,2023-12-15
+Música,12,3,9,PARTICIPACION 5,Participación en Música,1,2023-12-06

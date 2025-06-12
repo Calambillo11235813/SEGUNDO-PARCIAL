@@ -86,6 +86,7 @@ class Boletin(models.Model):
 class Asistencia(models.Model):
     estudiante = models.ForeignKey('Usuarios.Usuario', on_delete=models.CASCADE, related_name='asistencias')
     materia = models.ForeignKey(Materia, on_delete=models.CASCADE, related_name='asistencias')
+    trimestre = models.ForeignKey('Trimestre', on_delete=models.CASCADE, related_name='asistencias')  # ✅ CORREGIDO
     fecha = models.DateField(default=timezone.now)
     presente = models.BooleanField(default=True)
     justificada = models.BooleanField(default=False)
@@ -93,8 +94,8 @@ class Asistencia(models.Model):
     class Meta:
         verbose_name = 'Asistencia'
         verbose_name_plural = 'Asistencias'
-        unique_together = ('estudiante', 'materia', 'fecha')  # Un estudiante solo puede tener una asistencia por materia y fecha
-        ordering = ['-fecha']  # Ordenar por fecha descendente
+        unique_together = ('estudiante', 'materia', 'fecha')
+        ordering = ['-fecha']
     
     def __str__(self):
         estado = "Presente" if self.presente else "Ausente"
@@ -102,6 +103,25 @@ class Asistencia(models.Model):
             estado = "Justificado"
         return f"{self.estudiante} - {self.materia} - {self.fecha} - {estado}"
 
+    def save(self, *args, **kwargs):
+        """
+        Auto-asigna el trimestre basado en la fecha si no se proporciona
+        """
+        if not self.trimestre:
+            # Buscar el trimestre activo que contenga esta fecha
+            trimestre_activo = Trimestre.objects.filter(  # ✅ Aquí también usar referencia como string si es necesario
+                fecha_inicio__lte=self.fecha,
+                fecha_fin__gte=self.fecha,
+                activo=True
+            ).first()
+            
+            if trimestre_activo:
+                self.trimestre = trimestre_activo
+            else:
+                from django.core.exceptions import ValidationError
+                raise ValidationError("No existe un trimestre activo para la fecha especificada")
+        
+        super().save(*args, **kwargs)
 
 class Trimestre(models.Model):
     """
