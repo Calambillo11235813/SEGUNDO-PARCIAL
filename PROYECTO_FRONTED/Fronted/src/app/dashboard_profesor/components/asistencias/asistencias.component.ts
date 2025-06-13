@@ -34,20 +34,23 @@ interface MateriasResponse {
 export class AsistenciasComponent implements OnInit {
   materias: Materia[] = [];
   estudiantes: any[] = [];
-  trimestres: any[] = [];  // ✅ Añadir array de trimestres
+  trimestres: any[] = [];
   asistenciaForm: FormGroup;
   loading = false;
   materiasLoading = false;
   estudiantesLoading = false;
-  trimestresLoading = false;  // ✅ Añadir loading para trimestres
+  trimestresLoading = false;
   error = '';
   mensaje = '';
   
-  // ✅ AGREGAR: Propiedades que faltan
+  // AGREGAR: Propiedades que faltan
   guardandoAsistencias = false;
   mostrarConfirmacion = false;
   resumenAsistencias: any = null;
   
+  // AGREGAR: Propiedad para el año actual
+  private readonly anoActual: number = new Date().getFullYear();
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -63,13 +66,31 @@ export class AsistenciasComponent implements OnInit {
   
   ngOnInit(): void {
     this.cargarMaterias();
-    this.cargarTrimestres();  // ✅ Cargar trimestres al inicializar
+    this.cargarTrimestres();
     
     // Escuchar cambios en el formulario para cargar estudiantes
     this.asistenciaForm.get('materia')?.valueChanges.subscribe(value => {
       if (value) {
         this.cargarEstudiantes();
       }
+    });
+  }
+
+  // AGREGAR: Método para verificar si una fecha pertenece al año actual
+  private esDelAnoActual(fecha: string): boolean {
+    if (!fecha) return false;
+    const anoFecha = new Date(fecha).getFullYear();
+    return anoFecha === this.anoActual;
+  }
+
+  // AGREGAR: Método para filtrar trimestres del año actual
+  private filtrarTrimestresAnoActual(trimestres: any[]): any[] {
+    return trimestres.filter(trimestre => {
+      // Verificar si la fecha de inicio o fin está en el año actual
+      const fechaInicio = trimestre.fecha_inicio;
+      const fechaFin = trimestre.fecha_fin;
+      
+      return this.esDelAnoActual(fechaInicio) || this.esDelAnoActual(fechaFin);
     });
   }
   
@@ -378,26 +399,33 @@ export class AsistenciasComponent implements OnInit {
     
     this.asistenciasService.getTrimestres({ activos: true }).subscribe({
       next: (response: any) => {
-        console.log('Respuesta trimestres:', response);
+        console.log('Respuesta trimestres originales:', response);
+        
+        let trimestresOriginales: any[] = [];
         
         if (response && response.trimestres && Array.isArray(response.trimestres)) {
-          this.trimestres = response.trimestres;
+          trimestresOriginales = response.trimestres;
         } else if (Array.isArray(response)) {
-          this.trimestres = response;
+          trimestresOriginales = response;
         } else {
           console.warn('Formato inesperado de trimestres:', response);
-          this.trimestres = [];
+          trimestresOriginales = [];
         }
+
+        // Filtrar solo trimestres del año actual
+        this.trimestres = this.filtrarTrimestresAnoActual(trimestresOriginales);
+        
+        console.log(`Trimestres filtrados para el año ${this.anoActual}:`, this.trimestres);
         
         this.trimestresLoading = false;
         
-        // ✅ MEJORAR: Seleccionar automáticamente el trimestre activo
+        // Seleccionar automáticamente el trimestre activo del año actual
         if (this.trimestres.length > 0) {
           const trimestreActivo = this.trimestres.find(t => t.activo === true);
           if (trimestreActivo) {
             this.asistenciaForm.patchValue({ trimestre: trimestreActivo.id });
           } else {
-            // Si no hay uno activo, seleccionar el primero
+            // Si no hay uno activo, seleccionar el primero del año actual
             this.asistenciaForm.patchValue({ trimestre: this.trimestres[0].id });
           }
         }
@@ -406,11 +434,32 @@ export class AsistenciasComponent implements OnInit {
         console.error('Error al cargar trimestres:', error);
         this.trimestresLoading = false;
         
-        // ✅ MEJORAR: Datos simulados más realistas
+        // Datos simulados del año actual
+        const fechaActual = new Date();
+        const anoActual = fechaActual.getFullYear();
+        
         this.trimestres = [
-          { id: 1, nombre: 'Primer Trimestre 2025', activo: true, fecha_inicio: '2025-01-01', fecha_fin: '2025-04-30' },
-          { id: 2, nombre: 'Segundo Trimestre 2025', activo: false, fecha_inicio: '2025-05-01', fecha_fin: '2025-08-31' },
-          { id: 3, nombre: 'Tercer Trimestre 2025', activo: false, fecha_inicio: '2025-09-01', fecha_fin: '2025-12-31' }
+          { 
+            id: 1, 
+            nombre: `Primer Trimestre ${anoActual}`, 
+            activo: true, 
+            fecha_inicio: `${anoActual}-01-01`, 
+            fecha_fin: `${anoActual}-04-30` 
+          },
+          { 
+            id: 2, 
+            nombre: `Segundo Trimestre ${anoActual}`, 
+            activo: false, 
+            fecha_inicio: `${anoActual}-05-01`, 
+            fecha_fin: `${anoActual}-08-31` 
+          },
+          { 
+            id: 3, 
+            nombre: `Tercer Trimestre ${anoActual}`, 
+            activo: false, 
+            fecha_inicio: `${anoActual}-09-01`, 
+            fecha_fin: `${anoActual + 1}-01-31` 
+          }
         ];
         
         // Seleccionar el activo
