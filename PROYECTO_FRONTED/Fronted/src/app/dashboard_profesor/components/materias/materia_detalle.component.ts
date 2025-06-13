@@ -67,7 +67,7 @@ import { MateriasService } from '../../../services/materias.service';
                   <span>Ver Lista de Asistencias</span>
                 </a>
                 
-                <a routerLink="/profesor/notas" [queryParams]="{materia: materia.id}" 
+                <a routerLink="/profesor/evaluaciones" [queryParams]="{materia: materia.id}" 
                   class="flex items-center p-3 rounded-md bg-green-50 text-green-700 hover:bg-green-100 transition">
                   <i class="fas fa-chart-line mr-3"></i>
                   <span>Gestionar Calificaciones</span>
