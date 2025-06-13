@@ -47,6 +47,7 @@ export class EvaluacionesComponent implements OnInit {
 
   // Formularios
   evaluacionForm: FormGroup;
+  configuracionForm: FormGroup;
   
   // Control de errores y mensajes
   error: string = '';
@@ -56,9 +57,13 @@ export class EvaluacionesComponent implements OnInit {
   mostrarFormulario: boolean = false;
   esEntregable: boolean = true;
   materiaSeleccionada: number | null = null;
+  configurandoPorcentaje: boolean = false;
   
   // Datos del usuario
   usuario: any;
+
+  // Agregar al array de propiedades de la clase
+  configuracionPorcentajes: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -91,6 +96,12 @@ export class EvaluacionesComponent implements OnInit {
       criterios_participacion: [''],
       escala_calificacion: ['NUMERICA']
     });
+    
+    this.configuracionForm = this.fb.group({
+      materia_id: [null, Validators.required],
+      tipo_evaluacion_id: [null, Validators.required],
+      porcentaje: [10, [Validators.required, Validators.min(1), Validators.max(100)]]
+    });
   }
   
   ngOnInit(): void {
@@ -105,7 +116,9 @@ export class EvaluacionesComponent implements OnInit {
       if (materiaId) {
         this.materiaSeleccionada = +materiaId;
         this.evaluacionForm.patchValue({ materia_id: +materiaId });
+        this.configuracionForm.patchValue({ materia_id: +materiaId });
         this.cargarEvaluaciones(+materiaId);
+        this.cargarConfiguracionPorcentajes(+materiaId);
       }
     });
     
@@ -122,7 +135,9 @@ export class EvaluacionesComponent implements OnInit {
     this.evaluacionForm.get('materia_id')?.valueChanges.subscribe(value => {
       if (value && (!this.materiaSeleccionada || this.materiaSeleccionada !== value)) {
         this.materiaSeleccionada = value;
+        this.configuracionForm.patchValue({ materia_id: value });
         this.cargarEvaluaciones(value);
+        this.cargarConfiguracionPorcentajes(value);
       }
     });
   }
@@ -561,6 +576,90 @@ export class EvaluacionesComponent implements OnInit {
     return `${valor}%`;
   }
   
+  // Método para mostrar el modal de configuración
+  mostrarConfiguracionPorcentaje(): void {
+    this.configurandoPorcentaje = true;
+  }
+  
+  // Método para guardar la configuración de porcentaje
+  guardarConfiguracionPorcentaje(): void {
+    if (this.configuracionForm.invalid) {
+      Object.keys(this.configuracionForm.controls).forEach(field => {
+        const control = this.configuracionForm.get(field);
+        if (control?.invalid) {
+          control.markAsTouched({ onlySelf: true });
+        }
+      });
+      return;
+    }
+    
+    const formData = { ...this.configuracionForm.value };
+    formData.materia_id = Number(formData.materia_id);
+    formData.tipo_evaluacion_id = Number(formData.tipo_evaluacion_id);
+    formData.porcentaje = Number(formData.porcentaje);
+    
+    this.evaluacionesService.configurarPorcentajeEvaluacion(formData).subscribe({
+      next: (response: any) => {
+        console.log('Configuración guardada:', response);
+        this.mensaje = 'Configuración de porcentaje guardada correctamente';
+        this.configurandoPorcentaje = false;
+        this.cargarConfiguracionPorcentajes(this.materiaSeleccionada);
+      },
+      error: (error) => {
+        console.error('Error al guardar configuración:', error);
+        this.error = error.error?.mensaje || 'Error al guardar la configuración';
+      }
+    });
+  }
+  
+  // Método para validar el porcentaje de una evaluación
+  validarPorcentajeEvaluacion(): void {
+    const materiaId = this.evaluacionForm.get('materia_id')?.value;
+    const tipoId = this.evaluacionForm.get('tipo_evaluacion_id')?.value;
+    const porcentaje = this.evaluacionForm.get('porcentaje_nota_final')?.value;
+    
+    if (materiaId && tipoId && porcentaje) {
+      // Conversión explícita a number para evitar problemas de tipo
+      this.evaluacionesService.verificarPorcentajeDisponible(
+        Number(materiaId), 
+        Number(tipoId), 
+        Number(porcentaje), 
+        this.evaluaciones
+      ).subscribe({
+        next: (resultado) => {
+          if (!resultado.disponible) {
+            this.error = resultado.mensaje;
+          } else {
+            this.error = '';
+          }
+        },
+        error: (err) => {
+          console.error('Error al verificar porcentaje:', err);
+        }
+      });
+    }
+  }
+  
+  cargarConfiguracionPorcentajes(materiaId: number | null): void {
+    // Si materiaId es null, no hacer nada
+    if (materiaId === null) {
+      this.configuracionPorcentajes = [];
+      return;
+    }
+    
+    // Ahora podemos llamar al servicio con seguridad
+    this.evaluacionesService.getConfiguracionPorcentajes(materiaId).subscribe({
+      next: (response: any) => {
+        console.log('Configuración de porcentajes:', response);
+        this.configuracionPorcentajes = Array.isArray(response) ? response : [];
+      },
+      error: (error) => {
+        console.error('Error al cargar configuración de porcentajes:', error);
+        this.configuracionPorcentajes = [];
+      }
+    });
+  }
+  
   calcularPorcentajeRestante(): number {
     const tipoEvaluacionId = this.evaluacionForm.get('tipo_evaluacion_id')?.value;
     
@@ -568,14 +667,22 @@ export class EvaluacionesComponent implements OnInit {
       return 100;
     }
     
+    // Convertir explícitamente a número
+    const tipoId = Number(tipoEvaluacionId);
+    
     // Calcular el porcentaje ya utilizado para este tipo de evaluación
     const porcentajeUsado = this.evaluacionesService.calcularPorcentajeUsado(
       this.evaluaciones, 
-      tipoEvaluacionId
+      tipoId
     );
     
-    // Obtener el porcentaje máximo permitido (simulado como 100 - podría venir de configuración)
-    const porcentajeMaximo = 100;
+    // Buscar la configuración personalizada para este tipo
+    const configuracion = this.configuracionPorcentajes.find(
+      c => c.tipo_evaluacion_id == tipoId
+    );
+    
+    // Obtener el porcentaje máximo permitido (personalizado o por defecto 100)
+    const porcentajeMaximo = configuracion ? Number(configuracion.porcentaje) : 100;
     
     // Calcular el restante
     return Math.max(0, porcentajeMaximo - porcentajeUsado);
