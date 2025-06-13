@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators'; // Añadir esta importación
+import { map } from 'rxjs/operators';
+import { ApiConfig } from '../config/api-config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EvaluacionesService {
-  private apiUrl = 'http://localhost:8000/api/cursos';
+  private apiUrl = ApiConfig.ENDPOINTS.CURSOS;
 
   constructor(private http: HttpClient) { }
 
@@ -286,15 +287,6 @@ export class EvaluacionesService {
   }
 
   /**
-   * Calcula el porcentaje total usado por tipo de evaluación
-   */
-  calcularPorcentajeUsado(evaluaciones: any[], tipoEvaluacionId: number): number {
-    return evaluaciones
-      .filter(evaluacion => evaluacion.tipo_evaluacion?.id === tipoEvaluacionId)
-      .reduce((total, evaluacion) => total + (evaluacion.porcentaje_nota_final || 0), 0);
-  }
-
-  /**
    * Configura el porcentaje máximo permitido para un tipo de evaluación en una materia
    */
   configurarPorcentajeEvaluacion(configuracion: {
@@ -362,5 +354,14 @@ export class EvaluacionesService {
         };
       })
     );
+  }
+
+  /**
+   * Calcula el porcentaje total usado por tipo de evaluación
+   */
+  calcularPorcentajeUsado(evaluaciones: any[], tipoEvaluacionId: number): number {
+    return evaluaciones
+      .filter(evaluacion => evaluacion.tipo_evaluacion?.id === tipoEvaluacionId)
+      .reduce((total, evaluacion) => total + (evaluacion.porcentaje_nota_final || 0), 0);
   }
 }

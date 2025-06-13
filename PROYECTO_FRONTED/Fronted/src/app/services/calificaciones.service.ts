@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ApiConfig } from '../config/api-config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CalificacionesService {
-  private apiUrl = 'http://localhost:8000/api/cursos';
+  private apiUrl = ApiConfig.ENDPOINTS.CURSOS;
 
   constructor(private http: HttpClient) { }
 

@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ApiConfig } from '../config/api-config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EstudiantesService {
-  private apiUrl = 'http://localhost:8000/api';
+  private usuariosApiUrl = ApiConfig.ENDPOINTS.USUARIOS;
+  private cursosApiUrl = ApiConfig.ENDPOINTS.CURSOS;
 
   constructor(private http: HttpClient) { }
 
@@ -15,21 +17,21 @@ export class EstudiantesService {
    * Obtiene todos los estudiantes registrados en el sistema
    */
   getEstudiantes(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/usuarios/usuarios/estudiantes/`);
+    return this.http.get<any[]>(`${this.usuariosApiUrl}/usuarios/estudiantes/`);
   }
 
   /**
    * Obtiene un estudiante específico por su ID
    */
   getEstudiante(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/usuarios/usuarios/estudiantes/${id}/`);
+    return this.http.get<any>(`${this.usuariosApiUrl}/usuarios/estudiantes/${id}/`);
   }
 
   /**
    * Obtiene todos los estudiantes de un curso específico
    */
   getEstudiantesPorCurso(cursoId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/cursos/cursos/${cursoId}/estudiantes/`);
+    return this.http.get<any[]>(`${this.cursosApiUrl}/cursos/${cursoId}/estudiantes/`);
   }
 
   /**
@@ -37,7 +39,7 @@ export class EstudiantesService {
    * Este método es clave para obtener los estudiantes que se pueden calificar en una evaluación
    */
   getEstudiantesPorMateria(materiaId: number): Observable<any[]> {
-    return this.http.get<any>(`${this.apiUrl}/cursos/materias/${materiaId}/estudiantes/`)
+    return this.http.get<any>(`${this.cursosApiUrl}/materias/${materiaId}/estudiantes/`)
       .pipe(
         map(response => {
           if (response && response.estudiantes) {
@@ -57,7 +59,7 @@ export class EstudiantesService {
     let params = new HttpParams();
     params = params.append('tipo', tipoEvaluacion);
     
-    return this.http.get<any>(`${this.apiUrl}/cursos/evaluaciones/${evaluacionId}/calificaciones/`, { params })
+    return this.http.get<any>(`${this.cursosApiUrl}/evaluaciones/${evaluacionId}/calificaciones/`, { params })
       .pipe(
         map(response => {
           if (response && response.calificaciones) {
@@ -74,7 +76,7 @@ export class EstudiantesService {
    * Asigna un estudiante a un curso
    */
   asignarEstudianteACurso(estudianteId: number, cursoId: number): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/cursos/estudiantes/asignar-curso/`, {
+    return this.http.post<any>(`${this.cursosApiUrl}/estudiantes/asignar-curso/`, {
       estudiante_id: estudianteId,
       curso_id: cursoId
     });
@@ -84,7 +86,7 @@ export class EstudiantesService {
    * Desasigna un estudiante de un curso
    */
   desasignarEstudianteDeCurso(estudianteId: number): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/cursos/estudiantes/${estudianteId}/desasignar-curso/`, {});
+    return this.http.post<any>(`${this.cursosApiUrl}/estudiantes/${estudianteId}/desasignar-curso/`, {});
   }
 
   /**
@@ -98,7 +100,7 @@ export class EstudiantesService {
       if (filtros.tipo_evaluacion) params = params.append('tipo_evaluacion', filtros.tipo_evaluacion);
     }
     
-    return this.http.get<any>(`${this.apiUrl}/cursos/estudiantes/${estudianteId}/calificaciones/`, { params })
+    return this.http.get<any>(`${this.cursosApiUrl}/estudiantes/${estudianteId}/calificaciones/`, { params })
       .pipe(
         map(response => {
           if (response && response.calificaciones) {
@@ -123,7 +125,7 @@ export class EstudiantesService {
       if (filtros.fecha_fin) params = params.append('fecha_fin', filtros.fecha_fin);
     }
     
-    return this.http.get<any>(`${this.apiUrl}/cursos/estudiantes/${estudianteId}/asistencias/`, { params })
+    return this.http.get<any>(`${this.cursosApiUrl}/estudiantes/${estudianteId}/asistencias/`, { params })
       .pipe(
         map(response => {
           if (Array.isArray(response)) {
@@ -146,7 +148,7 @@ export class EstudiantesService {
       if (filtros.anio) params = params.append('anio', filtros.anio.toString());
     }
     
-    return this.http.get<any>(`${this.apiUrl}/cursos/estudiantes/${estudianteId}/evaluaciones/`, { params })
+    return this.http.get<any>(`${this.cursosApiUrl}/estudiantes/${estudianteId}/evaluaciones/`, { params })
       .pipe(
         map(response => {
           if (Array.isArray(response)) {
@@ -189,13 +191,13 @@ export class EstudiantesService {
    * Obtiene historial académico completo de un estudiante
    */
   getHistorialAcademico(estudianteId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/cursos/estudiantes/${estudianteId}/historial-academico/`);
+    return this.http.get<any>(`${this.cursosApiUrl}/estudiantes/${estudianteId}/historial-academico/`);
   }
 
   /**
    * Obtiene información completa de un estudiante, incluyendo curso y materias
    */
   getEstudianteCompleto(estudianteId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/cursos/estudiantes/${estudianteId}/curso-materias/`);
+    return this.http.get<any>(`${this.cursosApiUrl}/estudiantes/${estudianteId}/curso-materias/`);
   }
 }

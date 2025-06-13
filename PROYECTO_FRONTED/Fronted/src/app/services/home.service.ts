@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ApiConfig } from '../config/api-config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsuarioService {
-  private apiUrl = 'http://localhost:8000/api/usuarios'; // URL base para usuarios
-  private cursosApiUrl = 'http://localhost:8000/api/cursos'; // URL base para cursos
+  private usuariosApiUrl = ApiConfig.ENDPOINTS.USUARIOS;
+  private cursosApiUrl = ApiConfig.ENDPOINTS.CURSOS;
 
   constructor(private http: HttpClient) {}
 
@@ -15,14 +16,14 @@ export class UsuarioService {
    * Obtiene la cantidad total de estudiantes.
    */
   getCantidadEstudiantes(): Observable<{ total: number }> {
-    return this.http.get<{ total: number }>(`${this.apiUrl}/usuarios/estudiantes/`);
+    return this.http.get<{ total: number }>(`${this.usuariosApiUrl}/usuarios/estudiantes/`);
   }
 
   /**
    * Obtiene la cantidad total de profesores.
    */
   getCantidadProfesores(): Observable<{ total: number }> {
-    return this.http.get<{ total: number }>(`${this.apiUrl}/usuarios/profesores/`);
+    return this.http.get<{ total: number }>(`${this.usuariosApiUrl}/usuarios/profesores/`);
   }
 
   /**

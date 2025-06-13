@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators'; // ✅ Agregar este import
+import { catchError } from 'rxjs/operators';
+import { ApiConfig } from '../config/api-config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AsistenciasService {
-  private apiUrl = 'http://localhost:8000/api';
+  private cursosApiUrl = ApiConfig.ENDPOINTS.CURSOS;
 
   constructor(private http: HttpClient) { }
 
@@ -15,8 +16,7 @@ export class AsistenciasService {
    * Obtiene los trimestres disponibles
    */
   getTrimestres(filtros?: { año?: number, activos?: boolean }): Observable<any> {
-    // ✅ PROBAR: Diferentes URLs según tu backend
-    let url = `${this.apiUrl}/cursos/trimestres/`; // Cambiar de /cursos/trimestres/ a /trimestres/
+    let url = `${this.cursosApiUrl}/trimestres/`;
     
     if (filtros) {
       let params = new HttpParams();
@@ -48,8 +48,7 @@ export class AsistenciasService {
       throw new Error('materia_id es requerido');
     }
     
-    // ✅ Verificar que esta URL coincida con tu urls.py
-    const url = `${this.apiUrl}/cursos/asistencias/registrar-masivo/`;
+    const url = `${this.cursosApiUrl}/asistencias/registrar-masivo/`;
     
     const dataParaBackend = {
       materia_id: asistenciasData.materia_id,
@@ -76,7 +75,7 @@ export class AsistenciasService {
   registrarAsistencia(asistenciaData: {
     materia_id: number;
     estudiante_id: number;
-    trimestre_id: number;  // ✅ Nuevo campo requerido
+    trimestre_id: number;
     fecha?: string;
     presente: boolean;
     justificada?: boolean;
@@ -85,7 +84,7 @@ export class AsistenciasService {
       throw new Error('trimestre_id es requerido');
     }
     
-    const url = `${this.apiUrl}/cursos/asistencias/registrar/`;
+    const url = `${this.cursosApiUrl}/asistencias/registrar/`;
     return this.http.post<any>(url, asistenciaData);
   }
 
@@ -93,14 +92,14 @@ export class AsistenciasService {
    * Obtiene la lista de estudiantes por materia
    */
   getEstudiantesPorMateria(materiaId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/cursos/materias/${materiaId}/estudiantes/`);
+    return this.http.get<any>(`${this.cursosApiUrl}/materias/${materiaId}/estudiantes/`);
   }
 
   /**
    * Obtiene las asistencias de una materia específica
    */
   getAsistenciasPorMateria(materiaId: number, filtros?: any): Observable<any> {
-    let url = `${this.apiUrl}/cursos/materias/${materiaId}/asistencias/`;
+    let url = `${this.cursosApiUrl}/materias/${materiaId}/asistencias/`;
     
     if (filtros) {
       let params = new HttpParams();

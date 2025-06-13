@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ApiConfig } from '../config/api-config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MateriasService {
-  private apiUrl = 'http://localhost:8000/api/cursos';
+  private apiUrl = ApiConfig.ENDPOINTS.CURSOS;
 
   constructor(private http: HttpClient) { }
 
@@ -63,12 +64,14 @@ export class MateriasService {
   getMateriasPorProfesor(profesorId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/profesores/${profesorId}/materias/`);
   }
+
   /**
    * Obtiene los datos completos de un curso específico por ID
    */
   getCursoDetalle(cursoId: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/cursos/${cursoId}/`);
   }
+
   /**
    * Obtiene los estudiantes de un curso específico
    */

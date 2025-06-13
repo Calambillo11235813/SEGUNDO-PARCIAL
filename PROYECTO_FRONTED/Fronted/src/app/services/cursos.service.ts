@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ApiConfig } from '../config/api-config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CursosService {
-  private apiUrl = 'http://localhost:8000/api/cursos';
+  private apiUrl = ApiConfig.ENDPOINTS.CURSOS;
 
   constructor(private http: HttpClient) { }
 
   // Obtener todos los cursos con información del nivel
   getCursos(): Observable<any[]> {
-    // Asumiendo que la API devuelve información completa del curso incluyendo el nivel
     return this.http.get<any[]>(`${this.apiUrl}/cursos/`);
   }
 

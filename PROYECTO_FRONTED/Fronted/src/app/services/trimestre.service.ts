@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { ApiConfig } from '../config/api-config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrimestreService {
-  private apiUrl = 'http://localhost:8000/api/cursos'; // URL base similar a otros servicios
+  private apiUrl = ApiConfig.ENDPOINTS.CURSOS;
 
   constructor(private http: HttpClient) { }
 
@@ -27,7 +28,7 @@ export class TrimestreService {
       params = params.append('activos', 'true');
     }
     
-    return this.http.get(`${this.apiUrl}/trimestres/`);
+    return this.http.get(`${this.apiUrl}/trimestres/`, { params });
   }
 
   /**
