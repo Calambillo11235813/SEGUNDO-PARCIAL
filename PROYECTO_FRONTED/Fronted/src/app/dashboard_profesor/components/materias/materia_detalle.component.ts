@@ -61,7 +61,7 @@ import { MateriasService } from '../../../services/materias.service';
                   <span>Registrar Asistencia</span>
                 </a>
                 
-                <a routerLink="/profesor/lista-asistencias" [queryParams]="{materia: materia.id}" 
+                <a routerLink="/profesor/asistencias/registro" [queryParams]="{materia: materia.id}" 
                   class="flex items-center p-3 rounded-md bg-purple-50 text-purple-700 hover:bg-purple-100 transition">
                   <i class="fas fa-list-alt mr-3"></i>
                   <span>Ver Lista de Asistencias</span>
