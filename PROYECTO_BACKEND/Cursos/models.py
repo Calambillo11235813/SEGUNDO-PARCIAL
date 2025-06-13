@@ -180,9 +180,34 @@ class Trimestre(models.Model):
 
     @property
     def puede_registrar_calificaciones(self):
-        """Verifica si aún se pueden registrar calificaciones"""
+        """
+        Verifica si se pueden registrar calificaciones en este trimestre
+        """
         from django.utils import timezone
-        return timezone.now().date() <= self.fecha_limite_calificaciones and self.estado in ['ACTIVO', 'FINALIZADO']
+        hoy = timezone.now().date()
+        
+        # El trimestre debe estar activo y no haber pasado la fecha límite
+        return (
+            self.activo and 
+            self.estado in ['ACTIVO', 'PLANIFICADO'] and
+            hoy <= self.fecha_limite_calificaciones
+        )
+    
+    # ✅ Si prefieres un método específico para asistencias:
+    @property
+    def puede_registrar_asistencias(self):
+        """
+        Verifica si se pueden registrar asistencias en este trimestre
+        """
+        from django.utils import timezone
+        hoy = timezone.now().date()
+        
+        # Para asistencias puede ser más permisivo
+        return (
+            self.activo and 
+            self.estado in ['ACTIVO', 'PLANIFICADO'] and
+            self.fecha_inicio <= hoy <= self.fecha_fin
+        )
 
 class TipoEvaluacion(models.Model):
     """

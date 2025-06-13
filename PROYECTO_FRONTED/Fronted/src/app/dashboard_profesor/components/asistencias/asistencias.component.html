@@ -16,18 +16,39 @@
               formControlName="materia"
               class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
               [ngClass]="{'border-red-500 ring-1 ring-red-500': asistenciaForm.get('materia')?.invalid && asistenciaForm.get('materia')?.touched}"
-              [disabled]="materiasLoading"
+              [attr.disabled]="materiasLoading ? true : null"
             >
               <option [value]="null" disabled>
                 {{ materiasLoading ? 'Cargando materias...' : 'Seleccione una materia' }}
               </option>
               <option *ngFor="let materia of materias" [value]="materia.id">
-                <!-- ✅ CORREGIDO: Operador de navegación segura -->
                 {{ materia.nombre }} - {{ materia.curso_nombre || (materia.curso?.grado + '' + materia.curso?.paralelo) }}
               </option>
             </select>
             <div *ngIf="asistenciaForm.get('materia')?.invalid && asistenciaForm.get('materia')?.touched" class="text-red-500 text-xs mt-1">
               Debe seleccionar una materia
+            </div>
+          </div>
+          
+          <!-- Selector de trimestre -->
+          <div class="mb-4">
+            <label for="trimestre" class="block text-sm font-medium text-gray-700 mb-1">Trimestre</label>
+            <select
+              id="trimestre"
+              formControlName="trimestre"
+              class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+              [ngClass]="{'border-red-500 ring-1 ring-red-500': asistenciaForm.get('trimestre')?.invalid && asistenciaForm.get('trimestre')?.touched}"
+              [attr.disabled]="trimestresLoading ? true : null"
+            >
+              <option [value]="null" disabled>
+                {{ trimestresLoading ? 'Cargando trimestres...' : 'Seleccione un trimestre' }}
+              </option>
+              <option *ngFor="let trimestre of trimestres" [value]="trimestre.id">
+                {{ trimestre.nombre }}
+              </option>
+            </select>
+            <div *ngIf="asistenciaForm.get('trimestre')?.invalid && asistenciaForm.get('trimestre')?.touched" class="text-red-500 text-xs mt-1">
+              Debe seleccionar un trimestre
             </div>
           </div>
           
@@ -48,7 +69,6 @@
 
           <!-- Información de la materia seleccionada -->
           <div *ngIf="getMateriaSeleccionada()" class="mb-4 p-3 bg-gray-50 rounded-md">
-            <!-- ✅ CORREGIDO: Operador de navegación segura -->
             <h4 class="font-medium text-gray-700">{{ getMateriaSeleccionada()?.nombre }}</h4>
             <p class="text-sm text-gray-600">{{ getMateriaSeleccionada()?.curso_nombre }}</p>
             <p class="text-sm text-gray-600">Estudiantes: {{ estudiantes.length }}</p>
@@ -85,7 +105,7 @@
           <button 
             type="button" 
             class="w-full px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300 flex items-center justify-center"
-            [disabled]="asistenciaForm.invalid || estudiantes.length === 0 || guardandoAsistencias"
+            [attr.disabled]="asistenciaForm.invalid || estudiantes.length === 0 || guardandoAsistencias ? true : null"
             [ngClass]="{'opacity-70 cursor-not-allowed': asistenciaForm.invalid || estudiantes.length === 0 || guardandoAsistencias}"
             (click)="mostrarConfirmacionGuardado()"
           >
@@ -101,76 +121,58 @@
       <div class="bg-white rounded-lg shadow-md border border-red-100">
         <div class="p-4 border-b border-red-100 flex justify-between items-center">
           <h3 class="text-lg font-semibold text-red-600">Lista de Estudiantes</h3>
-          <div *ngIf="estudiantes.length > 0" class="text-sm text-gray-600">
-            {{ obtenerResumenAsistencias().presentes }}/{{ obtenerResumenAsistencias().total }} presentes 
-            ({{ obtenerResumenAsistencias().porcentajeAsistencia }}%)
-          </div>
+          <span *ngIf="estudiantes.length > 0" class="text-sm text-gray-600">
+            Total: {{ estudiantes.length }}
+          </span>
         </div>
         
         <div class="p-6">
-          <!-- Loading de estudiantes -->
-          <div *ngIf="estudiantesLoading" class="flex justify-center p-8">
-            <div class="text-center">
-              <div class="h-8 w-8 border-4 border-red-600 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
-              <p class="text-gray-600">Cargando estudiantes...</p>
-            </div>
+          <div *ngIf="estudiantesLoading" class="text-center py-8">
+            <div class="inline-block h-8 w-8 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div>
+            <p class="mt-2 text-gray-600">Cargando estudiantes...</p>
           </div>
           
-          <!-- Sin estudiantes -->
           <div *ngIf="!estudiantesLoading && estudiantes.length === 0" class="text-center py-8 text-gray-500">
-            <i class="fas fa-users text-4xl mb-4 text-gray-300"></i>
-            <p>{{ asistenciaForm.get('materia')?.value ? 'No hay estudiantes en esta materia' : 'Seleccione una materia para ver la lista de estudiantes' }}</p>
+            Seleccione una materia para ver los estudiantes
           </div>
           
-          <!-- Tabla de estudiantes -->
-          <div *ngIf="estudiantes.length > 0" class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-red-200">
-              <thead class="bg-red-50">
-                <tr>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase tracking-wider">Código</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase tracking-wider">Nombre</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase tracking-wider">Apellido</th>
-                  <th class="px-6 py-3 text-center text-xs font-medium text-red-500 uppercase tracking-wider">Asistencia</th>
-                  <th class="px-6 py-3 text-center text-xs font-medium text-red-500 uppercase tracking-wider">Justificada</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white divide-y divide-red-200">
-                <tr *ngFor="let estudiante of estudiantes" 
-                    [ngClass]="{'bg-green-50': estudiante.asistio, 'bg-red-50': !estudiante.asistio && !estudiante.justificada, 'bg-yellow-50': !estudiante.asistio && estudiante.justificada}">
-                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ estudiante.codigo }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ estudiante.nombre }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ estudiante.apellido }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-center">
-                    <button 
-                      [ngClass]="estudiante.asistio ? 'bg-green-500' : 'bg-red-400'"
-                      class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                      (click)="toggleAsistencia(estudiante)"
-                      title="Asistencia"
-                    >
-                      <span 
-                        [ngClass]="estudiante.asistio ? 'translate-x-5' : 'translate-x-0'"
-                        class="pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"
-                      ></span>
-                    </button>
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-center">
-                    <button 
-                      *ngIf="!estudiante.asistio"
-                      [ngClass]="estudiante.justificada ? 'bg-yellow-500' : 'bg-gray-300'"
-                      class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
-                      (click)="toggleJustificacion(estudiante)"
-                      title="Justificación"	
-                    >
-                      <span 
-                        [ngClass]="estudiante.justificada ? 'translate-x-5' : 'translate-x-0'"
-                        class="pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"
-                      ></span>
-                    </button>
-                    <span *ngIf="estudiante.asistio" class="text-gray-400 text-sm">N/A</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div *ngIf="!estudiantesLoading && estudiantes.length > 0" class="space-y-3">
+            <div *ngFor="let estudiante of estudiantes; trackBy: trackByEstudiante" 
+                 class="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition duration-200">
+              <div class="flex-1">
+                <h4 class="font-medium text-gray-900">
+                  {{ estudiante.nombre }} {{ estudiante.apellido }}
+                </h4>
+                <p class="text-sm text-gray-500">{{ estudiante.codigo }}</p>
+              </div>
+              
+              <div class="flex items-center space-x-4">
+                <!-- Checkbox de asistencia -->
+                <label class="flex items-center cursor-pointer">
+                  <input 
+                    type="checkbox" 
+                    [checked]="estudiante.asistio"
+                    (change)="toggleAsistencia(estudiante)"
+                    class="w-5 h-5 text-green-600 border-gray-300 rounded focus:ring-green-500"
+                  >
+                  <span class="ml-2 text-sm font-medium" 
+                        [ngClass]="estudiante.asistio ? 'text-green-600' : 'text-red-600'">
+                    {{ estudiante.asistio ? 'Presente' : 'Ausente' }}
+                  </span>
+                </label>
+                
+                <!-- Checkbox de justificación (solo si está ausente) -->
+                <label *ngIf="!estudiante.asistio" class="flex items-center cursor-pointer">
+                  <input 
+                    type="checkbox" 
+                    [checked]="estudiante.justificada"
+                    (change)="toggleJustificacion(estudiante)"
+                    class="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  >
+                  <span class="ml-2 text-sm text-blue-600">Justificada</span>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -187,27 +189,25 @@
       <div class="text-left bg-gray-50 p-4 rounded-md mb-4">
         <h4 class="font-medium text-gray-700 mb-2">Resumen:</h4>
         <div class="space-y-1 text-sm">
-          <p><span class="font-medium">Total de estudiantes:</span> {{ resumenAsistencias?.total }}</p>
-          <p class="text-green-600"><span class="font-medium">Presentes:</span> {{ resumenAsistencias?.presentes }}</p>
-          <p class="text-red-600"><span class="font-medium">Ausentes:</span> {{ resumenAsistencias?.ausentes }}</p>
-          <p class="text-yellow-600"><span class="font-medium">Justificadas:</span> {{ resumenAsistencias?.justificadas }}</p>
-          <p class="text-red-600"><span class="font-medium">Injustificadas:</span> {{ resumenAsistencias?.injustificadas }}</p>
-          <p class="text-blue-600"><span class="font-medium">% Asistencia:</span> {{ resumenAsistencias?.porcentajeAsistencia }}%</p>
+          <p><strong>Total estudiantes:</strong> {{ resumenAsistencias?.total }}</p>
+          <p><strong>Presentes:</strong> {{ resumenAsistencias?.presentes }}</p>
+          <p><strong>Ausentes:</strong> {{ resumenAsistencias?.ausentes }}</p>
+          <p><strong>Justificadas:</strong> {{ resumenAsistencias?.justificadas }}</p>
+          <p><strong>Injustificadas:</strong> {{ resumenAsistencias?.injustificadas }}</p>
+          <p><strong>% Asistencia:</strong> {{ resumenAsistencias?.porcentajeAsistencia }}%</p>
         </div>
       </div>
       
       <div class="flex justify-center space-x-4">
         <button 
-          type="button"
-          class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition duration-300"
           (click)="cancelarGuardado()"
+          class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition duration-300"
         >
           Cancelar
         </button>
         <button 
-          type="button"
-          class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300"
           (click)="confirmarGuardado()"
+          class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300"
         >
           Confirmar
         </button>

@@ -19,6 +19,7 @@ def registrar_asistencia(request):
     {
         "materia_id": 1,
         "estudiante_id": 2,
+        "trimestre_id": 1,  # Ahora requerido
         "fecha": "2025-05-25",  # Opcional, usa la fecha actual por defecto
         "presente": true,
         "justificada": false
@@ -28,15 +29,21 @@ def registrar_asistencia(request):
         data = request.data
         materia_id = data.get('materia_id')
         estudiante_id = data.get('estudiante_id')
+        trimestre_id = data.get('trimestre_id')  # ✅ Nuevo campo
         fecha_str = data.get('fecha')
         presente = data.get('presente', True)
         justificada = data.get('justificada', False)
-       
         
         # Validaciones básicas
         if not materia_id or not estudiante_id:
             return Response(
                 {'error': 'Se requiere materia_id y estudiante_id'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        if not trimestre_id:  # ✅ Validar trimestre_id
+            return Response(
+                {'error': 'Se requiere trimestre_id'},
                 status=status.HTTP_400_BAD_REQUEST
             )
         
@@ -49,10 +56,19 @@ def registrar_asistencia(request):
                 status=status.HTTP_404_NOT_FOUND
             )
         
+        # ✅ Obtener el trimestre
+        try:
+            from ..models import Trimestre
+            trimestre = Trimestre.objects.get(id=trimestre_id)
+        except Trimestre.DoesNotExist:
+            return Response(
+                {'error': f'No existe trimestre con id {trimestre_id}'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
         # Obtener el estudiante
         try:
             estudiante = Usuario.objects.get(id=estudiante_id)
-            # Verificar que sea un estudiante (ajustar según tu modelo)
             if not hasattr(estudiante, 'rol') or estudiante.rol.nombre != 'Estudiante':
                 return Response(
                     {'error': 'El usuario especificado no es un estudiante'},
@@ -71,14 +87,13 @@ def registrar_asistencia(request):
                 status=status.HTTP_400_BAD_REQUEST
             )
         
-        # También verificar que el estudiante tenga un curso asignado
         if not estudiante.curso:
             return Response(
                 {'error': 'El estudiante no tiene un curso asignado'},
                 status=status.HTTP_400_BAD_REQUEST
             )
         
-        # Procesar fecha (usar fecha actual si no se proporciona)
+        # Procesar fecha
         fecha = timezone.now().date()
         if fecha_str:
             try:
@@ -89,14 +104,22 @@ def registrar_asistencia(request):
                     status=status.HTTP_400_BAD_REQUEST
                 )
         
-        # Crear o actualizar la asistencia (sin el campo observacion/ausente)
+        # ✅ Validar fecha dentro del trimestre
+        if not (trimestre.fecha_inicio <= fecha <= trimestre.fecha_fin):
+            return Response(
+                {'error': f'La fecha no está dentro del período del trimestre'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # ✅ Crear o actualizar la asistencia con trimestre
         asistencia, created = Asistencia.objects.update_or_create(
             estudiante=estudiante,
             materia=materia,
             fecha=fecha,
             defaults={
                 'presente': presente,
-                'justificada': justificada
+                'justificada': justificada,
+                'trimestre': trimestre  # ✅ Incluir trimestre
             }
         )
         
@@ -106,6 +129,7 @@ def registrar_asistencia(request):
             'estudiante': f"{estudiante.nombre} {estudiante.apellido}",
             'materia': materia.nombre,
             'curso': str(materia.curso),
+            'trimestre': str(trimestre),  # ✅ Incluir en respuesta
             'fecha': fecha,
             'presente': presente,
             'justificada': justificada,
@@ -123,20 +147,11 @@ def registrar_asistencia(request):
 def registrar_asistencias_masivo(request):
     """
     Registra asistencias de múltiples estudiantes para una materia en una fecha específica.
-    
-    Request body:
-    {
-        "materia_id": 1,
-        "fecha": "2025-05-25",  # Opcional
-        "asistencias": [
-            {"estudiante_id": 1, "presente": true},
-            {"estudiante_id": 2, "presente": false, "justificada": true}
-        ]
-    }
     """
     try:
         data = request.data
         materia_id = data.get('materia_id')
+        trimestre_id = data.get('trimestre_id')
         fecha_str = data.get('fecha')
         asistencias_data = data.get('asistencias', [])
         
@@ -144,6 +159,12 @@ def registrar_asistencias_masivo(request):
         if not materia_id:
             return Response(
                 {'error': 'Se requiere materia_id'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        if not trimestre_id:
+            return Response(
+                {'error': 'Se requiere trimestre_id'},
                 status=status.HTTP_400_BAD_REQUEST
             )
         
@@ -162,6 +183,23 @@ def registrar_asistencias_masivo(request):
                 status=status.HTTP_404_NOT_FOUND
             )
         
+        # ✅ Obtener el trimestre
+        try:
+            from ..models import Trimestre
+            trimestre = Trimestre.objects.get(id=trimestre_id)
+        except Trimestre.DoesNotExist:
+            return Response(
+                {'error': f'No existe trimestre con id {trimestre_id}'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        # ✅ Validar que el trimestre esté activo
+        if not trimestre.puede_registrar_calificaciones:
+            return Response(
+                {'error': f'El trimestre {trimestre.nombre} no permite registro de asistencias'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
         # Procesar fecha
         fecha = timezone.now().date()
         if fecha_str:
@@ -173,6 +211,13 @@ def registrar_asistencias_masivo(request):
                     status=status.HTTP_400_BAD_REQUEST
                 )
         
+        # ✅ Validar que la fecha esté dentro del período del trimestre
+        if not (trimestre.fecha_inicio <= fecha <= trimestre.fecha_fin):
+            return Response(
+                {'error': f'La fecha {fecha} no está dentro del período del trimestre ({trimestre.fecha_inicio} - {trimestre.fecha_fin})'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
         # Registrar asistencias en una transacción
         resultados = []
         with transaction.atomic():
@@ -180,7 +225,6 @@ def registrar_asistencias_masivo(request):
                 estudiante_id = asistencia_data.get('estudiante_id')
                 presente = asistencia_data.get('presente', True)
                 justificada = asistencia_data.get('justificada', False)
-                # Eliminada la referencia a observacion/ausente
                 
                 # Obtener estudiante
                 try:
@@ -218,7 +262,7 @@ def registrar_asistencias_masivo(request):
                     })
                     continue
                 
-                # Crear o actualizar asistencia
+                # ✅ Crear o actualizar asistencia con trimestre
                 try:
                     asistencia, created = Asistencia.objects.update_or_create(
                         estudiante=estudiante,
@@ -226,7 +270,8 @@ def registrar_asistencias_masivo(request):
                         fecha=fecha,
                         defaults={
                             'presente': presente,
-                            'justificada': justificada
+                            'justificada': justificada,
+                            'trimestre': trimestre  # ✅ Incluir trimestre
                         }
                     )
                     
@@ -235,6 +280,7 @@ def registrar_asistencias_masivo(request):
                         'estudiante': f"{estudiante.nombre} {estudiante.apellido}",
                         'presente': presente,
                         'justificada': justificada,
+                        'trimestre': str(trimestre),  # ✅ Incluir en respuesta
                         'created': created,
                         'success': True
                     })
@@ -249,7 +295,11 @@ def registrar_asistencias_masivo(request):
         return Response({
             'materia': materia.nombre,
             'curso': str(materia.curso),
+            'trimestre': str(trimestre),  # ✅ Incluir trimestre en respuesta
             'fecha': fecha,
+            'total_procesados': len(asistencias_data),
+            'exitosos': len([r for r in resultados if r['success']]),
+            'fallidos': len([r for r in resultados if not r['success']]),
             'resultados': resultados
         }, status=status.HTTP_200_OK)
     
