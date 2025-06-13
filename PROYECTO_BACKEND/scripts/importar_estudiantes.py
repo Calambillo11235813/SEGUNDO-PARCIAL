@@ -11,13 +11,12 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Backend.settings')
 django.setup()
 
 from Usuarios.models import Usuario
-from Permisos.models import Rol
 from Cursos.models import Curso
 from django.contrib.auth.hashers import make_password
 
 def importar_estudiantes_csv():
     """
-    Importa estudiantes desde el archivo CSV a la base de datos.
+    Importa estudiantes desde el archivo CSV a la base de datos de forma ultra rápida.
     
     Formato esperado del CSV:
     codigo,nombre,apellido,telefono,password,rol_id,curso
@@ -42,24 +41,20 @@ def importar_estudiantes_csv():
         usuarios_a_crear = []
         usuarios_a_actualizar = []
         
+        # Estadísticas
+        creados = 0
+        actualizados = 0
+        errores = 0
+        
+        # Aumentar el tamaño del lote para mejor rendimiento
+        BATCH_SIZE = 1000
+        
         with open(csv_path, mode='r', encoding='utf-8') as file:
             csv_reader = csv.DictReader(file)
             
-            # Cargar todos los datos en memoria
-            rows = list(csv_reader)
-            
-            # Contador para estadísticas
-            total = len(rows)
-            creados = 0
-            actualizados = 0
-            errores = 0
-            
-            # Procesar en lotes de 100 para balancear memoria y rendimiento
-            BATCH_SIZE = 100
-            
             # Usar transacción para asegurar que todos los datos se guarden correctamente
             with transaction.atomic():
-                for i, row in enumerate(rows):
+                for row in csv_reader:
                     try:
                         codigo = row['codigo']
                         
@@ -84,12 +79,9 @@ def importar_estudiantes_csv():
                         # Determinar si crear o actualizar
                         if codigo in codigos_existentes:
                             # Actualizar usuario existente
-                            usuario = Usuario.objects.get(codigo=codigo)
-                            for key, value in datos_usuario.items():
-                                setattr(usuario, key, value)
+                            usuario = Usuario(codigo=codigo, **datos_usuario)
                             usuarios_a_actualizar.append(usuario)
                             actualizados += 1
-                            print(f"[{time.time() - tiempo_inicio:.2f}s] ↻ Actualizado usuario {codigo}: {row['nombre']} {row['apellido']}")
                         else:
                             # Crear nuevo usuario
                             datos_usuario['codigo'] = codigo
@@ -97,7 +89,6 @@ def importar_estudiantes_csv():
                             usuarios_a_crear.append(usuario)
                             codigos_existentes.add(codigo)  # Actualizar caché
                             creados += 1
-                            print(f"[{time.time() - tiempo_inicio:.2f}s] ✓ Creado usuario {codigo}: {row['nombre']} {row['apellido']}")
                         
                         # Procesar en lotes para optimizar
                         if len(usuarios_a_crear) >= BATCH_SIZE:
@@ -113,8 +104,6 @@ def importar_estudiantes_csv():
                             
                     except Exception as e:
                         errores += 1
-                        print(f"✗ Error al procesar la fila {i+1}: {str(e)}")
-                        print(f"  Datos: {row}")
                 
                 # Procesar los lotes finales
                 if usuarios_a_crear:
@@ -127,14 +116,12 @@ def importar_estudiantes_csv():
                     )
             
             tiempo_total = time.time() - tiempo_inicio
-            # Mostrar estadísticas finales
+            # Mostrar estadísticas finales solamente
             print("\n===== RESUMEN DE IMPORTACIÓN =====")
-            print(f"Total de registros procesados: {total}")
             print(f"Usuarios creados: {creados}")
             print(f"Usuarios actualizados: {actualizados}")
             print(f"Errores: {errores}")
             print(f"Tiempo total: {tiempo_total:.2f} segundos")
-            print(f"Promedio: {(total / tiempo_total):.2f} registros/segundo")
             print("=================================")
     
     except Exception as e:

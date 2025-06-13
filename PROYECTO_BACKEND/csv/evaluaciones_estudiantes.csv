@@ -1,0 +1,1027 @@
+estudiante_codigo,estudiante_nombre,materia,curso_id,tipo_evaluacion_id,trimestre_id,titulo,descripcion,fecha_asignacion,fecha_entrega,nota_maxima,nota_minima_aprobacion,porcentaje_nota_final,permite_entrega_tardia,penalizacion_tardio
+2221,Ernesto Solis,Matemáticas,6,1,4,PARCIAL 1,Parcial 1 de Matemáticas - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,1,4,PARCIAL 2,Parcial 2 de Matemáticas - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,1,4,PARCIAL 3,Parcial 3 de Matemáticas - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,4,PRÁCTICO 1,Práctico 1 de Matemáticas - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,4,PRÁCTICO 2,Práctico 2 de Matemáticas - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,4,PRÁCTICO 3,Práctico 3 de Matemáticas - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,4,PRÁCTICO 4,Práctico 4 de Matemáticas - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,4,PRÁCTICO 5,Práctico 5 de Matemáticas - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,4,PRÁCTICO 6,Práctico 6 de Matemáticas - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,1,5,PARCIAL 1,Parcial 1 de Matemáticas - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,1,5,PARCIAL 2,Parcial 2 de Matemáticas - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,1,5,PARCIAL 3,Parcial 3 de Matemáticas - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,5,PRÁCTICO 1,Práctico 1 de Matemáticas - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,5,PRÁCTICO 2,Práctico 2 de Matemáticas - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,5,PRÁCTICO 3,Práctico 3 de Matemáticas - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,5,PRÁCTICO 4,Práctico 4 de Matemáticas - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,5,PRÁCTICO 5,Práctico 5 de Matemáticas - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,5,PRÁCTICO 6,Práctico 6 de Matemáticas - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,1,6,PARCIAL 1,Parcial 1 de Matemáticas - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,1,6,PARCIAL 2,Parcial 2 de Matemáticas - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,1,6,PARCIAL 3,Parcial 3 de Matemáticas - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,6,PRÁCTICO 1,Práctico 1 de Matemáticas - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,6,PRÁCTICO 2,Práctico 2 de Matemáticas - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,6,PRÁCTICO 3,Práctico 3 de Matemáticas - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,6,PRÁCTICO 4,Práctico 4 de Matemáticas - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,6,PRÁCTICO 5,Práctico 5 de Matemáticas - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,6,PRÁCTICO 6,Práctico 6 de Matemáticas - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,4,PARCIAL 1,Parcial 1 de Lenguaje - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,4,PARCIAL 2,Parcial 2 de Lenguaje - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,4,PARCIAL 3,Parcial 3 de Lenguaje - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,4,PRÁCTICO 1,Práctico 1 de Lenguaje - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,4,PRÁCTICO 2,Práctico 2 de Lenguaje - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,4,PRÁCTICO 3,Práctico 3 de Lenguaje - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,4,PRÁCTICO 4,Práctico 4 de Lenguaje - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,4,PRÁCTICO 5,Práctico 5 de Lenguaje - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,4,PRÁCTICO 6,Práctico 6 de Lenguaje - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,5,PARCIAL 1,Parcial 1 de Lenguaje - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,5,PARCIAL 2,Parcial 2 de Lenguaje - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,5,PARCIAL 3,Parcial 3 de Lenguaje - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,5,PRÁCTICO 1,Práctico 1 de Lenguaje - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,5,PRÁCTICO 2,Práctico 2 de Lenguaje - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,5,PRÁCTICO 3,Práctico 3 de Lenguaje - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,5,PRÁCTICO 4,Práctico 4 de Lenguaje - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,5,PRÁCTICO 5,Práctico 5 de Lenguaje - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,5,PRÁCTICO 6,Práctico 6 de Lenguaje - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,6,PARCIAL 1,Parcial 1 de Lenguaje - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,6,PARCIAL 2,Parcial 2 de Lenguaje - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,6,PARCIAL 3,Parcial 3 de Lenguaje - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,6,PRÁCTICO 1,Práctico 1 de Lenguaje - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,6,PRÁCTICO 2,Práctico 2 de Lenguaje - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,6,PRÁCTICO 3,Práctico 3 de Lenguaje - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,6,PRÁCTICO 4,Práctico 4 de Lenguaje - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,6,PRÁCTICO 5,Práctico 5 de Lenguaje - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,6,PRÁCTICO 6,Práctico 6 de Lenguaje - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,4,PARCIAL 1,Parcial 1 de Ciencias Naturales - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,4,PARCIAL 2,Parcial 2 de Ciencias Naturales - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,4,PARCIAL 3,Parcial 3 de Ciencias Naturales - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,4,PRÁCTICO 1,Práctico 1 de Ciencias Naturales - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,4,PRÁCTICO 2,Práctico 2 de Ciencias Naturales - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,4,PRÁCTICO 3,Práctico 3 de Ciencias Naturales - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,4,PRÁCTICO 4,Práctico 4 de Ciencias Naturales - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,4,PRÁCTICO 5,Práctico 5 de Ciencias Naturales - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,4,PRÁCTICO 6,Práctico 6 de Ciencias Naturales - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,5,PARCIAL 1,Parcial 1 de Ciencias Naturales - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,5,PARCIAL 2,Parcial 2 de Ciencias Naturales - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,5,PARCIAL 3,Parcial 3 de Ciencias Naturales - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,5,PRÁCTICO 1,Práctico 1 de Ciencias Naturales - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,5,PRÁCTICO 2,Práctico 2 de Ciencias Naturales - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,5,PRÁCTICO 3,Práctico 3 de Ciencias Naturales - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,5,PRÁCTICO 4,Práctico 4 de Ciencias Naturales - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,5,PRÁCTICO 5,Práctico 5 de Ciencias Naturales - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,5,PRÁCTICO 6,Práctico 6 de Ciencias Naturales - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,6,PARCIAL 1,Parcial 1 de Ciencias Naturales - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,6,PARCIAL 2,Parcial 2 de Ciencias Naturales - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,6,PARCIAL 3,Parcial 3 de Ciencias Naturales - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,6,PRÁCTICO 1,Práctico 1 de Ciencias Naturales - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,6,PRÁCTICO 2,Práctico 2 de Ciencias Naturales - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,6,PRÁCTICO 3,Práctico 3 de Ciencias Naturales - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,6,PRÁCTICO 4,Práctico 4 de Ciencias Naturales - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,6,PRÁCTICO 5,Práctico 5 de Ciencias Naturales - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,6,PRÁCTICO 6,Práctico 6 de Ciencias Naturales - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,4,PARCIAL 1,Parcial 1 de Ciencias Sociales - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,4,PARCIAL 2,Parcial 2 de Ciencias Sociales - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,4,PARCIAL 3,Parcial 3 de Ciencias Sociales - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,4,PRÁCTICO 1,Práctico 1 de Ciencias Sociales - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,4,PRÁCTICO 2,Práctico 2 de Ciencias Sociales - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,4,PRÁCTICO 3,Práctico 3 de Ciencias Sociales - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,4,PRÁCTICO 4,Práctico 4 de Ciencias Sociales - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,4,PRÁCTICO 5,Práctico 5 de Ciencias Sociales - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,4,PRÁCTICO 6,Práctico 6 de Ciencias Sociales - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,5,PARCIAL 1,Parcial 1 de Ciencias Sociales - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,5,PARCIAL 2,Parcial 2 de Ciencias Sociales - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,5,PARCIAL 3,Parcial 3 de Ciencias Sociales - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,5,PRÁCTICO 1,Práctico 1 de Ciencias Sociales - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,5,PRÁCTICO 2,Práctico 2 de Ciencias Sociales - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,5,PRÁCTICO 3,Práctico 3 de Ciencias Sociales - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,5,PRÁCTICO 4,Práctico 4 de Ciencias Sociales - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,5,PRÁCTICO 5,Práctico 5 de Ciencias Sociales - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,5,PRÁCTICO 6,Práctico 6 de Ciencias Sociales - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,6,PARCIAL 1,Parcial 1 de Ciencias Sociales - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,6,PARCIAL 2,Parcial 2 de Ciencias Sociales - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,6,PARCIAL 3,Parcial 3 de Ciencias Sociales - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,6,PRÁCTICO 1,Práctico 1 de Ciencias Sociales - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,6,PRÁCTICO 2,Práctico 2 de Ciencias Sociales - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,6,PRÁCTICO 3,Práctico 3 de Ciencias Sociales - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,6,PRÁCTICO 4,Práctico 4 de Ciencias Sociales - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,6,PRÁCTICO 5,Práctico 5 de Ciencias Sociales - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,6,PRÁCTICO 6,Práctico 6 de Ciencias Sociales - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,4,PARCIAL 1,Parcial 1 de Educación Física - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,4,PARCIAL 2,Parcial 2 de Educación Física - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,4,PARCIAL 3,Parcial 3 de Educación Física - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,4,PRÁCTICO 1,Práctico 1 de Educación Física - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,4,PRÁCTICO 2,Práctico 2 de Educación Física - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,4,PRÁCTICO 3,Práctico 3 de Educación Física - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,4,PRÁCTICO 4,Práctico 4 de Educación Física - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,4,PRÁCTICO 5,Práctico 5 de Educación Física - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,4,PRÁCTICO 6,Práctico 6 de Educación Física - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,5,PARCIAL 1,Parcial 1 de Educación Física - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,5,PARCIAL 2,Parcial 2 de Educación Física - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,5,PARCIAL 3,Parcial 3 de Educación Física - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,5,PRÁCTICO 1,Práctico 1 de Educación Física - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,5,PRÁCTICO 2,Práctico 2 de Educación Física - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,5,PRÁCTICO 3,Práctico 3 de Educación Física - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,5,PRÁCTICO 4,Práctico 4 de Educación Física - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,5,PRÁCTICO 5,Práctico 5 de Educación Física - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,5,PRÁCTICO 6,Práctico 6 de Educación Física - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,6,PARCIAL 1,Parcial 1 de Educación Física - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,6,PARCIAL 2,Parcial 2 de Educación Física - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,6,PARCIAL 3,Parcial 3 de Educación Física - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,6,PRÁCTICO 1,Práctico 1 de Educación Física - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,6,PRÁCTICO 2,Práctico 2 de Educación Física - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,6,PRÁCTICO 3,Práctico 3 de Educación Física - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,6,PRÁCTICO 4,Práctico 4 de Educación Física - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,6,PRÁCTICO 5,Práctico 5 de Educación Física - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,6,PRÁCTICO 6,Práctico 6 de Educación Física - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,4,PARCIAL 1,Parcial 1 de Artes Plásticas - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,4,PARCIAL 2,Parcial 2 de Artes Plásticas - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,4,PARCIAL 3,Parcial 3 de Artes Plásticas - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,4,PRÁCTICO 1,Práctico 1 de Artes Plásticas - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,4,PRÁCTICO 2,Práctico 2 de Artes Plásticas - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,4,PRÁCTICO 3,Práctico 3 de Artes Plásticas - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,4,PRÁCTICO 4,Práctico 4 de Artes Plásticas - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,4,PRÁCTICO 5,Práctico 5 de Artes Plásticas - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,4,PRÁCTICO 6,Práctico 6 de Artes Plásticas - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,5,PARCIAL 1,Parcial 1 de Artes Plásticas - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,5,PARCIAL 2,Parcial 2 de Artes Plásticas - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,5,PARCIAL 3,Parcial 3 de Artes Plásticas - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,5,PRÁCTICO 1,Práctico 1 de Artes Plásticas - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,5,PRÁCTICO 2,Práctico 2 de Artes Plásticas - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,5,PRÁCTICO 3,Práctico 3 de Artes Plásticas - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,5,PRÁCTICO 4,Práctico 4 de Artes Plásticas - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,5,PRÁCTICO 5,Práctico 5 de Artes Plásticas - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,5,PRÁCTICO 6,Práctico 6 de Artes Plásticas - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,6,PARCIAL 1,Parcial 1 de Artes Plásticas - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,6,PARCIAL 2,Parcial 2 de Artes Plásticas - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,6,PARCIAL 3,Parcial 3 de Artes Plásticas - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,6,PRÁCTICO 1,Práctico 1 de Artes Plásticas - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,6,PRÁCTICO 2,Práctico 2 de Artes Plásticas - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,6,PRÁCTICO 3,Práctico 3 de Artes Plásticas - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,6,PRÁCTICO 4,Práctico 4 de Artes Plásticas - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,6,PRÁCTICO 5,Práctico 5 de Artes Plásticas - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,6,PRÁCTICO 6,Práctico 6 de Artes Plásticas - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,1,4,PARCIAL 1,Parcial 1 de Música - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,1,4,PARCIAL 2,Parcial 2 de Música - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,1,4,PARCIAL 3,Parcial 3 de Música - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,2,4,PRÁCTICO 1,Práctico 1 de Música - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,4,PRÁCTICO 2,Práctico 2 de Música - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,4,PRÁCTICO 3,Práctico 3 de Música - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,4,PRÁCTICO 4,Práctico 4 de Música - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,4,PRÁCTICO 5,Práctico 5 de Música - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,4,PRÁCTICO 6,Práctico 6 de Música - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,1,5,PARCIAL 1,Parcial 1 de Música - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,1,5,PARCIAL 2,Parcial 2 de Música - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,1,5,PARCIAL 3,Parcial 3 de Música - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,2,5,PRÁCTICO 1,Práctico 1 de Música - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,5,PRÁCTICO 2,Práctico 2 de Música - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,5,PRÁCTICO 3,Práctico 3 de Música - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,5,PRÁCTICO 4,Práctico 4 de Música - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,5,PRÁCTICO 5,Práctico 5 de Música - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,5,PRÁCTICO 6,Práctico 6 de Música - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,1,6,PARCIAL 1,Parcial 1 de Música - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,1,6,PARCIAL 2,Parcial 2 de Música - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,1,6,PARCIAL 3,Parcial 3 de Música - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,2,6,PRÁCTICO 1,Práctico 1 de Música - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,6,PRÁCTICO 2,Práctico 2 de Música - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,6,PRÁCTICO 3,Práctico 3 de Música - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,6,PRÁCTICO 4,Práctico 4 de Música - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,6,PRÁCTICO 5,Práctico 5 de Música - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,6,PRÁCTICO 6,Práctico 6 de Música - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,4,PARCIAL 1,Parcial 1 de Religión - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,4,PARCIAL 2,Parcial 2 de Religión - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,4,PARCIAL 3,Parcial 3 de Religión - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,4,PRÁCTICO 1,Práctico 1 de Religión - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,4,PRÁCTICO 2,Práctico 2 de Religión - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,4,PRÁCTICO 3,Práctico 3 de Religión - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,4,PRÁCTICO 4,Práctico 4 de Religión - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,4,PRÁCTICO 5,Práctico 5 de Religión - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,4,PRÁCTICO 6,Práctico 6 de Religión - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,5,PARCIAL 1,Parcial 1 de Religión - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,5,PARCIAL 2,Parcial 2 de Religión - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,5,PARCIAL 3,Parcial 3 de Religión - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,5,PRÁCTICO 1,Práctico 1 de Religión - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,5,PRÁCTICO 2,Práctico 2 de Religión - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,5,PRÁCTICO 3,Práctico 3 de Religión - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,5,PRÁCTICO 4,Práctico 4 de Religión - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,5,PRÁCTICO 5,Práctico 5 de Religión - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,5,PRÁCTICO 6,Práctico 6 de Religión - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,6,PARCIAL 1,Parcial 1 de Religión - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,6,PARCIAL 2,Parcial 2 de Religión - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,6,PARCIAL 3,Parcial 3 de Religión - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,6,PRÁCTICO 1,Práctico 1 de Religión - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,6,PRÁCTICO 2,Práctico 2 de Religión - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,6,PRÁCTICO 3,Práctico 3 de Religión - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,6,PRÁCTICO 4,Práctico 4 de Religión - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,6,PRÁCTICO 5,Práctico 5 de Religión - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,6,PRÁCTICO 6,Práctico 6 de Religión - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,4,PARCIAL 1,Parcial 1 de Matemáticas - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,4,PARCIAL 2,Parcial 2 de Matemáticas - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,4,PARCIAL 3,Parcial 3 de Matemáticas - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,4,PRÁCTICO 1,Práctico 1 de Matemáticas - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,4,PRÁCTICO 2,Práctico 2 de Matemáticas - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,4,PRÁCTICO 3,Práctico 3 de Matemáticas - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,4,PRÁCTICO 4,Práctico 4 de Matemáticas - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,4,PRÁCTICO 5,Práctico 5 de Matemáticas - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,4,PRÁCTICO 6,Práctico 6 de Matemáticas - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,5,PARCIAL 1,Parcial 1 de Matemáticas - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,5,PARCIAL 2,Parcial 2 de Matemáticas - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,5,PARCIAL 3,Parcial 3 de Matemáticas - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,5,PRÁCTICO 1,Práctico 1 de Matemáticas - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,5,PRÁCTICO 2,Práctico 2 de Matemáticas - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,5,PRÁCTICO 3,Práctico 3 de Matemáticas - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,5,PRÁCTICO 4,Práctico 4 de Matemáticas - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,5,PRÁCTICO 5,Práctico 5 de Matemáticas - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,5,PRÁCTICO 6,Práctico 6 de Matemáticas - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,6,PARCIAL 1,Parcial 1 de Matemáticas - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,6,PARCIAL 2,Parcial 2 de Matemáticas - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,6,PARCIAL 3,Parcial 3 de Matemáticas - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,6,PRÁCTICO 1,Práctico 1 de Matemáticas - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,6,PRÁCTICO 2,Práctico 2 de Matemáticas - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,6,PRÁCTICO 3,Práctico 3 de Matemáticas - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,6,PRÁCTICO 4,Práctico 4 de Matemáticas - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,6,PRÁCTICO 5,Práctico 5 de Matemáticas - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,6,PRÁCTICO 6,Práctico 6 de Matemáticas - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,4,PARCIAL 1,Parcial 1 de Lenguaje - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,4,PARCIAL 2,Parcial 2 de Lenguaje - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,4,PARCIAL 3,Parcial 3 de Lenguaje - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,4,PRÁCTICO 1,Práctico 1 de Lenguaje - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,4,PRÁCTICO 2,Práctico 2 de Lenguaje - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,4,PRÁCTICO 3,Práctico 3 de Lenguaje - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,4,PRÁCTICO 4,Práctico 4 de Lenguaje - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,4,PRÁCTICO 5,Práctico 5 de Lenguaje - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,4,PRÁCTICO 6,Práctico 6 de Lenguaje - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,5,PARCIAL 1,Parcial 1 de Lenguaje - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,5,PARCIAL 2,Parcial 2 de Lenguaje - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,5,PARCIAL 3,Parcial 3 de Lenguaje - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,5,PRÁCTICO 1,Práctico 1 de Lenguaje - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,5,PRÁCTICO 2,Práctico 2 de Lenguaje - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,5,PRÁCTICO 3,Práctico 3 de Lenguaje - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,5,PRÁCTICO 4,Práctico 4 de Lenguaje - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,5,PRÁCTICO 5,Práctico 5 de Lenguaje - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,5,PRÁCTICO 6,Práctico 6 de Lenguaje - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,6,PARCIAL 1,Parcial 1 de Lenguaje - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,6,PARCIAL 2,Parcial 2 de Lenguaje - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,6,PARCIAL 3,Parcial 3 de Lenguaje - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,6,PRÁCTICO 1,Práctico 1 de Lenguaje - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,6,PRÁCTICO 2,Práctico 2 de Lenguaje - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,6,PRÁCTICO 3,Práctico 3 de Lenguaje - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,6,PRÁCTICO 4,Práctico 4 de Lenguaje - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,6,PRÁCTICO 5,Práctico 5 de Lenguaje - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,6,PRÁCTICO 6,Práctico 6 de Lenguaje - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,1,4,PARCIAL 1,Parcial 1 de Física - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,1,4,PARCIAL 2,Parcial 2 de Física - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,1,4,PARCIAL 3,Parcial 3 de Física - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,2,4,PRÁCTICO 1,Práctico 1 de Física - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,4,PRÁCTICO 2,Práctico 2 de Física - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,4,PRÁCTICO 3,Práctico 3 de Física - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,4,PRÁCTICO 4,Práctico 4 de Física - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,4,PRÁCTICO 5,Práctico 5 de Física - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,4,PRÁCTICO 6,Práctico 6 de Física - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,1,5,PARCIAL 1,Parcial 1 de Física - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,1,5,PARCIAL 2,Parcial 2 de Física - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,1,5,PARCIAL 3,Parcial 3 de Física - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,2,5,PRÁCTICO 1,Práctico 1 de Física - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,5,PRÁCTICO 2,Práctico 2 de Física - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,5,PRÁCTICO 3,Práctico 3 de Física - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,5,PRÁCTICO 4,Práctico 4 de Física - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,5,PRÁCTICO 5,Práctico 5 de Física - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,5,PRÁCTICO 6,Práctico 6 de Física - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,1,6,PARCIAL 1,Parcial 1 de Física - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,1,6,PARCIAL 2,Parcial 2 de Física - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,1,6,PARCIAL 3,Parcial 3 de Física - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,2,6,PRÁCTICO 1,Práctico 1 de Física - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,6,PRÁCTICO 2,Práctico 2 de Física - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,6,PRÁCTICO 3,Práctico 3 de Física - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,6,PRÁCTICO 4,Práctico 4 de Física - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,6,PRÁCTICO 5,Práctico 5 de Física - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,6,PRÁCTICO 6,Práctico 6 de Física - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,1,4,PARCIAL 1,Parcial 1 de Química - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,1,4,PARCIAL 2,Parcial 2 de Química - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,1,4,PARCIAL 3,Parcial 3 de Química - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,2,4,PRÁCTICO 1,Práctico 1 de Química - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,4,PRÁCTICO 2,Práctico 2 de Química - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,4,PRÁCTICO 3,Práctico 3 de Química - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,4,PRÁCTICO 4,Práctico 4 de Química - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,4,PRÁCTICO 5,Práctico 5 de Química - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,4,PRÁCTICO 6,Práctico 6 de Química - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,1,5,PARCIAL 1,Parcial 1 de Química - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,1,5,PARCIAL 2,Parcial 2 de Química - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,1,5,PARCIAL 3,Parcial 3 de Química - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,2,5,PRÁCTICO 1,Práctico 1 de Química - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,5,PRÁCTICO 2,Práctico 2 de Química - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,5,PRÁCTICO 3,Práctico 3 de Química - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,5,PRÁCTICO 4,Práctico 4 de Química - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,5,PRÁCTICO 5,Práctico 5 de Química - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,5,PRÁCTICO 6,Práctico 6 de Química - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,1,6,PARCIAL 1,Parcial 1 de Química - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,1,6,PARCIAL 2,Parcial 2 de Química - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,1,6,PARCIAL 3,Parcial 3 de Química - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,2,6,PRÁCTICO 1,Práctico 1 de Química - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,6,PRÁCTICO 2,Práctico 2 de Química - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,6,PRÁCTICO 3,Práctico 3 de Química - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,6,PRÁCTICO 4,Práctico 4 de Química - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,6,PRÁCTICO 5,Práctico 5 de Química - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,6,PRÁCTICO 6,Práctico 6 de Química - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,1,4,PARCIAL 1,Parcial 1 de Biología - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,1,4,PARCIAL 2,Parcial 2 de Biología - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,1,4,PARCIAL 3,Parcial 3 de Biología - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,2,4,PRÁCTICO 1,Práctico 1 de Biología - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,4,PRÁCTICO 2,Práctico 2 de Biología - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,4,PRÁCTICO 3,Práctico 3 de Biología - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,4,PRÁCTICO 4,Práctico 4 de Biología - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,4,PRÁCTICO 5,Práctico 5 de Biología - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,4,PRÁCTICO 6,Práctico 6 de Biología - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,1,5,PARCIAL 1,Parcial 1 de Biología - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,1,5,PARCIAL 2,Parcial 2 de Biología - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,1,5,PARCIAL 3,Parcial 3 de Biología - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,2,5,PRÁCTICO 1,Práctico 1 de Biología - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,5,PRÁCTICO 2,Práctico 2 de Biología - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,5,PRÁCTICO 3,Práctico 3 de Biología - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,5,PRÁCTICO 4,Práctico 4 de Biología - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,5,PRÁCTICO 5,Práctico 5 de Biología - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,5,PRÁCTICO 6,Práctico 6 de Biología - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,1,6,PARCIAL 1,Parcial 1 de Biología - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,1,6,PARCIAL 2,Parcial 2 de Biología - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,1,6,PARCIAL 3,Parcial 3 de Biología - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,2,6,PRÁCTICO 1,Práctico 1 de Biología - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,6,PRÁCTICO 2,Práctico 2 de Biología - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,6,PRÁCTICO 3,Práctico 3 de Biología - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,6,PRÁCTICO 4,Práctico 4 de Biología - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,6,PRÁCTICO 5,Práctico 5 de Biología - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,6,PRÁCTICO 6,Práctico 6 de Biología - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,1,4,PARCIAL 1,Parcial 1 de Historia - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,1,4,PARCIAL 2,Parcial 2 de Historia - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,1,4,PARCIAL 3,Parcial 3 de Historia - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,2,4,PRÁCTICO 1,Práctico 1 de Historia - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,4,PRÁCTICO 2,Práctico 2 de Historia - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,4,PRÁCTICO 3,Práctico 3 de Historia - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,4,PRÁCTICO 4,Práctico 4 de Historia - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,4,PRÁCTICO 5,Práctico 5 de Historia - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,4,PRÁCTICO 6,Práctico 6 de Historia - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,1,5,PARCIAL 1,Parcial 1 de Historia - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,1,5,PARCIAL 2,Parcial 2 de Historia - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,1,5,PARCIAL 3,Parcial 3 de Historia - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,2,5,PRÁCTICO 1,Práctico 1 de Historia - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,5,PRÁCTICO 2,Práctico 2 de Historia - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,5,PRÁCTICO 3,Práctico 3 de Historia - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,5,PRÁCTICO 4,Práctico 4 de Historia - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,5,PRÁCTICO 5,Práctico 5 de Historia - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,5,PRÁCTICO 6,Práctico 6 de Historia - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,1,6,PARCIAL 1,Parcial 1 de Historia - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,1,6,PARCIAL 2,Parcial 2 de Historia - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,1,6,PARCIAL 3,Parcial 3 de Historia - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,2,6,PRÁCTICO 1,Práctico 1 de Historia - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,6,PRÁCTICO 2,Práctico 2 de Historia - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,6,PRÁCTICO 3,Práctico 3 de Historia - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,6,PRÁCTICO 4,Práctico 4 de Historia - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,6,PRÁCTICO 5,Práctico 5 de Historia - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,6,PRÁCTICO 6,Práctico 6 de Historia - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,4,PARCIAL 1,Parcial 1 de Geografía - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,4,PARCIAL 2,Parcial 2 de Geografía - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,4,PARCIAL 3,Parcial 3 de Geografía - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,4,PRÁCTICO 1,Práctico 1 de Geografía - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,4,PRÁCTICO 2,Práctico 2 de Geografía - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,4,PRÁCTICO 3,Práctico 3 de Geografía - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,4,PRÁCTICO 4,Práctico 4 de Geografía - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,4,PRÁCTICO 5,Práctico 5 de Geografía - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,4,PRÁCTICO 6,Práctico 6 de Geografía - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,5,PARCIAL 1,Parcial 1 de Geografía - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,5,PARCIAL 2,Parcial 2 de Geografía - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,5,PARCIAL 3,Parcial 3 de Geografía - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,5,PRÁCTICO 1,Práctico 1 de Geografía - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,5,PRÁCTICO 2,Práctico 2 de Geografía - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,5,PRÁCTICO 3,Práctico 3 de Geografía - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,5,PRÁCTICO 4,Práctico 4 de Geografía - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,5,PRÁCTICO 5,Práctico 5 de Geografía - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,5,PRÁCTICO 6,Práctico 6 de Geografía - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,6,PARCIAL 1,Parcial 1 de Geografía - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,6,PARCIAL 2,Parcial 2 de Geografía - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,6,PARCIAL 3,Parcial 3 de Geografía - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,6,PRÁCTICO 1,Práctico 1 de Geografía - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,6,PRÁCTICO 2,Práctico 2 de Geografía - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,6,PRÁCTICO 3,Práctico 3 de Geografía - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,6,PRÁCTICO 4,Práctico 4 de Geografía - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,6,PRÁCTICO 5,Práctico 5 de Geografía - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,6,PRÁCTICO 6,Práctico 6 de Geografía - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,4,PARCIAL 1,Parcial 1 de Idioma Extranjero - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,4,PARCIAL 2,Parcial 2 de Idioma Extranjero - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,4,PARCIAL 3,Parcial 3 de Idioma Extranjero - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,4,PRÁCTICO 1,Práctico 1 de Idioma Extranjero - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,4,PRÁCTICO 2,Práctico 2 de Idioma Extranjero - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,4,PRÁCTICO 3,Práctico 3 de Idioma Extranjero - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,4,PRÁCTICO 4,Práctico 4 de Idioma Extranjero - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,4,PRÁCTICO 5,Práctico 5 de Idioma Extranjero - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,4,PRÁCTICO 6,Práctico 6 de Idioma Extranjero - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,5,PARCIAL 1,Parcial 1 de Idioma Extranjero - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,5,PARCIAL 2,Parcial 2 de Idioma Extranjero - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,5,PARCIAL 3,Parcial 3 de Idioma Extranjero - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,5,PRÁCTICO 1,Práctico 1 de Idioma Extranjero - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,5,PRÁCTICO 2,Práctico 2 de Idioma Extranjero - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,5,PRÁCTICO 3,Práctico 3 de Idioma Extranjero - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,5,PRÁCTICO 4,Práctico 4 de Idioma Extranjero - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,5,PRÁCTICO 5,Práctico 5 de Idioma Extranjero - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,5,PRÁCTICO 6,Práctico 6 de Idioma Extranjero - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,6,PARCIAL 1,Parcial 1 de Idioma Extranjero - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,6,PARCIAL 2,Parcial 2 de Idioma Extranjero - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,6,PARCIAL 3,Parcial 3 de Idioma Extranjero - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,6,PRÁCTICO 1,Práctico 1 de Idioma Extranjero - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,6,PRÁCTICO 2,Práctico 2 de Idioma Extranjero - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,6,PRÁCTICO 3,Práctico 3 de Idioma Extranjero - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,6,PRÁCTICO 4,Práctico 4 de Idioma Extranjero - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,6,PRÁCTICO 5,Práctico 5 de Idioma Extranjero - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,6,PRÁCTICO 6,Práctico 6 de Idioma Extranjero - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,4,PARCIAL 1,Parcial 1 de Educación Física - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,4,PARCIAL 2,Parcial 2 de Educación Física - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,4,PARCIAL 3,Parcial 3 de Educación Física - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,4,PRÁCTICO 1,Práctico 1 de Educación Física - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,4,PRÁCTICO 2,Práctico 2 de Educación Física - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,4,PRÁCTICO 3,Práctico 3 de Educación Física - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,4,PRÁCTICO 4,Práctico 4 de Educación Física - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,4,PRÁCTICO 5,Práctico 5 de Educación Física - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,4,PRÁCTICO 6,Práctico 6 de Educación Física - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,5,PARCIAL 1,Parcial 1 de Educación Física - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,5,PARCIAL 2,Parcial 2 de Educación Física - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,5,PARCIAL 3,Parcial 3 de Educación Física - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,5,PRÁCTICO 1,Práctico 1 de Educación Física - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,5,PRÁCTICO 2,Práctico 2 de Educación Física - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,5,PRÁCTICO 3,Práctico 3 de Educación Física - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,5,PRÁCTICO 4,Práctico 4 de Educación Física - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,5,PRÁCTICO 5,Práctico 5 de Educación Física - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,5,PRÁCTICO 6,Práctico 6 de Educación Física - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,6,PARCIAL 1,Parcial 1 de Educación Física - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,6,PARCIAL 2,Parcial 2 de Educación Física - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,6,PARCIAL 3,Parcial 3 de Educación Física - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,6,PRÁCTICO 1,Práctico 1 de Educación Física - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,6,PRÁCTICO 2,Práctico 2 de Educación Física - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,6,PRÁCTICO 3,Práctico 3 de Educación Física - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,6,PRÁCTICO 4,Práctico 4 de Educación Física - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,6,PRÁCTICO 5,Práctico 5 de Educación Física - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,6,PRÁCTICO 6,Práctico 6 de Educación Física - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,4,PARCIAL 1,Parcial 1 de Artes Plásticas - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,4,PARCIAL 2,Parcial 2 de Artes Plásticas - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,4,PARCIAL 3,Parcial 3 de Artes Plásticas - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,4,PRÁCTICO 1,Práctico 1 de Artes Plásticas - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,4,PRÁCTICO 2,Práctico 2 de Artes Plásticas - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,4,PRÁCTICO 3,Práctico 3 de Artes Plásticas - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,4,PRÁCTICO 4,Práctico 4 de Artes Plásticas - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,4,PRÁCTICO 5,Práctico 5 de Artes Plásticas - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,4,PRÁCTICO 6,Práctico 6 de Artes Plásticas - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,5,PARCIAL 1,Parcial 1 de Artes Plásticas - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,5,PARCIAL 2,Parcial 2 de Artes Plásticas - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,5,PARCIAL 3,Parcial 3 de Artes Plásticas - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,5,PRÁCTICO 1,Práctico 1 de Artes Plásticas - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,5,PRÁCTICO 2,Práctico 2 de Artes Plásticas - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,5,PRÁCTICO 3,Práctico 3 de Artes Plásticas - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,5,PRÁCTICO 4,Práctico 4 de Artes Plásticas - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,5,PRÁCTICO 5,Práctico 5 de Artes Plásticas - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,5,PRÁCTICO 6,Práctico 6 de Artes Plásticas - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,6,PARCIAL 1,Parcial 1 de Artes Plásticas - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,6,PARCIAL 2,Parcial 2 de Artes Plásticas - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,6,PARCIAL 3,Parcial 3 de Artes Plásticas - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,6,PRÁCTICO 1,Práctico 1 de Artes Plásticas - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,6,PRÁCTICO 2,Práctico 2 de Artes Plásticas - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,6,PRÁCTICO 3,Práctico 3 de Artes Plásticas - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,6,PRÁCTICO 4,Práctico 4 de Artes Plásticas - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,6,PRÁCTICO 5,Práctico 5 de Artes Plásticas - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,6,PRÁCTICO 6,Práctico 6 de Artes Plásticas - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,1,4,PARCIAL 1,Parcial 1 de Música - 2022,2022-02-11,2022-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,1,4,PARCIAL 2,Parcial 2 de Música - 2022,2022-02-21,2022-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,1,4,PARCIAL 3,Parcial 3 de Música - 2022,2022-03-03,2022-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,2,4,PRÁCTICO 1,Práctico 1 de Música - 2022,2022-02-04,2022-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,4,PRÁCTICO 2,Práctico 2 de Música - 2022,2022-02-07,2022-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,4,PRÁCTICO 3,Práctico 3 de Música - 2022,2022-02-10,2022-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,4,PRÁCTICO 4,Práctico 4 de Música - 2022,2022-02-13,2022-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,4,PRÁCTICO 5,Práctico 5 de Música - 2022,2022-02-16,2022-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,4,PRÁCTICO 6,Práctico 6 de Música - 2022,2022-02-19,2022-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,1,5,PARCIAL 1,Parcial 1 de Música - 2022,2022-05-11,2022-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,1,5,PARCIAL 2,Parcial 2 de Música - 2022,2022-05-21,2022-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,1,5,PARCIAL 3,Parcial 3 de Música - 2022,2022-05-31,2022-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,2,5,PRÁCTICO 1,Práctico 1 de Música - 2022,2022-05-04,2022-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,5,PRÁCTICO 2,Práctico 2 de Música - 2022,2022-05-07,2022-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,5,PRÁCTICO 3,Práctico 3 de Música - 2022,2022-05-10,2022-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,5,PRÁCTICO 4,Práctico 4 de Música - 2022,2022-05-13,2022-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,5,PRÁCTICO 5,Práctico 5 de Música - 2022,2022-05-16,2022-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,5,PRÁCTICO 6,Práctico 6 de Música - 2022,2022-05-19,2022-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,1,6,PARCIAL 1,Parcial 1 de Música - 2022,2022-10-11,2022-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,1,6,PARCIAL 2,Parcial 2 de Música - 2022,2022-10-21,2022-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,1,6,PARCIAL 3,Parcial 3 de Música - 2022,2022-10-31,2022-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,2,6,PRÁCTICO 1,Práctico 1 de Música - 2022,2022-10-04,2022-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,6,PRÁCTICO 2,Práctico 2 de Música - 2022,2022-10-07,2022-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,6,PRÁCTICO 3,Práctico 3 de Música - 2022,2022-10-10,2022-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,6,PRÁCTICO 4,Práctico 4 de Música - 2022,2022-10-13,2022-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,6,PRÁCTICO 5,Práctico 5 de Música - 2022,2022-10-16,2022-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,6,PRÁCTICO 6,Práctico 6 de Música - 2022,2022-10-19,2022-10-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,1,7,PARCIAL 1,Parcial 1 de Matemáticas - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,1,7,PARCIAL 2,Parcial 2 de Matemáticas - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,1,7,PARCIAL 3,Parcial 3 de Matemáticas - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,7,PRÁCTICO 1,Práctico 1 de Matemáticas - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,7,PRÁCTICO 2,Práctico 2 de Matemáticas - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,7,PRÁCTICO 3,Práctico 3 de Matemáticas - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,7,PRÁCTICO 4,Práctico 4 de Matemáticas - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,7,PRÁCTICO 5,Práctico 5 de Matemáticas - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,7,PRÁCTICO 6,Práctico 6 de Matemáticas - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,1,8,PARCIAL 1,Parcial 1 de Matemáticas - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,1,8,PARCIAL 2,Parcial 2 de Matemáticas - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,1,8,PARCIAL 3,Parcial 3 de Matemáticas - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,8,PRÁCTICO 1,Práctico 1 de Matemáticas - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,8,PRÁCTICO 2,Práctico 2 de Matemáticas - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,8,PRÁCTICO 3,Práctico 3 de Matemáticas - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,8,PRÁCTICO 4,Práctico 4 de Matemáticas - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,8,PRÁCTICO 5,Práctico 5 de Matemáticas - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,8,PRÁCTICO 6,Práctico 6 de Matemáticas - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,1,9,PARCIAL 1,Parcial 1 de Matemáticas - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,1,9,PARCIAL 2,Parcial 2 de Matemáticas - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,1,9,PARCIAL 3,Parcial 3 de Matemáticas - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,9,PRÁCTICO 1,Práctico 1 de Matemáticas - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,9,PRÁCTICO 2,Práctico 2 de Matemáticas - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,9,PRÁCTICO 3,Práctico 3 de Matemáticas - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,9,PRÁCTICO 4,Práctico 4 de Matemáticas - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,9,PRÁCTICO 5,Práctico 5 de Matemáticas - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Matemáticas,6,2,9,PRÁCTICO 6,Práctico 6 de Matemáticas - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,7,PARCIAL 1,Parcial 1 de Lenguaje - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,7,PARCIAL 2,Parcial 2 de Lenguaje - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,7,PARCIAL 3,Parcial 3 de Lenguaje - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,7,PRÁCTICO 1,Práctico 1 de Lenguaje - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,7,PRÁCTICO 2,Práctico 2 de Lenguaje - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,7,PRÁCTICO 3,Práctico 3 de Lenguaje - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,7,PRÁCTICO 4,Práctico 4 de Lenguaje - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,7,PRÁCTICO 5,Práctico 5 de Lenguaje - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,7,PRÁCTICO 6,Práctico 6 de Lenguaje - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,8,PARCIAL 1,Parcial 1 de Lenguaje - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,8,PARCIAL 2,Parcial 2 de Lenguaje - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,8,PARCIAL 3,Parcial 3 de Lenguaje - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,8,PRÁCTICO 1,Práctico 1 de Lenguaje - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,8,PRÁCTICO 2,Práctico 2 de Lenguaje - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,8,PRÁCTICO 3,Práctico 3 de Lenguaje - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,8,PRÁCTICO 4,Práctico 4 de Lenguaje - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,8,PRÁCTICO 5,Práctico 5 de Lenguaje - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,8,PRÁCTICO 6,Práctico 6 de Lenguaje - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,9,PARCIAL 1,Parcial 1 de Lenguaje - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,9,PARCIAL 2,Parcial 2 de Lenguaje - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,1,9,PARCIAL 3,Parcial 3 de Lenguaje - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,9,PRÁCTICO 1,Práctico 1 de Lenguaje - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,9,PRÁCTICO 2,Práctico 2 de Lenguaje - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,9,PRÁCTICO 3,Práctico 3 de Lenguaje - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,9,PRÁCTICO 4,Práctico 4 de Lenguaje - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,9,PRÁCTICO 5,Práctico 5 de Lenguaje - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Lenguaje,6,2,9,PRÁCTICO 6,Práctico 6 de Lenguaje - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,7,PARCIAL 1,Parcial 1 de Ciencias Naturales - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,7,PARCIAL 2,Parcial 2 de Ciencias Naturales - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,7,PARCIAL 3,Parcial 3 de Ciencias Naturales - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,7,PRÁCTICO 1,Práctico 1 de Ciencias Naturales - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,7,PRÁCTICO 2,Práctico 2 de Ciencias Naturales - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,7,PRÁCTICO 3,Práctico 3 de Ciencias Naturales - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,7,PRÁCTICO 4,Práctico 4 de Ciencias Naturales - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,7,PRÁCTICO 5,Práctico 5 de Ciencias Naturales - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,7,PRÁCTICO 6,Práctico 6 de Ciencias Naturales - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,8,PARCIAL 1,Parcial 1 de Ciencias Naturales - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,8,PARCIAL 2,Parcial 2 de Ciencias Naturales - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,8,PARCIAL 3,Parcial 3 de Ciencias Naturales - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,8,PRÁCTICO 1,Práctico 1 de Ciencias Naturales - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,8,PRÁCTICO 2,Práctico 2 de Ciencias Naturales - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,8,PRÁCTICO 3,Práctico 3 de Ciencias Naturales - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,8,PRÁCTICO 4,Práctico 4 de Ciencias Naturales - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,8,PRÁCTICO 5,Práctico 5 de Ciencias Naturales - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,8,PRÁCTICO 6,Práctico 6 de Ciencias Naturales - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,9,PARCIAL 1,Parcial 1 de Ciencias Naturales - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,9,PARCIAL 2,Parcial 2 de Ciencias Naturales - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,1,9,PARCIAL 3,Parcial 3 de Ciencias Naturales - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,9,PRÁCTICO 1,Práctico 1 de Ciencias Naturales - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,9,PRÁCTICO 2,Práctico 2 de Ciencias Naturales - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,9,PRÁCTICO 3,Práctico 3 de Ciencias Naturales - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,9,PRÁCTICO 4,Práctico 4 de Ciencias Naturales - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,9,PRÁCTICO 5,Práctico 5 de Ciencias Naturales - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Naturales,6,2,9,PRÁCTICO 6,Práctico 6 de Ciencias Naturales - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,7,PARCIAL 1,Parcial 1 de Ciencias Sociales - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,7,PARCIAL 2,Parcial 2 de Ciencias Sociales - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,7,PARCIAL 3,Parcial 3 de Ciencias Sociales - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,7,PRÁCTICO 1,Práctico 1 de Ciencias Sociales - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,7,PRÁCTICO 2,Práctico 2 de Ciencias Sociales - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,7,PRÁCTICO 3,Práctico 3 de Ciencias Sociales - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,7,PRÁCTICO 4,Práctico 4 de Ciencias Sociales - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,7,PRÁCTICO 5,Práctico 5 de Ciencias Sociales - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,7,PRÁCTICO 6,Práctico 6 de Ciencias Sociales - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,8,PARCIAL 1,Parcial 1 de Ciencias Sociales - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,8,PARCIAL 2,Parcial 2 de Ciencias Sociales - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,8,PARCIAL 3,Parcial 3 de Ciencias Sociales - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,8,PRÁCTICO 1,Práctico 1 de Ciencias Sociales - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,8,PRÁCTICO 2,Práctico 2 de Ciencias Sociales - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,8,PRÁCTICO 3,Práctico 3 de Ciencias Sociales - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,8,PRÁCTICO 4,Práctico 4 de Ciencias Sociales - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,8,PRÁCTICO 5,Práctico 5 de Ciencias Sociales - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,8,PRÁCTICO 6,Práctico 6 de Ciencias Sociales - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,9,PARCIAL 1,Parcial 1 de Ciencias Sociales - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,9,PARCIAL 2,Parcial 2 de Ciencias Sociales - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,1,9,PARCIAL 3,Parcial 3 de Ciencias Sociales - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,9,PRÁCTICO 1,Práctico 1 de Ciencias Sociales - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,9,PRÁCTICO 2,Práctico 2 de Ciencias Sociales - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,9,PRÁCTICO 3,Práctico 3 de Ciencias Sociales - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,9,PRÁCTICO 4,Práctico 4 de Ciencias Sociales - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,9,PRÁCTICO 5,Práctico 5 de Ciencias Sociales - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Ciencias Sociales,6,2,9,PRÁCTICO 6,Práctico 6 de Ciencias Sociales - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,7,PARCIAL 1,Parcial 1 de Educación Física - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,7,PARCIAL 2,Parcial 2 de Educación Física - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,7,PARCIAL 3,Parcial 3 de Educación Física - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,7,PRÁCTICO 1,Práctico 1 de Educación Física - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,7,PRÁCTICO 2,Práctico 2 de Educación Física - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,7,PRÁCTICO 3,Práctico 3 de Educación Física - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,7,PRÁCTICO 4,Práctico 4 de Educación Física - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,7,PRÁCTICO 5,Práctico 5 de Educación Física - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,7,PRÁCTICO 6,Práctico 6 de Educación Física - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,8,PARCIAL 1,Parcial 1 de Educación Física - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,8,PARCIAL 2,Parcial 2 de Educación Física - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,8,PARCIAL 3,Parcial 3 de Educación Física - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,8,PRÁCTICO 1,Práctico 1 de Educación Física - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,8,PRÁCTICO 2,Práctico 2 de Educación Física - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,8,PRÁCTICO 3,Práctico 3 de Educación Física - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,8,PRÁCTICO 4,Práctico 4 de Educación Física - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,8,PRÁCTICO 5,Práctico 5 de Educación Física - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,8,PRÁCTICO 6,Práctico 6 de Educación Física - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,9,PARCIAL 1,Parcial 1 de Educación Física - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,9,PARCIAL 2,Parcial 2 de Educación Física - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,1,9,PARCIAL 3,Parcial 3 de Educación Física - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,9,PRÁCTICO 1,Práctico 1 de Educación Física - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,9,PRÁCTICO 2,Práctico 2 de Educación Física - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,9,PRÁCTICO 3,Práctico 3 de Educación Física - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,9,PRÁCTICO 4,Práctico 4 de Educación Física - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,9,PRÁCTICO 5,Práctico 5 de Educación Física - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Educación Física,6,2,9,PRÁCTICO 6,Práctico 6 de Educación Física - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,7,PARCIAL 1,Parcial 1 de Artes Plásticas - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,7,PARCIAL 2,Parcial 2 de Artes Plásticas - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,7,PARCIAL 3,Parcial 3 de Artes Plásticas - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,7,PRÁCTICO 1,Práctico 1 de Artes Plásticas - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,7,PRÁCTICO 2,Práctico 2 de Artes Plásticas - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,7,PRÁCTICO 3,Práctico 3 de Artes Plásticas - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,7,PRÁCTICO 4,Práctico 4 de Artes Plásticas - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,7,PRÁCTICO 5,Práctico 5 de Artes Plásticas - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,7,PRÁCTICO 6,Práctico 6 de Artes Plásticas - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,8,PARCIAL 1,Parcial 1 de Artes Plásticas - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,8,PARCIAL 2,Parcial 2 de Artes Plásticas - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,8,PARCIAL 3,Parcial 3 de Artes Plásticas - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,8,PRÁCTICO 1,Práctico 1 de Artes Plásticas - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,8,PRÁCTICO 2,Práctico 2 de Artes Plásticas - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,8,PRÁCTICO 3,Práctico 3 de Artes Plásticas - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,8,PRÁCTICO 4,Práctico 4 de Artes Plásticas - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,8,PRÁCTICO 5,Práctico 5 de Artes Plásticas - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,8,PRÁCTICO 6,Práctico 6 de Artes Plásticas - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,9,PARCIAL 1,Parcial 1 de Artes Plásticas - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,9,PARCIAL 2,Parcial 2 de Artes Plásticas - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,1,9,PARCIAL 3,Parcial 3 de Artes Plásticas - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,9,PRÁCTICO 1,Práctico 1 de Artes Plásticas - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,9,PRÁCTICO 2,Práctico 2 de Artes Plásticas - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,9,PRÁCTICO 3,Práctico 3 de Artes Plásticas - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,9,PRÁCTICO 4,Práctico 4 de Artes Plásticas - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,9,PRÁCTICO 5,Práctico 5 de Artes Plásticas - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Artes Plásticas,6,2,9,PRÁCTICO 6,Práctico 6 de Artes Plásticas - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,1,7,PARCIAL 1,Parcial 1 de Música - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,1,7,PARCIAL 2,Parcial 2 de Música - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,1,7,PARCIAL 3,Parcial 3 de Música - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,2,7,PRÁCTICO 1,Práctico 1 de Música - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,7,PRÁCTICO 2,Práctico 2 de Música - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,7,PRÁCTICO 3,Práctico 3 de Música - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,7,PRÁCTICO 4,Práctico 4 de Música - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,7,PRÁCTICO 5,Práctico 5 de Música - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,7,PRÁCTICO 6,Práctico 6 de Música - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,1,8,PARCIAL 1,Parcial 1 de Música - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,1,8,PARCIAL 2,Parcial 2 de Música - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,1,8,PARCIAL 3,Parcial 3 de Música - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,2,8,PRÁCTICO 1,Práctico 1 de Música - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,8,PRÁCTICO 2,Práctico 2 de Música - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,8,PRÁCTICO 3,Práctico 3 de Música - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,8,PRÁCTICO 4,Práctico 4 de Música - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,8,PRÁCTICO 5,Práctico 5 de Música - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,8,PRÁCTICO 6,Práctico 6 de Música - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,1,9,PARCIAL 1,Parcial 1 de Música - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,1,9,PARCIAL 2,Parcial 2 de Música - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,1,9,PARCIAL 3,Parcial 3 de Música - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Música,6,2,9,PRÁCTICO 1,Práctico 1 de Música - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,9,PRÁCTICO 2,Práctico 2 de Música - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,9,PRÁCTICO 3,Práctico 3 de Música - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,9,PRÁCTICO 4,Práctico 4 de Música - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,9,PRÁCTICO 5,Práctico 5 de Música - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Música,6,2,9,PRÁCTICO 6,Práctico 6 de Música - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,7,PARCIAL 1,Parcial 1 de Religión - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,7,PARCIAL 2,Parcial 2 de Religión - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,7,PARCIAL 3,Parcial 3 de Religión - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,7,PRÁCTICO 1,Práctico 1 de Religión - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,7,PRÁCTICO 2,Práctico 2 de Religión - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,7,PRÁCTICO 3,Práctico 3 de Religión - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,7,PRÁCTICO 4,Práctico 4 de Religión - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,7,PRÁCTICO 5,Práctico 5 de Religión - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,7,PRÁCTICO 6,Práctico 6 de Religión - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,8,PARCIAL 1,Parcial 1 de Religión - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,8,PARCIAL 2,Parcial 2 de Religión - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,8,PARCIAL 3,Parcial 3 de Religión - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,8,PRÁCTICO 1,Práctico 1 de Religión - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,8,PRÁCTICO 2,Práctico 2 de Religión - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,8,PRÁCTICO 3,Práctico 3 de Religión - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,8,PRÁCTICO 4,Práctico 4 de Religión - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,8,PRÁCTICO 5,Práctico 5 de Religión - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,8,PRÁCTICO 6,Práctico 6 de Religión - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,9,PARCIAL 1,Parcial 1 de Religión - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,9,PARCIAL 2,Parcial 2 de Religión - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,1,9,PARCIAL 3,Parcial 3 de Religión - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,9,PRÁCTICO 1,Práctico 1 de Religión - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,9,PRÁCTICO 2,Práctico 2 de Religión - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,9,PRÁCTICO 3,Práctico 3 de Religión - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,9,PRÁCTICO 4,Práctico 4 de Religión - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,9,PRÁCTICO 5,Práctico 5 de Religión - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2221,Ernesto Solis,Religión,6,2,9,PRÁCTICO 6,Práctico 6 de Religión - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,7,PARCIAL 1,Parcial 1 de Matemáticas - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,7,PARCIAL 2,Parcial 2 de Matemáticas - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,7,PARCIAL 3,Parcial 3 de Matemáticas - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,7,PRÁCTICO 1,Práctico 1 de Matemáticas - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,7,PRÁCTICO 2,Práctico 2 de Matemáticas - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,7,PRÁCTICO 3,Práctico 3 de Matemáticas - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,7,PRÁCTICO 4,Práctico 4 de Matemáticas - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,7,PRÁCTICO 5,Práctico 5 de Matemáticas - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,7,PRÁCTICO 6,Práctico 6 de Matemáticas - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,8,PARCIAL 1,Parcial 1 de Matemáticas - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,8,PARCIAL 2,Parcial 2 de Matemáticas - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,8,PARCIAL 3,Parcial 3 de Matemáticas - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,8,PRÁCTICO 1,Práctico 1 de Matemáticas - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,8,PRÁCTICO 2,Práctico 2 de Matemáticas - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,8,PRÁCTICO 3,Práctico 3 de Matemáticas - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,8,PRÁCTICO 4,Práctico 4 de Matemáticas - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,8,PRÁCTICO 5,Práctico 5 de Matemáticas - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,8,PRÁCTICO 6,Práctico 6 de Matemáticas - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,9,PARCIAL 1,Parcial 1 de Matemáticas - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,9,PARCIAL 2,Parcial 2 de Matemáticas - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,1,9,PARCIAL 3,Parcial 3 de Matemáticas - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,9,PRÁCTICO 1,Práctico 1 de Matemáticas - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,9,PRÁCTICO 2,Práctico 2 de Matemáticas - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,9,PRÁCTICO 3,Práctico 3 de Matemáticas - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,9,PRÁCTICO 4,Práctico 4 de Matemáticas - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,9,PRÁCTICO 5,Práctico 5 de Matemáticas - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Matemáticas,7,2,9,PRÁCTICO 6,Práctico 6 de Matemáticas - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,7,PARCIAL 1,Parcial 1 de Lenguaje - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,7,PARCIAL 2,Parcial 2 de Lenguaje - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,7,PARCIAL 3,Parcial 3 de Lenguaje - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,7,PRÁCTICO 1,Práctico 1 de Lenguaje - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,7,PRÁCTICO 2,Práctico 2 de Lenguaje - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,7,PRÁCTICO 3,Práctico 3 de Lenguaje - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,7,PRÁCTICO 4,Práctico 4 de Lenguaje - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,7,PRÁCTICO 5,Práctico 5 de Lenguaje - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,7,PRÁCTICO 6,Práctico 6 de Lenguaje - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,8,PARCIAL 1,Parcial 1 de Lenguaje - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,8,PARCIAL 2,Parcial 2 de Lenguaje - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,8,PARCIAL 3,Parcial 3 de Lenguaje - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,8,PRÁCTICO 1,Práctico 1 de Lenguaje - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,8,PRÁCTICO 2,Práctico 2 de Lenguaje - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,8,PRÁCTICO 3,Práctico 3 de Lenguaje - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,8,PRÁCTICO 4,Práctico 4 de Lenguaje - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,8,PRÁCTICO 5,Práctico 5 de Lenguaje - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,8,PRÁCTICO 6,Práctico 6 de Lenguaje - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,9,PARCIAL 1,Parcial 1 de Lenguaje - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,9,PARCIAL 2,Parcial 2 de Lenguaje - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,1,9,PARCIAL 3,Parcial 3 de Lenguaje - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,9,PRÁCTICO 1,Práctico 1 de Lenguaje - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,9,PRÁCTICO 2,Práctico 2 de Lenguaje - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,9,PRÁCTICO 3,Práctico 3 de Lenguaje - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,9,PRÁCTICO 4,Práctico 4 de Lenguaje - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,9,PRÁCTICO 5,Práctico 5 de Lenguaje - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Lenguaje,7,2,9,PRÁCTICO 6,Práctico 6 de Lenguaje - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,1,7,PARCIAL 1,Parcial 1 de Física - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,1,7,PARCIAL 2,Parcial 2 de Física - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,1,7,PARCIAL 3,Parcial 3 de Física - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,2,7,PRÁCTICO 1,Práctico 1 de Física - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,7,PRÁCTICO 2,Práctico 2 de Física - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,7,PRÁCTICO 3,Práctico 3 de Física - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,7,PRÁCTICO 4,Práctico 4 de Física - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,7,PRÁCTICO 5,Práctico 5 de Física - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,7,PRÁCTICO 6,Práctico 6 de Física - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,1,8,PARCIAL 1,Parcial 1 de Física - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,1,8,PARCIAL 2,Parcial 2 de Física - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,1,8,PARCIAL 3,Parcial 3 de Física - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,2,8,PRÁCTICO 1,Práctico 1 de Física - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,8,PRÁCTICO 2,Práctico 2 de Física - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,8,PRÁCTICO 3,Práctico 3 de Física - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,8,PRÁCTICO 4,Práctico 4 de Física - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,8,PRÁCTICO 5,Práctico 5 de Física - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,8,PRÁCTICO 6,Práctico 6 de Física - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,1,9,PARCIAL 1,Parcial 1 de Física - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,1,9,PARCIAL 2,Parcial 2 de Física - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,1,9,PARCIAL 3,Parcial 3 de Física - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Física,7,2,9,PRÁCTICO 1,Práctico 1 de Física - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,9,PRÁCTICO 2,Práctico 2 de Física - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,9,PRÁCTICO 3,Práctico 3 de Física - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,9,PRÁCTICO 4,Práctico 4 de Física - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,9,PRÁCTICO 5,Práctico 5 de Física - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Física,7,2,9,PRÁCTICO 6,Práctico 6 de Física - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,1,7,PARCIAL 1,Parcial 1 de Química - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,1,7,PARCIAL 2,Parcial 2 de Química - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,1,7,PARCIAL 3,Parcial 3 de Química - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,2,7,PRÁCTICO 1,Práctico 1 de Química - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,7,PRÁCTICO 2,Práctico 2 de Química - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,7,PRÁCTICO 3,Práctico 3 de Química - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,7,PRÁCTICO 4,Práctico 4 de Química - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,7,PRÁCTICO 5,Práctico 5 de Química - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,7,PRÁCTICO 6,Práctico 6 de Química - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,1,8,PARCIAL 1,Parcial 1 de Química - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,1,8,PARCIAL 2,Parcial 2 de Química - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,1,8,PARCIAL 3,Parcial 3 de Química - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,2,8,PRÁCTICO 1,Práctico 1 de Química - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,8,PRÁCTICO 2,Práctico 2 de Química - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,8,PRÁCTICO 3,Práctico 3 de Química - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,8,PRÁCTICO 4,Práctico 4 de Química - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,8,PRÁCTICO 5,Práctico 5 de Química - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,8,PRÁCTICO 6,Práctico 6 de Química - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,1,9,PARCIAL 1,Parcial 1 de Química - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,1,9,PARCIAL 2,Parcial 2 de Química - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,1,9,PARCIAL 3,Parcial 3 de Química - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Química,7,2,9,PRÁCTICO 1,Práctico 1 de Química - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,9,PRÁCTICO 2,Práctico 2 de Química - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,9,PRÁCTICO 3,Práctico 3 de Química - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,9,PRÁCTICO 4,Práctico 4 de Química - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,9,PRÁCTICO 5,Práctico 5 de Química - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Química,7,2,9,PRÁCTICO 6,Práctico 6 de Química - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,1,7,PARCIAL 1,Parcial 1 de Biología - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,1,7,PARCIAL 2,Parcial 2 de Biología - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,1,7,PARCIAL 3,Parcial 3 de Biología - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,2,7,PRÁCTICO 1,Práctico 1 de Biología - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,7,PRÁCTICO 2,Práctico 2 de Biología - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,7,PRÁCTICO 3,Práctico 3 de Biología - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,7,PRÁCTICO 4,Práctico 4 de Biología - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,7,PRÁCTICO 5,Práctico 5 de Biología - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,7,PRÁCTICO 6,Práctico 6 de Biología - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,1,8,PARCIAL 1,Parcial 1 de Biología - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,1,8,PARCIAL 2,Parcial 2 de Biología - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,1,8,PARCIAL 3,Parcial 3 de Biología - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,2,8,PRÁCTICO 1,Práctico 1 de Biología - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,8,PRÁCTICO 2,Práctico 2 de Biología - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,8,PRÁCTICO 3,Práctico 3 de Biología - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,8,PRÁCTICO 4,Práctico 4 de Biología - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,8,PRÁCTICO 5,Práctico 5 de Biología - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,8,PRÁCTICO 6,Práctico 6 de Biología - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,1,9,PARCIAL 1,Parcial 1 de Biología - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,1,9,PARCIAL 2,Parcial 2 de Biología - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,1,9,PARCIAL 3,Parcial 3 de Biología - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Biología,7,2,9,PRÁCTICO 1,Práctico 1 de Biología - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,9,PRÁCTICO 2,Práctico 2 de Biología - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,9,PRÁCTICO 3,Práctico 3 de Biología - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,9,PRÁCTICO 4,Práctico 4 de Biología - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,9,PRÁCTICO 5,Práctico 5 de Biología - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Biología,7,2,9,PRÁCTICO 6,Práctico 6 de Biología - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,1,7,PARCIAL 1,Parcial 1 de Historia - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,1,7,PARCIAL 2,Parcial 2 de Historia - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,1,7,PARCIAL 3,Parcial 3 de Historia - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,2,7,PRÁCTICO 1,Práctico 1 de Historia - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,7,PRÁCTICO 2,Práctico 2 de Historia - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,7,PRÁCTICO 3,Práctico 3 de Historia - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,7,PRÁCTICO 4,Práctico 4 de Historia - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,7,PRÁCTICO 5,Práctico 5 de Historia - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,7,PRÁCTICO 6,Práctico 6 de Historia - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,1,8,PARCIAL 1,Parcial 1 de Historia - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,1,8,PARCIAL 2,Parcial 2 de Historia - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,1,8,PARCIAL 3,Parcial 3 de Historia - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,2,8,PRÁCTICO 1,Práctico 1 de Historia - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,8,PRÁCTICO 2,Práctico 2 de Historia - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,8,PRÁCTICO 3,Práctico 3 de Historia - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,8,PRÁCTICO 4,Práctico 4 de Historia - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,8,PRÁCTICO 5,Práctico 5 de Historia - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,8,PRÁCTICO 6,Práctico 6 de Historia - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,1,9,PARCIAL 1,Parcial 1 de Historia - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,1,9,PARCIAL 2,Parcial 2 de Historia - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,1,9,PARCIAL 3,Parcial 3 de Historia - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Historia,7,2,9,PRÁCTICO 1,Práctico 1 de Historia - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,9,PRÁCTICO 2,Práctico 2 de Historia - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,9,PRÁCTICO 3,Práctico 3 de Historia - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,9,PRÁCTICO 4,Práctico 4 de Historia - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,9,PRÁCTICO 5,Práctico 5 de Historia - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Historia,7,2,9,PRÁCTICO 6,Práctico 6 de Historia - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,7,PARCIAL 1,Parcial 1 de Geografía - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,7,PARCIAL 2,Parcial 2 de Geografía - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,7,PARCIAL 3,Parcial 3 de Geografía - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,7,PRÁCTICO 1,Práctico 1 de Geografía - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,7,PRÁCTICO 2,Práctico 2 de Geografía - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,7,PRÁCTICO 3,Práctico 3 de Geografía - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,7,PRÁCTICO 4,Práctico 4 de Geografía - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,7,PRÁCTICO 5,Práctico 5 de Geografía - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,7,PRÁCTICO 6,Práctico 6 de Geografía - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,8,PARCIAL 1,Parcial 1 de Geografía - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,8,PARCIAL 2,Parcial 2 de Geografía - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,8,PARCIAL 3,Parcial 3 de Geografía - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,8,PRÁCTICO 1,Práctico 1 de Geografía - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,8,PRÁCTICO 2,Práctico 2 de Geografía - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,8,PRÁCTICO 3,Práctico 3 de Geografía - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,8,PRÁCTICO 4,Práctico 4 de Geografía - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,8,PRÁCTICO 5,Práctico 5 de Geografía - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,8,PRÁCTICO 6,Práctico 6 de Geografía - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,9,PARCIAL 1,Parcial 1 de Geografía - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,9,PARCIAL 2,Parcial 2 de Geografía - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,1,9,PARCIAL 3,Parcial 3 de Geografía - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,9,PRÁCTICO 1,Práctico 1 de Geografía - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,9,PRÁCTICO 2,Práctico 2 de Geografía - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,9,PRÁCTICO 3,Práctico 3 de Geografía - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,9,PRÁCTICO 4,Práctico 4 de Geografía - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,9,PRÁCTICO 5,Práctico 5 de Geografía - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Geografía,7,2,9,PRÁCTICO 6,Práctico 6 de Geografía - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,7,PARCIAL 1,Parcial 1 de Idioma Extranjero - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,7,PARCIAL 2,Parcial 2 de Idioma Extranjero - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,7,PARCIAL 3,Parcial 3 de Idioma Extranjero - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,7,PRÁCTICO 1,Práctico 1 de Idioma Extranjero - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,7,PRÁCTICO 2,Práctico 2 de Idioma Extranjero - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,7,PRÁCTICO 3,Práctico 3 de Idioma Extranjero - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,7,PRÁCTICO 4,Práctico 4 de Idioma Extranjero - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,7,PRÁCTICO 5,Práctico 5 de Idioma Extranjero - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,7,PRÁCTICO 6,Práctico 6 de Idioma Extranjero - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,8,PARCIAL 1,Parcial 1 de Idioma Extranjero - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,8,PARCIAL 2,Parcial 2 de Idioma Extranjero - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,8,PARCIAL 3,Parcial 3 de Idioma Extranjero - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,8,PRÁCTICO 1,Práctico 1 de Idioma Extranjero - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,8,PRÁCTICO 2,Práctico 2 de Idioma Extranjero - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,8,PRÁCTICO 3,Práctico 3 de Idioma Extranjero - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,8,PRÁCTICO 4,Práctico 4 de Idioma Extranjero - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,8,PRÁCTICO 5,Práctico 5 de Idioma Extranjero - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,8,PRÁCTICO 6,Práctico 6 de Idioma Extranjero - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,9,PARCIAL 1,Parcial 1 de Idioma Extranjero - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,9,PARCIAL 2,Parcial 2 de Idioma Extranjero - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,1,9,PARCIAL 3,Parcial 3 de Idioma Extranjero - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,9,PRÁCTICO 1,Práctico 1 de Idioma Extranjero - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,9,PRÁCTICO 2,Práctico 2 de Idioma Extranjero - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,9,PRÁCTICO 3,Práctico 3 de Idioma Extranjero - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,9,PRÁCTICO 4,Práctico 4 de Idioma Extranjero - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,9,PRÁCTICO 5,Práctico 5 de Idioma Extranjero - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Idioma Extranjero,7,2,9,PRÁCTICO 6,Práctico 6 de Idioma Extranjero - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,7,PARCIAL 1,Parcial 1 de Educación Física - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,7,PARCIAL 2,Parcial 2 de Educación Física - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,7,PARCIAL 3,Parcial 3 de Educación Física - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,7,PRÁCTICO 1,Práctico 1 de Educación Física - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,7,PRÁCTICO 2,Práctico 2 de Educación Física - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,7,PRÁCTICO 3,Práctico 3 de Educación Física - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,7,PRÁCTICO 4,Práctico 4 de Educación Física - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,7,PRÁCTICO 5,Práctico 5 de Educación Física - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,7,PRÁCTICO 6,Práctico 6 de Educación Física - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,8,PARCIAL 1,Parcial 1 de Educación Física - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,8,PARCIAL 2,Parcial 2 de Educación Física - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,8,PARCIAL 3,Parcial 3 de Educación Física - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,8,PRÁCTICO 1,Práctico 1 de Educación Física - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,8,PRÁCTICO 2,Práctico 2 de Educación Física - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,8,PRÁCTICO 3,Práctico 3 de Educación Física - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,8,PRÁCTICO 4,Práctico 4 de Educación Física - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,8,PRÁCTICO 5,Práctico 5 de Educación Física - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,8,PRÁCTICO 6,Práctico 6 de Educación Física - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,9,PARCIAL 1,Parcial 1 de Educación Física - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,9,PARCIAL 2,Parcial 2 de Educación Física - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,1,9,PARCIAL 3,Parcial 3 de Educación Física - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,9,PRÁCTICO 1,Práctico 1 de Educación Física - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,9,PRÁCTICO 2,Práctico 2 de Educación Física - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,9,PRÁCTICO 3,Práctico 3 de Educación Física - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,9,PRÁCTICO 4,Práctico 4 de Educación Física - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,9,PRÁCTICO 5,Práctico 5 de Educación Física - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Educación Física,7,2,9,PRÁCTICO 6,Práctico 6 de Educación Física - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,7,PARCIAL 1,Parcial 1 de Artes Plásticas - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,7,PARCIAL 2,Parcial 2 de Artes Plásticas - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,7,PARCIAL 3,Parcial 3 de Artes Plásticas - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,7,PRÁCTICO 1,Práctico 1 de Artes Plásticas - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,7,PRÁCTICO 2,Práctico 2 de Artes Plásticas - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,7,PRÁCTICO 3,Práctico 3 de Artes Plásticas - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,7,PRÁCTICO 4,Práctico 4 de Artes Plásticas - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,7,PRÁCTICO 5,Práctico 5 de Artes Plásticas - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,7,PRÁCTICO 6,Práctico 6 de Artes Plásticas - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,8,PARCIAL 1,Parcial 1 de Artes Plásticas - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,8,PARCIAL 2,Parcial 2 de Artes Plásticas - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,8,PARCIAL 3,Parcial 3 de Artes Plásticas - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,8,PRÁCTICO 1,Práctico 1 de Artes Plásticas - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,8,PRÁCTICO 2,Práctico 2 de Artes Plásticas - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,8,PRÁCTICO 3,Práctico 3 de Artes Plásticas - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,8,PRÁCTICO 4,Práctico 4 de Artes Plásticas - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,8,PRÁCTICO 5,Práctico 5 de Artes Plásticas - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,8,PRÁCTICO 6,Práctico 6 de Artes Plásticas - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,9,PARCIAL 1,Parcial 1 de Artes Plásticas - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,9,PARCIAL 2,Parcial 2 de Artes Plásticas - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,1,9,PARCIAL 3,Parcial 3 de Artes Plásticas - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,9,PRÁCTICO 1,Práctico 1 de Artes Plásticas - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,9,PRÁCTICO 2,Práctico 2 de Artes Plásticas - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,9,PRÁCTICO 3,Práctico 3 de Artes Plásticas - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,9,PRÁCTICO 4,Práctico 4 de Artes Plásticas - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,9,PRÁCTICO 5,Práctico 5 de Artes Plásticas - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Artes Plásticas,7,2,9,PRÁCTICO 6,Práctico 6 de Artes Plásticas - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,1,7,PARCIAL 1,Parcial 1 de Música - 2023,2023-02-11,2023-02-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,1,7,PARCIAL 2,Parcial 2 de Música - 2023,2023-02-21,2023-02-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,1,7,PARCIAL 3,Parcial 3 de Música - 2023,2023-03-03,2023-03-08,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,2,7,PRÁCTICO 1,Práctico 1 de Música - 2023,2023-02-04,2023-02-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,7,PRÁCTICO 2,Práctico 2 de Música - 2023,2023-02-07,2023-02-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,7,PRÁCTICO 3,Práctico 3 de Música - 2023,2023-02-10,2023-02-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,7,PRÁCTICO 4,Práctico 4 de Música - 2023,2023-02-13,2023-02-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,7,PRÁCTICO 5,Práctico 5 de Música - 2023,2023-02-16,2023-02-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,7,PRÁCTICO 6,Práctico 6 de Música - 2023,2023-02-19,2023-02-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,1,8,PARCIAL 1,Parcial 1 de Música - 2023,2023-05-11,2023-05-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,1,8,PARCIAL 2,Parcial 2 de Música - 2023,2023-05-21,2023-05-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,1,8,PARCIAL 3,Parcial 3 de Música - 2023,2023-05-31,2023-06-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,2,8,PRÁCTICO 1,Práctico 1 de Música - 2023,2023-05-04,2023-05-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,8,PRÁCTICO 2,Práctico 2 de Música - 2023,2023-05-07,2023-05-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,8,PRÁCTICO 3,Práctico 3 de Música - 2023,2023-05-10,2023-05-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,8,PRÁCTICO 4,Práctico 4 de Música - 2023,2023-05-13,2023-05-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,8,PRÁCTICO 5,Práctico 5 de Música - 2023,2023-05-16,2023-05-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,8,PRÁCTICO 6,Práctico 6 de Música - 2023,2023-05-19,2023-05-23,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,1,9,PARCIAL 1,Parcial 1 de Música - 2023,2023-10-11,2023-10-16,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,1,9,PARCIAL 2,Parcial 2 de Música - 2023,2023-10-21,2023-10-26,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,1,9,PARCIAL 3,Parcial 3 de Música - 2023,2023-10-31,2023-11-05,100.0,51.0,20.0,True,10.0
+2253,Maria Huanca,Música,7,2,9,PRÁCTICO 1,Práctico 1 de Música - 2023,2023-10-04,2023-10-08,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,9,PRÁCTICO 2,Práctico 2 de Música - 2023,2023-10-07,2023-10-11,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,9,PRÁCTICO 3,Práctico 3 de Música - 2023,2023-10-10,2023-10-14,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,9,PRÁCTICO 4,Práctico 4 de Música - 2023,2023-10-13,2023-10-17,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,9,PRÁCTICO 5,Práctico 5 de Música - 2023,2023-10-16,2023-10-20,100.0,51.0,5.0,True,10.0
+2253,Maria Huanca,Música,7,2,9,PRÁCTICO 6,Práctico 6 de Música - 2023,2023-10-19,2023-10-23,100.0,51.0,5.0,True,10.0

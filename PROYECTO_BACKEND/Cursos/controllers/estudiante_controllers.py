@@ -44,6 +44,13 @@ def obtener_materias_estudiante(request):
                 status=status.HTTP_404_NOT_FOUND
             )
         
+        # Verificar el rol del usuario
+        if not usuario.rol or usuario.rol.nombre != 'Estudiante':
+            return Response(
+                {'error': 'El usuario especificado no es un estudiante'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
         # Obtener el curso
         curso = Curso.objects.get(id=usuario.curso.id)
         
@@ -534,7 +541,7 @@ def calcular_promedios_trimestre(request, trimestre_id):
                         calificaciones_encontradas = 0
                         
                         # Procesar evaluaciones entregables
-                        for evaluacion in evaluaciones_entregable:
+                        for evaluacion in evaluaciones_entregables: # type: ignore
                             try:
                                 calificacion = Calificacion.objects.get(
                                     content_type=entregable_ct,
@@ -831,7 +838,7 @@ def obtener_calificaciones_trimestre(request, estudiante_id, trimestre_id):
                 calificaciones_encontradas = 0
                 
                 # Procesar evaluaciones entregables
-                for evaluacion in evaluaciones_entregable:
+                for evaluacion in evaluaciones_entregables: # type: ignore
                     try:
                         calificacion = Calificacion.objects.get(
                             content_type=entregable_ct,
@@ -981,7 +988,7 @@ def historial_academico_estudiante(request, estudiante_id):
                 )
                 
                 participaciones_valores = [
-                    float(c.nota_final if c.nota_final is not None else c.nota)
+                    float(c.calcular_nota_con_penalizacion())
                     for c in calificaciones_participacion
                 ]
                 promedio_participacion = round(sum(participaciones_valores) / len(participaciones_valores), 2) if participaciones_valores else None

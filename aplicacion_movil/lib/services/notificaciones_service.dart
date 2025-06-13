@@ -165,6 +165,7 @@ class NotificacionesService {
 
       AppLogger.i('Registrando token FCM en servidor: $url');
 
+      // Asegurar que el formato coincida con el esperado por el backend
       final response = await http.post(
         url,
         headers: {
@@ -174,6 +175,7 @@ class NotificacionesService {
         body: jsonEncode({
           'token': fcmToken,
           'plataforma': _obtenerPlataforma(),
+          'usuario': int.parse(userId), // ID numérico para Django
         }),
       );
 

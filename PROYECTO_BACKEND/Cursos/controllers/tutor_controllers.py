@@ -265,7 +265,7 @@ def obtener_calificaciones_estudiantes(request, tutor_id):
                                     estudiante=estudiante.usuario
                                 )
                                 
-                                nota_estudiante = calificacion.nota_final if calificacion.nota_final else calificacion.nota
+                                nota_estudiante = calificacion.calcular_nota_con_penalizacion()
                                 porcentaje_eval = Decimal(str(evaluacion.porcentaje_nota_final))
                                 
                                 nota_ponderada = nota_estudiante * (porcentaje_eval / Decimal('100.0'))
@@ -284,7 +284,7 @@ def obtener_calificaciones_estudiantes(request, tutor_id):
                                     estudiante=estudiante.usuario
                                 )
                                 
-                                nota_estudiante = calificacion.nota_final if calificacion.nota_final else calificacion.nota
+                                nota_estudiante = calificacion.calcular_nota_con_penalizacion()
                                 porcentaje_eval = Decimal(str(evaluacion.porcentaje_nota_final))
                                 
                                 nota_ponderada = nota_estudiante * (porcentaje_eval / Decimal('100.0'))
@@ -485,7 +485,7 @@ def obtener_calificaciones_estudiante_detalle(request, tutor_id, estudiante_id):
                     calificacion_data = {
                         'id': calificacion.id,
                         'nota': float(calificacion.nota),
-                        'nota_final': float(calificacion.nota_final) if calificacion.nota_final else float(calificacion.nota),
+                        'nota_final': float(calificacion.calcular_nota_con_penalizacion()),
                         'porcentaje': float(evaluacion.porcentaje_nota_final),
                         'fecha_entrega': calificacion.fecha_entrega,
                         'finalizada': calificacion.finalizada,
@@ -532,7 +532,7 @@ def obtener_calificaciones_estudiante_detalle(request, tutor_id, estudiante_id):
                     calificacion_data = {
                         'id': calificacion.id,
                         'nota': float(calificacion.nota),
-                        'nota_final': float(calificacion.nota_final) if calificacion.nota_final else float(calificacion.nota),
+                        'nota_final': float(calificacion.calcular_nota_con_penalizacion()),
                         'porcentaje': float(evaluacion.porcentaje_nota_final),
                         'finalizada': calificacion.finalizada,
                         'observaciones': calificacion.observaciones,

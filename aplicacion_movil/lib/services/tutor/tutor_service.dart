@@ -170,17 +170,8 @@ class TutorService {
         if (resultado['estudiante'] != null &&
             resultado['estudiante']['materias'] != null &&
             resultado['materias'] == null) {
-          AppLogger.d(
-            'Normalizando estructura: moviendo materias de estudiante a raíz',
-          );
+          AppLogger.d('Normalizando estructura...');
           resultado['materias'] = resultado['estudiante']['materias'];
-
-          // Opcional: limpiar materias del objeto estudiante para evitar duplicación
-          final estudianteData = Map<String, dynamic>.from(
-            resultado['estudiante'],
-          );
-          estudianteData.remove('materias');
-          resultado['estudiante'] = estudianteData;
         }
 
         AppLogger.i(

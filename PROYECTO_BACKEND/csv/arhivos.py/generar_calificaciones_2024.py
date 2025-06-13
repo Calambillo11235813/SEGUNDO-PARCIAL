@@ -104,15 +104,95 @@ def generar_nota_para_estudiante(estudiante_perfil, materia, trimestre_id, fecha
     
     return nota, es_tardia
 
+def generar_retroalimentacion(nota, tipo_evaluacion_id, materia):
+    """Genera retroalimentación realista basada en la nota y tipo de evaluación"""
+    retroalimentaciones = {
+        'excelente': [
+            f"Excelente trabajo en {materia}. Tu dedicación se refleja en estos resultados.",
+            f"Rendimiento sobresaliente en {materia}. Eres un ejemplo para tus compañeros.",
+            f"Dominio excepcional de {materia}. Continúa con esa calidad de trabajo.",
+            f"Calidad superior en {materia}. Tu comprensión del tema es muy sólida.",
+            f"Trabajo extraordinario en {materia}. Demuestra preparación y talento."
+        ],
+        'bueno': [
+            f"Muy buen desempeño en {materia}. Con pequeños ajustes alcanzarás la excelencia.",
+            f"Trabajo sólido en {materia}. Tu esfuerzo es evidente y valorado.",
+            f"Buen manejo de los conceptos de {materia}. Sigue practicando.",
+            f"Rendimiento satisfactorio en {materia}. Estás en el camino correcto.",
+            f"Buen nivel en {materia}. Con dedicación continua mejorarás aún más."
+        ],
+        'regular': [
+            f"Nivel básico alcanzado en {materia}. Es importante reforzar algunos conceptos.",
+            f"Trabajo aceptable en {materia}, pero puedes dar mucho más de ti.",
+            f"Comprensión básica de {materia}. Te sugiero dedicar más tiempo al estudio.",
+            f"Cumples con lo mínimo en {materia}. Busca apoyo para mejorar.",
+            f"Rendimiento regular en {materia}. Identifica tus áreas débiles para fortalecerlas."
+        ],
+        'deficiente': [
+            f"Necesitas apoyo urgente en {materia}. No dudes en buscar ayuda adicional.",
+            f"Resultado preocupante en {materia}. Trabajemos juntos para mejorar.",
+            f"Requiere mayor dedicación al estudio de {materia}. Estoy aquí para apoyarte.",
+            f"Es crucial que busques tutoría en {materia} para mejorar tu rendimiento.",
+            f"Resultado insuficiente en {materia}. Revisemos los conceptos fundamentales."
+        ]
+    }
+    
+    if nota >= 85:
+        categoria = 'excelente'
+    elif nota >= 70:
+        categoria = 'bueno'
+    elif nota >= 51:
+        categoria = 'regular'
+    else:
+        categoria = 'deficiente'
+    
+    # Agregar especificidad según tipo de evaluación
+    prefijo = ""
+    if tipo_evaluacion_id == '1':  # PARCIAL
+        prefijo = "En este examen: "
+    elif tipo_evaluacion_id == '2':  # PRÁCTICO
+        prefijo = "En esta actividad práctica: "
+    
+    return prefijo + random.choice(retroalimentaciones[categoria])
+
+def generar_observaciones(nota, entrega_tardia, penalizacion):
+    """Genera observaciones basadas en el rendimiento"""
+    observaciones = []
+    
+    if entrega_tardia:
+        observaciones.append(f"Entrega tardía - Penalización aplicada: {penalizacion}%")
+    
+    if nota >= 95:
+        observaciones.append("Rendimiento excepcional - Excelencia académica")
+    elif nota >= 85:
+        observaciones.append("Rendimiento sobresaliente - Muy buen trabajo")
+    elif nota >= 75:
+        observaciones.append("Buen rendimiento - Sigue así")
+    elif nota >= 65:
+        observaciones.append("Rendimiento satisfactorio - Con potencial de mejora")
+    elif nota >= 51:
+        observaciones.append("Rendimiento básico - Necesita refuerzo en algunos temas")
+    else:
+        observaciones.append("Rendimiento insuficiente - Requiere apoyo académico inmediato")
+    
+    return "; ".join(observaciones)
+
 def main():
-    print("🚀 Iniciando generación de calificaciones 2024 con distribución realista...")
+    print("🚀 Iniciando generación de calificaciones 2024 (versión simplificada)...")
     
     csv_dir = os.path.dirname(os.path.abspath(__file__))
+    parent_dir = os.path.dirname(csv_dir)  # Subir un nivel para acceder a csv/
+    csv_path = os.path.join(parent_dir, "csv")
     
     # Leer estudiantes
     print("📚 Cargando datos de estudiantes...")
     estudiantes = []
-    estudiantes_path = os.path.join(csv_dir, "estudiantes.csv")
+    estudiantes_path = os.path.join(csv_path, "estudiantes.csv")
+    
+    if not os.path.exists(estudiantes_path):
+        print(f"❌ Error: No se encontró el archivo {estudiantes_path}")
+        return
+    
     with open(estudiantes_path, newline='', encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -124,18 +204,21 @@ def main():
                 "perfil": crear_perfil_estudiante()  # Crear perfil único para cada estudiante
             })
     
-    # Leer evaluaciones (solo entregables)
+    print(f"✅ Cargados {len(estudiantes)} estudiantes")
+    
+    # Leer evaluaciones
     print("📝 Cargando datos de evaluaciones...")
     evaluaciones = []
-    eval_path = os.path.join(csv_dir, "evaluaciones_practicos_2024.csv")
+    eval_path = os.path.join(csv_path, "evaluaciones_practicos_2024.csv")
+    
+    if not os.path.exists(eval_path):
+        print(f"❌ Error: No se encontró el archivo {eval_path}")
+        return
+    
     with open(eval_path, newline='', encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
-            # Crear un identificador único para cada evaluación
-            evaluacion_id = f"{row['materia']}_{row['curso_id']}_{row['titulo']}_{row['trimestre_id']}_{row['tipo_evaluacion_id']}"
-            
             evaluaciones.append({
-                "id": evaluacion_id,
                 "materia": row["materia"],
                 "curso_id": int(row["curso_id"]),
                 "titulo": row["titulo"],
@@ -147,31 +230,43 @@ def main():
                 "nota_maxima": float(row["nota_maxima"]),
                 "nota_minima_aprobacion": float(row["nota_minima_aprobacion"]),
                 "porcentaje_nota_final": float(row["porcentaje_nota_final"]),
+                "permite_entrega_tardia": row.get("permite_entrega_tardia", "TRUE").upper() == "TRUE",
+                "penalizacion_tardio": float(row.get("penalizacion_tardio", 0.0)) if row.get("penalizacion_tardio") else 0.0
             })
     
+    print(f"✅ Cargadas {len(evaluaciones)} evaluaciones")
+    
     # Generar calificaciones
-    output_path = os.path.join(csv_dir, "calificaciones_2024.csv")
+    output_path = os.path.join(csv_path, "calificaciones_2024.csv")
     print(f"⚙️ Generando calificaciones y guardando en {output_path}...")
     
     with open(output_path, "w", newline='', encoding="utf-8") as f:
         fieldnames = [
+            # Campos principales simplificados
             "estudiante_codigo",
+            "nota",
+            "fecha_entrega",
+            "entrega_tardia",
+            "penalizacion_aplicada",
+            "observaciones",
+            "retroalimentacion",
+            "finalizada",
+            "calificado_por_codigo",
+            "fecha_calificacion",
+            # Campos de contexto para identificar la evaluación
             "estudiante_nombre",
             "estudiante_apellido",
             "materia",
             "curso_id",
             "titulo_evaluacion",
+            "descripcion_evaluacion",
             "tipo_evaluacion_id",
             "trimestre_id",
-            "nota",
-            "nota_final",
             "nota_maxima",
             "nota_minima_aprobacion",
             "porcentaje_nota_final",
-            "fecha_calificacion",
-            "entrega_tardia",
-            "penalizacion_aplicada",
-            "finalizada"
+            "fecha_asignacion",
+            "fecha_entrega_limite"
         ]
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
@@ -183,7 +278,8 @@ def main():
         suma_notas_aprobatorias = 0
         notas_80_90 = 0
         notas_90_100 = 0
-        total_evaluciones_procesadas = len(evaluaciones)
+        entregas_tardias = 0
+        total_evaluaciones_procesadas = len(evaluaciones)
         
         # Mostrar progreso
         total_combinaciones = len(estudiantes) * len(evaluaciones)
@@ -191,9 +287,9 @@ def main():
         
         for i, evaluacion in enumerate(evaluaciones):
             # Reportar progreso cada 10%
-            if i % max(1, total_evaluciones_procesadas // 10) == 0:
-                porcentaje = (i / total_evaluciones_procesadas) * 100
-                print(f"⏳ Progreso: {porcentaje:.1f}% - Procesando evaluación {i+1} de {total_evaluciones_procesadas}")
+            if i % max(1, total_evaluaciones_procesadas // 10) == 0:
+                porcentaje = (i / total_evaluaciones_procesadas) * 100
+                print(f"⏳ Progreso: {porcentaje:.1f}% - Procesando evaluación {i+1} de {total_evaluaciones_procesadas}")
             
             # Convertir fecha de entrega a objeto datetime
             fecha_entrega = datetime.strptime(evaluacion["fecha_entrega"], "%Y-%m-%d")
@@ -210,46 +306,84 @@ def main():
                     fecha_entrega
                 )
                 
+                # Verificar si la evaluación permite entrega tardía
+                if entrega_tardia and not evaluacion["permite_entrega_tardia"]:
+                    entrega_tardia = False  # Forzar entrega a tiempo si no se permite tardía
+                
                 # Configurar penalización para entregas tardías
                 penalizacion = 0.0
-                if entrega_tardia:
-                    # Penalización basada en perfil
-                    if estudiante["perfil"]["tipo"] == 'sobresaliente':
-                        penalizacion = random.choice([2, 4])  # Menor penalización en 2024
-                    elif estudiante["perfil"]["tipo"] == 'bueno':
-                        penalizacion = random.choice([4, 7])  # Menor penalización en 2024
-                    elif estudiante["perfil"]["tipo"] in ['medio-alto', 'medio-bajo']:
-                        penalizacion = random.choice([7, 10, 13])  # Menor penalización en 2024
+                if entrega_tardia and evaluacion["permite_entrega_tardia"]:
+                    # Usar la penalización definida en la evaluación o una basada en perfil
+                    if evaluacion["penalizacion_tardio"] > 0:
+                        penalizacion = evaluacion["penalizacion_tardio"]
                     else:
-                        penalizacion = random.choice([13, 17, 22])  # Menor penalización en 2024
+                        # Penalización basada en perfil del estudiante (menor para 2024)
+                        if estudiante["perfil"]["tipo"] == 'sobresaliente':
+                            penalizacion = random.choice([2, 4])  # Menor penalización en 2024
+                        elif estudiante["perfil"]["tipo"] == 'bueno':
+                            penalizacion = random.choice([4, 7])  # Menor penalización en 2024
+                        elif estudiante["perfil"]["tipo"] in ['medio-alto', 'medio-bajo']:
+                            penalizacion = random.choice([7, 10, 13])  # Menor penalización en 2024
+                        else:
+                            penalizacion = random.choice([13, 17, 22])  # Menor penalización en 2024
                 
-                # Aplicar penalización si corresponde
-                nota_final = round(max(0, nota - (nota * penalizacion / 100)), 2)
+                # Generar fecha y hora de entrega
+                if entrega_tardia:
+                    # Entrega 1-3 días después de la fecha límite
+                    dias_retraso = random.randint(1, 3)
+                    fecha_entrega_estudiante = fecha_entrega + timedelta(days=dias_retraso)
+                    entregas_tardias += 1
+                else:
+                    # Entrega el mismo día o 1-2 días antes
+                    dias_adelanto = random.randint(-2, 0)
+                    fecha_entrega_estudiante = fecha_entrega + timedelta(days=dias_adelanto)
+                
+                # Agregar hora aleatoria
+                hora = random.randint(8, 22)
+                minuto = random.randint(0, 59)
+                fecha_entrega_estudiante = fecha_entrega_estudiante.replace(hour=hora, minute=minuto)
                 
                 # Generar fecha de calificación (1-4 días después de entrega)
-                dias_adicionales = random.randint(1, 4)  # Reducción de tiempo de calificación
-                fecha_calificacion = fecha_entrega + timedelta(days=dias_adicionales)
-                fecha_calificacion_str = fecha_calificacion.strftime("%Y-%m-%d %H:%M:%S")
+                dias_calificacion = random.randint(1, 4)  # Reducción de tiempo de calificación para 2024
+                fecha_calificacion = fecha_entrega_estudiante + timedelta(days=dias_calificacion)
+                hora_calificacion = random.randint(9, 18)
+                minuto_calificacion = random.randint(0, 59)
+                fecha_calificacion = fecha_calificacion.replace(hour=hora_calificacion, minute=minuto_calificacion)
+                
+                # Generar código del profesor que califica (diferente para 2024)
+                calificado_por_codigo = f"PROF{random.randint(1041, 1060)}"
+                
+                # Generar retroalimentación y observaciones
+                retroalimentacion = generar_retroalimentacion(nota, evaluacion["tipo_evaluacion_id"], evaluacion["materia"])
+                observaciones = generar_observaciones(nota, entrega_tardia, penalizacion)
                 
                 # Guardar registro
                 writer.writerow({
+                    # Campos principales
                     "estudiante_codigo": estudiante["codigo"],
+                    "nota": nota,
+                    "fecha_entrega": fecha_entrega_estudiante.strftime("%Y-%m-%d %H:%M:%S"),
+                    "entrega_tardia": entrega_tardia,
+                    "penalizacion_aplicada": penalizacion,
+                    "observaciones": observaciones,
+                    "retroalimentacion": retroalimentacion,
+                    "finalizada": True,
+                    "calificado_por_codigo": calificado_por_codigo,
+                    "fecha_calificacion": fecha_calificacion.strftime("%Y-%m-%d %H:%M:%S"),
+                    # Campos de contexto
                     "estudiante_nombre": estudiante["nombre"],
                     "estudiante_apellido": estudiante["apellido"],
                     "materia": evaluacion["materia"],
                     "curso_id": evaluacion["curso_id"],
                     "titulo_evaluacion": evaluacion["titulo"],
+                    "descripcion_evaluacion": evaluacion["descripcion"],
                     "tipo_evaluacion_id": evaluacion["tipo_evaluacion_id"],
                     "trimestre_id": evaluacion["trimestre_id"],
-                    "nota": nota,
-                    "nota_final": nota_final,
                     "nota_maxima": evaluacion["nota_maxima"],
                     "nota_minima_aprobacion": evaluacion["nota_minima_aprobacion"],
                     "porcentaje_nota_final": evaluacion["porcentaje_nota_final"],
-                    "fecha_calificacion": fecha_calificacion_str,
-                    "entrega_tardia": "SI" if entrega_tardia else "NO",
-                    "penalizacion_aplicada": penalizacion,
-                    "finalizada": "SI"
+                    "fecha_asignacion": evaluacion["fecha_asignacion"],
+                    "fecha_entrega_limite": evaluacion["fecha_entrega"]
                 })
                 
                 # Actualizar estadísticas
@@ -272,15 +406,19 @@ def main():
     porcentaje_aprobacion = (notas_aprobatorias / total_registros) * 100 if total_registros > 0 else 0
     porcentaje_80_90 = (notas_80_90 / total_registros) * 100 if total_registros > 0 else 0
     porcentaje_90_100 = (notas_90_100 / total_registros) * 100 if total_registros > 0 else 0
+    porcentaje_tardias = (entregas_tardias / total_registros) * 100 if total_registros > 0 else 0
     
     print("\n✅ Generación completada!")
-    print(f"📊 ESTADÍSTICAS FINALES:")
+    print(f"📊 ESTADÍSTICAS FINALES 2024:")
     print(f"  • Total de calificaciones generadas: {total_registros:,}")
-    print(f"  • Calificaciones aprobatorias (>51): {notas_aprobatorias:,} ({porcentaje_aprobacion:.2f}%)")
+    print(f"  • Total de evaluaciones procesadas: {len(evaluaciones)}")
+    print(f"  • Calificaciones aprobatorias (≥51): {notas_aprobatorias:,} ({porcentaje_aprobacion:.2f}%)")
     print(f"  • Promedio general: {promedio_general:.2f} puntos")
     print(f"  • Promedio de aprobados: {promedio_aprobados:.2f} puntos")
     print(f"  • Notas entre 80-90: {notas_80_90:,} ({porcentaje_80_90:.2f}%)")
     print(f"  • Notas entre 90-100: {notas_90_100:,} ({porcentaje_90_100:.2f}%)")
+    print(f"  • Entregas tardías: {entregas_tardias:,} ({porcentaje_tardias:.2f}%)")
+    print(f"📁 Archivo generado: {output_path}")
 
 if __name__ == "__main__":
     main()
