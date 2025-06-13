@@ -334,7 +334,6 @@ class Calificacion(models.Model):
     # Otros campos que ya existían
     estudiante = models.ForeignKey('Usuarios.Usuario', on_delete=models.CASCADE)
     nota = models.DecimalField(max_digits=5, decimal_places=2)
-    nota_final = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     
     # Información de entrega
     fecha_entrega = models.DateTimeField(null=True, blank=True)
@@ -371,13 +370,6 @@ class Calificacion(models.Model):
         return f"{self.estudiante.nombre} - {evaluacion_titulo}: {self.nota}/{self.nota_sobre}"
 
     @property
-    def nota_final(self):
-        """Calcula la nota final aplicando penalizaciones"""
-        if self.penalizacion_aplicada > 0:
-            return max(0, self.nota - (self.nota * self.penalizacion_aplicada / 100))
-        return self.nota
-
-    @property
     def porcentaje(self):
         """Calcula el porcentaje obtenido"""
         if self.nota_sobre > 0:
@@ -394,7 +386,22 @@ class Calificacion(models.Model):
             # Valor por defecto si no tiene el atributo
             nota_minima = 51.0
         
-        return self.nota_final >= nota_minima
+        return self.calcular_nota_con_penalizacion() >= nota_minima
+
+    # Eliminar esta propiedad
+    # @property
+    # def nota_final(self):
+    #    """Calcula la nota final aplicando penalizaciones"""
+    #    if self.penalizacion_aplicada > 0:
+    #        return max(0, self.nota - (self.nota * self.penalizacion_aplicada / 100))
+    #    return self.nota
+    
+    # Reemplazar con un método para mantener compatibilidad
+    def calcular_nota_con_penalizacion(self):
+        """Calcula la nota aplicando penalizaciones"""
+        if self.penalizacion_aplicada > 0:
+            return max(0, self.nota - (self.nota * self.penalizacion_aplicada / 100))
+        return self.nota
 
 class PromedioTrimestral(models.Model):
     """

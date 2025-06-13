@@ -249,7 +249,7 @@ def obtener_evaluaciones_estudiante(request, estudiante_id):
                 calificacion_data = {
                     'id': calificacion.id,
                     'nota': float(calificacion.nota),
-                    'nota_final': float(calificacion.nota_final),
+                    'nota_final': float(calificacion.calcular_nota_con_penalizacion()),  # Cambio aquí
                     'entrega_tardia': calificacion.entrega_tardia,
                     'penalizacion_aplicada': float(calificacion.penalizacion_aplicada),
                     'fecha_entrega': calificacion.fecha_entrega,
@@ -306,7 +306,7 @@ def obtener_evaluaciones_estudiante(request, estudiante_id):
                 calificacion_data = {
                     'id': calificacion.id,
                     'nota': float(calificacion.nota),
-                    'nota_final': float(calificacion.nota_final),
+                    'nota_final': float(calificacion.calcular_nota_con_penalizacion()),  # Cambio aquí
                     'entrega_tardia': calificacion.entrega_tardia,
                     'penalizacion_aplicada': float(calificacion.penalizacion_aplicada),
                     'fecha_entrega': calificacion.fecha_entrega,
@@ -543,7 +543,7 @@ def calcular_promedios_trimestre(request, trimestre_id):
                                 )
                                 
                                 # ✅ CORRECCIÓN: Asegurar que todo sea Decimal
-                                nota_estudiante = calificacion.nota_final if calificacion.nota_final else calificacion.nota
+                                nota_estudiante = calificacion.calcular_nota_con_penalizacion()
                                 porcentaje_eval = Decimal(str(evaluacion.porcentaje_nota_final))
                                 
                                 # ✅ CORRECCIÓN: Operaciones con Decimal
@@ -568,7 +568,7 @@ def calcular_promedios_trimestre(request, trimestre_id):
                                 )
                                 
                                 # ✅ CORRECCIÓN: Asegurar que todo sea Decimal
-                                nota_estudiante = calificacion.nota_final if calificacion.nota_final else calificacion.nota
+                                nota_estudiante = calificacion.calcular_nota_con_penalizacion()
                                 porcentaje_eval = Decimal(str(evaluacion.porcentaje_nota_final))
                                 
                                 # ✅ CORRECCIÓN: Operaciones con Decimal
@@ -839,7 +839,7 @@ def obtener_calificaciones_trimestre(request, estudiante_id, trimestre_id):
                             estudiante=estudiante
                         )
                         
-                        nota_estudiante = calificacion.nota_final if calificacion.nota_final else calificacion.nota
+                        nota_estudiante = calificacion.calcular_nota_con_penalizacion()
                         porcentaje_eval = Decimal(str(evaluacion.porcentaje_nota_final))
                         
                         nota_ponderada = nota_estudiante * (porcentaje_eval / Decimal('100.0'))
@@ -858,7 +858,7 @@ def obtener_calificaciones_trimestre(request, estudiante_id, trimestre_id):
                             estudiante=estudiante
                         )
                         
-                        nota_estudiante = calificacion.nota_final if calificacion.nota_final else calificacion.nota
+                        nota_estudiante = calificacion.calcular_nota_con_penalizacion()
                         porcentaje_eval = Decimal(str(evaluacion.porcentaje_nota_final))
                         
                         nota_ponderada = nota_estudiante * (porcentaje_eval / Decimal('100.0'))
@@ -966,7 +966,7 @@ def historial_academico_estudiante(request, estudiante_id):
                 )
                 
                 notas_valores = [
-                    float(c.nota_final if c.nota_final is not None else c.nota)
+                    float(c.calcular_nota_con_penalizacion())  # Cambio aquí
                     for c in calificaciones_entregable
                 ]
                 promedio_notas = round(sum(notas_valores) / len(notas_valores), 2) if notas_valores else None

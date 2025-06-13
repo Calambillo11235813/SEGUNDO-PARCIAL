@@ -108,7 +108,6 @@ def importar_evaluaciones_csv():
                         permite_entrega_tardia = row['permite_entrega_tardia'].lower() == 'true'
                         
                         # Buscar o crear la evaluación
-                        # Ahora usamos EvaluacionEntregable en lugar de Evaluacion
                         evaluacion, created = EvaluacionEntregable.objects.get_or_create(
                             titulo=row['titulo'],
                             materia=materia,

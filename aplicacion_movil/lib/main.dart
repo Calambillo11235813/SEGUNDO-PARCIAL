@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import './firebase_options.dart'; // Añadir esta importación
 import 'screens/auth/logi_screen.dart';
 // Importaciones de Student
 import 'screens/student/dashboard_screen.dart';
@@ -23,13 +25,53 @@ import 'screens/tutor/calificaciones/anio_academico_screen.dart' as tutor;
 import 'screens/tutor/calificaciones/estudiante_trimestre_screen.dart';
 import 'screens/tutor/calificaciones/calificaciones_estudiante_screen.dart'; // Añadida
 import 'config/theme_config.dart';
+import 'services/notificaciones_service.dart';
+import 'services/estudiante/monitor_automatico_service.dart';
+import 'screens/student/alertas_rendimiento_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Inicializar Firebase antes de cualquier otra cosa
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+// Modifica la clase MyApp para ser StatefulWidget en lugar de StatelessWidget
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    // Inicializar servicio de notificaciones
+    NotificacionesService.inicializar();
+
+    // Iniciar monitoreo automático de rendimiento
+    _iniciarMonitoreoAutomatico();
+  }
+
+  Future<void> _iniciarMonitoreoAutomatico() async {
+    // Pequeña pausa para asegurar que Firebase esté inicializado
+    await Future.delayed(Duration(seconds: 2));
+
+    // Iniciar monitoreo una vez que la app esté cargada
+    MonitorAutomaticoService.iniciar();
+  }
+
+  @override
+  void dispose() {
+    // Detener el monitoreo al cerrar la aplicación
+    MonitorAutomaticoService.detener();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,6 +154,7 @@ class MyApp extends StatelessWidget {
                   as Map<String, dynamic>;
           return EstudianteDetalleScreen(estudiante: args['estudiante']);
         },
+        '/student/alertas': (context) => AlertasRendimientoScreen(),
       },
       // Manejar rutas desconocidas
       onUnknownRoute: (settings) {

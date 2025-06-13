@@ -4,6 +4,7 @@ import '../../models/usuario.dart';
 import '../../widgets/student_drawer.dart';
 // Importar el tema
 import '../../config/theme_config.dart';
+import '../../services/estudiante/rendimiento_monitor_service.dart';
 
 class StudentDashboardScreen extends StatefulWidget {
   const StudentDashboardScreen({super.key});
@@ -37,6 +38,82 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
     }
   }
 
+  Widget _buildAlertaRendimiento() {
+    // Si no hay usuario, no mostrar nada
+    if (currentUser == null) {
+      return SizedBox.shrink();
+    }
+
+    return FutureBuilder<Map<String, dynamic>>(
+      future: RendimientoMonitorService.verificarRendimientoGeneral(
+        currentUser!.id.toString(),
+      ),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return SizedBox.shrink(); // O un indicador de carga sutil
+        }
+
+        if (snapshot.hasError || !snapshot.hasData) {
+          return SizedBox.shrink(); // No mostrar nada en caso de error
+        }
+
+        final datos = snapshot.data!;
+        final enRiesgo = datos['en_riesgo'] ?? false;
+
+        // Solo mostrar si hay riesgo
+        if (!enRiesgo) {
+          return SizedBox.shrink();
+        }
+
+        return GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, '/student/alertas');
+          },
+          child: Card(
+            color: Colors.red.shade50,
+            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.warning_amber_rounded,
+                    color: Colors.red,
+                    size: 32,
+                  ),
+                  SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Alerta de Rendimiento',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red.shade700,
+                            fontSize: 16,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          datos['materias_riesgo_count'] > 0
+                              ? 'Tienes ${datos['materias_riesgo_count']} materia(s) en riesgo'
+                              : 'Tu promedio general está en riesgo',
+                          style: TextStyle(color: Colors.red.shade700),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Icon(Icons.arrow_forward_ios, color: Colors.red.shade300),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,11 +128,14 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> {
       body:
           isLoading
               ? const Center(child: CircularProgressIndicator())
-              : Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              : RefreshIndicator(
+                onRefresh: _loadUserData,
+                child: ListView(
+                  padding: const EdgeInsets.all(16.0),
                   children: [
+                    // Widget de alerta de rendimiento
+                    _buildAlertaRendimiento(),
+
                     // Tarjeta de información del usuario
                     Card(
                       elevation: 4,

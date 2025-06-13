@@ -44,6 +44,13 @@ dependencies:
   table_calendar: ^3.0.9
   shared_preferences: ^2.2.2 # O la última versión
 
+  # Firebase para notificaciones push
+  firebase_core: ^2.15.0
+  firebase_messaging: ^14.6.5
+  
+  # Notificaciones locales
+  flutter_local_notifications: ^15.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -96,3 +103,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+

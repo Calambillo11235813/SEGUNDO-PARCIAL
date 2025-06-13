@@ -7,12 +7,19 @@ import time
 from django.utils import timezone
 
 # Primero configuramos el entorno Django
-sys.path.append('D:/1.CARRERA UNIVERSITARIA/8.NOVENO SEMESTRE/1.SISTEMAS DE INFORMACION 2/SEGUNDO PARCIAL/SEGUNDO-PARCIAL/PROYECTO_BACKEND')
+script_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(script_dir)
+sys.path.insert(0, project_root)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Backend.settings')
 
 # Ahora inicializamos Django
-import django
-django.setup()
+try:
+    import django
+    django.setup()
+    import pandas as pd # type: ignore
+except Exception as e:
+    print(f"❌ Error inicializando Django o cargando dependencias: {e}")
+    sys.exit(1)
 
 # Solo después de inicializar Django importamos los módulos de Django
 from django.db import transaction
@@ -20,231 +27,401 @@ from django.contrib.contenttypes.models import ContentType
 from Cursos.models import Calificacion, EvaluacionEntregable, Materia, Trimestre
 from Usuarios.models import Usuario
 
-def importar_calificaciones_csv(actualizar_existentes=True, test_mode=False):
-    """
-    Importa calificaciones desde el archivo CSV a la base de datos.
-    Asume que todas las evaluaciones son de tipo entregable.
+def diagnosticar_estructura_base_datos_2023():
+    """Diagnóstico para verificar la estructura necesaria para importaciones 2023"""
+    print("\n🔧 DIAGNÓSTICO DE ESTRUCTURA 2023:")
+    print("=" * 50)
     
-    Parámetros:
-    - actualizar_existentes: Si es True, actualiza las calificaciones existentes; si es False, las omite.
-    - test_mode: Si es True, valida los datos pero no realiza cambios en la base de datos.
-    """
+    # Verificar ContentType
+    try:
+        entregable_ct = ContentType.objects.get_for_model(EvaluacionEntregable)
+        print(f"✅ ContentType EvaluacionEntregable: ID {entregable_ct.id}")
+    except Exception as e:
+        print(f"❌ Error obteniendo ContentType: {e}")
+        return False
     
-    # Definir campos requeridos para validación
-    required_fields = [
-        'estudiante_codigo', 'estudiante_nombre', 'estudiante_apellido', 
-        'materia', 'curso_id', 'titulo_evaluacion', 'tipo_evaluacion_id', 
-        'trimestre_id', 'nota', 'nota_final', 'nota_maxima', 
-        'nota_minima_aprobacion', 'fecha_calificacion'
-    ]
+    # Verificar evaluaciones 2023
+    try:
+        total_evaluaciones = EvaluacionEntregable.objects.filter(
+            trimestre__id__in=[7, 8, 9]
+        ).count()
+        print(f"✅ Total evaluaciones entregables 2023: {total_evaluaciones}")
+        if total_evaluaciones == 0:
+            print("❌ ¡No hay evaluaciones entregables para 2023!")
+            return False
+    except Exception as e:
+        print(f"❌ Error contando evaluaciones: {e}")
+        return False
     
-    # Usar ruta absoluta para asegurar acceso al archivo
-    csv_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'csv', 'calificaciones_2023.csv')
+    # Verificar estudiantes
+    try:
+        total_estudiantes = Usuario.objects.filter(rol__id=2).count()
+        print(f"✅ Total estudiantes (rol_id=2): {total_estudiantes}")
+        if total_estudiantes == 0:
+            print("❌ ¡No hay estudiantes!")
+            return False
+    except Exception as e:
+        print(f"❌ Error contando estudiantes: {e}")
+        return False
     
-    # Verificar que el archivo existe
-    if not os.path.isfile(csv_path):
-        print(f"Error: El archivo {csv_path} no existe.")
-        return
+    # Verificar calificaciones existentes
+    try:
+        entregable_ct = ContentType.objects.get_for_model(EvaluacionEntregable)
+        calificaciones_2023 = Calificacion.objects.filter(
+            content_type=entregable_ct,
+            object_id__in=EvaluacionEntregable.objects.filter(
+                trimestre__id__in=[7, 8, 9]
+            ).values_list('id', flat=True)
+        ).count()
+        print(f"✅ Calificaciones entregables 2023 existentes: {calificaciones_2023}")
+    except Exception as e:
+        print(f"❌ Error contando calificaciones: {e}")
     
-    # Mostrar modo de ejecución
-    if test_mode:
-        print("⚠️ Ejecutando en modo prueba - no se realizarán cambios en la base de datos")
+    # Verificar archivo CSV
+    csv_path = os.path.join(project_root, 'csv', 'calificaciones_2023.csv')
+    if not os.path.exists(csv_path):
+        print(f"❌ Archivo CSV no encontrado: {csv_path}")
+        return False
     
-    # Obtener el ContentType para EvaluacionEntregable
-    entregable_ct = ContentType.objects.get_for_model(EvaluacionEntregable)
+    # Tamaño del archivo
+    csv_size = os.path.getsize(csv_path)
+    print(f"✅ Archivo CSV 2023 encontrado: {csv_size:,} bytes")
     
-    # Contadores para estadísticas
+    # Verificar estructura del CSV
+    try:
+        # Leer solo las primeras filas para análisis
+        df_sample = pd.read_csv(csv_path, nrows=5)
+        columnas = df_sample.columns.tolist()
+        print(f"✅ Estructura CSV verificada: {len(columnas)} columnas")
+        print(f"   📊 Muestra de trimestres en CSV: {sorted(df_sample['trimestre_id'].unique())}")
+        print(f"   📋 Tipos de evaluación en muestra: {sorted(df_sample['tipo_evaluacion_id'].unique())}")
+        
+        # Verificar valores booleanos
+        if 'entrega_tardia' in df_sample.columns and 'finalizada' in df_sample.columns:
+            print(f"   ✅ Formato de campos booleanos verificado")
+        else:
+            print(f"   ⚠️ Faltan campos booleanos en el CSV")
+    except Exception as e:
+        print(f"❌ Error verificando estructura CSV: {e}")
+        return False
+        
+    return True
+
+def analizar_datos_csv_2023():
+    """Analiza la estructura y contenido del archivo CSV de calificaciones 2023"""
+    csv_path = os.path.join(project_root, 'csv', 'calificaciones_2023.csv')
+    
+    if not os.path.exists(csv_path):
+        print(f"❌ Archivo CSV no encontrado: {csv_path}")
+        return False
+    
+    print("\n📊 ANÁLISIS DE DATOS CSV 2023:")
+    print("=" * 50)
+    
+    try:
+        # Leer el CSV sin conversiones específicas
+        df = pd.read_csv(csv_path)
+        
+        # Análisis general
+        print("📈 ESTADÍSTICAS GENERALES:")
+        print(f"   📊 Total registros: {len(df):,}")
+        print(f"   👥 Estudiantes únicos: {df['estudiante_codigo'].nunique():,}")
+        print(f"   📚 Materias únicas: {df['materia'].nunique():,}")
+        print(f"   📝 Evaluaciones únicas: {df['titulo_evaluacion'].nunique():,}")
+        print(f"   🎯 Tipos de evaluación: {sorted(df['tipo_evaluacion_id'].unique())}")
+        
+        # Análisis por trimestre
+        print("\n📅 DISTRIBUCIÓN POR TRIMESTRE 2023:")
+        for trimestre in sorted(df['trimestre_id'].unique()):
+            trim_df = df[df['trimestre_id'] == trimestre]
+            print(f"   📚 Trimestre {trimestre}: {len(trim_df):,} calificaciones, promedio: {pd.to_numeric(trim_df['nota']).mean():.2f}")
+        
+        # Análisis por tipo de evaluación
+        print("\n🎯 DISTRIBUCIÓN POR TIPO DE EVALUACIÓN:")
+        for tipo in sorted(df['tipo_evaluacion_id'].unique()):
+            tipo_df = df[df['tipo_evaluacion_id'] == tipo]
+            print(f"   📝 Tipo {tipo}: {len(tipo_df):,} calificaciones, promedio: {pd.to_numeric(tipo_df['nota']).mean():.2f}")
+        
+        # Estadísticas de notas
+        print("\n📊 ESTADÍSTICAS DE NOTAS 2023:")
+        df['nota_numeric'] = pd.to_numeric(df['nota'])
+        print(f"   📈 Nota promedio: {df['nota_numeric'].mean():.2f}")
+        print(f"   📊 Nota máxima: {df['nota_numeric'].max():.2f}")
+        print(f"   📊 Nota mínima: {df['nota_numeric'].min():.2f}")
+        print(f"   📈 Desviación estándar: {df['nota_numeric'].std():.2f}")
+        
+        return True
+    except Exception as e:
+        print(f"❌ Error analizando CSV: {e}")
+        import traceback
+        traceback.print_exc()
+        return False
+
+def verificar_estado_actual_2023():
+    """Verifica el estado actual de calificaciones 2023 en la BD"""
+    print("\n📊 VERIFICACIÓN DEL ESTADO ACTUAL 2023:")
+    print("=" * 50)
+    
+    try:
+        entregable_ct = ContentType.objects.get_for_model(EvaluacionEntregable)
+        print("🔍 Contando calificaciones por trimestre 2023...")
+        
+        # Contar por trimestre
+        for trimestre_id in [7, 8, 9]:
+            try:
+                count = Calificacion.objects.filter(
+                    content_type=entregable_ct,
+                    object_id__in=EvaluacionEntregable.objects.filter(
+                        trimestre__id=trimestre_id
+                    ).values_list('id', flat=True)
+                ).count()
+                print(f"   📚 Trimestre {trimestre_id}: {count:,} calificaciones")
+            except Exception as e:
+                print(f"   ❌ Error contando trimestre {trimestre_id}: {e}")
+        
+        # Total general
+        try:
+            total_2023 = Calificacion.objects.filter(
+                content_type=entregable_ct,
+                object_id__in=EvaluacionEntregable.objects.filter(
+                    trimestre__id__in=[7, 8, 9]
+                ).values_list('id', flat=True)
+            ).count()
+            print(f"\n🎯 Total calificaciones 2023: {total_2023:,}")
+        except Exception as e:
+            print(f"❌ Error contando total 2023: {e}")
+        
+        return True
+    except Exception as e:
+        print(f"❌ Error verificando estado actual: {e}")
+        return False
+
+def importar_calificaciones_2023_ULTRA_RAPIDO():
+    """Versión ULTRA RÁPIDA para calificaciones 2023 - Optimizada para máximo rendimiento"""
+    csv_path = os.path.join(project_root, 'csv', 'calificaciones_2023.csv')
+    
+    inicio = time.time()
+    print("🚀 MODO ULTRA-RÁPIDO - CALIFICACIONES 2023")
+    print("📚 Basado en optimizaciones exitosas de scripts anteriores")
+    
+    if not os.path.exists(csv_path):
+        print(f"❌ Archivo CSV no encontrado: {csv_path}")
+        return False
+    
+    # Contadores
     total = 0
     creados = 0
     actualizados = 0
     errores = 0
-    no_encontrados = 0
-    omitidos = 0
     
-    # Cache para estudiantes, materias y evaluaciones
-    estudiantes_cache = {}
+    # Pre-cargar ContentType
+    entregable_ct = ContentType.objects.get_for_model(EvaluacionEntregable)
+    print(f"🔧 ContentType ID: {entregable_ct.id}")
+    
+    # Obtener datos en memoria para mejor rendimiento
+    print("📊 Pre-cargando datos en cache...")
+    estudiantes_cache = {e.codigo: e for e in Usuario.objects.filter(rol__id=2)}
     materias_cache = {}
+    for m in Materia.objects.all():
+        materias_cache[f"{m.nombre}_{m.curso_id}"] = m
+    
+    # Pre-cargar todas las evaluaciones entregables de 2023
     evaluaciones_cache = {}
+    for eval in EvaluacionEntregable.objects.filter(trimestre__id__in=[7, 8, 9]):
+        clave = f"{eval.titulo}_{eval.trimestre.id}_{eval.materia.id}"
+        evaluaciones_cache[clave] = eval
     
-    # Iniciar tiempo de ejecución
-    tiempo_inicio = time.time()
+    print(f"✅ Cache cargado:")
+    print(f"   👥 {len(estudiantes_cache)} estudiantes")
+    print(f"   📚 {len(materias_cache)} materias")
+    print(f"   📝 {len(evaluaciones_cache)} evaluaciones")
     
-    with open(csv_path, mode='r', encoding='utf-8') as file:
-        csv_reader = csv.DictReader(file)
+    # Usar el enfoque tradicional con csv para mayor estabilidad
+    print("📖 Leyendo CSV...")
+    try:
+        calificaciones_a_crear = []
+        errores_list = []
+        total_rows = 0
+        batch_size = 5000
         
-        # Usar transacción para garantizar la integridad de los datos
-        with transaction.atomic():
-            for row in csv_reader:
-                total += 1
+        with open(csv_path, 'r', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            
+            # Procesar en lotes
+            current_batch = []
+            
+            for row in reader:
+                total_rows += 1
+                
                 try:
-                    # Al inicio del procesamiento de cada fila
-                    if not all(required_field in row for required_field in required_fields):
-                        print(f"✗ Fila {total} con campos requeridos faltantes")
-                        errores += 1
+                    # Buscar estudiante
+                    codigo_estudiante = row['estudiante_codigo']
+                    estudiante = estudiantes_cache.get(codigo_estudiante)
+                    if not estudiante:
+                        errores_list.append(f"Estudiante no encontrado: {codigo_estudiante}")
                         continue
                     
-                    # Obtener datos del estudiante
-                    codigo_estudiante = row['estudiante_codigo']
-                    if codigo_estudiante not in estudiantes_cache:
-                        try:
-                            estudiante = Usuario.objects.get(codigo=codigo_estudiante)
-                            estudiantes_cache[codigo_estudiante] = estudiante
-                        except Usuario.DoesNotExist:
-                            print(f"✗ No se encontró el estudiante con código {codigo_estudiante}")
-                            no_encontrados += 1
-                            continue
-                    
-                    estudiante = estudiantes_cache[codigo_estudiante]
-                    
-                    # Buscar la materia por nombre y curso_id
+                    # Buscar materia
                     materia_nombre = row['materia']
                     curso_id = int(row['curso_id'])
                     materia_key = f"{materia_nombre}_{curso_id}"
+                    materia = materias_cache.get(materia_key)
+                    if not materia:
+                        errores_list.append(f"Materia no encontrada: {materia_key}")
+                        continue
                     
-                    if materia_key not in materias_cache:
-                        try:
-                            materia = Materia.objects.get(nombre=materia_nombre, curso_id=curso_id)
-                            materias_cache[materia_key] = materia
-                        except Materia.DoesNotExist:
-                            print(f"✗ No se encontró la materia '{materia_nombre}' para el curso {curso_id}")
-                            no_encontrados += 1
-                            continue
-                    
-                    materia = materias_cache[materia_key]
-                    
-                    # Buscar la evaluación por título, tipo y trimestre
+                    # Buscar evaluación
                     titulo_evaluacion = row['titulo_evaluacion']
                     trimestre_id = int(row['trimestre_id'])
-                    tipo_evaluacion_id = int(row['tipo_evaluacion_id'])
-                    
                     eval_key = f"{titulo_evaluacion}_{trimestre_id}_{materia.id}"
+                    evaluacion = evaluaciones_cache.get(eval_key)
                     
-                    if eval_key not in evaluaciones_cache:
-                        try:
-                            evaluacion = EvaluacionEntregable.objects.get(
-                                titulo=titulo_evaluacion,
-                                materia=materia,
-                                trimestre_id=trimestre_id,
-                                tipo_evaluacion_id=tipo_evaluacion_id
-                            )
-                            evaluaciones_cache[eval_key] = evaluacion
-                        except EvaluacionEntregable.DoesNotExist:
-                            # En lugar de crear la evaluación, simplemente reportamos que no existe
-                            print(f"✗ No se encontró la evaluación '{titulo_evaluacion}' para la materia '{materia_nombre}', trimestre {trimestre_id}")
-                            no_encontrados += 1
-                            continue  # Continuamos con el siguiente registro
-                    
-                    evaluacion = evaluaciones_cache[eval_key]
+                    if not evaluacion:
+                        errores_list.append(f"Evaluación no encontrada: {eval_key}")
+                        continue
                     
                     # Convertir valores
                     try:
-                        nota = Decimal(row['nota'])
-                        if nota < 0 or nota > Decimal(row['nota_maxima']):
-                            print(f"⚠ Valor de nota fuera de rango: {nota}")
-                    except InvalidOperation:
-                        print(f"✗ Valor de nota inválido: {row['nota']}")
-                        errores += 1
+                        nota = Decimal(str(row['nota']))
+                        # Ignorar nota_final del CSV, se calculará automáticamente
+                        penalizacion = Decimal(str(row['penalizacion_aplicada'])) if 'penalizacion_aplicada' in row else Decimal('0')
+                    except (ValueError, TypeError, InvalidOperation):
+                        errores_list.append(f"Error convirtiendo valores numéricos: {row}")
                         continue
                     
-                    # Leer nota_final pero no la usaremos directamente en la creación
-                    nota_final_csv = Decimal(row['nota_final'])
-
-                    # Convertir fechas a formato aware (con zona horaria)
-                    fecha_naive = datetime.strptime(row['fecha_calificacion'], '%Y-%m-%d %H:%M:%S')
-                    fecha_calificacion = timezone.make_aware(fecha_naive)
-
-                    entrega_tardia = row['entrega_tardia'].lower() == 'true'
-                    penalizacion_aplicada = Decimal(row['penalizacion_aplicada'])
+                    # Convertir valores booleanos
+                    entrega_tardia = False
+                    if 'entrega_tardia' in row:
+                        if isinstance(row['entrega_tardia'], str):
+                            entrega_tardia = row['entrega_tardia'].lower() == 'true' or row['entrega_tardia'] == 'SI'
+                        else:
+                            entrega_tardia = bool(row['entrega_tardia'])
+                    
                     finalizada = True
                     if 'finalizada' in row:
-                        finalizada = row['finalizada'].lower() == 'true'
-                    
-                    # Antes de crear o actualizar una calificación
-                    calificacion_existente = Calificacion.objects.filter(
-                        content_type=entregable_ct,
-                        object_id=evaluacion.id,
-                        estudiante=estudiante
-                    ).exists()
-                    
-                    if calificacion_existente and not actualizar_existentes:
-                        print(f"⚠ Omitiendo calificación existente: {estudiante.get_full_name()} - {evaluacion.titulo}")
-                        omitidos += 1
-                        continue
-                    
-                    # En modo prueba, no creamos/actualizamos realmente
-                    if test_mode:
-                        tiempo_actual = time.time() - tiempo_inicio
-                        if calificacion_existente:
-                            actualizados += 1
-                            print(f"⚠️ [MODO PRUEBA] [{tiempo_actual:.2f}s] Se actualizaría: {estudiante.codigo} - {estudiante.get_full_name()} - {evaluacion.titulo}")
+                        if isinstance(row['finalizada'], str):
+                            finalizada = row['finalizada'].lower() == 'true' or row['finalizada'] == 'SI'
                         else:
-                            creados += 1
-                            print(f"⚠️ [MODO PRUEBA] [{tiempo_actual:.2f}s] Se crearía: {estudiante.codigo} - {estudiante.get_full_name()} - {evaluacion.titulo}")
-                        continue
+                            finalizada = bool(row['finalizada'])
                     
-                    # Buscar o crear la calificación
-                    calificacion, created = Calificacion.objects.update_or_create(
+                    # Fecha de calificación
+                    fecha_calificacion = None
+                    if 'fecha_calificacion' in row and row['fecha_calificacion']:
+                        try:
+                            fecha_naive = datetime.strptime(row['fecha_calificacion'], '%Y-%m-%d %H:%M:%S')
+                            fecha_calificacion = timezone.make_aware(fecha_naive)
+                        except ValueError:
+                            fecha_calificacion = timezone.now()
+                    
+                    # Crear objeto para inserción masiva
+                    calificacion = Calificacion(
                         content_type=entregable_ct,
                         object_id=evaluacion.id,
                         estudiante=estudiante,
-                        defaults={
-                            'nota': nota,
-                            # No incluir 'nota_final' aquí, ya que es una propiedad calculada
-                            'fecha_entrega': fecha_calificacion,  # Ahora es aware
-                            'entrega_tardia': entrega_tardia,
-                            'penalizacion_aplicada': penalizacion_aplicada,
-                            'finalizada': finalizada,
-                            'fecha_calificacion': fecha_calificacion,  # Ahora es aware
-                            'observaciones': f"Calificación importada del CSV 2023 {total}",
-                            'retroalimentacion': None,
-                            'calificado_por': None
-                        }
+                        nota=nota,
+                        entrega_tardia=entrega_tardia,
+                        penalizacion_aplicada=penalizacion,
+                        finalizada=finalizada,
+                        fecha_calificacion=fecha_calificacion,
+                        observaciones=f"Calificación importada del CSV 2023 - fila {total_rows}"
                     )
                     
-                    tiempo_actual = time.time() - tiempo_inicio
-                    if created:
-                        creados += 1
-                        print(f"✓ [{tiempo_actual:.2f}s] Creada calificación: {estudiante.codigo} - {estudiante.get_full_name()} - {evaluacion.titulo}")
-                    else:
-                        actualizados += 1
-                        print(f"↻ [{tiempo_actual:.2f}s] Actualizada calificación: {estudiante.codigo} - {estudiante.get_full_name()} - {evaluacion.titulo}")
+                    current_batch.append(calificacion)
+                    
+                    # Cuando alcanzamos el tamaño del lote, guardamos y reiniciamos
+                    if len(current_batch) >= batch_size:
+                        calificaciones_a_crear.extend(current_batch)
+                        print(f"⏳ Procesadas {total_rows:,} filas ({len(calificaciones_a_crear):,} válidas)")
+                        current_batch = []
                 
                 except Exception as e:
                     errores += 1
-                    print(f"✗ Error al procesar la fila {total}: {str(e)}")
-                    print(f"  Datos: {row}")
+                    errores_list.append(f"Error procesando fila {total_rows}: {str(e)}")
+                    if errores <= 5:  # Mostrar solo los primeros 5 errores
+                        print(f"❌ Error: {str(e)}")
             
-            # Si estamos en modo prueba, revertimos la transacción
-            if test_mode:
-                transaction.set_rollback(True)
-                print("\n⚠️ MODO PRUEBA - Todas las transacciones han sido revertidas")
-            
-            # Mostrar estadísticas finales
-            print("\n===== RESUMEN DE IMPORTACIÓN DE CALIFICACIONES 2023 =====")
-            print(f"Total de registros procesados: {total}")
-            print(f"Calificaciones creadas: {creados}")
-            print(f"Calificaciones actualizadas: {actualizados}")
-            print(f"Registros no encontrados: {no_encontrados}")
-            print(f"Errores: {errores}")
-            print(f"Calificaciones omitidas: {omitidos}")
-            print("=================================================")
+            # Agregar último lote
+            if current_batch:
+                calificaciones_a_crear.extend(current_batch)
+        
+        # Insertar en la base de datos
+        print(f"💾 Guardando {len(calificaciones_a_crear):,} calificaciones en la base de datos...")
+        total = len(calificaciones_a_crear)
+        
+        # Insertar en lotes con transacciones
+        with transaction.atomic():
+            Calificacion.objects.bulk_create(calificaciones_a_crear, batch_size=1000)
+            creados = len(calificaciones_a_crear)
+        
+        # Resumen de errores
+        errores = len(errores_list)
+        if errores > 0:
+            print(f"\n⚠️ Se encontraron {errores:,} errores:")
+            for i, error in enumerate(errores_list[:10]):  # Mostrar solo los primeros 10
+                print(f"   {i+1}. {error}")
+            if errores > 10:
+                print(f"   ... y {errores-10} errores más")
+    
+    except Exception as e:
+        print(f"❌ Error general en la importación: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return False
+    
+    # Informar resultados
+    fin = time.time()
+    tiempo_total = fin - inicio
+    registros_por_segundo = total / tiempo_total if tiempo_total > 0 else 0
+    
+    print("\n✅ IMPORTACIÓN COMPLETADA")
+    print(f"⏱️ Tiempo total: {tiempo_total:.2f} segundos")
+    print(f"📊 Velocidad: {registros_por_segundo:.2f} registros/segundo")
+    print(f"📝 Calificaciones creadas: {creados:,}")
+    print(f"❌ Errores: {errores:,}")
+    
+    return True
 
 if __name__ == '__main__':
     # Ofrecer opciones al usuario para ejecutar el script
-    print("Importación de calificaciones 2023")
-    print("==================================")
-    print("1. Ejecutar importación normal (actualizar existentes)")
-    print("2. Ejecutar importación sin actualizar existentes")
-    print("3. Ejecutar en modo prueba (sin guardar cambios)")
-    print("0. Salir")
+    print("🎓 IMPORTADOR ULTRA RÁPIDO - CALIFICACIONES 2023")
+    print("⚡ Versión optimizada para máximo rendimiento")
+    print("🔧 Adaptado para evaluaciones entregables trimestres 7, 8, 9")
+    print()
     
-    opcion = input("\nSeleccione una opción: ")
+    # Diagnosticar estructura primero
+    if not diagnosticar_estructura_base_datos_2023():
+        print("\n❌ Los requisitos no están cumplidos para 2023. Por favor verifica la estructura.")
+        sys.exit(1)
     
-    if opcion == "1":
-        importar_calificaciones_csv(actualizar_existentes=True)
-    elif opcion == "2":
-        importar_calificaciones_csv(actualizar_existentes=False)
-    elif opcion == "3":
-        importar_calificaciones_csv(test_mode=True)
+    # Analizar datos del CSV
+    if not analizar_datos_csv_2023():
+        print("\n⚠️ Hay problemas en el análisis del CSV. ¿Desea continuar?")
+        continuar = input("¿Continuar a pesar de los problemas? (s/n): ").lower() == 's'
+        if not continuar:
+            sys.exit(1)
+    
+    # Verificar estado actual
+    verificar_estado_actual_2023()
+    
+    print("\n" + "=" * 60)
+    print("🚀 OPCIONES DE IMPORTACIÓN:")
+    print("1. 🏃‍♂️ Importación ULTRA RÁPIDA (recomendado)")
+    print("2. 📊 Solo verificar datos (sin importar)")
+    print("0. ❌ Cancelar")
+    
+    opcion = input("\nSeleccione una opción (1/2/0): ")
+    
+    if opcion == '1':
+        confirmacion = input("¿Confirma ejecutar importación ULTRA RÁPIDA para 2023? (s/n): ")
+        if confirmacion.lower() == 's':
+            exito = importar_calificaciones_2023_ULTRA_RAPIDO()
+            if exito:
+                print("\n🎉 Importación 2023 completada con éxito!")
+            else:
+                print("\n💥 La importación 2023 falló")
+        else:
+            print("\n❌ Importación cancelada por el usuario")
+    elif opcion == '2':
+        print("\n📊 Verificación completada. No se realizaron cambios en la base de datos.")
     else:
-        print("Saliendo sin realizar cambios.")
+        print("\n❌ Operación cancelada")
