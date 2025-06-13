@@ -7,6 +7,7 @@ import { ProfesoresComponent } from './dashboard_administrador/components/profes
 import { PerfilComponent } from './dashboard_administrador/components/perfil/perfil.component';
 import { CursosComponent } from './dashboard_administrador/components/cursos/cursos.component';
 import { MateriasComponent } from './dashboard_administrador/components/materias/materias.component';
+import { TutorComponent } from './dashboard_administrador/components/tutor/tutor.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { AdminGuard } from './core/guards/admin.guard';
 import { TeacherGuard } from './core/guards/teacher.guard';
@@ -35,6 +36,7 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'estudiantes', component: EstudiantesComponent },
       { path: 'profesores', component: ProfesoresComponent },
+      { path: 'tutores', component: TutorComponent },
       { path: 'cursos', component: CursosComponent },
       { path: 'materias', component: MateriasComponent },
       { path: 'perfil', component: PerfilComponent }
