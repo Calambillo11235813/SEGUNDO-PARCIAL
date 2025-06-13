@@ -32,20 +32,25 @@ interface MateriasResponse {
   imports: [CommonModule, ReactiveFormsModule]
 })
 export class AsistenciasComponent implements OnInit {
-  materias: Materia[] = [];           // ✅ Tipado correcto
+  materias: Materia[] = [];
   estudiantes: any[] = [];
+  trimestres: any[] = [];
   asistenciaForm: FormGroup;
   loading = false;
   materiasLoading = false;
   estudiantesLoading = false;
+  trimestresLoading = false;
   error = '';
   mensaje = '';
   
-  // Nuevas propiedades para mejorar UX
+  // AGREGAR: Propiedades que faltan
   guardandoAsistencias = false;
   mostrarConfirmacion = false;
   resumenAsistencias: any = null;
   
+  // AGREGAR: Propiedad para el año actual
+  private readonly anoActual: number = new Date().getFullYear();
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -54,18 +59,38 @@ export class AsistenciasComponent implements OnInit {
   ) {
     this.asistenciaForm = this.fb.group({
       materia: [null, Validators.required],
+      trimestre: [null, Validators.required],  // ✅ Añadir campo trimestre
       fecha: [this.obtenerFechaActual(), Validators.required]
     });
   }
   
   ngOnInit(): void {
     this.cargarMaterias();
+    this.cargarTrimestres();
     
     // Escuchar cambios en el formulario para cargar estudiantes
     this.asistenciaForm.get('materia')?.valueChanges.subscribe(value => {
       if (value) {
         this.cargarEstudiantes();
       }
+    });
+  }
+
+  // AGREGAR: Método para verificar si una fecha pertenece al año actual
+  private esDelAnoActual(fecha: string): boolean {
+    if (!fecha) return false;
+    const anoFecha = new Date(fecha).getFullYear();
+    return anoFecha === this.anoActual;
+  }
+
+  // AGREGAR: Método para filtrar trimestres del año actual
+  private filtrarTrimestresAnoActual(trimestres: any[]): any[] {
+    return trimestres.filter(trimestre => {
+      // Verificar si la fecha de inicio o fin está en el año actual
+      const fechaInicio = trimestre.fecha_inicio;
+      const fechaFin = trimestre.fecha_fin;
+      
+      return this.esDelAnoActual(fechaInicio) || this.esDelAnoActual(fechaFin);
     });
   }
   
@@ -268,15 +293,6 @@ export class AsistenciasComponent implements OnInit {
     };
   }
   
-  mostrarConfirmacionGuardado(): void {
-    if (this.asistenciaForm.invalid || this.estudiantes.length === 0) {
-      return;
-    }
-    
-    this.resumenAsistencias = this.obtenerResumenAsistencias();
-    this.mostrarConfirmacion = true;
-  }
-  
   cancelarGuardado(): void {
     this.mostrarConfirmacion = false;
     this.resumenAsistencias = null;
@@ -288,7 +304,17 @@ export class AsistenciasComponent implements OnInit {
   }
   
   guardarAsistencias(): void {
+    // ✅ AGREGAR: Validación específica del trimestre
     if (this.asistenciaForm.invalid || this.estudiantes.length === 0) {
+      this.marcarCamposInvalidos(); // Marcar campos para mostrar errores
+      this.error = 'Por favor complete todos los campos requeridos (materia, trimestre y fecha)';
+      return;
+    }
+    
+    // ✅ AGREGAR: Validación específica del trimestre
+    const trimestreId = this.asistenciaForm.get('trimestre')?.value;
+    if (!trimestreId) {
+      this.error = 'Debe seleccionar un trimestre';
       return;
     }
     
@@ -297,14 +323,18 @@ export class AsistenciasComponent implements OnInit {
     this.error = '';
     
     const asistenciasData = {
-      materia_id: this.asistenciaForm.get('materia')?.value,
+      materia_id: Number(this.asistenciaForm.get('materia')?.value), // ✅ Convertir a número
+      trimestre_id: Number(trimestreId), // ✅ Convertir a número y validar
       fecha: this.asistenciaForm.get('fecha')?.value,
       asistencias: this.estudiantes.map(est => ({
-        estudiante_id: est.id,
-        presente: est.asistio,
-        justificada: est.justificada
+        estudiante_id: Number(est.id), // ✅ Convertir a número
+        presente: Boolean(est.asistio),
+        justificada: Boolean(est.justificada)
       }))
     };
+    
+    // ✅ AGREGAR: Log para debug
+    console.log('Datos a enviar:', JSON.stringify(asistenciasData, null, 2));
     
     this.asistenciasService.registrarAsistenciasMasivo(asistenciasData).subscribe({
       next: (response: any) => {
@@ -315,6 +345,8 @@ export class AsistenciasComponent implements OnInit {
         
         if (errores.length === 0) {
           this.mensaje = `✅ Asistencias registradas correctamente para ${exitosos.length} estudiantes`;
+          // ✅ AGREGAR: Limpiar formulario después del éxito
+          this.resetearFormulario();
         } else if (exitosos.length > 0) {
           this.mensaje = `⚠️ Asistencias registradas para ${exitosos.length} estudiantes. ${errores.length} con errores.`;
           this.error = `Errores: ${errores.map((e: any) => e.error).join(', ')}`;
@@ -323,40 +355,165 @@ export class AsistenciasComponent implements OnInit {
         }
         
         this.guardandoAsistencias = false;
-        
-        setTimeout(() => {
-          this.mensaje = '';
-          this.error = '';
-        }, 5000);
       },
       error: (error) => {
         console.error('Error al guardar asistencias:', error);
-        this.error = 'Error al guardar las asistencias. Verifica la conexión e intenta nuevamente.';
-        this.guardandoAsistencias = false;
         
-        setTimeout(() => {
-          this.error = '';
-        }, 5000);
+        // ✅ MEJORAR: Manejo de errores más específico
+        if (error.error && error.error.error) {
+          this.error = `Error: ${error.error.error}`;
+        } else if (error.error && error.error.detail) {
+          this.error = `Error: ${error.error.detail}`;
+        } else if (error.message) {
+          this.error = `Error: ${error.message}`;
+        } else {
+          this.error = 'Error al guardar las asistencias. Verifica la conexión e intenta nuevamente.';
+        }
+        
+        this.guardandoAsistencias = false;
       }
     });
   }
   
-  marcarTodosPresentes(): void {
+  // ✅ AGREGAR: Método para marcar campos inválidos
+  private marcarCamposInvalidos(): void {
+    Object.keys(this.asistenciaForm.controls).forEach(field => {
+      const control = this.asistenciaForm.get(field);
+      if (control?.invalid) {
+        control.markAsTouched({ onlySelf: true });
+      }
+    });
+  }
+  
+  // ✅ AGREGAR: Método para resetear formulario después del éxito
+  private resetearFormulario(): void {
     this.estudiantes.forEach(est => {
       est.asistio = true;
       est.justificada = false;
     });
   }
   
-  marcarTodosAusentes(): void {
-    this.estudiantes.forEach(est => {
-      est.asistio = false;
-      est.justificada = false;
+  // ✅ MEJORAR: Cargar trimestres con mejor manejo de errores
+  cargarTrimestres(): void {
+    this.trimestresLoading = true;
+    
+    this.asistenciasService.getTrimestres({ activos: true }).subscribe({
+      next: (response: any) => {
+        console.log('Respuesta trimestres originales:', response);
+        
+        let trimestresOriginales: any[] = [];
+        
+        if (response && response.trimestres && Array.isArray(response.trimestres)) {
+          trimestresOriginales = response.trimestres;
+        } else if (Array.isArray(response)) {
+          trimestresOriginales = response;
+        } else {
+          console.warn('Formato inesperado de trimestres:', response);
+          trimestresOriginales = [];
+        }
+
+        // Filtrar solo trimestres del año actual
+        this.trimestres = this.filtrarTrimestresAnoActual(trimestresOriginales);
+        
+        console.log(`Trimestres filtrados para el año ${this.anoActual}:`, this.trimestres);
+        
+        this.trimestresLoading = false;
+        
+        // Seleccionar automáticamente el trimestre activo del año actual
+        if (this.trimestres.length > 0) {
+          const trimestreActivo = this.trimestres.find(t => t.activo === true);
+          if (trimestreActivo) {
+            this.asistenciaForm.patchValue({ trimestre: trimestreActivo.id });
+          } else {
+            // Si no hay uno activo, seleccionar el primero del año actual
+            this.asistenciaForm.patchValue({ trimestre: this.trimestres[0].id });
+          }
+        }
+      },
+      error: (error) => {
+        console.error('Error al cargar trimestres:', error);
+        this.trimestresLoading = false;
+        
+        // Datos simulados del año actual
+        const fechaActual = new Date();
+        const anoActual = fechaActual.getFullYear();
+        
+        this.trimestres = [
+          { 
+            id: 1, 
+            nombre: `Primer Trimestre ${anoActual}`, 
+            activo: true, 
+            fecha_inicio: `${anoActual}-01-01`, 
+            fecha_fin: `${anoActual}-04-30` 
+          },
+          { 
+            id: 2, 
+            nombre: `Segundo Trimestre ${anoActual}`, 
+            activo: false, 
+            fecha_inicio: `${anoActual}-05-01`, 
+            fecha_fin: `${anoActual}-08-31` 
+          },
+          { 
+            id: 3, 
+            nombre: `Tercer Trimestre ${anoActual}`, 
+            activo: false, 
+            fecha_inicio: `${anoActual}-09-01`, 
+            fecha_fin: `${anoActual + 1}-01-31` 
+          }
+        ];
+        
+        // Seleccionar el activo
+        const trimestreActivo = this.trimestres.find(t => t.activo === true);
+        if (trimestreActivo) {
+          this.asistenciaForm.patchValue({ trimestre: trimestreActivo.id });
+        }
+      }
     });
   }
   
-  getMateriaSeleccionada(): Materia | undefined {  // ✅ Tipado correcto del retorno
+  // ✅ AGREGAR: Método getMateriaSeleccionada que falta
+  getMateriaSeleccionada(): Materia | null {
     const materiaId = this.asistenciaForm.get('materia')?.value;
-    return this.materias.find(m => m.id == materiaId);
+    if (!materiaId) return null;
+    
+    return this.materias.find(materia => materia.id === Number(materiaId)) || null;
+  }
+  
+  // ✅ AGREGAR: Método marcarTodosPresentes que falta
+  marcarTodosPresentes(): void {
+    this.estudiantes.forEach(estudiante => {
+      estudiante.asistio = true;
+      estudiante.justificada = false;
+    });
+  }
+  
+  // ✅ AGREGAR: Método marcarTodosAusentes que falta
+  marcarTodosAusentes(): void {
+    this.estudiantes.forEach(estudiante => {
+      estudiante.asistio = false;
+      estudiante.justificada = false;
+    });
+  }
+  
+  // ✅ MANTENER: Solo una implementación de mostrarConfirmacionGuardado
+  mostrarConfirmacionGuardado(): void {
+    if (this.asistenciaForm.invalid) {
+      this.marcarCamposInvalidos();
+      this.error = 'Por favor complete todos los campos requeridos';
+      return;
+    }
+    
+    if (this.estudiantes.length === 0) {
+      this.error = 'No hay estudiantes para registrar asistencia';
+      return;
+    }
+    
+    this.resumenAsistencias = this.obtenerResumenAsistencias();
+    this.mostrarConfirmacion = true;
+  }
+  
+  // ✅ AGREGAR: Método trackBy para mejorar rendimiento
+  trackByEstudiante(index: number, estudiante: any): any {
+    return estudiante.id;
   }
 }

@@ -1,0 +1,324 @@
+<div class="p-6">
+  <div class="flex items-center justify-between mb-6">
+    <!-- Título y botón de volver -->
+    <div class="flex items-center">
+      <button (click)="volver()" class="mr-4 text-gray-700 hover:text-red-600 transition" title="Volver a evaluaciones">
+        <i class="fas fa-arrow-left mr-2"></i>Volver
+      </button>
+      <h2 class="text-2xl font-bold text-red-600">Calificaciones</h2>
+    </div>
+    
+    <!-- Botones de acción -->
+    <div class="space-x-2">
+      <button 
+        *ngIf="!modoEdicion" 
+        (click)="toggleModoEdicion()" 
+        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition flex items-center"
+      >
+        <i class="fas fa-edit mr-2"></i>Modo Edición
+      </button>
+      
+      <button 
+        *ngIf="modoEdicion" 
+        (click)="guardarCalificaciones()" 
+        class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition flex items-center"
+        [disabled]="guardandoCalificaciones"
+      >
+        <i *ngIf="!guardandoCalificaciones" class="fas fa-save mr-2"></i>
+        <div *ngIf="guardandoCalificaciones" class="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+        Guardar Calificaciones
+      </button>
+      
+      <button 
+        *ngIf="modoEdicion" 
+        (click)="toggleModoEdicion()" 
+        class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition"
+      >
+        Cancelar
+      </button>
+    </div>
+  </div>
+  
+  <!-- Información de la evaluación -->
+  <div *ngIf="evaluacion" class="bg-white rounded-lg shadow-md border border-red-100 p-6 mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <h3 class="text-lg font-semibold text-red-600 mb-2">{{ evaluacion.titulo }}</h3>
+        <p class="text-gray-600 mb-1">{{ evaluacion.materia?.nombre }}</p>
+        <p class="text-gray-500 text-sm mb-2">
+          <span *ngIf="evaluacion.tipo_evaluacion">{{ evaluacion.tipo_evaluacion.nombre_display }}</span>
+          <span *ngIf="!evaluacion.tipo_evaluacion">{{ tipoEvaluacion === 'entregable' ? 'Entregable' : 'Participación' }}</span>
+        </p>
+        <p class="text-gray-700 text-sm" *ngIf="evaluacion.descripcion">{{ evaluacion.descripcion }}</p>
+      </div>
+      
+      <div class="md:text-right">
+        <p class="text-gray-600 mb-1" *ngIf="evaluacion.fecha_entrega">
+          <strong>Fecha de entrega:</strong> {{ evaluacion.fecha_entrega | date: 'dd/MM/yyyy' }}
+        </p>
+        <p class="text-gray-600 mb-1" *ngIf="evaluacion.fecha_registro">
+          <strong>Fecha de registro:</strong> {{ evaluacion.fecha_registro | date: 'dd/MM/yyyy' }}
+        </p>
+        <p class="text-gray-600 mb-1">
+          <strong>Porcentaje nota final:</strong> {{ evaluacion.porcentaje_nota_final }}%
+        </p>
+        <p class="text-gray-600">
+          <strong>Nota máxima:</strong> {{ evaluacion.nota_maxima || 100 }}
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mensajes -->
+  <div *ngIf="mensaje" class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
+    {{ mensaje }}
+  </div>
+  
+  <div *ngIf="error" class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+    {{ error }}
+  </div>
+  
+  <!-- Loading de calificaciones -->
+  <div *ngIf="cargandoEstudiantes" class="flex justify-center p-8">
+    <div class="text-center">
+      <div class="h-8 w-8 border-4 border-red-600 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+      <p class="text-gray-600">Cargando calificaciones...</p>
+    </div>
+  </div>
+  
+  <!-- Sin evaluación -->
+  <div *ngIf="!evaluacionId && !cargandoEvaluacion" class="text-center py-8 text-gray-500">
+    <i class="fas fa-exclamation-circle text-4xl mb-4 text-gray-300"></i>
+    <p>No se ha especificado una evaluación válida</p>
+  </div>
+  
+  <!-- Estadísticas de calificación -->
+  <div *ngIf="calificaciones.length > 0 && !cargandoEstudiantes" class="bg-white rounded-lg shadow-md border border-red-100 p-6 mb-6">
+    <h3 class="text-lg font-semibold text-gray-700 mb-4">Resumen de Calificaciones</h3>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+        <h4 class="text-blue-800 text-sm font-medium mb-2">Estudiantes</h4>
+        <p class="text-2xl font-bold text-blue-900">{{ calificaciones.length }}</p>
+        <p class="text-xs text-blue-700 mt-1">Total de estudiantes</p>
+      </div>
+      
+      <div class="bg-green-50 p-4 rounded-lg border border-green-100">
+        <h4 class="text-green-800 text-sm font-medium mb-2">Calificados</h4>
+        <p class="text-2xl font-bold text-green-900">{{ estadisticas.calificados }} / {{ calificaciones.length }}</p>
+        <p class="text-xs text-green-700 mt-1">{{ Math.round((estadisticas.calificados / calificaciones.length) * 100) || 0 }}% completado</p>
+      </div>
+      
+      <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-100">
+        <h4 class="text-yellow-800 text-sm font-medium mb-2">Promedio</h4>
+        <p class="text-2xl font-bold text-yellow-900">{{ formatearNota(estadisticas.promedioActual) }}</p>
+        <p class="text-xs text-yellow-700 mt-1">Calificación promedio actual</p>
+      </div>
+    </div>
+    
+    <!-- Barra de progreso -->
+    <div class="mt-4 bg-gray-200 rounded-full h-2.5">
+      <div class="bg-green-600 h-2.5 rounded-full" 
+           [style.width]="(estadisticas.calificados / calificaciones.length * 100) + '%'"></div>
+    </div>
+  </div>
+  
+  <!-- Calificación Individual -->
+  <div *ngIf="modoCalificacionIndividual" class="bg-white rounded-lg shadow-md border border-red-100 p-6 mb-6">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-lg font-semibold text-red-600">
+        Calificar a {{ estudianteSeleccionado?.nombre }} {{ estudianteSeleccionado?.apellido }}
+      </h3>
+      
+      <button (click)="volverACalificacionMasiva()" class="text-gray-500 hover:text-red-600" title="Cerrar formulario individual">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <form [formGroup]="calificacionForm" (submit)="guardarCalificacionIndividual()">
+      <div class="mb-4">
+        <label for="nota" class="block text-sm font-medium text-gray-700 mb-1">Nota</label>
+        <input
+          id="nota"
+          type="number"
+          formControlName="nota"
+          (input)="validarNota($event)"
+          class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+          [ngClass]="{'border-red-500 ring-1 ring-red-500': calificacionForm.get('nota')?.invalid && calificacionForm.get('nota')?.touched}"
+          min="0"
+          [max]="evaluacion?.nota_maxima || 100"
+          step="0.01"
+        >
+        <div *ngIf="calificacionForm.get('nota')?.invalid && calificacionForm.get('nota')?.touched" class="text-red-500 text-xs mt-1">
+          Ingrese una nota válida
+        </div>
+      </div>
+      
+      <div class="mb-4">
+        <label for="observaciones" class="block text-sm font-medium text-gray-700 mb-1">Observaciones (opcional)</label>
+        <textarea
+          id="observaciones"
+          formControlName="observaciones"
+          class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+          rows="2"
+          placeholder="Observaciones sobre la evaluación..."
+        ></textarea>
+      </div>
+      
+      <div class="mb-4">
+        <label for="retroalimentacion" class="block text-sm font-medium text-gray-700 mb-1">Retroalimentación (opcional)</label>
+        <textarea
+          id="retroalimentacion"
+          formControlName="retroalimentacion"
+          class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+          rows="3"
+          placeholder="Retroalimentación para el estudiante..."
+        ></textarea>
+      </div>
+      
+      <div class="flex justify-end space-x-2">
+        <button
+          type="button"
+          (click)="volverACalificacionMasiva()"
+          class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+        >
+          Cancelar
+        </button>
+        
+        <button
+          type="submit"
+          class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition flex items-center"
+          [disabled]="calificacionForm.invalid || guardandoCalificaciones"
+          [ngClass]="{'opacity-70 cursor-not-allowed': calificacionForm.invalid || guardandoCalificaciones}"
+        >
+          <i *ngIf="!guardandoCalificaciones" class="fas fa-save mr-2"></i>
+          <div *ngIf="guardandoCalificaciones" class="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+          Guardar Calificación
+        </button>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Tabla de calificaciones masivas -->
+  <div *ngIf="calificaciones.length > 0 && !cargandoEstudiantes && !modoCalificacionIndividual" class="bg-white rounded-lg shadow-md border border-red-100 overflow-hidden">
+    <div class="px-6 py-4 border-b border-red-100">
+      <h3 class="text-lg font-semibold text-red-600">Calificaciones de Estudiantes</h3>
+    </div>
+    
+    <div class="overflow-x-auto">
+      <form [formGroup]="calificacionMasivaForm">
+        <table class="min-w-full divide-y divide-red-200">
+          <thead class="bg-red-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase tracking-wider">Estudiante</th>
+              <th class="px-6 py-3 text-center text-xs font-medium text-red-500 uppercase tracking-wider">Nota</th>
+              <th class="px-6 py-3 text-center text-xs font-medium text-red-500 uppercase tracking-wider">Estado</th>
+              <th class="px-6 py-3 text-center text-xs font-medium text-red-500 uppercase tracking-wider">Observaciones</th>
+              <th class="px-6 py-3 text-center text-xs font-medium text-red-500 uppercase tracking-wider">Acción</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-red-200" formArrayName="calificaciones">
+            <tr *ngFor="let estudianteControl of calificacionesArray.controls; let i = index" [formGroupName]="i">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                <input type="hidden" formControlName="estudiante_id">
+                <input type="hidden" formControlName="nombre">
+                {{ estudianteControl.value.nombre }}
+              </td>
+              
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <!-- Modo de edición -->
+                <div *ngIf="modoEdicion">
+                  <label for="nota-{{i}}" class="sr-only">Nota para {{estudianteControl.value.nombre}}</label>
+                  <input
+                    id="nota-{{i}}"
+                    type="number"
+                    formControlName="nota"
+                    (input)="validarNota($event)"
+                    class="w-20 px-3 py-1 text-center border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    [ngClass]="{'border-red-500 ring-1 ring-red-500': estudianteControl.get('nota')?.invalid && estudianteControl.get('nota')?.touched}"
+                    min="0"
+                    [max]="evaluacion?.nota_maxima || 100"
+                    step="0.01"
+                    placeholder="Nota"
+                  >
+                </div>
+                
+                <!-- Modo de visualización -->
+                <div *ngIf="!modoEdicion">
+                  <span 
+                    *ngIf="estudianteControl.value.nota !== null && estudianteControl.value.nota !== undefined"
+                    [ngStyle]="{'color': getColorPorNota(estudianteControl.value.nota)}" 
+                    class="font-bold text-lg"
+                  >
+                    {{ formatearNota(estudianteControl.value.nota) }}
+                  </span>
+                  <span *ngIf="estudianteControl.value.nota === null || estudianteControl.value.nota === undefined" class="text-gray-400">
+                    Sin calificar
+                  </span>
+                </div>
+              </td>
+              
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span 
+                  *ngIf="estudianteControl.value.nota !== null && estudianteControl.value.nota !== undefined"
+                  class="px-2 py-1 text-xs font-medium rounded-full"
+                  [ngClass]="{
+                    'bg-red-100 text-red-800': estudianteControl.value.nota < (evaluacion?.nota_minima_aprobacion || 51),
+                    'bg-yellow-100 text-yellow-800': estudianteControl.value.nota >= (evaluacion?.nota_minima_aprobacion || 51) && estudianteControl.value.nota < 70,
+                    'bg-green-100 text-green-800': estudianteControl.value.nota >= 70
+                  }"
+                >
+                  {{ getEscalaCualitativa(estudianteControl.value.nota) }}
+                </span>
+                <span *ngIf="estudianteControl.value.nota === null || estudianteControl.value.nota === undefined" class="text-gray-400">
+                  -
+                </span>
+              </td>
+              
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <!-- Modo de edición -->
+                <div *ngIf="modoEdicion">
+                  <label for="obs-{{i}}" class="sr-only">Observaciones para {{estudianteControl.value.nombre}}</label>
+                  <input
+                    id="obs-{{i}}"
+                    type="text"
+                    formControlName="observaciones"
+                    class="w-full px-3 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    placeholder="Observaciones..."
+                  >
+                </div>
+                
+                <!-- Modo de visualización -->
+                <div *ngIf="!modoEdicion">
+                  <span *ngIf="estudianteControl.value.observaciones" class="text-sm">
+                    {{ estudianteControl.value.observaciones }}
+                  </span>
+                  <span *ngIf="!estudianteControl.value.observaciones" class="text-gray-400">
+                    -
+                  </span>
+                </div>
+              </td>
+              
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <button
+                  type="button"
+                  (click)="calificarEstudiante({id: estudianteControl.value.estudiante_id, nombre: estudianteControl.value.nombre.split(' ')[0], apellido: estudianteControl.value.nombre.split(' ')[1]})"
+                  class="px-3 py-1 text-blue-600 hover:text-blue-800 transition"
+                  title="Calificar individualmente"
+                >
+                  <i class="fas fa-user-edit mr-1"></i> Detalle
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Sin estudiantes -->
+  <div *ngIf="!cargandoEstudiantes && calificaciones.length === 0" class="text-center py-8 text-gray-500">
+    <i class="fas fa-users-slash text-4xl mb-4 text-gray-300"></i>
+    <p>No hay estudiantes asociados a esta evaluación</p>
+  </div>
+</div>

@@ -187,6 +187,9 @@ export class ListaAsistenciasComponent implements OnInit {
     hasta: ''
   };
 
+  // AGREGAR: Propiedad para el año actual
+  private readonly anoActual: number = new Date().getFullYear();
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -203,6 +206,14 @@ export class ListaAsistenciasComponent implements OnInit {
     });
   }
 
+  // AGREGAR: Método para verificar si una fecha pertenece al año actual
+  private esDelAnoActual(fecha: string): boolean {
+    if (!fecha) return false;
+    const anoFecha = new Date(fecha).getFullYear();
+    return anoFecha === this.anoActual;
+  }
+
+  // MODIFICAR: Cargar asistencias filtradas por año actual
   cargarAsistencias(): void {
     if (!this.materiaId) return;
     
@@ -215,9 +226,29 @@ export class ListaAsistenciasComponent implements OnInit {
     if (this.filtros.desde) filtrosServicio.desde = this.filtros.desde;
     if (this.filtros.hasta) filtrosServicio.hasta = this.filtros.hasta;
     
+    // AGREGAR: Filtro automático por año actual si no hay filtros específicos
+    if (!this.filtros.fecha && !this.filtros.desde && !this.filtros.hasta) {
+      filtrosServicio.desde = `${this.anoActual}-01-01`;
+      filtrosServicio.hasta = `${this.anoActual}-12-31`;
+    }
+    
     this.asistenciasService.getAsistenciasPorMateria(this.materiaId, filtrosServicio).subscribe({
       next: (data) => {
         console.log('Datos de asistencias:', data);
+        
+        // AGREGAR: Filtrar asistencias por año actual si no hay filtros específicos
+        if (data && data.asistencias && !this.filtros.fecha && !this.filtros.desde && !this.filtros.hasta) {
+          const asistenciasFiltradas: any = {};
+          
+          Object.keys(data.asistencias).forEach(fecha => {
+            if (this.esDelAnoActual(fecha)) {
+              asistenciasFiltradas[fecha] = data.asistencias[fecha];
+            }
+          });
+          
+          data.asistencias = asistenciasFiltradas;
+        }
+        
         this.asistenciasData = data;
         this.materia = data.materia;
         this.loading = false;
@@ -293,6 +324,6 @@ export class ListaAsistenciasComponent implements OnInit {
   }
 
   volver(): void {
-    this.router.navigate(['/profesor/materias', this.materiaId]);
+    this.router.navigate(['/profesor/materia/', this.materiaId]);
   }
 }

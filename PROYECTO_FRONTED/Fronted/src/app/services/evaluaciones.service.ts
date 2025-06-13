@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators'; // Añadir esta importación
 
 @Injectable({
   providedIn: 'root'
@@ -291,5 +292,75 @@ export class EvaluacionesService {
     return evaluaciones
       .filter(evaluacion => evaluacion.tipo_evaluacion?.id === tipoEvaluacionId)
       .reduce((total, evaluacion) => total + (evaluacion.porcentaje_nota_final || 0), 0);
+  }
+
+  /**
+   * Configura el porcentaje máximo permitido para un tipo de evaluación en una materia
+   */
+  configurarPorcentajeEvaluacion(configuracion: {
+    materia_id: number;
+    tipo_evaluacion_id: number;
+    porcentaje: number;
+  }): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/configuracion-evaluacion/`, configuracion);
+  }
+
+  /**
+   * Obtiene la configuración de porcentajes máximos por tipo de evaluación para una materia
+   */
+  getConfiguracionPorcentajes(materiaId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/materias/${materiaId}/configuracion-evaluacion/`);
+  }
+
+  /**
+   * Verifica si el porcentaje de una nueva evaluación excede el máximo configurado
+   */
+  verificarPorcentajeDisponible(
+    materiaId: number, 
+    tipoEvaluacionId: number, 
+    porcentajeRequerido: number,
+    evaluacionesActuales: any[]
+  ): Observable<{
+    disponible: boolean;
+    porcentajeMaximo: number;
+    porcentajeUsado: number;
+    porcentajeDisponible: number;
+    mensaje: string;
+  }> {
+    // Asegurarse de que los parámetros sean números
+    materiaId = Number(materiaId);
+    tipoEvaluacionId = Number(tipoEvaluacionId);
+    porcentajeRequerido = Number(porcentajeRequerido);
+    
+    return this.getConfiguracionPorcentajes(materiaId).pipe(
+      map((configuraciones: any) => {
+        // Buscar la configuración para este tipo de evaluación
+        const config = Array.isArray(configuraciones) 
+          ? configuraciones.find((c: any) => c.tipo_evaluacion_id === tipoEvaluacionId) 
+          : null;
+        
+        // Si no hay configuración, usar valor predeterminado de 100%
+        const porcentajeMaximo = config ? config.porcentaje : 100;
+        
+        // Calcular porcentaje ya usado
+        const porcentajeUsado = this.calcularPorcentajeUsado(
+          evaluacionesActuales,
+          tipoEvaluacionId
+        );
+        
+        const porcentajeDisponible = porcentajeMaximo - porcentajeUsado;
+        const disponible = porcentajeRequerido <= porcentajeDisponible;
+        
+        return {
+          disponible,
+          porcentajeMaximo,
+          porcentajeUsado,
+          porcentajeDisponible,
+          mensaje: disponible 
+            ? `Porcentaje disponible: ${porcentajeDisponible}%`
+            : `El porcentaje excede el máximo disponible (${porcentajeDisponible}%)`
+        };
+      })
+    );
   }
 }

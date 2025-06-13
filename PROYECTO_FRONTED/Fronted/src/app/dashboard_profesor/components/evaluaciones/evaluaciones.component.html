@@ -67,6 +67,79 @@
         <div *ngIf="error" class="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
           {{ error }}
         </div>
+        
+        <!-- Agregar esto cerca del botón de "Nueva Evaluación" -->
+        <div class="flex justify-end mb-4 space-x-2">
+          <button
+            *ngIf="materiaSeleccionada"
+            (click)="mostrarConfiguracionPorcentaje()"
+            class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded flex items-center"
+          >
+            <i class="fas fa-cog mr-2"></i>
+            Configurar porcentajes
+          </button>
+        </div>
+
+        <!-- Modal de configuración de porcentaje -->
+        <div *ngIf="configurandoPorcentaje" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50">
+          <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-bold text-gray-900">Configurar porcentaje máximo</h3>
+              <button (click)="configurandoPorcentaje = false" class="text-gray-400 hover:text-gray-600" aria-label="Cerrar ventana de configuración">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            
+            <form [formGroup]="configuracionForm" (ngSubmit)="guardarConfiguracionPorcentaje()">
+              <div class="mb-4">
+                <label for="config_tipo_evaluacion_id" class="block text-sm font-medium text-gray-700 mb-1">Tipo de evaluación</label>
+                <select 
+                  id="config_tipo_evaluacion_id"
+                  formControlName="tipo_evaluacion_id"
+                  class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                >
+                  <option [value]="null" disabled>Seleccione tipo de evaluación</option>
+                  <option *ngFor="let tipo of tiposEvaluacion" [value]="tipo.id">{{ tipo.nombre_display }}</option>
+                </select>
+              </div>
+              
+              <div class="mb-4">
+                <label for="config_porcentaje" class="block text-sm font-medium text-gray-700 mb-1">Porcentaje máximo</label>
+                <div class="flex items-center">
+                  <input
+                    id="config_porcentaje"
+                    type="number"
+                    formControlName="porcentaje"
+                    class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    min="1"
+                    max="100"
+                  >
+                  <span class="ml-2">%</span>
+                </div>
+              </div>
+              
+              <div class="text-xs text-gray-500 mb-4">
+                Esto configurará el porcentaje máximo que pueden sumar todas las evaluaciones de este tipo para esta materia.
+              </div>
+              
+              <div class="flex justify-end space-x-2">
+                <button 
+                  type="button" 
+                  (click)="configurandoPorcentaje = false"
+                  class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                >
+                  Cancelar
+                </button>
+                <button 
+                  type="submit"
+                  class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700"
+                >
+                  Guardar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -375,7 +448,7 @@
                 <th class="px-6 py-3 text-left text-xs font-medium text-red-500 uppercase tracking-wider">Tipo</th>
                 <th class="px-6 py-3 text-center text-xs font-medium text-red-500 uppercase tracking-wider">Fecha</th>
                 <th class="px-6 py-3 text-center text-xs font-medium text-red-500 uppercase tracking-wider">% Nota</th>
-                <th class="px-6 py-3 text-center text-xs font-medium text-red-500 uppercase tracking-wider">Acciones</th>
+                <th class="px-6 py-3 text-center text-xs font-medium text-red-500 uppercase tracking-wider">Acción</th>
               </tr>
             </thead>
             <tbody class="bg-white divide-y divide-red-200">
@@ -401,25 +474,26 @@
                   {{ formatearPorcentaje(evaluacion.porcentaje_nota_final) }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                  <div class="flex justify-center space-x-2">
-                    <button 
-                      class="p-1 rounded-full text-blue-600 hover:bg-blue-100 transition"
-                      title="Editar evaluación"
+                  <div class="flex justify-center space-x-3">
+                    <!-- Botón para ver calificaciones -->
+                    <a 
+                      [routerLink]="['/profesor/evaluaciones', evaluacion.id, 'calificaciones']"
+                      [queryParams]="{tipo: evaluacion.modelo}"
+                      class="px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors flex items-center"
+                      title="Ver y gestionar calificaciones"
                     >
-                      <i class="fas fa-edit"></i>
-                    </button>
+                      <i class="fas fa-clipboard-check mr-1.5"></i>
+                      Calificaciones
+                    </a>
+                    
+                    <!-- Botón existente de eliminar -->
                     <button 
-                      class="p-1 rounded-full text-red-600 hover:bg-red-100 transition"
+                      class="px-3 py-1.5 bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors flex items-center"
                       title="Eliminar evaluación"
                       (click)="eliminarEvaluacion(evaluacion)"
                     >
-                      <i class="fas fa-trash"></i>
-                    </button>
-                    <button 
-                      class="p-1 rounded-full text-green-600 hover:bg-green-100 transition"
-                      title="Ver calificaciones"
-                    >
-                      <i class="fas fa-chart-bar"></i>
+                      <i class="fas fa-trash mr-1.5"></i>
+                      Eliminar
                     </button>
                   </div>
                 </td>

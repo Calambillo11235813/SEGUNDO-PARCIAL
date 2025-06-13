@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router'; // Añadir esta importación
 import { AuthService } from '../../../services/auth.service';
 import { MateriasService } from '../../../services/materias.service';
 import { EvaluacionesService } from '../../../services/evaluaciones.service';
@@ -29,7 +30,7 @@ interface TipoEvaluacion {
   selector: 'app-evaluaciones',
   templateUrl: './evaluaciones.component.html',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule, RouterModule] // Añadir RouterModule aquí
 })
 export class EvaluacionesComponent implements OnInit {
   // Lista de datos necesarios
@@ -47,6 +48,7 @@ export class EvaluacionesComponent implements OnInit {
 
   // Formularios
   evaluacionForm: FormGroup;
+  configuracionForm: FormGroup;
   
   // Control de errores y mensajes
   error: string = '';
@@ -56,9 +58,16 @@ export class EvaluacionesComponent implements OnInit {
   mostrarFormulario: boolean = false;
   esEntregable: boolean = true;
   materiaSeleccionada: number | null = null;
+  configurandoPorcentaje: boolean = false;
   
   // Datos del usuario
   usuario: any;
+
+  // Agregar al array de propiedades de la clase
+  configuracionPorcentajes: any[] = [];
+
+  // Agregar propiedad para el año actual
+  private readonly anoActual: number = new Date().getFullYear();
 
   constructor(
     private fb: FormBuilder,
@@ -91,6 +100,12 @@ export class EvaluacionesComponent implements OnInit {
       criterios_participacion: [''],
       escala_calificacion: ['NUMERICA']
     });
+    
+    this.configuracionForm = this.fb.group({
+      materia_id: [null, Validators.required],
+      tipo_evaluacion_id: [null, Validators.required],
+      porcentaje: [10, [Validators.required, Validators.min(1), Validators.max(100)]]
+    });
   }
   
   ngOnInit(): void {
@@ -105,7 +120,9 @@ export class EvaluacionesComponent implements OnInit {
       if (materiaId) {
         this.materiaSeleccionada = +materiaId;
         this.evaluacionForm.patchValue({ materia_id: +materiaId });
+        this.configuracionForm.patchValue({ materia_id: +materiaId });
         this.cargarEvaluaciones(+materiaId);
+        this.cargarConfiguracionPorcentajes(+materiaId);
       }
     });
     
@@ -122,7 +139,9 @@ export class EvaluacionesComponent implements OnInit {
     this.evaluacionForm.get('materia_id')?.valueChanges.subscribe(value => {
       if (value && (!this.materiaSeleccionada || this.materiaSeleccionada !== value)) {
         this.materiaSeleccionada = value;
+        this.configuracionForm.patchValue({ materia_id: value });
         this.cargarEvaluaciones(value);
+        this.cargarConfiguracionPorcentajes(value);
       }
     });
   }
@@ -133,6 +152,48 @@ export class EvaluacionesComponent implements OnInit {
     const mes = String(hoy.getMonth() + 1).padStart(2, '0');
     const dia = String(hoy.getDate()).padStart(2, '0');
     return `${año}-${mes}-${dia}`;
+  }
+
+  // Método para verificar si una fecha pertenece al año actual
+  private esDelAnoActual(fecha: string): boolean {
+    if (!fecha) return false;
+    const anoFecha = new Date(fecha).getFullYear();
+    return anoFecha === this.anoActual;
+  }
+
+  // Método para filtrar trimestres del año actual
+  private filtrarTrimestresAnoActual(trimestres: any[]): any[] {
+    return trimestres.filter(trimestre => {
+      // Verificar si la fecha de inicio o fin está en el año actual
+      const fechaInicio = trimestre.fecha_inicio;
+      const fechaFin = trimestre.fecha_fin;
+      
+      return this.esDelAnoActual(fechaInicio) || this.esDelAnoActual(fechaFin);
+    });
+  }
+
+  // Método para filtrar evaluaciones del año actual
+  private filtrarEvaluacionesAnoActual(evaluaciones: any[]): any[] {
+    return evaluaciones.filter(evaluacion => {
+      // Para evaluaciones entregables, verificar fecha_asignacion o fecha_entrega
+      if (evaluacion.modelo === 'entregable') {
+        return this.esDelAnoActual(evaluacion.fecha_asignacion) || 
+               this.esDelAnoActual(evaluacion.fecha_entrega);
+      }
+      
+      // Para evaluaciones de participación, verificar fecha_registro
+      if (evaluacion.modelo === 'participacion') {
+        return this.esDelAnoActual(evaluacion.fecha_registro);
+      }
+
+      // Si no tiene modelo específico, verificar fecha_creacion o created_at
+      if (evaluacion.created_at) {
+        return this.esDelAnoActual(evaluacion.created_at);
+      }
+
+      // Por defecto, mostrar si no se puede determinar la fecha
+      return true;
+    });
   }
   
   cargarMaterias(): void {
@@ -241,15 +302,22 @@ export class EvaluacionesComponent implements OnInit {
     
     this.trimestreService.getTrimestresActuales().subscribe({
       next: (response: any) => {
-        console.log('Trimestres:', response);
+        console.log('Trimestres originales:', response);
+        
+        let trimestresOriginales: any[] = [];
         
         if (response && response.trimestres) {
-          this.trimestres = response.trimestres;
+          trimestresOriginales = response.trimestres;
         } else if (Array.isArray(response)) {
-          this.trimestres = response;
+          trimestresOriginales = response;
         } else {
-          this.trimestres = [];
+          trimestresOriginales = [];
         }
+
+        // Filtrar solo trimestres del año actual
+        this.trimestres = this.filtrarTrimestresAnoActual(trimestresOriginales);
+        
+        console.log(`Trimestres filtrados para el año ${this.anoActual}:`, this.trimestres);
         
         this.trimestresLoading = false;
       },
@@ -257,11 +325,29 @@ export class EvaluacionesComponent implements OnInit {
         console.error('Error al cargar trimestres:', error);
         this.trimestresLoading = false;
         
-        // Fallback a datos simulados
+        // Fallback a datos simulados del año actual
+        const fechaActual = new Date();
+        const anoActual = fechaActual.getFullYear();
+        
         this.trimestres = [
-          { id: 1, nombre: 'Primer Trimestre', fecha_inicio: '2023-05-01', fecha_fin: '2023-07-31' },
-          { id: 2, nombre: 'Segundo Trimestre', fecha_inicio: '2023-08-01', fecha_fin: '2023-10-31' },
-          { id: 3, nombre: 'Tercer Trimestre', fecha_inicio: '2023-11-01', fecha_fin: '2023-01-31' }
+          { 
+            id: 1, 
+            nombre: 'Primer Trimestre', 
+            fecha_inicio: `${anoActual}-05-01`, 
+            fecha_fin: `${anoActual}-07-31` 
+          },
+          { 
+            id: 2, 
+            nombre: 'Segundo Trimestre', 
+            fecha_inicio: `${anoActual}-08-01`, 
+            fecha_fin: `${anoActual}-10-31` 
+          },
+          { 
+            id: 3, 
+            nombre: 'Tercer Trimestre', 
+            fecha_inicio: `${anoActual}-11-01`, 
+            fecha_fin: `${anoActual + 1}-01-31` 
+          }
         ];
       }
     });
@@ -273,13 +359,20 @@ export class EvaluacionesComponent implements OnInit {
     
     this.evaluacionesService.getEvaluacionesPorMateria(materiaId).subscribe({
       next: (response: any) => {
-        console.log('Evaluaciones por materia:', response);
+        console.log('Evaluaciones originales por materia:', response);
+        
+        let evaluacionesOriginales: any[] = [];
         
         if (response && response.evaluaciones) {
-          this.evaluaciones = response.evaluaciones;
+          evaluacionesOriginales = response.evaluaciones;
         } else {
-          this.evaluaciones = [];
+          evaluacionesOriginales = [];
         }
+
+        // Filtrar solo evaluaciones del año actual
+        this.evaluaciones = this.filtrarEvaluacionesAnoActual(evaluacionesOriginales);
+        
+        console.log(`Evaluaciones filtradas para el año ${this.anoActual}:`, this.evaluaciones);
         
         this.evaluacionesLoading = false;
       },
@@ -287,7 +380,7 @@ export class EvaluacionesComponent implements OnInit {
         console.error('Error al cargar evaluaciones:', error);
         this.evaluacionesLoading = false;
         
-        // Fallback a datos simulados
+        // Fallback a datos simulados del año actual
         this.cargarEvaluacionesSimuladas();
       }
     });
@@ -295,13 +388,16 @@ export class EvaluacionesComponent implements OnInit {
   
   cargarEvaluacionesSimuladas(): void {
     setTimeout(() => {
+      const anoActual = new Date().getFullYear();
+      const mesActual = String(new Date().getMonth() + 1).padStart(2, '0');
+      
       this.evaluaciones = [
         {
           id: 1,
           titulo: 'Examen parcial',
           tipo_evaluacion: { id: 2, nombre: 'EXAMEN', nombre_display: 'Examen' },
-          fecha_asignacion: '2023-06-10',
-          fecha_entrega: '2023-06-15',
+          fecha_asignacion: `${anoActual}-${mesActual}-10`,
+          fecha_entrega: `${anoActual}-${mesActual}-15`,
           porcentaje_nota_final: 20,
           modelo: 'entregable'
         },
@@ -309,7 +405,7 @@ export class EvaluacionesComponent implements OnInit {
           id: 2,
           titulo: 'Participación semana 1',
           tipo_evaluacion: { id: 3, nombre: 'PARTICIPACION', nombre_display: 'Participación' },
-          fecha_registro: '2023-06-05',
+          fecha_registro: `${anoActual}-${mesActual}-05`,
           porcentaje_nota_final: 5,
           modelo: 'participacion'
         }
@@ -561,6 +657,90 @@ export class EvaluacionesComponent implements OnInit {
     return `${valor}%`;
   }
   
+  // Método para mostrar el modal de configuración
+  mostrarConfiguracionPorcentaje(): void {
+    this.configurandoPorcentaje = true;
+  }
+  
+  // Método para guardar la configuración de porcentaje
+  guardarConfiguracionPorcentaje(): void {
+    if (this.configuracionForm.invalid) {
+      Object.keys(this.configuracionForm.controls).forEach(field => {
+        const control = this.configuracionForm.get(field);
+        if (control?.invalid) {
+          control.markAsTouched({ onlySelf: true });
+        }
+      });
+      return;
+    }
+    
+    const formData = { ...this.configuracionForm.value };
+    formData.materia_id = Number(formData.materia_id);
+    formData.tipo_evaluacion_id = Number(formData.tipo_evaluacion_id);
+    formData.porcentaje = Number(formData.porcentaje);
+    
+    this.evaluacionesService.configurarPorcentajeEvaluacion(formData).subscribe({
+      next: (response: any) => {
+        console.log('Configuración guardada:', response);
+        this.mensaje = 'Configuración de porcentaje guardada correctamente';
+        this.configurandoPorcentaje = false;
+        this.cargarConfiguracionPorcentajes(this.materiaSeleccionada);
+      },
+      error: (error) => {
+        console.error('Error al guardar configuración:', error);
+        this.error = error.error?.mensaje || 'Error al guardar la configuración';
+      }
+    });
+  }
+  
+  // Método para validar el porcentaje de una evaluación
+  validarPorcentajeEvaluacion(): void {
+    const materiaId = this.evaluacionForm.get('materia_id')?.value;
+    const tipoId = this.evaluacionForm.get('tipo_evaluacion_id')?.value;
+    const porcentaje = this.evaluacionForm.get('porcentaje_nota_final')?.value;
+    
+    if (materiaId && tipoId && porcentaje) {
+      // Conversión explícita a number para evitar problemas de tipo
+      this.evaluacionesService.verificarPorcentajeDisponible(
+        Number(materiaId), 
+        Number(tipoId), 
+        Number(porcentaje), 
+        this.evaluaciones
+      ).subscribe({
+        next: (resultado) => {
+          if (!resultado.disponible) {
+            this.error = resultado.mensaje;
+          } else {
+            this.error = '';
+          }
+        },
+        error: (err) => {
+          console.error('Error al verificar porcentaje:', err);
+        }
+      });
+    }
+  }
+  
+  cargarConfiguracionPorcentajes(materiaId: number | null): void {
+    // Si materiaId es null, no hacer nada
+    if (materiaId === null) {
+      this.configuracionPorcentajes = [];
+      return;
+    }
+    
+    // Ahora podemos llamar al servicio con seguridad
+    this.evaluacionesService.getConfiguracionPorcentajes(materiaId).subscribe({
+      next: (response: any) => {
+        console.log('Configuración de porcentajes:', response);
+        this.configuracionPorcentajes = Array.isArray(response) ? response : [];
+      },
+      error: (error) => {
+        console.error('Error al cargar configuración de porcentajes:', error);
+        this.configuracionPorcentajes = [];
+      }
+    });
+  }
+  
   calcularPorcentajeRestante(): number {
     const tipoEvaluacionId = this.evaluacionForm.get('tipo_evaluacion_id')?.value;
     
@@ -568,14 +748,22 @@ export class EvaluacionesComponent implements OnInit {
       return 100;
     }
     
+    // Convertir explícitamente a número
+    const tipoId = Number(tipoEvaluacionId);
+    
     // Calcular el porcentaje ya utilizado para este tipo de evaluación
     const porcentajeUsado = this.evaluacionesService.calcularPorcentajeUsado(
       this.evaluaciones, 
-      tipoEvaluacionId
+      tipoId
     );
     
-    // Obtener el porcentaje máximo permitido (simulado como 100 - podría venir de configuración)
-    const porcentajeMaximo = 100;
+    // Buscar la configuración personalizada para este tipo
+    const configuracion = this.configuracionPorcentajes.find(
+      c => c.tipo_evaluacion_id == tipoId
+    );
+    
+    // Obtener el porcentaje máximo permitido (personalizado o por defecto 100)
+    const porcentajeMaximo = configuracion ? Number(configuracion.porcentaje) : 100;
     
     // Calcular el restante
     return Math.max(0, porcentajeMaximo - porcentajeUsado);
