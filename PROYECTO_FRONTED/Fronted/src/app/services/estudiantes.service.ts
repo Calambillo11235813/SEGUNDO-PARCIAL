@@ -15,14 +15,14 @@ export class EstudiantesService {
    * Obtiene todos los estudiantes registrados en el sistema
    */
   getEstudiantes(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/usuarios/estudiantes/`);
+    return this.http.get<any[]>(`${this.apiUrl}/usuarios/usuarios/estudiantes/`);
   }
 
   /**
    * Obtiene un estudiante específico por su ID
    */
   getEstudiante(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/usuarios/estudiantes/${id}/`);
+    return this.http.get<any>(`${this.apiUrl}/usuarios/usuarios/estudiantes/${id}/`);
   }
 
   /**

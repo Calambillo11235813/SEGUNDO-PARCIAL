@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router'; // Añadir esta importación
+import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { MateriasService } from '../../../services/materias.service';
 import { EvaluacionesService } from '../../../services/evaluaciones.service';
@@ -30,7 +30,7 @@ interface TipoEvaluacion {
   selector: 'app-evaluaciones',
   templateUrl: './evaluaciones.component.html',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule] // Añadir RouterModule aquí
+  imports: [CommonModule, ReactiveFormsModule, RouterModule]
 })
 export class EvaluacionesComponent implements OnInit {
   // Lista de datos necesarios
@@ -63,19 +63,22 @@ export class EvaluacionesComponent implements OnInit {
   // Datos del usuario
   usuario: any;
 
-  // Agregar al array de propiedades de la clase
+  // Configuración de porcentajes
   configuracionPorcentajes: any[] = [];
 
-  // Agregar propiedad para el año actual
+  // Propiedad para materia preseleccionada
+  private materiaPreseleccionada: number | null = null;
+
+  // Año actual
   private readonly anoActual: number = new Date().getFullYear();
 
   constructor(
     private fb: FormBuilder,
+    private route: ActivatedRoute,
     private authService: AuthService,
     private materiasService: MateriasService,
     private evaluacionesService: EvaluacionesService,
     private trimestreService: TrimestreService, 
-    private route: ActivatedRoute
   ) {
     this.evaluacionForm = this.fb.group({
       materia_id: [null, Validators.required],
@@ -109,43 +112,40 @@ export class EvaluacionesComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.usuario = this.authService.getCurrentUser();
-    this.cargarMaterias();
-    this.cargarTiposEvaluacion();
-    this.cargarTrimestres();
+    this.initializeFormDefaults();
+    this.cargarDatos();
     
-    // Verificar si hay un parámetro de materia en la URL
+    // Detectar si hay una materia preseleccionada en los query params
     this.route.queryParams.subscribe(params => {
-      const materiaId = params['materia'];
-      if (materiaId) {
-        this.materiaSeleccionada = +materiaId;
-        this.evaluacionForm.patchValue({ materia_id: +materiaId });
-        this.configuracionForm.patchValue({ materia_id: +materiaId });
-        this.cargarEvaluaciones(+materiaId);
-        this.cargarConfiguracionPorcentajes(+materiaId);
-      }
-    });
-    
-    // Observar cambios en el tipo de evaluación
-    this.evaluacionForm.get('tipo_evaluacion_id')?.valueChanges.subscribe(value => {
-      if (value) {
-        const tipoSeleccionado = this.tiposEvaluacion.find(tipo => tipo.id == value);
-        this.esEntregable = tipoSeleccionado ? tipoSeleccionado.nombre !== 'PARTICIPACION' : true;
-        this.actualizarValidacionesPorTipo();
-      }
-    });
-    
-    // Observar cambios en la materia seleccionada
-    this.evaluacionForm.get('materia_id')?.valueChanges.subscribe(value => {
-      if (value && (!this.materiaSeleccionada || this.materiaSeleccionada !== value)) {
-        this.materiaSeleccionada = value;
-        this.configuracionForm.patchValue({ materia_id: value });
-        this.cargarEvaluaciones(value);
-        this.cargarConfiguracionPorcentajes(value);
+      if (params['materia']) {
+        const materiaId = +params['materia'];
+        console.log('Materia preseleccionada desde URL:', materiaId);
+        
+        // Esperar a que las materias se carguen antes de seleccionar
+        if (this.materias.length > 0) {
+          this.seleccionarMateriaAutomaticamente(materiaId);
+        } else {
+          // Si las materias no están cargadas aún, guardar el ID para seleccionar después
+          this.materiaPreseleccionada = materiaId;
+        }
       }
     });
   }
-  
+
+  // Método para inicializar los valores por defecto del formulario
+  initializeFormDefaults(): void {
+    // Obtener datos del usuario
+    this.usuario = this.authService.getCurrentUser();
+    console.log('Usuario actual:', this.usuario);
+  }
+
+  // Método para cargar todos los datos necesarios
+  cargarDatos(): void {
+    this.cargarMaterias();
+    this.cargarTiposEvaluacion();
+    this.cargarTrimestres();
+  }
+
   obtenerFechaActual(): string {
     const hoy = new Date();
     const año = hoy.getFullYear();
@@ -218,6 +218,12 @@ export class EvaluacionesComponent implements OnInit {
           
           this.materiasLoading = false;
           
+          // Si hay una materia preseleccionada, seleccionarla ahora que las materias están cargadas
+          if (this.materiaPreseleccionada) {
+            this.seleccionarMateriaAutomaticamente(this.materiaPreseleccionada);
+            this.materiaPreseleccionada = null;
+          }
+          
           if (this.materias.length === 0) {
             this.error = 'No tienes materias asignadas';
           }
@@ -235,6 +241,26 @@ export class EvaluacionesComponent implements OnInit {
       this.materiasLoading = false;
       this.error = 'No se pudo identificar al profesor';
       this.cargarMateriasSimuladas();
+    }
+  }
+  
+  private seleccionarMateriaAutomaticamente(materiaId: number): void {
+    const materiaEncontrada = this.materias.find(m => m.id === materiaId);
+    if (materiaEncontrada) {
+      // Actualizar el formulario con la materia seleccionada
+      this.evaluacionForm.patchValue({
+        materia_id: materiaId
+      });
+      
+      // Actualizar la materia seleccionada
+      this.materiaSeleccionada = materiaId;
+      
+      // Cargar las evaluaciones de esta materia
+      this.cargarEvaluaciones(materiaId);
+      
+      console.log('Materia seleccionada automáticamente:', materiaEncontrada.nombre);
+    } else {
+      console.warn('No se encontró la materia con ID:', materiaId);
     }
   }
   
