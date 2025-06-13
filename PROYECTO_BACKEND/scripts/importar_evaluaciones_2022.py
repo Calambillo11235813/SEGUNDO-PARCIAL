@@ -7,7 +7,13 @@ from datetime import datetime
 from decimal import Decimal
 
 # Configurar entorno Django
-sys.path.append('D:/1.CARRERA UNIVERSITARIA/8.NOVENO SEMESTRE/1.SISTEMAS DE INFORMACION 2/SEGUNDO PARCIAL/SEGUNDO-PARCIAL/PROYECTO_BACKEND')
+# Obtener la ruta absoluta del directorio del script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+# Subir un nivel para llegar a la raíz del proyecto
+project_root = os.path.dirname(script_dir)
+# Insertar la raíz del proyecto al inicio del path
+sys.path.insert(0, project_root)
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Backend.settings')
 django.setup()
 
@@ -22,7 +28,8 @@ def importar_evaluaciones_csv():
     materia,curso_id,tipo_evaluacion_id,trimestre_id,titulo,descripcion,fecha_asignacion,fecha_entrega,nota_maxima,nota_minima_aprobacion,porcentaje_nota_final,permite_entrega_tardia,penalizacion_tardio
     """
     
-    csv_path = 'D:/1.CARRERA UNIVERSITARIA/8.NOVENO SEMESTRE/1.SISTEMAS DE INFORMACION 2/SEGUNDO PARCIAL/SEGUNDO-PARCIAL/PROYECTO_BACKEND/csv/evaluaciones_practicos_2022.csv'
+    # Usar ruta relativa para el archivo CSV
+    csv_path = os.path.join(project_root, 'csv', 'evaluaciones_practicos_2022.csv')
     
     # Verificar que existan los tipos de evaluación necesarios
     try:
@@ -37,6 +44,8 @@ def importar_evaluaciones_csv():
             )
             if created:
                 print(f"✓ Creado tipo de evaluación: {nombre} (ID: {tipo_id})")
+            else:
+                print(f"✓ Usando tipo de evaluación existente: {tipo_eval.nombre} (ID: {tipo_id})")
     except Exception as e:
         print(f"Error al verificar tipos de evaluación: {str(e)}")
         return
@@ -47,6 +56,8 @@ def importar_evaluaciones_csv():
             print(f"Error: El archivo {csv_path} no existe.")
             return
         
+        print(f"Usando archivo CSV: {csv_path}")
+        
         with open(csv_path, mode='r', encoding='utf-8') as file:
             csv_reader = csv.DictReader(file)
             
@@ -56,8 +67,15 @@ def importar_evaluaciones_csv():
             actualizados = 0
             errores = 0
             
-            # Cache para materias por nombre y curso
+            # Cache para materias, cursos y trimestres
             materias_cache = {}
+            trimestres_cache = {}
+            tipos_eval_cache = {}
+            
+            # Verificar los trimestres que existen
+            for trimestre in Trimestre.objects.all():
+                trimestres_cache[trimestre.id] = trimestre
+                print(f"✓ Trimestre disponible: ID {trimestre.id} - {trimestre.nombre}")
             
             # Usar transacción para asegurar la integridad de los datos
             with transaction.atomic():
@@ -83,16 +101,24 @@ def importar_evaluaciones_csv():
                         materia = materias_cache[materia_key]
                         
                         # Verificar que el trimestre existe
-                        try:
-                            trimestre = Trimestre.objects.get(id=trimestre_id)
-                        except Trimestre.DoesNotExist:
-                            raise Exception(f"No existe el trimestre con ID {trimestre_id}")
+                        if trimestre_id not in trimestres_cache:
+                            try:
+                                trimestre = Trimestre.objects.get(id=trimestre_id)
+                                trimestres_cache[trimestre_id] = trimestre
+                            except Trimestre.DoesNotExist:
+                                raise Exception(f"No existe el trimestre con ID {trimestre_id}")
+                        
+                        trimestre = trimestres_cache[trimestre_id]
                         
                         # Verificar que el tipo de evaluación existe
-                        try:
-                            tipo_evaluacion = TipoEvaluacion.objects.get(id=tipo_evaluacion_id)
-                        except TipoEvaluacion.DoesNotExist:
-                            raise Exception(f"No existe el tipo de evaluación con ID {tipo_evaluacion_id}")
+                        if tipo_evaluacion_id not in tipos_eval_cache:
+                            try:
+                                tipo_evaluacion = TipoEvaluacion.objects.get(id=tipo_evaluacion_id)
+                                tipos_eval_cache[tipo_evaluacion_id] = tipo_evaluacion
+                            except TipoEvaluacion.DoesNotExist:
+                                raise Exception(f"No existe el tipo de evaluación con ID {tipo_evaluacion_id}")
+                        
+                        tipo_evaluacion = tipos_eval_cache[tipo_evaluacion_id]
                         
                         # Convertir fechas
                         fecha_asignacion = datetime.strptime(row['fecha_asignacion'], '%Y-%m-%d').date()

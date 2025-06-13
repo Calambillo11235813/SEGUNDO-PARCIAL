@@ -18,6 +18,7 @@ import { PerfilProfesorComponent } from './dashboard_profesor/components/perfil/
 import { DetalleMateriaComponent } from './dashboard_profesor/components/materias/materia_detalle.component';
 import { ListaAsistenciasComponent } from './dashboard_profesor/components/asistencias/lista-asistencias.component';
 import { EvaluacionesComponent } from './dashboard_profesor/components/evaluaciones/evaluaciones.component';
+import { CalificacionesComponent } from './dashboard_profesor/components/evaluaciones/calificaciones.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -52,6 +53,7 @@ export const routes: Routes = [
       { path: 'asistencias', component: AsistenciasComponent },
       { path: 'lista-asistencias', component: ListaAsistenciasComponent },
       { path: 'evaluaciones', component: EvaluacionesComponent },
+      { path: 'evaluaciones/:id/calificaciones', component: CalificacionesComponent },
       { path: 'perfil', component: PerfilProfesorComponent }
     ]
   }

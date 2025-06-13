@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router'; // Añadir esta importación
 import { AuthService } from '../../../services/auth.service';
 import { MateriasService } from '../../../services/materias.service';
 import { EvaluacionesService } from '../../../services/evaluaciones.service';
@@ -29,7 +30,7 @@ interface TipoEvaluacion {
   selector: 'app-evaluaciones',
   templateUrl: './evaluaciones.component.html',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule, RouterModule] // Añadir RouterModule aquí
 })
 export class EvaluacionesComponent implements OnInit {
   // Lista de datos necesarios
